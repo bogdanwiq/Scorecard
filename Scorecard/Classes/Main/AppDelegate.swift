@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let rootViewController = UINavigationController(rootViewController: StatisticViewController())
         window?.rootViewController = rootViewController
+        // Set the battery, carrier , signal, clock to white
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         return true
     }
