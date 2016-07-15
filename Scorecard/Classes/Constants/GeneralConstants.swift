@@ -10,3 +10,9 @@ import UIKit
 
 let SharedApplication = UIApplication.sharedApplication()
 let NotificationCenter = NSNotificationCenter.defaultCenter()
+
+let kBackgroundColor : UInt32 = 0x031322
+let kTextColor : UInt32 = 0xFFFFFF
+let kNavigationTitleColor = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+
+
