@@ -15,7 +15,6 @@ class ProfileViewController : BaseViewController {
         super.viewDidLoad()
         initUI()
     }
-    
     override func initUI(){
         //Set Background
         self.view.backgroundColor = UIColorFromHex(kBackgroundColor, alpha: 1)
@@ -25,33 +24,11 @@ class ProfileViewController : BaseViewController {
         self.title = "Profile"
         self.navigationController?.navigationBar.titleTextAttributes = kNavigationTitleColor
         self.navigationController?.navigationBar.barTintColor = UIColorFromHex(kBackgroundColor, alpha: 1)
-        
+        // End Title & Color
         // Buttons left & right
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        
-        // Profile image
         let image = UIImage(named: "ProfilePicture")
         let profilePicture = ProfilePicture(image: image)
-        profilePicture.frame.origin.x = 94.0
-        profilePicture.frame.origin.y = 90.0
         self.view.addSubview(profilePicture)
-        
-        // User name
-        let nameLabel = UILabel()
-        nameLabel.text = "Anonymous User"
-        nameLabel.backgroundColor = UIColorFromHex(kBackgroundColor)
-        nameLabel.textColor = UIColor.lightTextColor()
-        nameLabel.frame = CGRectMake(94.0, 252.0, 131.0, 22.0)
-        self.view.addSubview(nameLabel)
-        
-        // Settings
-        let settingsTableView = SettingsTableView()
-        settingsTableView.frame = CGRectMake(0.0, 300.0, settingsTableView.frame.width, 286.0)
-        self.view.addSubview(settingsTableView)
-        
-        // Logout button
-        let logoutButton = LogoutButton()
-        logoutButton.frame = CGRectMake(107.0, 598.0, 100.0, 40.0)
-        self.view.addSubview(logoutButton)
     }
 }

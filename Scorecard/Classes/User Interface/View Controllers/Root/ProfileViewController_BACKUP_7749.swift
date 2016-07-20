@@ -15,7 +15,6 @@ class ProfileViewController : BaseViewController {
         super.viewDidLoad()
         initUI()
     }
-    
     override func initUI(){
         //Set Background
         self.view.backgroundColor = UIColorFromHex(kBackgroundColor, alpha: 1)
@@ -35,6 +34,7 @@ class ProfileViewController : BaseViewController {
         profilePicture.frame.origin.x = 94.0
         profilePicture.frame.origin.y = 90.0
         self.view.addSubview(profilePicture)
+<<<<<<< HEAD
         
         // User name
         let nameLabel = UILabel()
@@ -53,5 +53,7 @@ class ProfileViewController : BaseViewController {
         let logoutButton = LogoutButton()
         logoutButton.frame = CGRectMake(107.0, 598.0, 100.0, 40.0)
         self.view.addSubview(logoutButton)
+=======
+>>>>>>> daaeca1be86797df66ac504ff55dc6277ddb7753
     }
 }
