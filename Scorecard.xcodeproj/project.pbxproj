@@ -40,7 +40,6 @@
 		F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92E71A01D354600006E9D1F /* AppDelegate.swift */; };
 		F92E71DD1D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71A31D354600006E9D1F /* .keep */; };
 		F92E71DE1D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71A61D354600006E9D1F /* .keep */; };
-		F92E71DF1D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71A81D354600006E9D1F /* .keep */; };
 		F92E71E01D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71AA1D354600006E9D1F /* .keep */; };
 		F92E71E11D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71AC1D354600006E9D1F /* .keep */; };
 		F92E71E21D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71AE1D354600006E9D1F /* .keep */; };
@@ -107,7 +106,7 @@
 		F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
 		F46185D31D3E239F007ABA24 /* StatsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsTableView.swift; sourceTree = "<group>"; };
 		F46185D51D3E32FA007ABA24 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
-		F46185D71D3E3605007ABA24 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		F46185D71D3E3605007ABA24 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCell.swift; path = ../TableViews/CustomCell.swift; sourceTree = "<group>"; };
 		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
 		F4D043071D3CAA410096C5F7 /* ProfileButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		F4D043091D3CB4E20096C5F7 /* NotificationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationButton.swift; sourceTree = "<group>"; };
@@ -133,7 +132,6 @@
 		F92E71A01D354600006E9D1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F92E71A31D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71A61D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
-		F92E71A81D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71AA1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71AC1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71AE1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
@@ -486,7 +484,7 @@
 		F92E71A71D354600006E9D1F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				F92E71A81D354600006E9D1F /* .keep */,
+				F46185D71D3E3605007ABA24 /* CustomCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -513,7 +511,6 @@
 			children = (
 				F92E71AE1D354600006E9D1F /* .keep */,
 				F46185D31D3E239F007ABA24 /* StatsTableView.swift */,
-				F46185D71D3E3605007ABA24 /* CustomCell.swift */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -818,7 +815,6 @@
 				F92E71E41D354600006E9D1F /* .keep in Resources */,
 				F92E71E71D354600006E9D1F /* .keep in Resources */,
 				F92E71E21D354600006E9D1F /* .keep in Resources */,
-				F92E71DF1D354600006E9D1F /* .keep in Resources */,
 				F92E71DB1D354600006E9D1F /* .keep in Resources */,
 				F92E71DA1D354600006E9D1F /* .keep in Resources */,
 				F92E71D91D354600006E9D1F /* .keep in Resources */,

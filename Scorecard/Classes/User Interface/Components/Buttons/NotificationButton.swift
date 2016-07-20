@@ -20,8 +20,7 @@ class NotificationButton : UIBarButtonItem {
         
     }
     func slide(){
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.centerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+        
     }
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

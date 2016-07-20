@@ -10,15 +10,12 @@ import Foundation
 
 class ProfilePicture : UIImageView {
     var profileImage : UIImage?
-   
+    
     override init(image: UIImage?){
         super.init(image: image)
         self.profileImage = image!
         self.roundImage()
-        
         self.frame = CGRectMake(100,100, 130, 130)
-        //self.frame = CGRectMake(100,100,150,150)
-
     }
     
     required init?(coder aDecoder: NSCoder) {

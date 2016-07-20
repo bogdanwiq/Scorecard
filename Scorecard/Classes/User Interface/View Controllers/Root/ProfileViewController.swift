@@ -9,16 +9,12 @@
 import Foundation
 import UIKit
 
-
-
-
 class ProfileViewController : BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
     }
-    
     override func initUI(){
         //Set Background
         self.view.backgroundColor = UIColorFromHex(kBackgroundColor, alpha: 1)
@@ -34,6 +30,5 @@ class ProfileViewController : BaseViewController {
         let image = UIImage(named: "ProfilePicture")
         let profilePicture = ProfilePicture(image: image)
         self.view.addSubview(profilePicture)
-        
     }
 }
