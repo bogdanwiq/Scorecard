@@ -14,6 +14,7 @@ let NotificationCenter = NSNotificationCenter.defaultCenter()
 
 // COLORS
 let kBackgroundColor : UInt32 = 0x031322
+let kSegmentedControlBackgroundColor : UInt32 = 0x344454
 let kTextColor : UInt32 = 0xFFFFFF
 let kFallColor : UInt32 = 0xFF6647
 let kRiseColor : UInt32 = 0x7FD121

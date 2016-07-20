@@ -20,6 +20,7 @@
 		F46185D61D3E32FA007ABA24 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D51D3E32FA007ABA24 /* Stats.swift */; };
 		F46185D81D3E3605007ABA24 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D71D3E3605007ABA24 /* CustomCell.swift */; };
 		F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D91D3E6124007ABA24 /* ProfilePicture.swift */; };
+		F495FCCA1D3FA28C005A3EE8 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCC91D3FA28C005A3EE8 /* SegmentedControl.swift */; };
 		F4D043081D3CAA410096C5F7 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D043071D3CAA410096C5F7 /* ProfileButton.swift */; };
 		F4D0430A1D3CB4E20096C5F7 /* NotificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D043091D3CB4E20096C5F7 /* NotificationButton.swift */; };
 		F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */; };
@@ -108,6 +109,7 @@
 		F46185D51D3E32FA007ABA24 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		F46185D71D3E3605007ABA24 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCell.swift; path = ../TableViews/CustomCell.swift; sourceTree = "<group>"; };
 		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
+		F495FCC91D3FA28C005A3EE8 /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		F4D043071D3CAA410096C5F7 /* ProfileButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		F4D043091D3CB4E20096C5F7 /* NotificationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationButton.swift; sourceTree = "<group>"; };
 		F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 			children = (
 				F92E71AA1D354600006E9D1F /* .keep */,
 				F46185D91D3E6124007ABA24 /* ProfilePicture.swift */,
+				F495FCC91D3FA28C005A3EE8 /* SegmentedControl.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -997,6 +1000,7 @@
 				F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */,
 				F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */,
 				F4D043081D3CAA410096C5F7 /* ProfileButton.swift in Sources */,
+				F495FCCA1D3FA28C005A3EE8 /* SegmentedControl.swift in Sources */,
 				F92E71FB1D354859006E9D1F /* GeneralConstants.swift in Sources */,
 				F92E72001D35497E006E9D1F /* RootViewController.swift in Sources */,
 				F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */,

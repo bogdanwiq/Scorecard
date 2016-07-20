@@ -31,9 +31,15 @@ class StatisticViewController: BaseViewController{
         self.navigationItem.leftBarButtonItem = ProfileButton()
         self.navigationItem.rightBarButtonItem = NotificationButton()
         
+        // TimeFrame
+        let timeFrame = SegmentedControl()
+        timeFrame.frame = CGRectMake(0,10, timeFrame.frame.width, 30)
+        
         // Table View
         let tableView = StatsTableView()
         tableView.frame = CGRectMake(0, 40, tableView.frame.width, tableView.frame.height-105)
+        
+        self.view.addSubview(timeFrame)
         self.view.addSubview(tableView)
     }
 }
