@@ -17,15 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()
         
-        //let rootViewController = UINavigationController(rootViewController: StatisticViewController())
-        //window?.rootViewController = rootViewController
-        
         // Set the battery, carrier , signal, clock to white
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         // Side Menu
-        
-        
         let centerView = UINavigationController(rootViewController: StatisticViewController())
         let leftView = ProfileViewController()
         
