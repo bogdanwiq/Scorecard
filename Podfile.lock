@@ -8,16 +8,13 @@ PODS:
     - HLMFoundation/Core
   - HLMFoundation/UI (1.6.0):
     - HLMFoundation/Core
-  - SideMenuController (0.1.3)
 
 DEPENDENCIES:
   - HLMFoundation
-  - SideMenuController (~> 0.1.3)
 
 SPEC CHECKSUMS:
   HLMFoundation: e7612b49cfa26d2ad5fe3d5c57b829a4c3b2e972
-  SideMenuController: a36fc436fb0cefd51a37ef8f41884e6683146971
 
-PODFILE CHECKSUM: cd3208970db45495e40964bca917ded3cfafd7eb
+PODFILE CHECKSUM: 455d88eb1ed2d81924a5796ecb9db7482460c4aa
 
 COCOAPODS: 1.0.1
