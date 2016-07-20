@@ -9,12 +9,14 @@
 import Foundation
 import UIKit
 
+
 class StatisticViewController: BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
     }
+    
     override func initUI(){
         //Set Background
         self.view.backgroundColor = UIColorFromHex(kBackgroundColor, alpha: 1)
@@ -33,7 +35,9 @@ class StatisticViewController: BaseViewController{
         
         // Table View
         let tableView = StatsTableView()
-        tableView.frame = CGRectMake(0, 40, tableView.frame.width, tableView.frame.height-105)
         self.view.addSubview(tableView)
+
+        
     }
+    
 }

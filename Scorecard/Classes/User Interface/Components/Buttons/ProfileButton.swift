@@ -19,7 +19,7 @@ class ProfileButton : UIBarButtonItem {
         self.action = #selector(slide)
         self.style = .Plain
     }
-
+    
     func slide(){
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.centerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)

@@ -9,12 +9,20 @@
 import Foundation
 import UIKit
 
+<<<<<<< .merge_file_xjmmZd
+
+=======
+>>>>>>> .merge_file_2KWdCw
 class StatisticViewController: BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
     }
+<<<<<<< .merge_file_xjmmZd
+    
+=======
+>>>>>>> .merge_file_2KWdCw
     override func initUI(){
         //Set Background
         self.view.backgroundColor = UIColorFromHex(kBackgroundColor, alpha: 1)
@@ -33,7 +41,15 @@ class StatisticViewController: BaseViewController{
         
         // Table View
         let tableView = StatsTableView()
+<<<<<<< .merge_file_xjmmZd
+        self.view.addSubview(tableView)
+
+        
+    }
+    
+=======
         tableView.frame = CGRectMake(0, 40, tableView.frame.width, tableView.frame.height-105)
         self.view.addSubview(tableView)
     }
+>>>>>>> .merge_file_2KWdCw
 }
