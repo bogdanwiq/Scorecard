@@ -25,10 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let leftView = ProfileViewController()
         
         centerContainer = MMDrawerController(centerViewController: centerView, leftDrawerViewController: leftView)
-        
         centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
         centerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView
-        
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
         window?.rootViewController = centerContainer
         window?.makeKeyAndVisible()
         return true

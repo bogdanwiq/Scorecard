@@ -22,6 +22,7 @@ class SettingsTableView : UITableView, UITableViewDataSource, UITableViewDelegat
         self.allowsSelection = false
         self.scrollEnabled = false
         self.backgroundColor = UIColorFromHex(kBackgroundColor)
+        
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -21,6 +21,7 @@ let kSettingOnColor: UInt32 = 0x3783FF
 let kFallColor : UInt32 = 0xFF6647
 let kRiseColor : UInt32 = 0x7FD121
 let kNavigationTitleColor = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+let kTimeFrameSelected : UInt32 = 0xB6CBD9
 
 // TABLECELL SIZE
 let kXpointLeft : CGFloat = 25.0
