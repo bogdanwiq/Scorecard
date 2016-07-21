@@ -32,11 +32,14 @@ class SettingsTableView : UITableView, UITableViewDataSource, UITableViewDelegat
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return arrayOfSettings.count
     }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let reuseIdentifier = "PreferenceSliderCell"
         let cell : PreferenceSliderCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PreferenceSliderCell
         cell.preferenceName.text = arrayOfSettings[indexPath.row]
+        cell.slider.setOn(NSUserDefaults.standardUserDefaults().boolForKey(arrayOfSettings[indexPath.row]) ?? false, animated: false)
+        cell.slider.addTarget(cell, action: #selector(cell.didChangeState(_:)), forControlEvents: .ValueChanged)
         cell.backgroundColor = UIColorFromHex(kBackgroundColor)
         
         return cell
