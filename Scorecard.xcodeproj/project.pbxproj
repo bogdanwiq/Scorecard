@@ -22,7 +22,7 @@
 		F46185D21D3E191D007ABA24 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */; };
 		F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D31D3E239F007ABA24 /* StatsTableView.swift */; };
 		F46185D61D3E32FA007ABA24 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D51D3E32FA007ABA24 /* Stats.swift */; };
-		F46185D81D3E3605007ABA24 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D71D3E3605007ABA24 /* CustomCell.swift */; };
+		F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D71D3E3605007ABA24 /* DashboardCell.swift */; };
 		F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D91D3E6124007ABA24 /* ProfilePicture.swift */; };
 		F495FCCA1D3FA28C005A3EE8 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCC91D3FA28C005A3EE8 /* SegmentedControl.swift */; };
 		F4D043081D3CAA410096C5F7 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D043071D3CAA410096C5F7 /* ProfileButton.swift */; };
@@ -108,7 +108,7 @@
 		F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
 		F46185D31D3E239F007ABA24 /* StatsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsTableView.swift; sourceTree = "<group>"; };
 		F46185D51D3E32FA007ABA24 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
-		F46185D71D3E3605007ABA24 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		F46185D71D3E3605007ABA24 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = ../TableViews/DashboardCell.swift; sourceTree = "<group>"; };
 		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
 		F495FCC91D3FA28C005A3EE8 /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		F4D043071D3CAA410096C5F7 /* ProfileButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
@@ -480,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */,
+				F46185D71D3E3605007ABA24 /* DashboardCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -506,7 +507,6 @@
 			children = (
 				F46185D31D3E239F007ABA24 /* StatsTableView.swift */,
 				04289FE51D3F93F00006DBCA /* SettingsTableView.swift */,
-				F46185D71D3E3605007ABA24 /* CustomCell.swift */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -981,7 +981,7 @@
 				F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */,
 				F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */,
 				F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */,
-				F46185D81D3E3605007ABA24 /* CustomCell.swift in Sources */,
+				F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */,
 				F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */,
 				F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */,
 				F4D043081D3CAA410096C5F7 /* ProfileButton.swift in Sources */,

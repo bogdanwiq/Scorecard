@@ -12,13 +12,18 @@ import UIKit
 let SharedApplication = UIApplication.sharedApplication()
 let NotificationCenter = NSNotificationCenter.defaultCenter()
 
+<<<<<<< .merge_file_5fF28r
+let kBackgroundColor: UInt32 = 0x031322
+let kTextColor: UInt32 = 0xFFFFFF
+let kLogoutBackgroundColor: UInt32 = 0xFF3939
+let kSettingOnColor: UInt32 = 0x3783FF
+=======
 // COLORS
 let kBackgroundColor : UInt32 = 0x031322
 let kTextColor : UInt32 = 0xFFFFFF
-let kLogoutBackgroundColor: UInt32 = 0xFF3939
-let kSettingOnColor: UInt32 = 0x3783FF
 let kFallColor : UInt32 = 0xFF6647
 let kRiseColor : UInt32 = 0x7FD121
+>>>>>>> .merge_file_5rr7xF
 let kNavigationTitleColor = [NSForegroundColorAttributeName: UIColor.whiteColor()]
 
 // TABLECELL SIZE

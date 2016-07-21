@@ -12,14 +12,14 @@ import UIKit
 class StatsTableView : UITableView, UITableViewDataSource, UITableViewDelegate{
     
     var arrayOfStats : [Stats] = [Stats]()
-    let reuseIdentifier : String = "cell"
+    let reuseIdentifier : String = "DashboardCell"
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
         self.frame = UIScreen.mainScreen().bounds
         self.delegate      =   self
         self.dataSource    =   self
         self.rowHeight = UITableViewAutomaticDimension
-        self.registerClass(CustomCell.self, forCellReuseIdentifier: "cell")
+        self.registerClass(DashboardCell.self, forCellReuseIdentifier: "DashboardCell")
         self.setupArray()
         self.separatorColor = UIColor.clearColor()
     }
@@ -53,7 +53,7 @@ class StatsTableView : UITableView, UITableViewDataSource, UITableViewDelegate{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         backgroundColor = UIColorFromHex(kBackgroundColor)
-        let cell : CustomCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CustomCell
+        let cell : DashboardCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DashboardCell
         
         // SET UILABELS.TEXT
         cell.typeName.text = arrayOfStats[indexPath.row].typeName
@@ -82,7 +82,7 @@ class StatsTableView : UITableView, UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedCell : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         selectedCell.contentView.backgroundColor = UIColor.redColor()
         print(arrayOfStats[indexPath.row])

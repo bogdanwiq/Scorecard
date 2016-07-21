@@ -33,5 +33,9 @@ class PreferenceSliderCell: UITableViewCell{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func didChangeState(sender: UISwitch) {
+        NSUserDefaults.standardUserDefaults().setBool(sender.on, forKey: preferenceName.text!)
+    }
 
 }
