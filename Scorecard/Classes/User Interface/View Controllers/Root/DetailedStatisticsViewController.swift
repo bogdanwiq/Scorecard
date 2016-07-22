@@ -14,24 +14,26 @@ class DetailedStatisticViewController : BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initUI()
-    }
-    override func initUI(){
-        //Set Background
-        self.view.backgroundColor = UIColorFromHex(kBackgroundColor, alpha: 1)
-        self.navigationController?.navigationBar.translucent = false
-        // Navigation Bar - TITLE
-        self.title = "Statistics"
-        self.navigationController?.navigationBar.titleTextAttributes = kNavigationTitleColor
-        self.navigationController?.navigationBar.barTintColor = UIColorFromHex(kBackgroundColor, alpha: 1)
-        // End Statistics Title
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
+        initUI()
+    }
+    
+    override func initUI(){
+        //Set Background
+        view.backgroundColor = Color.mainBackground
+        navigationController?.navigationBar.translucent = false
+        // Navigation Bar - TITLE
+        title = "Statistics"
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Color.navigationTitle]
+        navigationController?.navigationBar.barTintColor = Color.navigationBackground
+        // End Statistics Title
+        
         // Buttons left & right
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.tintColor = Color.navigationTitle
         
         let statsDetail = StatsDetail()
         statsDetail.frame = CGRectMake(0, 0, statsDetail.frame.width, 80)
-        self.view.addSubview(statsDetail)
+        view.addSubview(statsDetail)
     }
 }

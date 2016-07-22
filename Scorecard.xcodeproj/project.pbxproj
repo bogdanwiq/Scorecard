@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04289FE51D3F93F00006DBCA /* SettingsTableView.swift */; };
-		04289FE81D3FA4F90006DBCA /* LogoutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04289FE71D3FA4F90006DBCA /* LogoutButton.swift */; };
 		049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */; };
 		85B16355C4682A962EA47E7C /* Pods_ScorecardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A5979765873DF93CA36D6F /* Pods_ScorecardUITests.framework */; };
 		994079583AD2247F3BCD8E1A /* Pods_ScorecardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */; };
 		9D7996D998DA383D9DF6E501 /* Pods_Scorecard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C33FD5373472CC5B1403ED /* Pods_Scorecard.framework */; };
 		F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */; };
-		F4322CAE1D39148700EEB566 /* ColorHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4322CAD1D39148700EEB566 /* ColorHelp.swift */; };
 		F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185C71D3E191D007ABA24 /* MMDrawerBarButtonItem.m */; };
 		F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185C91D3E191D007ABA24 /* MMDrawerController.m */; };
 		F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185CC1D3E191D007ABA24 /* MMDrawerVisualState.m */; };
@@ -26,8 +24,7 @@
 		F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD21D40C779005A3EE8 /* TimeFrame.swift */; };
 		F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */; };
 		F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */; };
-		F4D043081D3CAA410096C5F7 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D043071D3CAA410096C5F7 /* ProfileButton.swift */; };
-		F4D0430A1D3CB4E20096C5F7 /* NotificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D043091D3CB4E20096C5F7 /* NotificationButton.swift */; };
+		F495FCD91D421405005A3EE8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD81D421405005A3EE8 /* Button.swift */; };
 		F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */; };
 		F92E717F1D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717A1D353D11006E9D1F /* Info.plist */; };
 		F92E71811D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717D1D353D11006E9D1F /* Info.plist */; };
@@ -81,7 +78,6 @@
 
 /* Begin PBXFileReference section */
 		04289FE51D3F93F00006DBCA /* SettingsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
-		04289FE71D3FA4F90006DBCA /* LogoutButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutButton.swift; sourceTree = "<group>"; };
 		049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceSliderCell.swift; path = "Scorecard/Classes/User Interface/Components/Cells/PreferenceSliderCell.swift"; sourceTree = SOURCE_ROOT; };
 		358D394A94E20F69650E0DE9 /* Pods-ScorecardUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4DD101E3A037447876FCE83F /* Pods-ScorecardUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,7 +91,6 @@
 		D0B136FAAA5070BAA5C5B410 /* Pods-ScorecardUITests.testing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.testing.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.testing.xcconfig"; sourceTree = "<group>"; };
 		F3C265FFAE1A500E8B6EC1F1 /* Pods-ScorecardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardTests/Pods-ScorecardTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
-		F4322CAD1D39148700EEB566 /* ColorHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorHelp.swift; sourceTree = "<group>"; };
 		F46185C51D3E191D007ABA24 /* Scorecard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Scorecard-Bridging-Header.h"; sourceTree = "<group>"; };
 		F46185C61D3E191D007ABA24 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		F46185C71D3E191D007ABA24 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
@@ -107,14 +102,13 @@
 		F46185CD1D3E191D007ABA24 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
 		F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
 		F46185D31D3E239F007ABA24 /* StatsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsTableView.swift; sourceTree = "<group>"; };
-		F46185D51D3E32FA007ABA24 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		F46185D51D3E32FA007ABA24 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stats.swift; path = "../../../User Interface/Model Presentation/Stats.swift"; sourceTree = "<group>"; };
 		F46185D71D3E3605007ABA24 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = ../TableViews/DashboardCell.swift; sourceTree = "<group>"; };
 		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
 		F495FCD21D40C779005A3EE8 /* TimeFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFrame.swift; sourceTree = "<group>"; };
 		F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedStatisticsViewController.swift; sourceTree = "<group>"; };
 		F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDetail.swift; sourceTree = "<group>"; };
-		F4D043071D3CAA410096C5F7 /* ProfileButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
-		F4D043091D3CB4E20096C5F7 /* NotificationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationButton.swift; sourceTree = "<group>"; };
+		F495FCD81D421405005A3EE8 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScorecardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92E71471D353CBD006E9D1F /* Scorecard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scorecard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +131,7 @@
 		F92E71A31D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71AC1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71B01D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
-		F92E71B21D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
+		F92E71B21D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .keep; path = "../../User Interface/Components/Views/.keep"; sourceTree = "<group>"; };
 		F92E71B41D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71BC1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71C01D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
@@ -412,6 +406,7 @@
 		F92E719B1D354600006E9D1F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				F46185D51D3E32FA007ABA24 /* Stats.swift */,
 				F92E719C1D354600006E9D1F /* .keep */,
 			);
 			path = Categories;
@@ -471,9 +466,7 @@
 		F92E71A51D354600006E9D1F /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				F4D043071D3CAA410096C5F7 /* ProfileButton.swift */,
-				F4D043091D3CB4E20096C5F7 /* NotificationButton.swift */,
-				04289FE71D3FA4F90006DBCA /* LogoutButton.swift */,
+				F495FCD81D421405005A3EE8 /* Button.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -524,7 +517,6 @@
 		F92E71B11D354600006E9D1F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F92E71B21D354600006E9D1F /* .keep */,
 				F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */,
 			);
 			path = Views;
@@ -541,7 +533,6 @@
 		F92E71B51D354600006E9D1F /* Model Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				F46185D51D3E32FA007ABA24 /* Stats.swift */,
 			);
 			path = "Model Presentation";
 			sourceTree = "<group>";
@@ -583,7 +574,7 @@
 		F92E71BD1D354600006E9D1F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				F4322CAD1D39148700EEB566 /* ColorHelp.swift */,
+				F92E71B21D354600006E9D1F /* .keep */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -699,7 +690,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F92E716F1D353CBD006E9D1F /* Build configuration list for PBXNativeTarget "Scorecard" */;
 			buildPhases = (
-				54AF776BDBDA7E241597DF33 /* 📦 Check Pods Manifest.lock */,
+				54AF776BDBDA7E241597DF33 /* [CP] Check Pods Manifest.lock */,
 				9F52F40E75D9AE3A7F39BDB3 /* [CP] Check Pods Manifest.lock */,
 				F92E71431D353CBD006E9D1F /* Sources */,
 				F92E71441D353CBD006E9D1F /* Frameworks */,
@@ -722,7 +713,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F92E71721D353CBD006E9D1F /* Build configuration list for PBXNativeTarget "ScorecardTests" */;
 			buildPhases = (
-				34853CDB75563ECB672DCCA1 /* 📦 Check Pods Manifest.lock */,
+				34853CDB75563ECB672DCCA1 /* [CP] Check Pods Manifest.lock */,
 				128B2E7C5DB14724B9F6D4BA /* [CP] Check Pods Manifest.lock */,
 				F92E71571D353CBD006E9D1F /* Sources */,
 				F92E71581D353CBD006E9D1F /* Frameworks */,
@@ -746,7 +737,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F92E71751D353CBD006E9D1F /* Build configuration list for PBXNativeTarget "ScorecardUITests" */;
 			buildPhases = (
-				B75A6B96AB17565F7FFC7F94 /* 📦 Check Pods Manifest.lock */,
+				B75A6B96AB17565F7FFC7F94 /* [CP] Check Pods Manifest.lock */,
 				C3BAC9913B998D892A40F79C /* [CP] Check Pods Manifest.lock */,
 				F92E71621D353CBD006E9D1F /* Sources */,
 				F92E71631D353CBD006E9D1F /* Frameworks */,
@@ -888,14 +879,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		34853CDB75563ECB672DCCA1 /* 📦 Check Pods Manifest.lock */ = {
+		34853CDB75563ECB672DCCA1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -933,14 +924,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScorecardTests/Pods-ScorecardTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		54AF776BDBDA7E241597DF33 /* 📦 Check Pods Manifest.lock */ = {
+		54AF776BDBDA7E241597DF33 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1038,14 +1029,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B75A6B96AB17565F7FFC7F94 /* 📦 Check Pods Manifest.lock */ = {
+		B75A6B96AB17565F7FFC7F94 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1106,8 +1097,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */,
+				F495FCD91D421405005A3EE8 /* Button.swift in Sources */,
 				F46185D61D3E32FA007ABA24 /* Stats.swift in Sources */,
-				F4322CAE1D39148700EEB566 /* ColorHelp.swift in Sources */,
 				F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */,
 				F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */,
 				F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */,
@@ -1115,9 +1106,7 @@
 				F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */,
 				F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */,
 				F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */,
-				F4D043081D3CAA410096C5F7 /* ProfileButton.swift in Sources */,
 				F92E71FB1D354859006E9D1F /* GeneralConstants.swift in Sources */,
-				04289FE81D3FA4F90006DBCA /* LogoutButton.swift in Sources */,
 				F92E72001D35497E006E9D1F /* RootViewController.swift in Sources */,
 				F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */,
 				F46185D21D3E191D007ABA24 /* UIViewController+MMDrawerController.m in Sources */,
@@ -1125,7 +1114,6 @@
 				F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */,
 				04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */,
 				F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */,
-				F4D0430A1D3CB4E20096C5F7 /* NotificationButton.swift in Sources */,
 				F92E71F91D354790006E9D1F /* BaseViewController.swift in Sources */,
 				049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */,
 			);

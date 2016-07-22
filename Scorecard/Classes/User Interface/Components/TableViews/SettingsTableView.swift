@@ -15,13 +15,13 @@ class SettingsTableView : UITableView, UITableViewDataSource, UITableViewDelegat
 
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
-        self.frame = UIScreen.mainScreen().bounds
-        self.delegate = self
-        self.dataSource = self
-        self.registerClass(PreferenceSliderCell.self, forCellReuseIdentifier: "PreferenceSliderCell")
-        self.allowsSelection = false
-        self.scrollEnabled = false
-        self.backgroundColor = UIColorFromHex(kBackgroundColor)
+        frame = UIScreen.mainScreen().bounds
+        delegate = self
+        dataSource = self
+        registerClass(PreferenceSliderCell.self, forCellReuseIdentifier: "PreferenceSliderCell")
+        allowsSelection = false
+        scrollEnabled = false
+        backgroundColor = Color.mainBackground
         
     }
 
@@ -40,7 +40,7 @@ class SettingsTableView : UITableView, UITableViewDataSource, UITableViewDelegat
         cell.preferenceName.text = arrayOfSettings[indexPath.row]
         cell.slider.setOn(NSUserDefaults.standardUserDefaults().boolForKey(arrayOfSettings[indexPath.row]) ?? false, animated: false)
         cell.slider.addTarget(cell, action: #selector(cell.didChangeState(_:)), forControlEvents: .ValueChanged)
-        cell.backgroundColor = UIColorFromHex(kBackgroundColor)
+        cell.backgroundColor = Color.mainBackground
         
         return cell
     }

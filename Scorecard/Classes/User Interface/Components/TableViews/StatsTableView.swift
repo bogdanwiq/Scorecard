@@ -16,12 +16,12 @@ class StatsTableView : UITableView, UITableViewDataSource{
  
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
-        self.frame = UIScreen.mainScreen().bounds
-        self.dataSource    =   self
-        self.rowHeight = UITableViewAutomaticDimension
-        self.registerClass(DashboardCell.self, forCellReuseIdentifier: "DashboardCell")
-        self.setupArray()
-        self.separatorColor = UIColor.clearColor()
+        frame = UIScreen.mainScreen().bounds
+        dataSource    =   self
+        rowHeight = 80
+        registerClass(DashboardCell.self, forCellReuseIdentifier: "DashboardCell")
+        setupArray()
+        separatorColor = UIColor.clearColor()
       
     }
     required init?(coder aDecoder: NSCoder) {
@@ -53,21 +53,21 @@ class StatsTableView : UITableView, UITableViewDataSource{
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        backgroundColor = UIColorFromHex(kBackgroundColor)
+        backgroundColor = Color.mainBackground
         let cell : DashboardCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DashboardCell
         
         // SET UILABELS.TEXT
         cell.typeName.text = arrayOfStats[indexPath.row].typeName
         cell.counter.text = String(arrayOfStats[indexPath.row].counter)
         if arrayOfStats[indexPath.row].getImage() == UIImage(named: "ArrowUp"){
-            cell.difference.textColor = UIColorFromHex(kRiseColor)
+            cell.difference.textColor = Color.statsRise
             cell.difference.text = "+" + String(arrayOfStats[indexPath.row].difference)
         }else if arrayOfStats[indexPath.row].getImage() == UIImage(named: "ArrowDown"){
-            cell.difference.textColor = UIColorFromHex(kFallColor)
+            cell.difference.textColor = Color.statsFall
             cell.difference.text = "-" + String(arrayOfStats[indexPath.row].difference)
         }
         else if arrayOfStats[indexPath.row].getImage() == UIImage(named: "None"){
-            cell.difference.textColor = UIColorFromHex(kRiseColor)
+            cell.difference.textColor = Color.statsRise
             cell.difference.text = String(arrayOfStats[indexPath.row].difference)
         }
         cell.percent.text = String(arrayOfStats[indexPath.row].percent) + "%"
@@ -78,7 +78,7 @@ class StatsTableView : UITableView, UITableViewDataSource{
         var saturation: CGFloat = 0.0
         var brightness : CGFloat = 0.0
         var alpha : CGFloat = 0.0
-        UIColorFromHex(kBackgroundColor).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        Color.mainBackground.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         cell.backgroundColor = UIColor(hue: hue, saturation: saturation-(0.06*CGFloat(indexPath.row)), brightness: brightness+(0.03*CGFloat(indexPath.row)), alpha: alpha)
         return cell
     }

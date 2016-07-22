@@ -24,44 +24,44 @@ class DashboardCell: UITableViewCell {
     }
     
     private func initUI(){
-        self.backgroundColor = UIColorFromHex(kBackgroundColor)
+        backgroundColor = Color.mainBackground
         // TYPENAME UILABEL SETTINGS
-        self.typeName.textAlignment = NSTextAlignment.Left
-        self.typeName.textColor = UIColorFromHex(kTextColor)
-        self.typeName.font = UIFont(name:"HelveticaNeue", size: kTypeNameSize)
-        self.typeName.translatesAutoresizingMaskIntoConstraints = false
-        self.typeName.frame = CGRectMake(kXpointLeft, kYpointUp, kLabelWidth, kLabelHeight);
+        typeName.textAlignment = NSTextAlignment.Left
+        typeName.textColor = Color.textColor
+        typeName.font = UIFont(name:"HelveticaNeue", size: kTypeNameSize)
+        typeName.translatesAutoresizingMaskIntoConstraints = false
+        typeName.frame = CGRectMake(kXpointLeft, kYpointUp, kLabelWidth, kLabelHeight);
         
         // COUNTER UILABEL SETTINGS
-        self.counter.textAlignment = NSTextAlignment.Left
-        self.counter.textColor = UIColorFromHex(kTextColor)
-        self.counter.font = UIFont(name:"HelveticaNeue", size: kCounterSize)
-        self.counter.translatesAutoresizingMaskIntoConstraints = false
-        self.counter.frame = CGRectMake(kXpointLeft, kYpointDown, kLabelWidth, kLabelHeight);
+        counter.textAlignment = NSTextAlignment.Left
+        counter.textColor = Color.textColor
+        counter.font = UIFont(name:"HelveticaNeue", size: kCounterSize)
+        counter.translatesAutoresizingMaskIntoConstraints = false
+        counter.frame = CGRectMake(kXpointLeft, kYpointDown, kLabelWidth, kLabelHeight);
         
         // DIFFERENCE UILABEL SETTINGS
-        self.difference.textAlignment = NSTextAlignment.Right
-        self.difference.textColor = UIColorFromHex(kTextColor)
-        self.difference.font = UIFont(name:"HelveticaNeue", size: kDifferenceSize)
-        self.difference.translatesAutoresizingMaskIntoConstraints = false
-        self.difference.frame = CGRectMake(kXpointRight, kYpointUpRight, kLabelWidth-70, kLabelHeight)
+        difference.textAlignment = NSTextAlignment.Right
+        difference.textColor = Color.textColor
+        difference.font = UIFont(name:"HelveticaNeue", size: kDifferenceSize)
+        difference.translatesAutoresizingMaskIntoConstraints = false
+        difference.frame = CGRectMake(kXpointRight, kYpointUpRight, kLabelWidth-70, kLabelHeight)
         
         // PERCENT UILABEL SETTINGS
-        self.percent.textAlignment = NSTextAlignment.Right
-        self.percent.textColor = UIColorFromHex(kTextColor)
-        self.percent.font = UIFont(name:"HelveticaNeue", size: kPercentSize)
-        self.percent.translatesAutoresizingMaskIntoConstraints = false
-        self.percent.frame = CGRectMake(kXpointRight, kYpointDownRight, kLabelWidth-70,kLabelHeight)
+        percent.textAlignment = NSTextAlignment.Right
+        percent.textColor = Color.textColor
+        percent.font = UIFont(name:"HelveticaNeue", size: kPercentSize)
+        percent.translatesAutoresizingMaskIntoConstraints = false
+        percent.frame = CGRectMake(kXpointRight, kYpointDownRight, kLabelWidth-70,kLabelHeight)
         
         // SIGN UIIMAGE SETTINGS
-        self.sign.frame = CGRectMake(kXsign,kYsign, 30,30)
+        sign.frame = CGRectMake(kXsign,kYsign, 30,30)
         
         // ADDSUBVIEW
-        self.addSubview(self.typeName)
-        self.addSubview(self.counter)
-        self.addSubview(self.difference)
-        self.addSubview(self.percent)
-        self.addSubview(self.sign)
+        addSubview(typeName)
+        addSubview(counter)
+        addSubview(difference)
+        addSubview(percent)
+        addSubview(sign)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -23,8 +23,8 @@ class StatsDetail : UIView {
     }
     
     private func initUI(){
-        self.frame = UIScreen.mainScreen().bounds
-        self.backgroundColor = UIColorFromHex(kBackgroundColor)
+        frame = UIScreen.mainScreen().bounds
+        backgroundColor = Color.mainBackground
         setInformation()
     }
     

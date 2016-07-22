@@ -18,40 +18,39 @@ class ProfileViewController : BaseViewController {
     
     override func initUI(){
         //Set Background
-        self.view.backgroundColor = UIColorFromHex(kBackgroundColor, alpha: 1)
-        self.navigationController?.navigationBar.translucent = false
+        view.backgroundColor = Color.mainBackground
+        navigationController?.navigationBar.translucent = false
         
         // Navigation Bar - TITLE
-        self.title = "Profile"
-        self.navigationController?.navigationBar.titleTextAttributes = kNavigationTitleColor
-        self.navigationController?.navigationBar.barTintColor = UIColorFromHex(kBackgroundColor, alpha: 1)
-        
+        title = "Profile"
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Color.navigationTitle]
+        navigationController?.navigationBar.barTintColor = Color.navigationBackground
         // Buttons left & right
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.tintColor = Color.navigationTitle
         
         // Profile image
         let image = UIImage(named: "ProfilePicture")
         let profilePicture = ProfilePicture(image: image)
         profilePicture.frame.origin.x = 94.0
         profilePicture.frame.origin.y = 90.0
-        self.view.addSubview(profilePicture)
+        view.addSubview(profilePicture)
         
         // User name
         let nameLabel = UILabel()
         nameLabel.text = "Anonymous User"
-        nameLabel.backgroundColor = UIColorFromHex(kBackgroundColor)
-        nameLabel.textColor = UIColor.lightTextColor()
+        nameLabel.backgroundColor = Color.mainBackground
+        nameLabel.textColor = Color.textColor
         nameLabel.frame = CGRectMake(94.0, 252.0, 131.0, 22.0)
-        self.view.addSubview(nameLabel)
+        view.addSubview(nameLabel)
         
         // Settings
         let settingsTableView = SettingsTableView()
         settingsTableView.frame = CGRectMake(0.0, 300.0, settingsTableView.frame.width, 286.0)
-        self.view.addSubview(settingsTableView)
+        view.addSubview(settingsTableView)
         
         // Logout button
-        let logoutButton = LogoutButton()
+        let logoutButton = Button.Logout.getButton()
         logoutButton.frame = CGRectMake(107.0, 598.0, 100.0, 40.0)
-        self.view.addSubview(logoutButton)
+        view.addSubview(logoutButton)
     }
 }

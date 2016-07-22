@@ -25,7 +25,7 @@ class TimeFrame : UIControl {
     }
     init(){
         super.init(frame: CGRectZero)
-        self.frame = UIScreen.mainScreen().bounds
+        frame = UIScreen.mainScreen().bounds
         setupView()
     }
     required init?(coder aDecoder: NSCoder) {
@@ -33,7 +33,7 @@ class TimeFrame : UIControl {
     }
     
     private func setupView(){
-        self.backgroundColor = UIColorFromHex(kSegmentedControlBackgroundColor)
+        backgroundColor = Color.timeFrameBackground
         setupLabels()
     }
     private func setupLabels(){
@@ -43,19 +43,19 @@ class TimeFrame : UIControl {
             uilabel.text = items[index]
             uilabel.textAlignment = .Center
             uilabel.font = UIFont.systemFontOfSize(16.0)
-            uilabel.textColor = UIColorFromHex(kTimeFrameSelected)
-            self.addSubview(uilabel)
+            uilabel.textColor = Color.timeFrameSelected
+            addSubview(uilabel)
             labels.append(uilabel)
         }
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        var selectFrame = self.bounds
+        var selectFrame = bounds
         let newWidth = CGRectGetWidth(selectFrame) / CGFloat(items.count)
         selectFrame.size.width = newWidth
         subView.frame = selectFrame
-        let labelHeight = self.bounds.height
-        let labelWidth = self.bounds.width / CGFloat(labels.count)
+        let labelHeight = bounds.height
+        let labelWidth = bounds.width / CGFloat(labels.count)
         
         for index in 0...labels.count - 1 {
             let label = labels[index]
@@ -86,16 +86,14 @@ class TimeFrame : UIControl {
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         for index in 0..<labels.count {
             labels[index].layer.addAnimation(animation,forKey :"layerFadeOut")
-            labels[index].layer.backgroundColor = UIColorFromHex(kSegmentedControlBackgroundColor).CGColor
-            labels[index].textColor = UIColorFromHex(kTimeFrameSelected)
+            labels[index].layer.backgroundColor = Color.timeFrameBackground.CGColor
+            labels[index].textColor = Color.timeFrameSelected
             labels[index].font = UIFont.systemFontOfSize(16.0)
         }
         labels[selectedIndex].layer.addAnimation(animation, forKey :"layerFadeIn")
-        labels[selectedIndex].layer.backgroundColor = UIColorFromHex(kTimeFrameSelected).CGColor
+        labels[selectedIndex].layer.backgroundColor = Color.timeFrameSelected.CGColor
         labels[selectedIndex].layer.cornerRadius = frame.height / 2
-        labels[selectedIndex].textColor = UIColorFromHex(kSegmentedControlBackgroundColor)
+        labels[selectedIndex].textColor = Color.timeFrameBackground
         labels[selectedIndex].font = UIFont.boldSystemFontOfSize(17.0)
-        
-        
     }
 }
