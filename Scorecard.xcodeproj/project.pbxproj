@@ -24,6 +24,8 @@
 		F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D71D3E3605007ABA24 /* DashboardCell.swift */; };
 		F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D91D3E6124007ABA24 /* ProfilePicture.swift */; };
 		F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD21D40C779005A3EE8 /* TimeFrame.swift */; };
+		F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */; };
+		F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */; };
 		F4D043081D3CAA410096C5F7 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D043071D3CAA410096C5F7 /* ProfileButton.swift */; };
 		F4D0430A1D3CB4E20096C5F7 /* NotificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D043091D3CB4E20096C5F7 /* NotificationButton.swift */; };
 		F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */; };
@@ -109,6 +111,8 @@
 		F46185D71D3E3605007ABA24 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = ../TableViews/DashboardCell.swift; sourceTree = "<group>"; };
 		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
 		F495FCD21D40C779005A3EE8 /* TimeFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFrame.swift; sourceTree = "<group>"; };
+		F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedStatisticsViewController.swift; sourceTree = "<group>"; };
+		F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDetail.swift; sourceTree = "<group>"; };
 		F4D043071D3CAA410096C5F7 /* ProfileButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		F4D043091D3CB4E20096C5F7 /* NotificationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationButton.swift; sourceTree = "<group>"; };
 		F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -521,6 +525,7 @@
 			isa = PBXGroup;
 			children = (
 				F92E71B21D354600006E9D1F /* .keep */,
+				F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -682,6 +687,7 @@
 				F92E71FF1D35497E006E9D1F /* RootViewController.swift */,
 				F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */,
 				F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */,
+				F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -987,6 +993,8 @@
 				F92E72001D35497E006E9D1F /* RootViewController.swift in Sources */,
 				F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */,
 				F46185D21D3E191D007ABA24 /* UIViewController+MMDrawerController.m in Sources */,
+				F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */,
+				F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */,
 				04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */,
 				F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */,
 				F4D0430A1D3CB4E20096C5F7 /* NotificationButton.swift in Sources */,

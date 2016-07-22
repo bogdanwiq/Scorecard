@@ -12,7 +12,7 @@ import UIKit
 class TimeFrame : UIControl {
     
     private var labels = [UILabel]()
-    var items : [String] = ["1d", "1w", "1m", "1y", "All"]{
+    private var items : [String] = ["1d", "1w", "1m", "1y", "All"]{
         didSet{
             setupLabels()
         }
@@ -32,11 +32,11 @@ class TimeFrame : UIControl {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView(){
+    private func setupView(){
         self.backgroundColor = UIColorFromHex(kSegmentedControlBackgroundColor)
         setupLabels()
     }
-    func setupLabels(){
+    private func setupLabels(){
         
         for index in 0...items.count - 1{
             let uilabel = UILabel(frame: CGRectZero)

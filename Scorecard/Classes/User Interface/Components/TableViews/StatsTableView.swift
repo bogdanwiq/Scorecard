@@ -9,19 +9,20 @@
 import Foundation
 import UIKit
 
-class StatsTableView : UITableView, UITableViewDataSource, UITableViewDelegate{
+class StatsTableView : UITableView, UITableViewDataSource{
     
     var arrayOfStats : [Stats] = [Stats]()
     let reuseIdentifier : String = "DashboardCell"
+ 
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
         self.frame = UIScreen.mainScreen().bounds
-        self.delegate      =   self
         self.dataSource    =   self
         self.rowHeight = UITableViewAutomaticDimension
         self.registerClass(DashboardCell.self, forCellReuseIdentifier: "DashboardCell")
         self.setupArray()
         self.separatorColor = UIColor.clearColor()
+      
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -80,16 +81,6 @@ class StatsTableView : UITableView, UITableViewDataSource, UITableViewDelegate{
         UIColorFromHex(kBackgroundColor).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         cell.backgroundColor = UIColor(hue: hue, saturation: saturation-(0.06*CGFloat(indexPath.row)), brightness: brightness+(0.03*CGFloat(indexPath.row)), alpha: alpha)
         return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let selectedCell : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-        selectedCell.contentView.backgroundColor = UIColor.redColor()
-        print(arrayOfStats[indexPath.row])
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
     }
     
 }
