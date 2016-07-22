@@ -9,6 +9,8 @@
 import Foundation
 
 class DataService {
+    
+    static let sharedInstance = DataService()
 
     func setupStats() -> [Stats] {
         var stats : [Stats] = [Stats]()

@@ -12,17 +12,21 @@ import UIKit
 class StatsTableView : UITableView, UITableViewDataSource{
     
     let reuseIdentifier : String = "DashboardCell"
-    let service = DataService()
+    let service = DataService.sharedInstance
     var stats : [Stats]!
+    
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
         frame = UIScreen.mainScreen().bounds
         dataSource = self
-        rowHeight = 80
+        //estimatedRowHeight = 80.0
+        //rowHeight = UITableViewAutomaticDimension
+        rowHeight = 80.0
         registerClass(DashboardCell.self, forCellReuseIdentifier: "DashboardCell")
         separatorColor = UIColor.clearColor()
         stats = service.setupStats()
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -39,14 +43,15 @@ class StatsTableView : UITableView, UITableViewDataSource{
         // SET UILABELS.TEXT
         cell.typeName.text = stats[indexPath.row].typeName
         cell.counter.text = String(stats[indexPath.row].counter)
-        if stats[indexPath.row].getImage() == UIImage(named: "ArrowUp"){
+        if stats[indexPath.row].getImage() == UIImage(named: "ArrowUp") {
             cell.difference.textColor = Color.statsRise
             cell.difference.text = "+" + String(stats[indexPath.row].difference)
-        }else if stats[indexPath.row].getImage() == UIImage(named: "ArrowDown"){
+        }
+        else if stats[indexPath.row].getImage() == UIImage(named: "ArrowDown") {
             cell.difference.textColor = Color.statsFall
             cell.difference.text = "-" + String(stats[indexPath.row].difference)
         }
-        else if stats[indexPath.row].getImage() == UIImage(named: "None"){
+        else if stats[indexPath.row].getImage() == UIImage(named: "None") {
             cell.difference.textColor = Color.statsRise
             cell.difference.text = String(stats[indexPath.row].difference)
         }
@@ -60,6 +65,7 @@ class StatsTableView : UITableView, UITableViewDataSource{
         var alpha : CGFloat = 0.0
         Color.mainBackground.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         cell.backgroundColor = UIColor(hue: hue, saturation: saturation-(0.06*CGFloat(indexPath.row)), brightness: brightness+(0.03*CGFloat(indexPath.row)), alpha: alpha)
+        
         return cell
     }
     

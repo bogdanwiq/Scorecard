@@ -12,7 +12,7 @@ import UIKit
 class SettingsTableView : UITableView, UITableViewDataSource {
     
     var settings = ["Notifications", "Alerts"]
-    let service = DataService()
+    let service = DataService.sharedInstance
 
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)

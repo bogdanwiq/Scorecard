@@ -27,15 +27,19 @@ class TimeFrame : UIControl {
         super.init(frame: CGRectZero)
         frame = UIScreen.mainScreen().bounds
         setupView()
+    
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func setupView(){
         backgroundColor = Color.timeFrameBackground
+        
         setupLabels()
     }
+    
     private func setupLabels(){
         
         for index in 0...items.count - 1{
@@ -44,10 +48,12 @@ class TimeFrame : UIControl {
             uilabel.textAlignment = .Center
             uilabel.font = UIFont.systemFontOfSize(16.0)
             uilabel.textColor = Color.timeFrameSelected
+            uilabel.translatesAutoresizingMaskIntoConstraints = false
             addSubview(uilabel)
             labels.append(uilabel)
         }
     }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         var selectFrame = bounds
@@ -64,6 +70,7 @@ class TimeFrame : UIControl {
         }
         displaySelected()
     }
+    
     override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
         let location = touch.locationInView(self)
         var calculatedIndex : Int?
@@ -78,6 +85,7 @@ class TimeFrame : UIControl {
         }
         return false
     }
+    
     func displaySelected(){
         // Animation //
         let animation: CATransition = CATransition()

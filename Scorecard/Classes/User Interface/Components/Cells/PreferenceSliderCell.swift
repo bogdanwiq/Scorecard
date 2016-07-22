@@ -13,7 +13,7 @@ class PreferenceSliderCell: UITableViewCell{
     
     let preferenceName = UILabel()
     let slider = UISwitch()
-    let service = DataService()
+    let service = DataService.sharedInstance
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style	, reuseIdentifier: reuseIdentifier)

@@ -28,7 +28,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
-        setupConstranits()
+        setupConstraints()
     }
     
     // MARK: - UI
@@ -37,5 +37,5 @@ class BaseViewController: UIViewController {
         
     }
     
-    func setupConstranits() { /* Override in child if needed */ }
+    func setupConstraints() { /* Override in child if needed */ }
 }

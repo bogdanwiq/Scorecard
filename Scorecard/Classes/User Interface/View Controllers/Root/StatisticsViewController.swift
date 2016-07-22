@@ -11,6 +11,12 @@ import UIKit
 
 class StatisticViewController: BaseViewController, UITableViewDelegate{
     
+    // TimeFrame
+    let timeFrame = TimeFrame()
+    
+    // Table View
+    let tableView = StatsTableView()
+    
     override func viewWillAppear(animated: Bool) {
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
@@ -37,16 +43,24 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationButton)
         
-        // TimeFrame
-        let timeFrame = TimeFrame()
-        timeFrame.frame = CGRectMake(0,0, timeFrame.frame.width, 30)
-        // Table View
-        let tableView = StatsTableView()
         tableView.delegate = self
-        tableView.frame = CGRectMake(0, 30, tableView.frame.width, tableView.frame.height-95)
+        
+        timeFrame.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(timeFrame)
         view.addSubview(tableView)
+    }
+    
+    override func setupConstraints() {
+        var allConstraints = [NSLayoutConstraint]()
+        let dictionary = ["timeFrame": timeFrame, "tableView": tableView]
+        
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[timeFrame]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[timeFrame(30)]-0-[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        
+        view.addConstraints(allConstraints)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
