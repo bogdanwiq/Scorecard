@@ -13,6 +13,7 @@ class PreferenceSliderCell: UITableViewCell{
     
     let preferenceName = UILabel()
     let slider = UISwitch()
+    let service = DataService()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style	, reuseIdentifier: reuseIdentifier)
@@ -35,7 +36,7 @@ class PreferenceSliderCell: UITableViewCell{
     }
     
     func didChangeState(sender: UISwitch) {
-        NSUserDefaults.standardUserDefaults().setBool(sender.on, forKey: preferenceName.text!)
+        service.setProfileSettings(preferenceName.text!, state: sender.on)
     }
 
 }

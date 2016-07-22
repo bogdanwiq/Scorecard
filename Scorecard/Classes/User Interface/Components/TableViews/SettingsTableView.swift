@@ -9,20 +9,20 @@
 import Foundation
 import UIKit
 
-class SettingsTableView : UITableView, UITableViewDataSource, UITableViewDelegate{
+class SettingsTableView : UITableView, UITableViewDataSource {
     
-    var arrayOfSettings = ["Notifications", "Alerts"]
+    var settings = ["Notifications", "Alerts"]
+    let service = DataService()
 
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
         frame = UIScreen.mainScreen().bounds
-        delegate = self
         dataSource = self
         registerClass(PreferenceSliderCell.self, forCellReuseIdentifier: "PreferenceSliderCell")
         allowsSelection = false
         scrollEnabled = false
         backgroundColor = Color.mainBackground
-        
+        rowHeight = 63
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -30,23 +30,19 @@ class SettingsTableView : UITableView, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return arrayOfSettings.count
+        return settings.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let reuseIdentifier = "PreferenceSliderCell"
         let cell : PreferenceSliderCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PreferenceSliderCell
-        cell.preferenceName.text = arrayOfSettings[indexPath.row]
-        cell.slider.setOn(NSUserDefaults.standardUserDefaults().boolForKey(arrayOfSettings[indexPath.row]) ?? false, animated: false)
+        cell.preferenceName.text = settings[indexPath.row]
+        cell.slider.setOn(service.getProfileSettings(settings[indexPath.row]) ?? false, animated: false)
         cell.slider.addTarget(cell, action: #selector(cell.didChangeState(_:)), forControlEvents: .ValueChanged)
         cell.backgroundColor = Color.mainBackground
         
         return cell
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 63
     }
     
 }

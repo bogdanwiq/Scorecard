@@ -44,8 +44,15 @@ class ProfileViewController : BaseViewController {
         view.addSubview(settingsTableView)
         
         // Logout button
-        let logoutButton = Button.Logout.getButton()
+        let logoutButton = UIButton(frame: view.frame)
         logoutButton.frame = CGRectMake(107.0, 598.0, 100.0, 40.0)
+        logoutButton.setTitle("Logout", forState: .Normal)
+        logoutButton.titleLabel?.textAlignment = .Center
+        logoutButton.backgroundColor = Color.logoutButtonBackground
+        logoutButton.tintColor = Color.textColor
+        logoutButton.layer.cornerRadius = 10.0
+        logoutButton.clipsToBounds = true
+        
         view.addSubview(logoutButton)
     }
 }

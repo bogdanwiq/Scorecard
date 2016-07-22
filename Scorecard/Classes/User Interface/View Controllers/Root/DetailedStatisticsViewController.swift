@@ -13,7 +13,7 @@ class DetailedStatisticViewController : BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = SharedApplication.delegate as! AppDelegate
         appDelegate.centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
     }
     

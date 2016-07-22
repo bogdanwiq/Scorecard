@@ -57,7 +57,7 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
     }
     
     func slideLeft(){
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = SharedApplication.delegate as! AppDelegate
         appDelegate.centerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
     }
     
