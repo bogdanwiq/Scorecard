@@ -11,11 +11,6 @@ import UIKit
 
 class ProfileViewController : BaseViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initUI()
-    }
-    
     override func initUI(){
         //Set Background
         view.backgroundColor = Color.mainBackground

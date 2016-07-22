@@ -91,7 +91,7 @@
 		D0B136FAAA5070BAA5C5B410 /* Pods-ScorecardUITests.testing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.testing.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.testing.xcconfig"; sourceTree = "<group>"; };
 		F3C265FFAE1A500E8B6EC1F1 /* Pods-ScorecardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardTests/Pods-ScorecardTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
-		F46185C51D3E191D007ABA24 /* Scorecard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Scorecard-Bridging-Header.h"; sourceTree = "<group>"; };
+		F46185C51D3E191D007ABA24 /* Scorecard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Scorecard-Bridging-Header.h"; path = "../Classes/User Interface/Transitioning/Scorecard-Bridging-Header.h"; sourceTree = "<group>"; };
 		F46185C61D3E191D007ABA24 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		F46185C71D3E191D007ABA24 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		F46185C81D3E191D007ABA24 /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
@@ -214,7 +214,6 @@
 				F46185CC1D3E191D007ABA24 /* MMDrawerVisualState.m */,
 				F46185CD1D3E191D007ABA24 /* UIViewController+MMDrawerController.h */,
 				F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */,
-				F46185C51D3E191D007ABA24 /* Scorecard-Bridging-Header.h */,
 			);
 			name = SideMenu;
 			sourceTree = "<group>";
@@ -659,6 +658,7 @@
 		F92E71D01D354600006E9D1F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F46185C51D3E191D007ABA24 /* Scorecard-Bridging-Header.h */,
 				F92E71D11D354600006E9D1F /* Info.plist */,
 			);
 			path = "Supporting Files";

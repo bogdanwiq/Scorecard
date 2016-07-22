@@ -11,11 +11,6 @@ import UIKit
 
 class StatisticViewController: BaseViewController, UITableViewDelegate{
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initUI()
-    }
-    
     override func viewWillAppear(animated: Bool) {
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
@@ -25,6 +20,7 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
         //Set Background
         view.backgroundColor = Color.mainBackground
         navigationController?.navigationBar.translucent = false
+        
         // Navigation Bar - TITLE
         title = "Dashboard"
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Color.navigationTitle]
