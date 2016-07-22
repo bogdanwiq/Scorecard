@@ -9,21 +9,18 @@
 import Foundation
 import UIKit
 
-class ProfileButton : UIBarButtonItem {
+class ProfileButton : UIButton {
     
-    override init() {
-        super.init()
-        let profileImage = UIImage(named: "Profile")!
-        self.image = profileImage
-        self.target = self
-        self.action = #selector(slide)
-        self.style = .Plain
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setImage(UIImage(named: "Profile"), forState: .Normal)
     }
     
-    func slide(){
+    func slide() {
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.centerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
     }
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

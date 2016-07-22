@@ -13,19 +13,24 @@ class StatsTableView : UITableView, UITableViewDataSource, UITableViewDelegate{
     
     var arrayOfStats : [Stats] = [Stats]()
     let reuseIdentifier : String = "DashboardCell"
+    
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
+        
         self.frame = UIScreen.mainScreen().bounds
         self.delegate      =   self
         self.dataSource    =   self
+        // CR: [Anyone | Medium] set directly here the height, if the all the rows height are equal [Atti]
         self.rowHeight = UITableViewAutomaticDimension
         self.registerClass(DashboardCell.self, forCellReuseIdentifier: "DashboardCell")
         self.setupArray()
         self.separatorColor = UIColor.clearColor()
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    // CR: [Anyone | High] The data should be created in a service [Atti]
     func setupArray(){
         let array1 = Stats(typeName: "DOWNLOAD", counter: 123131, difference: 2222, percent: 22, sign: "ArrowUp")
         let array2 = Stats(typeName: "UPDATE", counter: 1231, difference: 22, percent: 10, sign: "ArrowDown")
@@ -47,9 +52,11 @@ class StatsTableView : UITableView, UITableViewDataSource, UITableViewDelegate{
         arrayOfStats.append(array8)
         arrayOfStats.append(array9)
     }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return arrayOfStats.count
     }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         backgroundColor = UIColorFromHex(kBackgroundColor)

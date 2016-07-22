@@ -13,6 +13,7 @@ class ProfilePicture : UIImageView {
    
     override init(image: UIImage?) {
         super.init(image: image)
+        // CR: [Bogdan | Low] Don't need to put self before property set an method call [Atti]
         self.profileImage = image!
         self.roundImage()
         

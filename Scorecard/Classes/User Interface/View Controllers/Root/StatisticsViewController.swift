@@ -13,6 +13,7 @@ class StatisticViewController: BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // CR: [Anyone | High] This method is alrady called in base and thats why the UI is created twice [Atti]
         initUI()
     }
     override func initUI(){
@@ -20,15 +21,17 @@ class StatisticViewController: BaseViewController{
         self.view.backgroundColor = UIColorFromHex(kBackgroundColor, alpha: 1)
         self.navigationController?.navigationBar.translucent = false
         // Navigation Bar - TITLE
-        self.title = "Statistics"
-        self.navigationController?.navigationBar.titleTextAttributes = kNavigationTitleColor
-        self.navigationController?.navigationBar.barTintColor = UIColorFromHex(kBackgroundColor, alpha: 1)
+        title = "Statistics"
+        navigationController?.navigationBar.titleTextAttributes = kNavigationTitleColor
+        navigationController?.navigationBar.barTintColor = UIColorFromHex(kBackgroundColor, alpha: 1)
         // End Statistics Title
         
         // Buttons left & right
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         // Navigation buttons
-        self.navigationItem.leftBarButtonItem = ProfileButton()
+        let button = ProfileButton()
+//        button.addTarget(self, action: #selector(), forControlEvents: <#T##UIControlEvents#>)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: ProfileButton())
         self.navigationItem.rightBarButtonItem = NotificationButton()
         // TimeFrame
         let timeFrame = TimeFrame()

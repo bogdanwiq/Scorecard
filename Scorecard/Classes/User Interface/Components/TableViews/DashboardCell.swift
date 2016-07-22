@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class DashboardCell: UITableViewCell {
-    
+    // CR: [Anuone | Medium] Set the type, but not create the object [Atti]
     let typeName = UILabel()
     let counter = UILabel()
     let difference = UILabel()
