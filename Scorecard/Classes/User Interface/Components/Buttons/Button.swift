@@ -12,6 +12,7 @@ import UIKit
 enum Button {
     case Profile
     case Notification
+    case Back
     
     func getButton() -> UIButton{
         let button = UIButton(frame: CGRectMake(0,0,30,30))
@@ -22,6 +23,8 @@ enum Button {
         case .Notification:
             button.setImage(UIImage(named: "Notification"), forState: .Normal)
             break
+        case .Back:
+            button.setImage(UIImage(named: "Back"), forState: .Normal)
         }
         return button
     }

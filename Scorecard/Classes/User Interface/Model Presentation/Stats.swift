@@ -9,16 +9,19 @@
 import Foundation
 
 class Stats {
-    var typeName : String
-    var counter : Int
-    var difference : Int
-    var percent : Int
-    var img : UIImage
+    
     enum signImg: String{
         case ArrowUp
         case ArrowDown
         case None
     }
+    
+    var typeName : String
+    var counter : Int
+    var difference : Int
+    var percent : Int
+    var img : UIImage
+    
     init(typeName: String, counter: Int, difference: Int, percent :Int, sign : String){
         self.typeName = typeName
         self.counter = counter

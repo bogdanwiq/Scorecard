@@ -9,7 +9,8 @@ target 'Scorecard' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 	pod ‘HLMFoundation’
-
+	pod ‘Charts’
+	pod ‘ObjectMapper’, ‘~> 1.3’
   # Pods for Scorecard
 
   target 'ScorecardTests' do

@@ -68,6 +68,8 @@ typedef NS_OPTIONS(NSInteger, MMOpenDrawerGestureMode) {
                                                         MMOpenDrawerGestureModeCustom,
 };
 
+
+
 typedef NS_OPTIONS(NSInteger, MMCloseDrawerGestureMode) {
     MMCloseDrawerGestureModeNone                    = 0,
     MMCloseDrawerGestureModePanningNavigationBar    = 1 << 1,

@@ -21,7 +21,6 @@
 
 #import "MMDrawerController.h"
 #import "UIViewController+MMDrawerController.h"
-
 #import <QuartzCore/QuartzCore.h>
 
 CGFloat const MMDrawerDefaultWidth = 320.0f;
@@ -591,17 +590,17 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
 - (void)setMaximumDrawerWidth:(CGFloat)width forSide:(MMDrawerSide)drawerSide animated:(BOOL)animated completion:(void(^)(BOOL finished))completion{
     NSParameterAssert(width > 0);
     NSParameterAssert(drawerSide != MMDrawerSideNone);
-    
+    CGFloat size = [UIScreen mainScreen].applicationFrame.size.width;
     UIViewController *sideDrawerViewController = [self sideDrawerViewControllerForSide:drawerSide];
     CGFloat oldWidth = 0.f;
     NSInteger drawerSideOriginCorrection = 1;
     if (drawerSide == MMDrawerSideLeft) {
         oldWidth = _maximumLeftDrawerWidth;
-        _maximumLeftDrawerWidth = width;
+        _maximumLeftDrawerWidth = size-size*0.2;
     }
     else if(drawerSide == MMDrawerSideRight){
         oldWidth = _maximumRightDrawerWidth;
-        _maximumRightDrawerWidth = width;
+        _maximumRightDrawerWidth = size-size*0.2;
         drawerSideOriginCorrection = -1;
     }
     

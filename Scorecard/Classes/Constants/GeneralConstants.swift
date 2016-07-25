@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 let SharedApplication = UIApplication.sharedApplication()
 let NotificationCenter = NSNotificationCenter.defaultCenter()
 
@@ -47,6 +46,7 @@ struct Color {
     private static let casper       = UIColor(hexNumber: 0xB6CBD9)
 }
 
+let screenWidth = UIScreen.mainScreen().applicationFrame.size.width
 // TABLECELL SIZE
 let kTypeNameSize : CGFloat = 15.0
 let kCounterSize : CGFloat = 22.0

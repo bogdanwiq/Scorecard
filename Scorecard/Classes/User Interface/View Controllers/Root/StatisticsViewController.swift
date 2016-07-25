@@ -61,7 +61,7 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedCell : DashboardCell = tableView.cellForRowAtIndexPath(indexPath)! as! DashboardCell
-        selectedCell.contentView.backgroundColor = Color.timeFrameBackground
+        selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
         navigationController?.pushViewController(DetailedStatisticViewController(), animated: true)
     }
     

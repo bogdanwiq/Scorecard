@@ -27,6 +27,10 @@
 		F495FCD91D421405005A3EE8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD81D421405005A3EE8 /* Button.swift */; };
 		F4984ABF1D45EF85009B0DEA /* DetailedStatsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984ABE1D45EF85009B0DEA /* DetailedStatsTableView.swift */; };
 		F4984AC11D45EFC5009B0DEA /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC01D45EFC5009B0DEA /* StatsCell.swift */; };
+		F4984AC51D464288009B0DEA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC41D464288009B0DEA /* User.swift */; };
+		F4984AC71D464327009B0DEA /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC61D464327009B0DEA /* Project.swift */; };
+		F4984AC91D4643FF009B0DEA /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC81D4643FF009B0DEA /* Metrics.swift */; };
+		F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984ACA1D46444A009B0DEA /* MetricValue.swift */; };
 		F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5FFF71D423549003A9C96 /* DataService.swift */; };
 		F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */; };
 		F92E717F1D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717A1D353D11006E9D1F /* Info.plist */; };
@@ -40,7 +44,6 @@
 		F92E71D71D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71941D354600006E9D1F /* .keep */; };
 		F92E71D81D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71961D354600006E9D1F /* .keep */; };
 		F92E71D91D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71981D354600006E9D1F /* .keep */; };
-		F92E71DA1D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E719C1D354600006E9D1F /* .keep */; };
 		F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92E71A01D354600006E9D1F /* AppDelegate.swift */; };
 		F92E71DD1D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71A31D354600006E9D1F /* .keep */; };
 		F92E71E11D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71AC1D354600006E9D1F /* .keep */; };
@@ -113,6 +116,10 @@
 		F495FCD81D421405005A3EE8 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F4984ABE1D45EF85009B0DEA /* DetailedStatsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedStatsTableView.swift; sourceTree = "<group>"; };
 		F4984AC01D45EFC5009B0DEA /* StatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
+		F4984AC41D464288009B0DEA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F4984AC61D464327009B0DEA /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		F4984AC81D4643FF009B0DEA /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
+		F4984ACA1D46444A009B0DEA /* MetricValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricValue.swift; sourceTree = "<group>"; };
 		F4B5FFF71D423549003A9C96 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScorecardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +137,6 @@
 		F92E71941D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71961D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71981D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
-		F92E719C1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71A01D354600006E9D1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F92E71A31D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71AC1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
@@ -410,7 +416,10 @@
 			isa = PBXGroup;
 			children = (
 				F46185D51D3E32FA007ABA24 /* Stats.swift */,
-				F92E719C1D354600006E9D1F /* .keep */,
+				F4984AC41D464288009B0DEA /* User.swift */,
+				F4984AC61D464327009B0DEA /* Project.swift */,
+				F4984AC81D4643FF009B0DEA /* Metrics.swift */,
+				F4984ACA1D46444A009B0DEA /* MetricValue.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -814,7 +823,6 @@
 				F92E71EE1D354600006E9D1F /* .keep in Resources */,
 				F92E71E81D354600006E9D1F /* .keep in Resources */,
 				F92E71E41D354600006E9D1F /* .keep in Resources */,
-				F92E71DA1D354600006E9D1F /* .keep in Resources */,
 				F92E71D91D354600006E9D1F /* .keep in Resources */,
 				F92E71EB1D354600006E9D1F /* .keep in Resources */,
 				F92E71E51D354600006E9D1F /* .keep in Resources */,
@@ -1102,13 +1110,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */,
+				F4984AC91D4643FF009B0DEA /* Metrics.swift in Sources */,
 				F4984ABF1D45EF85009B0DEA /* DetailedStatsTableView.swift in Sources */,
 				F495FCD91D421405005A3EE8 /* Button.swift in Sources */,
+				F4984AC71D464327009B0DEA /* Project.swift in Sources */,
 				F46185D61D3E32FA007ABA24 /* Stats.swift in Sources */,
 				F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */,
 				F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */,
 				F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */,
 				F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */,
+				F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */,
 				F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */,
 				F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */,
 				F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */,
@@ -1121,6 +1132,7 @@
 				F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */,
 				04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */,
 				F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */,
+				F4984AC51D464288009B0DEA /* User.swift in Sources */,
 				F92E71F91D354790006E9D1F /* BaseViewController.swift in Sources */,
 				F4984AC11D45EFC5009B0DEA /* StatsCell.swift in Sources */,
 				049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */,

@@ -30,9 +30,23 @@ class StatsTableView : UITableView, UITableViewDataSource{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        switch section{
+        case 0 :
+            return "First"
+        case 1 :
+            return "Second"
+        default :
+            return nil
+        }
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return stats.count
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -61,6 +75,7 @@ class StatsTableView : UITableView, UITableViewDataSource{
         var saturation: CGFloat = 0.0
         var brightness : CGFloat = 0.0
         var alpha : CGFloat = 0.0
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         Color.mainBackground.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         cell.backgroundColor = UIColor(hue: hue, saturation: saturation-(0.06*CGFloat(indexPath.row)), brightness: brightness+(0.03*CGFloat(indexPath.row)), alpha: alpha)
         return cell
