@@ -22,13 +22,17 @@ class PreferenceSliderCell: UITableViewCell{
         preferenceName.backgroundColor = Color.mainBackground
         preferenceName.textColor = Color.textColor
         preferenceName.text = "Placeholder"
+        preferenceName.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(preferenceName)
         
         slider.frame.origin.x = 263.0
         slider.frame.origin.y = 15.0
         slider.setOn(false, animated: false)
         slider.onTintColor = Color.profileSettings
+        slider.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(slider)
+        
+        setupConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,6 +41,18 @@ class PreferenceSliderCell: UITableViewCell{
     
     func didChangeState(sender: UISwitch) {
         service.setProfileSettings(preferenceName.text!, state: sender.on)
+    }
+    
+    func setupConstraints() {
+        var preferenceCellConstraints = [NSLayoutConstraint]()
+        let dictionary = ["preferenceName": preferenceName, "slider": slider]
+        
+        preferenceCellConstraints.append(NSLayoutConstraint(item: preferenceName, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
+        preferenceCellConstraints.append(NSLayoutConstraint(item: slider, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
+        preferenceCellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[preferenceName]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        preferenceCellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[slider]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        
+        addConstraints(preferenceCellConstraints)
     }
 
 }

@@ -14,9 +14,9 @@ class ProfilePicture : UIImageView {
     override init(image: UIImage?) {
         super.init(image: image)
         profileImage = image!
-        roundImage()
-        
         frame = CGRectMake(0, 0, 130, 130)
+        
+        roundImage()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,7 +27,12 @@ class ProfilePicture : UIImageView {
         contentMode = UIViewContentMode.ScaleAspectFill
         layer.borderWidth = 1.0
         layer.masksToBounds = false
-        layer.cornerRadius = 130.0 / 2.0
+        layer.cornerRadius = bounds.size.height / 2.0
         clipsToBounds = true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = bounds.size.height / 2.0
     }
 }

@@ -21,6 +21,7 @@ class SettingsTableView : UITableView, UITableViewDataSource {
         registerClass(PreferenceSliderCell.self, forCellReuseIdentifier: "PreferenceSliderCell")
         allowsSelection = false
         scrollEnabled = false
+        separatorColor = UIColor.clearColor()
         backgroundColor = Color.mainBackground
         rowHeight = 63
     }
