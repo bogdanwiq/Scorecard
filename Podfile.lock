@@ -1,4 +1,7 @@
 PODS:
+  - Charts (2.2.5):
+    - Charts/Core (= 2.2.5)
+  - Charts/Core (2.2.5)
   - HLMFoundation (1.6.0):
     - HLMFoundation/Core (= 1.6.0)
     - HLMFoundation/Logger (= 1.6.0)
@@ -10,11 +13,13 @@ PODS:
     - HLMFoundation/Core
 
 DEPENDENCIES:
+  - Charts
   - HLMFoundation
 
 SPEC CHECKSUMS:
+  Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
   HLMFoundation: e7612b49cfa26d2ad5fe3d5c57b829a4c3b2e972
 
-PODFILE CHECKSUM: 455d88eb1ed2d81924a5796ecb9db7482460c4aa
+PODFILE CHECKSUM: 39aabcf8cdd86563222624b36391c88fe72f995c
 
 COCOAPODS: 1.0.1

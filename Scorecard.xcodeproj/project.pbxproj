@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04289FE51D3F93F00006DBCA /* SettingsTableView.swift */; };
 		049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */; };
+		04F295BC1D461B0100B6E9B2 /* StatisticsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */; };
 		85B16355C4682A962EA47E7C /* Pods_ScorecardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A5979765873DF93CA36D6F /* Pods_ScorecardUITests.framework */; };
 		994079583AD2247F3BCD8E1A /* Pods_ScorecardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */; };
 		9D7996D998DA383D9DF6E501 /* Pods_Scorecard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C33FD5373472CC5B1403ED /* Pods_Scorecard.framework */; };
@@ -81,6 +82,7 @@
 /* Begin PBXFileReference section */
 		04289FE51D3F93F00006DBCA /* SettingsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
 		049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceSliderCell.swift; path = "Scorecard/Classes/User Interface/Components/Cells/PreferenceSliderCell.swift"; sourceTree = SOURCE_ROOT; };
+		04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsChart.swift; sourceTree = "<group>"; };
 		358D394A94E20F69650E0DE9 /* Pods-ScorecardUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4DD101E3A037447876FCE83F /* Pods-ScorecardUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		57A9850CCEE04D2DE5304EE3 /* Pods-ScorecardTests.testing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardTests.testing.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardTests/Pods-ScorecardTests.testing.xcconfig"; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 			isa = PBXGroup;
 			children = (
 				F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */,
+				04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1106,6 +1109,7 @@
 				F495FCD91D421405005A3EE8 /* Button.swift in Sources */,
 				F46185D61D3E32FA007ABA24 /* Stats.swift in Sources */,
 				F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */,
+				04F295BC1D461B0100B6E9B2 /* StatisticsChart.swift in Sources */,
 				F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */,
 				F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */,
 				F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */,

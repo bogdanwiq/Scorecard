@@ -25,16 +25,20 @@ extension UIColor{
     }
 }
 struct Color {
-    static let mainBackground         = Color.blackPearl
-    static let navigationBackground   = Color.blackPearl
-    static let timeFrameBackground    = Color.blueOxford
-    static let textColor              = Color.white
-    static let navigationTitle        = Color.white
-    static let logoutButtonBackground = Color.redOrange
-    static let profileSettings        = Color.blueDodger
-    static let statsFall              = Color.orangeBright
-    static let statsRise              = Color.lima
-    static let timeFrameSelected      = Color.casper
+    static let mainBackground             = Color.blackPearl
+    static let navigationBackground       = Color.blackPearl
+    static let timeFrameBackground        = Color.blueOxford
+    static let textColor                  = Color.white
+    static let navigationTitle            = Color.white
+    static let chartBackground            = Color.white
+    static let logoutButtonBackground     = Color.redOrange
+    static let profileSettings            = Color.blueDodger
+    static let statsFall                  = Color.orangeBright
+    static let statsRise                  = Color.lima
+    static let timeFrameSelected          = Color.casper
+    static let downloadsDataSetBackground = Color.blueHavelock
+    static let usersDataSetBackground     = Color.lima
+    static let updatesDataSetBackground   = Color.lemonRipe
 
     
     private static let blackPearl   = UIColor(hexNumber: 0x031322)
@@ -45,6 +49,8 @@ struct Color {
     private static let orangeBright = UIColor(hexNumber: 0xFF6647)
     private static let lima         = UIColor(hexNumber: 0x7FD121)
     private static let casper       = UIColor(hexNumber: 0xB6CBD9)
+    private static let lemonRipe    = UIColor(hexNumber: 0xF7E51E)
+    private static let blueHavelock = UIColor(hexNumber: 0x4A90E0)
 }
 
 // TABLECELL SIZE

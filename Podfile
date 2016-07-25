@@ -3,12 +3,13 @@
 source 'git@bitbucket.org:halcyonmobile/hmcocoapodsspecs.git’
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, ‘8.0’
+platform :ios, '8.0'
 
 target 'Scorecard' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-	pod ‘HLMFoundation’
+	pod 'HLMFoundation'
+	pod 'Charts'
 
   # Pods for Scorecard
 
