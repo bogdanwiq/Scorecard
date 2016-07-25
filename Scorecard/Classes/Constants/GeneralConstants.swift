@@ -48,16 +48,6 @@ struct Color {
 }
 
 // TABLECELL SIZE
-let kXpointLeft : CGFloat = 25.0
-let kXpointRight: CGFloat = 255.0
-let kYpointUp: CGFloat = 18.0
-let kYpointDown: CGFloat = 42.0
-let kYpointUpRight: CGFloat = kYpointUp-5
-let kYpointDownRight : CGFloat = kYpointDown + 5
-let kXsign : CGFloat = 340
-let kYsign : CGFloat = 20
-let kWidth : CGFloat = 375.0
-let kHeight : CGFloat = 80.0
 let kTypeNameSize : CGFloat = 15.0
 let kCounterSize : CGFloat = 22.0
 let kDifferenceSize : CGFloat = 19.0

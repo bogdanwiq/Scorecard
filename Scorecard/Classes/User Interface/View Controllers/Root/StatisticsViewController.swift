@@ -42,12 +42,9 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
         notificationButton.addTarget(self, action: #selector(slideRight), forControlEvents: .TouchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationButton)
-        
         tableView.delegate = self
-        
         timeFrame.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(timeFrame)
         view.addSubview(tableView)
     }
@@ -59,14 +56,12 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[timeFrame]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[timeFrame(30)]-0-[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        
         view.addConstraints(allConstraints)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedCell : DashboardCell = tableView.cellForRowAtIndexPath(indexPath)! as! DashboardCell
-        selectedCell.contentView.backgroundColor = UIColor.redColor()
-        print(selectedCell.typeName.text!)
+        selectedCell.contentView.backgroundColor = Color.timeFrameBackground
         navigationController?.pushViewController(DetailedStatisticViewController(), animated: true)
     }
     
