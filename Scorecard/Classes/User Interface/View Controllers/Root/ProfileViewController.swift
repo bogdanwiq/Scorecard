@@ -52,7 +52,6 @@ class ProfileViewController : BaseViewController {
         logoutButton.tintColor = Color.textColor
         logoutButton.layer.cornerRadius = 10.0
         logoutButton.clipsToBounds = true
-        
         view.addSubview(logoutButton)
     }
 }

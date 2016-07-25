@@ -38,6 +38,11 @@ class DataService {
         return stats
     }
     
+    func getCurrentStat() -> Stats {
+        let stat1 = Stats(typeName: "DOWNLOAD", counter: 123131, difference: 2222, percent: 22, sign: "ArrowUp")
+        return stat1
+    }
+    
     func setProfileSettings(preferenceName: String, state: Bool) {
         NSUserDefaults.standardUserDefaults().setBool(state, forKey: preferenceName)
     }

@@ -19,11 +19,11 @@ class StatsTableView : UITableView, UITableViewDataSource{
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
         frame = UIScreen.mainScreen().bounds
         dataSource = self
-        //estimatedRowHeight = 80.0
-        //rowHeight = UITableViewAutomaticDimension
-        rowHeight = 80.0
+        estimatedRowHeight = 80.0
+        rowHeight = UITableViewAutomaticDimension
         registerClass(DashboardCell.self, forCellReuseIdentifier: "DashboardCell")
         separatorColor = UIColor.clearColor()
+        backgroundColor = Color.mainBackground
         stats = service.setupStats()
     }
     
@@ -36,8 +36,6 @@ class StatsTableView : UITableView, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        backgroundColor = Color.mainBackground
         let cell : DashboardCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DashboardCell
         
         // SET UILABELS.TEXT
@@ -65,8 +63,6 @@ class StatsTableView : UITableView, UITableViewDataSource{
         var alpha : CGFloat = 0.0
         Color.mainBackground.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         cell.backgroundColor = UIColor(hue: hue, saturation: saturation-(0.06*CGFloat(indexPath.row)), brightness: brightness+(0.03*CGFloat(indexPath.row)), alpha: alpha)
-        
         return cell
     }
-    
 }

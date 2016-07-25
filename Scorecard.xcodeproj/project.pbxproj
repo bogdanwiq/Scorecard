@@ -25,6 +25,8 @@
 		F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */; };
 		F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */; };
 		F495FCD91D421405005A3EE8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD81D421405005A3EE8 /* Button.swift */; };
+		F4984ABF1D45EF85009B0DEA /* DetailedStatsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984ABE1D45EF85009B0DEA /* DetailedStatsTableView.swift */; };
+		F4984AC11D45EFC5009B0DEA /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC01D45EFC5009B0DEA /* StatsCell.swift */; };
 		F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5FFF71D423549003A9C96 /* DataService.swift */; };
 		F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */; };
 		F92E717F1D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717A1D353D11006E9D1F /* Info.plist */; };
@@ -109,6 +111,8 @@
 		F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedStatisticsViewController.swift; sourceTree = "<group>"; };
 		F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDetail.swift; sourceTree = "<group>"; };
 		F495FCD81D421405005A3EE8 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		F4984ABE1D45EF85009B0DEA /* DetailedStatsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedStatsTableView.swift; sourceTree = "<group>"; };
+		F4984AC01D45EFC5009B0DEA /* StatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 		F4B5FFF71D423549003A9C96 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScorecardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -475,6 +479,7 @@
 			children = (
 				049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */,
 				F46185D71D3E3605007ABA24 /* DashboardCell.swift */,
+				F4984AC01D45EFC5009B0DEA /* StatsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -501,6 +506,7 @@
 			children = (
 				F46185D31D3E239F007ABA24 /* StatsTableView.swift */,
 				04289FE51D3F93F00006DBCA /* SettingsTableView.swift */,
+				F4984ABE1D45EF85009B0DEA /* DetailedStatsTableView.swift */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -1096,6 +1102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */,
+				F4984ABF1D45EF85009B0DEA /* DetailedStatsTableView.swift in Sources */,
 				F495FCD91D421405005A3EE8 /* Button.swift in Sources */,
 				F46185D61D3E32FA007ABA24 /* Stats.swift in Sources */,
 				F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */,
@@ -1115,6 +1122,7 @@
 				04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */,
 				F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */,
 				F92E71F91D354790006E9D1F /* BaseViewController.swift in Sources */,
+				F4984AC11D45EFC5009B0DEA /* StatsCell.swift in Sources */,
 				049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

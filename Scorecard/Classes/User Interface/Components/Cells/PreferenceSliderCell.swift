@@ -17,13 +17,11 @@ class PreferenceSliderCell: UITableViewCell{
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style	, reuseIdentifier: reuseIdentifier)
-        
         preferenceName.frame = CGRectMake(10.0, 20.0, 100.0, 21.0);
         preferenceName.backgroundColor = Color.mainBackground
         preferenceName.textColor = Color.textColor
         preferenceName.text = "Placeholder"
         contentView.addSubview(preferenceName)
-        
         slider.frame.origin.x = 263.0
         slider.frame.origin.y = 15.0
         slider.setOn(false, animated: false)
