@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Charts
 
-class StatisticsChart: LineChartView, ChartViewDelegate {
+class StatisticsChart: LineChartView {
     
     var dataService = DataService.sharedInstance
     
@@ -21,19 +21,15 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         leftAxis.labelPosition = .InsideChart
         rightAxis.drawAxisLineEnabled = false
         rightAxis.drawLabelsEnabled = false
-        rightAxis.drawGridLinesEnabled = false
         xAxis.drawGridLinesEnabled = false
         xAxis.drawAxisLineEnabled = false
-        xAxis.labelPosition = .TopInside
-        xAxis.avoidFirstLastClippingEnabled = true
+        xAxis.labelPosition = .Top
         drawGridBackgroundEnabled = false
         drawBordersEnabled = false
         legend.enabled = false
-//        highlightPerTapEnabled = false
         descriptionText = ""
-        setViewPortOffsets(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0)
+        setViewPortOffsets(left: 0.0, top: 15.0, right: 0.0, bottom: 0.0)
         backgroundColor = Color.chartBackground
-        
         setChartData()
     }
     
@@ -98,5 +94,4 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         chartData.addDataSet(downloadsDataSet)
         data = chartData
     }
-    
 }
