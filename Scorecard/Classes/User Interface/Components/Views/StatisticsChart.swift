@@ -14,11 +14,13 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
     
     var dataService = DataService.sharedInstance
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         leftAxis.drawGridLinesEnabled = false
         leftAxis.drawAxisLineEnabled = false
         leftAxis.labelPosition = .InsideChart
+        leftAxis.labelTextColor = Color.chartTextColor
         rightAxis.drawAxisLineEnabled = false
         rightAxis.drawLabelsEnabled = false
         rightAxis.drawGridLinesEnabled = false
@@ -26,14 +28,16 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         xAxis.drawAxisLineEnabled = false
         xAxis.labelPosition = .TopInside
         xAxis.avoidFirstLastClippingEnabled = true
+        xAxis.labelFont = UIFont(name: "Helvetica Neue", size: 13.0)!
+        xAxis.labelTextColor = Color.chartTextColor
         drawGridBackgroundEnabled = false
         drawBordersEnabled = false
+        
         legend.enabled = false
-//        highlightPerTapEnabled = false
         descriptionText = ""
+        animate(xAxisDuration: 0.0, yAxisDuration: 1.0, easingOption: .EaseInSine)
         setViewPortOffsets(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0)
         backgroundColor = Color.chartBackground
-        
         setChartData()
     }
     
@@ -42,7 +46,7 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
     }
     
     func setChartData() {
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
         let downloads = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0, 4.0, 18.0, 2.0, 4.0, 5.0, 4.0]
         let users = [12.0, 15.0, 6.0, 5.0, 2.0, 60.0, 44.0, 52.0, 30.0, 47.0, 14.0, 4.0]
         let updates = [53.0, 28.0, 22.0, 13.0, 12.0, 6.0, 17.0, 63.0, 48.0, 56.0, 20.0, 12.0]
@@ -64,6 +68,7 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         downloadsDataSet.fillColor = Color.downloadsDataSetBackground
         downloadsDataSet.fillAlpha = 0.5
         downloadsDataSet.drawFilledEnabled = true
+        downloadsDataSet.highlightEnabled = false
         
         for i in 0..<months.count {
             let dataEntry = ChartDataEntry(value: users[i], xIndex: i)
@@ -78,6 +83,7 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         usersDataSet.fillColor = Color.usersDataSetBackground
         usersDataSet.fillAlpha = 0.5
         usersDataSet.drawFilledEnabled = true
+        usersDataSet.highlightEnabled = false
         
         for i in 0..<months.count {
             let dataEntry = ChartDataEntry(value: updates[i], xIndex: i)
@@ -92,6 +98,7 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         updatesDataSet.fillColor = Color.updatesDataSetBackground
         updatesDataSet.fillAlpha = 0.5
         updatesDataSet.drawFilledEnabled = true
+        updatesDataSet.highlightLineWidth = 0.0
         
         let chartData = LineChartData(xVals: months, dataSet: updatesDataSet)
         chartData.addDataSet(usersDataSet)

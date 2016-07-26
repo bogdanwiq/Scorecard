@@ -14,6 +14,7 @@
 		994079583AD2247F3BCD8E1A /* Pods_ScorecardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */; };
 		9D7996D998DA383D9DF6E501 /* Pods_Scorecard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C33FD5373472CC5B1403ED /* Pods_Scorecard.framework */; };
 		F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */; };
+		F4370C921D4792F3007FFE58 /* CircleMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4370C911D4792F3007FFE58 /* CircleMarker.swift */; };
 		F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185C71D3E191D007ABA24 /* MMDrawerBarButtonItem.m */; };
 		F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185C91D3E191D007ABA24 /* MMDrawerController.m */; };
 		F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185CC1D3E191D007ABA24 /* MMDrawerVisualState.m */; };
@@ -99,6 +100,7 @@
 		D0B136FAAA5070BAA5C5B410 /* Pods-ScorecardUITests.testing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.testing.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.testing.xcconfig"; sourceTree = "<group>"; };
 		F3C265FFAE1A500E8B6EC1F1 /* Pods-ScorecardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardTests/Pods-ScorecardTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		F4370C911D4792F3007FFE58 /* CircleMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMarker.swift; sourceTree = "<group>"; };
 		F46185C51D3E191D007ABA24 /* Scorecard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Scorecard-Bridging-Header.h"; path = "../Classes/User Interface/Transitioning/Scorecard-Bridging-Header.h"; sourceTree = "<group>"; };
 		F46185C61D3E191D007ABA24 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		F46185C71D3E191D007ABA24 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 			children = (
 				F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */,
 				04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */,
+				F4370C911D4792F3007FFE58 /* CircleMarker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1138,6 +1141,7 @@
 				F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */,
 				F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */,
 				04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */,
+				F4370C921D4792F3007FFE58 /* CircleMarker.swift in Sources */,
 				F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */,
 				F4984AC51D464288009B0DEA /* User.swift in Sources */,
 				F92E71F91D354790006E9D1F /* BaseViewController.swift in Sources */,

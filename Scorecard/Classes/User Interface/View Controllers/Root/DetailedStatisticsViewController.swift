@@ -60,7 +60,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statsDetail]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[detailedStatsTable]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statisticsChart]|", options:  NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[statsDetail(80)]-0-[detailedStatsTable(150)]-10-[statisticsChart(>=30)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[statsDetail(80)]-0-[detailedStatsTable(130)][statisticsChart(>=30)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         view.addConstraints(allConstraints)
     }
     
@@ -81,16 +81,13 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         let selectedIndex = entry.xIndex
         var i = 0
         var highlights: [ChartHighlight] = []
-        
         for dataSet in (chartView.data?.dataSets)! {
+            let marker = CircleMarker(color: (chartView.data?.dataSets[i].colors[0])!)
+            marker.minimumSize = CGSizeMake(10.0 , 10.0)
+            marker.offset = CGPointMake(0.0, 5.0)
+            chartView.marker = marker
             let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
             highlights.append(highlight)
-            
-//            let markerView = ChartMarker()
-//            let markerPosition = chartView.getMarkerPosition(entry: entry,  highlight: highlight)
-//            
-//            markerView.draw(context: UIGraphicsGetCurrentContext()!, point: markerPosition)
-            
             currentStats[i].typeName = dataSet.label!
             currentStats[i].difference = Int(dataSet.entryForIndex(selectedIndex)!.value)
             i += 1

@@ -26,6 +26,7 @@ extension UIColor{
 struct Color {
     static let mainBackground             = Color.blackPearl
     static let navigationBackground       = Color.blackPearl
+    static let chartTextColor             = Color.blackPearl
     static let timeFrameBackground        = Color.blueOxford
     static let textColor                  = Color.white
     static let navigationTitle            = Color.white
@@ -38,6 +39,7 @@ struct Color {
     static let downloadsDataSetBackground = Color.blueHavelock
     static let usersDataSetBackground     = Color.lima
     static let updatesDataSetBackground   = Color.lemonRipe
+    
 
     
     private static let blackPearl   = UIColor(hexNumber: 0x031322)
