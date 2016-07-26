@@ -33,6 +33,7 @@
 		F4984AC91D4643FF009B0DEA /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC81D4643FF009B0DEA /* Metrics.swift */; };
 		F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984ACA1D46444A009B0DEA /* MetricValue.swift */; };
 		F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5FFF71D423549003A9C96 /* DataService.swift */; };
+		F4BB4E021D473F24006F6C69 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */; };
 		F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */; };
 		F92E717F1D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717A1D353D11006E9D1F /* Info.plist */; };
 		F92E71811D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717D1D353D11006E9D1F /* Info.plist */; };
@@ -123,6 +124,7 @@
 		F4984AC81D4643FF009B0DEA /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		F4984ACA1D46444A009B0DEA /* MetricValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricValue.swift; sourceTree = "<group>"; };
 		F4B5FFF71D423549003A9C96 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScorecardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92E71471D353CBD006E9D1F /* Scorecard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scorecard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -697,6 +699,7 @@
 				F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */,
 				F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */,
 				F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */,
+				F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -1138,6 +1141,7 @@
 				F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */,
 				F4984AC51D464288009B0DEA /* User.swift in Sources */,
 				F92E71F91D354790006E9D1F /* BaseViewController.swift in Sources */,
+				F4BB4E021D473F24006F6C69 /* NotificationViewController.swift in Sources */,
 				F4984AC11D45EFC5009B0DEA /* StatsCell.swift in Sources */,
 				049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */,
 			);

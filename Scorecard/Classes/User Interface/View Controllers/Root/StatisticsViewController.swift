@@ -39,7 +39,7 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
         let profileButton = Button.Profile.getButton()
         profileButton.addTarget(self, action: #selector(slideLeft), forControlEvents: .TouchUpInside)
         let notificationButton = Button.Notification.getButton()
-        notificationButton.addTarget(self, action: #selector(slideRight), forControlEvents: .TouchUpInside)
+        notificationButton.addTarget(self, action: #selector(goNotification), forControlEvents: .TouchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationButton)
         tableView.delegate = self
@@ -70,7 +70,7 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
         appDelegate.centerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
     }
     
-    func slideRight(){
-        
+    func goNotification(){
+        navigationController?.pushViewController(NotificationViewController(), animated: true)
     }
 }

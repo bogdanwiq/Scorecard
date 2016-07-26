@@ -28,6 +28,7 @@ class StatisticsChart: LineChartView {
         drawBordersEnabled = false
         legend.enabled = false
         descriptionText = ""
+        setViewPortOffsets(left: 0.0, top: 15.0, right: 0.0, bottom: 0.0)
         backgroundColor = Color.chartBackground
         setChartData()
     }
