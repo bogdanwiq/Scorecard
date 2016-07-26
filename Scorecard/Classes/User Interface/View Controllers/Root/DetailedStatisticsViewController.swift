@@ -8,12 +8,16 @@
 
 import Foundation
 import UIKit
+import Charts
 
-class DetailedStatisticViewController : BaseViewController {
+class DetailedStatisticViewController : BaseViewController, UITableViewDataSource, ChartViewDelegate {
     
+    let reuseIdentifier : String = "StatsCell"
     let statsDetail = StatsDetail()
     let detailedStatsTable = DetailedStatsTableView()
     let statisticsChart = StatisticsChart()
+    let dataService = DataService.sharedInstance
+    var currentStats: [Stats] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,13 @@ class DetailedStatisticViewController : BaseViewController {
         // Buttons left & right
         navigationController?.navigationBar.tintColor = Color.navigationTitle
         
+        detailedStatsTable.dataSource = self
+        statisticsChart.delegate = self
+        
+        for _ in 0..<3 {
+            currentStats.append(Stats(typeName: "", counter: 15, difference: 20, percent: 20, sign: "ArrowUp"))
+        }
+    
         statsDetail.translatesAutoresizingMaskIntoConstraints = false
         detailedStatsTable.translatesAutoresizingMaskIntoConstraints = false
         statisticsChart.translatesAutoresizingMaskIntoConstraints = false
@@ -42,6 +53,7 @@ class DetailedStatisticViewController : BaseViewController {
         view.addSubview(detailedStatsTable)
         view.addSubview(statisticsChart)
     }
+    
     override func setupConstraints() {
         var allConstraints = [NSLayoutConstraint]()
         let dictionary = ["statsDetail": statsDetail, "detailedStatsTable": detailedStatsTable, "statisticsChart": statisticsChart]
@@ -51,4 +63,40 @@ class DetailedStatisticViewController : BaseViewController {
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[statsDetail(80)]-0-[detailedStatsTable(150)]-10-[statisticsChart(>=30)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         view.addConstraints(allConstraints)
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell : StatsCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! StatsCell
+        cell.identifier.image = UIImage(named: "Circle")
+        cell.typeName.text = currentStats[indexPath.row].typeName
+        cell.difference.text = String(currentStats[indexPath.row].difference)
+        cell.sign.image = currentStats[indexPath.row].getImage()
+        return cell
+    }
+    
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        let selectedIndex = entry.xIndex
+        var i = 0
+        var highlights: [ChartHighlight] = []
+        
+        for dataSet in (chartView.data?.dataSets)! {
+            let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
+            highlights.append(highlight)
+            
+//            let markerView = ChartMarker()
+//            let markerPosition = chartView.getMarkerPosition(entry: entry,  highlight: highlight)
+//            
+//            markerView.draw(context: UIGraphicsGetCurrentContext()!, point: markerPosition)
+            
+            currentStats[i].typeName = dataSet.label!
+            currentStats[i].difference = Int(dataSet.entryForIndex(selectedIndex)!.value)
+            i += 1
+        }
+        chartView.highlightValues(highlights)
+        detailedStatsTable.reloadData()
+    }
+    
 }
