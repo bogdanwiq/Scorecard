@@ -22,6 +22,7 @@ class Stats {
     var percent : Int
     var img : UIImage
     
+    // CR: [Someone | High] The percent and sign can be set from counter and difference. Alos use int enum for sign (arrow direction). [Atti]
     init(typeName: String, counter: Int, difference: Int, percent :Int, sign : String){
         self.typeName = typeName
         self.counter = counter

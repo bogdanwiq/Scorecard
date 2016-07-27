@@ -56,6 +56,7 @@ class TimeFrame : UIControl {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        // CR: [Someone | Low] Review this with autolayout.  [Atti]
         var selectFrame = bounds
         let newWidth = CGRectGetWidth(selectFrame) / CGFloat(items.count)
         selectFrame.size.width = newWidth

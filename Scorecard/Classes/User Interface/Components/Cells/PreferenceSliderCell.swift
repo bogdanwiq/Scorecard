@@ -17,6 +17,7 @@ class PreferenceSliderCell: UITableViewCell{
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style	, reuseIdentifier: reuseIdentifier)
+        // CR: [Anyone | Low] Add new line between component. [Atti]
         preferenceName.frame = CGRectMake(10.0, 20.0, 100.0, 21.0);
         preferenceName.backgroundColor = Color.mainBackground
         preferenceName.textColor = Color.textColor
@@ -38,6 +39,7 @@ class PreferenceSliderCell: UITableViewCell{
     }
     
     func didChangeState(sender: UISwitch) {
+        // CR: [Anyone | High] The cells will set the data just trough viewcontroller [Atti]
         service.setProfileSettings(preferenceName.text!, state: sender.on)
     }
     
@@ -47,6 +49,7 @@ class PreferenceSliderCell: UITableViewCell{
         
         preferenceCellConstraints.append(NSLayoutConstraint(item: preferenceName, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
         preferenceCellConstraints.append(NSLayoutConstraint(item: slider, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
+        // CR: [Andrei | Medium] You can merge this to constaints and use option for vertical alignment [Atti]
         preferenceCellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[preferenceName]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         preferenceCellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[slider]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         

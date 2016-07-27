@@ -8,6 +8,7 @@
 
 import Foundation
 
+// CR: [Someone | Low] This is not a label, move in views group [Atti]
 class ProfilePicture : UIImageView {
     var profileImage : UIImage?
    

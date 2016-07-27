@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let centerView = UINavigationController(rootViewController: StatisticViewController())
         let leftView = ProfileViewController()
         
+        // CR: [Anyone | Low] Subclass MMDrawerController to create  this navigation.[Atti]
         centerContainer = MMDrawerController(centerViewController: centerView, leftDrawerViewController: leftView)
         centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
         centerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView

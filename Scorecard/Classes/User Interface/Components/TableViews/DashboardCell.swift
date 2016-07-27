@@ -71,10 +71,12 @@ class DashboardCell: UITableViewCell {
                           "difference": difference,
                           "percent": percent,
                           "sign" : sign]
+        
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[typeName]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[difference]-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[counter]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[percent]-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        // CR: [Bogdan | High] In the vertical layout all height are set with constant values when this happens the constraints should be re-analysed. [Atti]
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[typeName(25)]-7-[counter(25)]-15-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[difference]-[percent]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=22)-[sign(30)]-(>=22)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)

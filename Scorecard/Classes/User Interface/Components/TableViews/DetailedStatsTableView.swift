@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 class DetailedStatsTableView : UITableView {
-    
+    // CR: [Someone | Medium] Just for this basic setups you don't need to create a separate file. Move this in viewcontroller where is created. [Atti]
+    // CR: [Both | High] A GENERAL NOTE: subclass a tableview or anything just if contains a conplicate logic, has many subviews or it is used in multiple places [Atti]
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
         frame = UIScreen.mainScreen().bounds

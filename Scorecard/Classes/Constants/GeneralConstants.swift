@@ -23,6 +23,7 @@ extension UIColor{
         return (red, green, blue, CGFloat(alpha))
     }
 }
+// CR: [Anyone | Medium] Make a separate ColorConnstant file with colors [Atti]
 struct Color {
     static let mainBackground             = Color.blackPearl
     static let navigationBackground       = Color.blackPearl

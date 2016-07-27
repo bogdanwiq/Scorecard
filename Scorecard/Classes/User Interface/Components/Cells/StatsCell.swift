@@ -59,6 +59,7 @@ class StatsCell : UITableViewCell {
                           "typeName": typeName,
                           "difference": difference,
                           "sign" : sign]
+        // CR: [Both | High] Make some reserch in NSLayoutFormatOptions usage or ask me, will make your life more earsier [Atti]
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[identifier]-10-[typeName]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         cellConstraints.append(NSLayoutConstraint(item: identifier, attribute: .Width, relatedBy: .Equal, toItem: identifier, attribute: .Height, multiplier: 1.0, constant: 0.0))
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[difference]-10-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
