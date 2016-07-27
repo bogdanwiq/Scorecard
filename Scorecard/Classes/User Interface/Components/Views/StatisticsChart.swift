@@ -14,13 +14,11 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
     
     var dataService = DataService.sharedInstance
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         leftAxis.drawGridLinesEnabled = false
         leftAxis.drawAxisLineEnabled = false
-        leftAxis.labelPosition = .InsideChart
-        leftAxis.labelTextColor = Color.chartTextColor
+        leftAxis.drawLabelsEnabled = false
         rightAxis.drawAxisLineEnabled = false
         rightAxis.drawLabelsEnabled = false
         rightAxis.drawGridLinesEnabled = false
@@ -28,7 +26,7 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         xAxis.drawAxisLineEnabled = false
         xAxis.labelPosition = .TopInside
         xAxis.avoidFirstLastClippingEnabled = true
-        xAxis.labelFont = UIFont(name: "Helvetica Neue", size: 13.0)!
+        xAxis.labelFont = UIFont(name: "HelveticaNeue", size: 13.0)!
         xAxis.labelTextColor = Color.chartTextColor
         drawGridBackgroundEnabled = false
         drawBordersEnabled = false
@@ -56,19 +54,19 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         var updatesEntries: [ChartDataEntry] = []
         
         for i in 0..<months.count {
-            let dataEntry = ChartDataEntry(value: downloads[i], xIndex: i)
-            downloadsEntries.append(dataEntry)
+            let dataEntry = ChartDataEntry(value: updates[i], xIndex: i)
+            updatesEntries.append(dataEntry)
         }
         
-        let downloadsDataSet = LineChartDataSet(yVals: downloadsEntries, label: "Downloads")
-        downloadsDataSet.mode = .CubicBezier
-        downloadsDataSet.drawValuesEnabled = false
-        downloadsDataSet.drawCirclesEnabled = false
-        downloadsDataSet.setColor(Color.downloadsDataSetBackground, alpha: 0.5)
-        downloadsDataSet.fillColor = Color.downloadsDataSetBackground
-        downloadsDataSet.fillAlpha = 0.5
-        downloadsDataSet.drawFilledEnabled = true
-        downloadsDataSet.highlightEnabled = false
+        let updatesDataSet = LineChartDataSet(yVals: updatesEntries, label: "Updates")
+        updatesDataSet.mode = .CubicBezier
+        updatesDataSet.drawValuesEnabled = false
+        updatesDataSet.drawCirclesEnabled = false
+        updatesDataSet.setColor(Color.updatesDataSetBackground, alpha: 0.5)
+        updatesDataSet.fillColor = Color.updatesDataSetBackground
+        updatesDataSet.fillAlpha = 0.5
+        updatesDataSet.drawFilledEnabled = true
+        updatesDataSet.highlightLineWidth = 0.0
         
         for i in 0..<months.count {
             let dataEntry = ChartDataEntry(value: users[i], xIndex: i)
@@ -86,19 +84,19 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         usersDataSet.highlightEnabled = false
         
         for i in 0..<months.count {
-            let dataEntry = ChartDataEntry(value: updates[i], xIndex: i)
-            updatesEntries.append(dataEntry)
+            let dataEntry = ChartDataEntry(value: downloads[i], xIndex: i)
+            downloadsEntries.append(dataEntry)
         }
         
-        let updatesDataSet = LineChartDataSet(yVals: updatesEntries, label: "Updates")
-        updatesDataSet.mode = .CubicBezier
-        updatesDataSet.drawValuesEnabled = false
-        updatesDataSet.drawCirclesEnabled = false
-        updatesDataSet.setColor(Color.updatesDataSetBackground, alpha: 0.5)
-        updatesDataSet.fillColor = Color.updatesDataSetBackground
-        updatesDataSet.fillAlpha = 0.5
-        updatesDataSet.drawFilledEnabled = true
-        updatesDataSet.highlightLineWidth = 0.0
+        let downloadsDataSet = LineChartDataSet(yVals: downloadsEntries, label: "Downloads")
+        downloadsDataSet.mode = .CubicBezier
+        downloadsDataSet.drawValuesEnabled = false
+        downloadsDataSet.drawCirclesEnabled = false
+        downloadsDataSet.setColor(Color.downloadsDataSetBackground, alpha: 0.5)
+        downloadsDataSet.fillColor = Color.downloadsDataSetBackground
+        downloadsDataSet.fillAlpha = 0.5
+        downloadsDataSet.drawFilledEnabled = true
+        downloadsDataSet.highlightEnabled = false
         
         let chartData = LineChartData(xVals: months, dataSet: updatesDataSet)
         chartData.addDataSet(usersDataSet)

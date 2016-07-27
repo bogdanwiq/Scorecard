@@ -11,8 +11,6 @@ import UIKit
 
 class StatsCell : UITableViewCell {
     
-    var identifier : UIImageView!
-    var typeName : UILabel!
     var difference : UILabel!
     var sign : UIImageView!
     
@@ -28,42 +26,28 @@ class StatsCell : UITableViewCell {
     
     private func initUI(){
         backgroundColor = Color.mainBackground
-        // SIGN UIIMAGE SETTINGS
-        identifier = UIImageView()
-        identifier.translatesAutoresizingMaskIntoConstraints = false
-        // TYPENAME UILABEL SETTINGS
-        typeName = UILabel()
-        typeName.textAlignment = NSTextAlignment.Left
-        typeName.textColor = Color.textColor
-        typeName.font = UIFont(name:"HelveticaNeue", size: kTypeNameSize)
-        typeName.translatesAutoresizingMaskIntoConstraints = false
+        
         // DIFFERENCE UILABEL SETTINGS
         difference = UILabel()
         difference.textAlignment = NSTextAlignment.Right
         difference.textColor = Color.textColor
         difference.font = UIFont(name:"HelveticaNeue", size: kDifferenceSize)
         difference.translatesAutoresizingMaskIntoConstraints = false
+        
         // SIGN UIIMAGE SETTINGS
         sign = UIImageView()
         sign.translatesAutoresizingMaskIntoConstraints = false
+        
         // ADDSUBVIEW
-        addSubview(identifier)
-        addSubview(typeName)
         addSubview(difference)
         addSubview(sign)
     }
     
     private func setupConstraints() {
         var cellConstraints = [NSLayoutConstraint]()
-        let dictionary = ["identifier" : identifier,
-                          "typeName": typeName,
-                          "difference": difference,
+        let dictionary = ["difference": difference,
                           "sign" : sign]
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[identifier]-10-[typeName]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        cellConstraints.append(NSLayoutConstraint(item: identifier, attribute: .Width, relatedBy: .Equal, toItem: identifier, attribute: .Height, multiplier: 1.0, constant: 0.0))
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[difference]-10-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=8)-[identifier(25)]-(>=8)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=8)-[typeName(25)]-(>=8)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=8)-[difference(25)]-(>=8)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=8)-[sign(25)]-(>=8)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         addConstraints(cellConstraints)

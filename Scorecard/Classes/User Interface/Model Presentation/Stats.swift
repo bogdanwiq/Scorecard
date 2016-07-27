@@ -29,6 +29,7 @@ class Stats {
         self.percent = percent
         self.img = Stats.setSign(sign)
     }
+    
     private class func setSign(sign: String) -> UIImage{
         var image : UIImage = UIImage()
         switch sign {
@@ -42,6 +43,7 @@ class Stats {
         }
         return image
     }
+    
     func getImage() -> UIImage{
         return img
     }
