@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04289FE51D3F93F00006DBCA /* SettingsTableView.swift */; };
 		049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */; };
+		04EF3D491D48951D0055BE43 /* StaticDetailedStatisticsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF3D481D48951D0055BE43 /* StaticDetailedStatisticsTableView.swift */; };
+		04EF3D4B1D4898670055BE43 /* StatsLabelsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF3D4A1D4898670055BE43 /* StatsLabelsCell.swift */; };
 		04F295BC1D461B0100B6E9B2 /* StatisticsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */; };
 		85B16355C4682A962EA47E7C /* Pods_ScorecardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A5979765873DF93CA36D6F /* Pods_ScorecardUITests.framework */; };
 		994079583AD2247F3BCD8E1A /* Pods_ScorecardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */; };
@@ -87,6 +89,8 @@
 /* Begin PBXFileReference section */
 		04289FE51D3F93F00006DBCA /* SettingsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
 		049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceSliderCell.swift; path = "Scorecard/Classes/User Interface/Components/Cells/PreferenceSliderCell.swift"; sourceTree = SOURCE_ROOT; };
+		04EF3D481D48951D0055BE43 /* StaticDetailedStatisticsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticDetailedStatisticsTableView.swift; sourceTree = "<group>"; };
+		04EF3D4A1D4898670055BE43 /* StatsLabelsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsLabelsCell.swift; sourceTree = "<group>"; };
 		04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsChart.swift; sourceTree = "<group>"; };
 		358D394A94E20F69650E0DE9 /* Pods-ScorecardUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4DD101E3A037447876FCE83F /* Pods-ScorecardUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -495,6 +499,7 @@
 				049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */,
 				F46185D71D3E3605007ABA24 /* DashboardCell.swift */,
 				F4984AC01D45EFC5009B0DEA /* StatsCell.swift */,
+				04EF3D4A1D4898670055BE43 /* StatsLabelsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -522,6 +527,7 @@
 				F46185D31D3E239F007ABA24 /* StatsTableView.swift */,
 				04289FE51D3F93F00006DBCA /* SettingsTableView.swift */,
 				F4984ABE1D45EF85009B0DEA /* DetailedStatsTableView.swift */,
+				04EF3D481D48951D0055BE43 /* StaticDetailedStatisticsTableView.swift */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -1167,6 +1173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */,
+				04EF3D491D48951D0055BE43 /* StaticDetailedStatisticsTableView.swift in Sources */,
 				F4984AC91D4643FF009B0DEA /* Metrics.swift in Sources */,
 				F4984ABF1D45EF85009B0DEA /* DetailedStatsTableView.swift in Sources */,
 				F495FCD91D421405005A3EE8 /* Button.swift in Sources */,
@@ -1183,6 +1190,7 @@
 				F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */,
 				F92E71FB1D354859006E9D1F /* GeneralConstants.swift in Sources */,
 				F92E72001D35497E006E9D1F /* RootViewController.swift in Sources */,
+				04EF3D4B1D4898670055BE43 /* StatsLabelsCell.swift in Sources */,
 				F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */,
 				F46185D21D3E191D007ABA24 /* UIViewController+MMDrawerController.m in Sources */,
 				F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */,

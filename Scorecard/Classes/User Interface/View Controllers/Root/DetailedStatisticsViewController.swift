@@ -15,6 +15,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
     let reuseIdentifier : String = "StatsCell"
     let statsDetail = StatsDetail()
     let detailedStatsTable = DetailedStatsTableView()
+    let staticDetailedStatsTableView = StaticDetailedStatsTableView()
     let statisticsChart = StatisticsChart()
     let dataService = DataService.sharedInstance
     var currentStats: [Stats] = []
@@ -47,20 +48,23 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
     
         statsDetail.translatesAutoresizingMaskIntoConstraints = false
         detailedStatsTable.translatesAutoresizingMaskIntoConstraints = false
+        staticDetailedStatsTableView.translatesAutoresizingMaskIntoConstraints = false
         statisticsChart.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(statsDetail)
         view.addSubview(detailedStatsTable)
+        view.addSubview(staticDetailedStatsTableView)
         view.addSubview(statisticsChart)
     }
     
     override func setupConstraints() {
         var allConstraints = [NSLayoutConstraint]()
-        let dictionary = ["statsDetail": statsDetail, "detailedStatsTable": detailedStatsTable, "statisticsChart": statisticsChart]
+        let dictionary = ["statsDetail": statsDetail, "detailedStatsTable": detailedStatsTable, "staticDetailedStatsTableView": staticDetailedStatsTableView, "statisticsChart": statisticsChart]
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statsDetail]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[detailedStatsTable]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[staticDetailedStatsTableView(>=80)][detailedStatsTable(>=80)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statisticsChart]|", options:  NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[statsDetail(80)]-0-[detailedStatsTable(130)][statisticsChart(>=30)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[statsDetail(80)][detailedStatsTable(130)][statisticsChart(>=30)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[statsDetail(80)][staticDetailedStatsTableView(130)][statisticsChart(>=30)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         view.addConstraints(allConstraints)
     }
     
@@ -70,8 +74,6 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : StatsCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! StatsCell
-        cell.identifier.image = UIImage(named: "Circle")
-        cell.typeName.text = currentStats[indexPath.row].typeName
         cell.difference.text = String(currentStats[indexPath.row].difference)
         cell.sign.image = currentStats[indexPath.row].getImage()
         return cell
@@ -86,14 +88,15 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
             marker.minimumSize = CGSizeMake(10.0 , 10.0)
             marker.offset = CGPointMake(0.0, 5.0)
             chartView.marker = marker
+            
             let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
             highlights.append(highlight)
-            currentStats[i].typeName = dataSet.label!
+            
             currentStats[i].difference = Int(dataSet.entryForIndex(selectedIndex)!.value)
             i += 1
         }
         chartView.highlightValues(highlights)
-        detailedStatsTable.reloadData()
+        detailedStatsTable.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
     }
     
 }
