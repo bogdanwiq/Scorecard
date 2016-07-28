@@ -14,10 +14,10 @@ class NotificationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = SharedApplication.delegate as! AppDelegate
-        appDelegate.centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
+        appDelegate.sideMenu!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
     }
     
-    override func initUI(){
+    override func initUI() {
         view.backgroundColor = Color.mainBackground
         navigationController?.navigationBar.translucent = false
         title = "Notifications"

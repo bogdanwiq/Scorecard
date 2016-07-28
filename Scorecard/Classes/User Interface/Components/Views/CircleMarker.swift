@@ -20,7 +20,9 @@ class CircleMarker: ChartMarker {
         self.color = color
     }
     
-    override var size: CGSize { return _size; }
+    override var size: CGSize {
+        return _size
+    }
     
     override func draw(context context: CGContext, point: CGPoint) {
         
@@ -29,7 +31,6 @@ class CircleMarker: ChartMarker {
         
         rect.origin.x -= _size.width / 2.0
         rect.origin.y -= _size.height
-        
         CGContextSaveGState(context)
         CGContextSetFillColorWithColor(context, color?.CGColor)
         CGContextBeginPath(context)

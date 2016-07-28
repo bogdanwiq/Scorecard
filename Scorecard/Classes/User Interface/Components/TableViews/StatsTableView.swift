@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class StatsTableView : UITableView, UITableViewDataSource{
+class StatsTableView : UITableView, UITableViewDataSource {
     
     let reuseIdentifier : String = "DashboardCell"
     let service = DataService.sharedInstance
@@ -17,7 +17,6 @@ class StatsTableView : UITableView, UITableViewDataSource{
     
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
-        frame = UIScreen.mainScreen().bounds
         dataSource = self
         estimatedRowHeight = 80.0
         rowHeight = UITableViewAutomaticDimension
@@ -30,8 +29,8 @@ class StatsTableView : UITableView, UITableViewDataSource{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         switch section{
         case 0 :
             return "First"
@@ -41,7 +40,8 @@ class StatsTableView : UITableView, UITableViewDataSource{
             return nil
         }
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stats.count
     }
     
@@ -50,9 +50,9 @@ class StatsTableView : UITableView, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell : DashboardCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DashboardCell
         
-        // SET UILABELS.TEXT
         cell.typeName.text = stats[indexPath.row].typeName
         cell.counter.text = String(stats[indexPath.row].counter)
         if stats[indexPath.row].getImage() == UIImage(named: "ArrowUp") {
@@ -70,7 +70,6 @@ class StatsTableView : UITableView, UITableViewDataSource{
         cell.percent.text = String(stats[indexPath.row].percent) + "%"
         cell.sign.image = stats[indexPath.row].getImage()
         
-        // CELL BACKGROUND COLOR
         var hue : CGFloat = 0.0
         var saturation: CGFloat = 0.0
         var brightness : CGFloat = 0.0

@@ -15,10 +15,10 @@ class DataService {
     func setupStats() -> [Stats] {
         var stats : [Stats] = [Stats]()
         
-        let stat1 = Stats(typeName: "DOWNLOAD", counter: 123131, difference: 2222, percent: 22, sign: "ArrowUp")
-        let stat2 = Stats(typeName: "UPDATE", counter: 1231, difference: 22, percent: 10, sign: "ArrowDown")
-        let stat3 = Stats(typeName: "USERS", counter: 123131, difference: 2222, percent: 22, sign: "ArrowUp")
-        let stat4 = Stats(typeName: "DOWNLOADERS", counter: 1231, difference: 22, percent: 10, sign: "None")
+        let stat1 = Stats(typeName: "DOWNLOAD", counter: 123131, difference: 2222, percent: 22, sign: .ArrowUp)
+        let stat2 = Stats(typeName: "UPDATE", counter: 1231, difference: 22, percent: 10, sign: .ArrowDown)
+        let stat3 = Stats(typeName: "USERS", counter: 123131, difference: 2222, percent: 22, sign: .ArrowUp)
+        let stat4 = Stats(typeName: "DOWNLOADERS", counter: 1231, difference: 22, percent: 10, sign: .None)
         
         stats.append(stat1)
         stats.append(stat2)
@@ -29,7 +29,7 @@ class DataService {
     }
     
     func getCurrentStat() -> Stats {
-        let stat1 = Stats(typeName: "DOWNLOAD", counter: 123131, difference: 2222, percent: 22, sign: "ArrowUp")
+        let stat1 = Stats(typeName: "DOWNLOAD", counter: 123131, difference: 2222, percent: 22, sign: .ArrowUp)
         return stat1
     }
     

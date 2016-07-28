@@ -8,15 +8,13 @@
 
 import Foundation
 
-// CR: [Someone | Low] This is not a label, move in views group [Atti]
 class ProfilePicture : UIImageView {
+    
     var profileImage : UIImage?
    
     override init(image: UIImage?) {
         super.init(image: image)
         profileImage = image!
-        frame = CGRectMake(0, 0, 130, 130)
-        
         roundImage()
     }
     

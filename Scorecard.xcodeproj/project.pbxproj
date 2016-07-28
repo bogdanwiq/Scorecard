@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04289FE51D3F93F00006DBCA /* SettingsTableView.swift */; };
 		049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */; };
-		04EF3D491D48951D0055BE43 /* StaticDetailedStatisticsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF3D481D48951D0055BE43 /* StaticDetailedStatisticsTableView.swift */; };
-		04EF3D4B1D4898670055BE43 /* StatsLabelsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF3D4A1D4898670055BE43 /* StatsLabelsCell.swift */; };
 		04F295BC1D461B0100B6E9B2 /* StatisticsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */; };
 		85B16355C4682A962EA47E7C /* Pods_ScorecardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A5979765873DF93CA36D6F /* Pods_ScorecardUITests.framework */; };
 		994079583AD2247F3BCD8E1A /* Pods_ScorecardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */; };
@@ -29,14 +27,16 @@
 		F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */; };
 		F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */; };
 		F495FCD91D421405005A3EE8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD81D421405005A3EE8 /* Button.swift */; };
-		F4984ABF1D45EF85009B0DEA /* DetailedStatsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984ABE1D45EF85009B0DEA /* DetailedStatsTableView.swift */; };
-		F4984AC11D45EFC5009B0DEA /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC01D45EFC5009B0DEA /* StatsCell.swift */; };
 		F4984AC51D464288009B0DEA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC41D464288009B0DEA /* User.swift */; };
 		F4984AC71D464327009B0DEA /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC61D464327009B0DEA /* Project.swift */; };
 		F4984AC91D4643FF009B0DEA /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC81D4643FF009B0DEA /* Metrics.swift */; };
 		F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984ACA1D46444A009B0DEA /* MetricValue.swift */; };
+		F4A378A71D49117600C8956D /* StatsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A378A61D49117600C8956D /* StatsDetailCell.swift */; };
+		F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */; };
 		F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5FFF71D423549003A9C96 /* DataService.swift */; };
 		F4BB4E021D473F24006F6C69 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */; };
+		F4E2A3261D48BE7900F3ED22 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E2A3251D48BE7900F3ED22 /* ColorConstants.swift */; };
+		F4E2A3281D48BF0200F3ED22 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E2A3271D48BF0200F3ED22 /* SideMenuController.swift */; };
 		F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */; };
 		F92E717F1D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717A1D353D11006E9D1F /* Info.plist */; };
 		F92E71811D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717D1D353D11006E9D1F /* Info.plist */; };
@@ -89,8 +89,6 @@
 /* Begin PBXFileReference section */
 		04289FE51D3F93F00006DBCA /* SettingsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
 		049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceSliderCell.swift; path = "Scorecard/Classes/User Interface/Components/Cells/PreferenceSliderCell.swift"; sourceTree = SOURCE_ROOT; };
-		04EF3D481D48951D0055BE43 /* StaticDetailedStatisticsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticDetailedStatisticsTableView.swift; sourceTree = "<group>"; };
-		04EF3D4A1D4898670055BE43 /* StatsLabelsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsLabelsCell.swift; sourceTree = "<group>"; };
 		04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsChart.swift; sourceTree = "<group>"; };
 		358D394A94E20F69650E0DE9 /* Pods-ScorecardUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4DD101E3A037447876FCE83F /* Pods-ScorecardUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,19 +116,21 @@
 		F46185D31D3E239F007ABA24 /* StatsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsTableView.swift; sourceTree = "<group>"; };
 		F46185D51D3E32FA007ABA24 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stats.swift; path = "../../../User Interface/Model Presentation/Stats.swift"; sourceTree = "<group>"; };
 		F46185D71D3E3605007ABA24 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = ../TableViews/DashboardCell.swift; sourceTree = "<group>"; };
-		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
+		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePicture.swift; path = ../Labels/ProfilePicture.swift; sourceTree = "<group>"; };
 		F495FCD21D40C779005A3EE8 /* TimeFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFrame.swift; sourceTree = "<group>"; };
 		F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedStatisticsViewController.swift; sourceTree = "<group>"; };
 		F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDetail.swift; sourceTree = "<group>"; };
 		F495FCD81D421405005A3EE8 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
-		F4984ABE1D45EF85009B0DEA /* DetailedStatsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedStatsTableView.swift; sourceTree = "<group>"; };
-		F4984AC01D45EFC5009B0DEA /* StatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 		F4984AC41D464288009B0DEA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F4984AC61D464327009B0DEA /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		F4984AC81D4643FF009B0DEA /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		F4984ACA1D46444A009B0DEA /* MetricValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricValue.swift; sourceTree = "<group>"; };
+		F4A378A61D49117600C8956D /* StatsDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDetailCell.swift; sourceTree = "<group>"; };
+		F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvolutionSign.swift; sourceTree = "<group>"; };
 		F4B5FFF71D423549003A9C96 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		F4E2A3251D48BE7900F3ED22 /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		F4E2A3271D48BF0200F3ED22 /* SideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
 		F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScorecardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92E71471D353CBD006E9D1F /* Scorecard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scorecard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				F92E71FA1D354859006E9D1F /* GeneralConstants.swift */,
+				F4E2A3251D48BE7900F3ED22 /* ColorConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -498,8 +499,7 @@
 			children = (
 				049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */,
 				F46185D71D3E3605007ABA24 /* DashboardCell.swift */,
-				F4984AC01D45EFC5009B0DEA /* StatsCell.swift */,
-				04EF3D4A1D4898670055BE43 /* StatsLabelsCell.swift */,
+				F4A378A61D49117600C8956D /* StatsDetailCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -507,7 +507,6 @@
 		F92E71A91D354600006E9D1F /* Labels */ = {
 			isa = PBXGroup;
 			children = (
-				F46185D91D3E6124007ABA24 /* ProfilePicture.swift */,
 				F495FCD21D40C779005A3EE8 /* TimeFrame.swift */,
 			);
 			path = Labels;
@@ -526,8 +525,6 @@
 			children = (
 				F46185D31D3E239F007ABA24 /* StatsTableView.swift */,
 				04289FE51D3F93F00006DBCA /* SettingsTableView.swift */,
-				F4984ABE1D45EF85009B0DEA /* DetailedStatsTableView.swift */,
-				04EF3D481D48951D0055BE43 /* StaticDetailedStatisticsTableView.swift */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -543,9 +540,11 @@
 		F92E71B11D354600006E9D1F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F46185D91D3E6124007ABA24 /* ProfilePicture.swift */,
 				F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */,
 				04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */,
 				F4370C911D4792F3007FFE58 /* CircleMarker.swift */,
+				F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -709,6 +708,7 @@
 				F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */,
 				F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */,
 				F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */,
+				F4E2A3271D48BF0200F3ED22 /* SideMenuController.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -720,7 +720,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F92E716F1D353CBD006E9D1F /* Build configuration list for PBXNativeTarget "Scorecard" */;
 			buildPhases = (
-				A991DE29C3171A2D07AB2D82 /* 📦 Check Pods Manifest.lock */,
+				A991DE29C3171A2D07AB2D82 /* [CP] Check Pods Manifest.lock */,
 				54AF776BDBDA7E241597DF33 /* [CP] Check Pods Manifest.lock */,
 				9F52F40E75D9AE3A7F39BDB3 /* [CP] Check Pods Manifest.lock */,
 				F92E71431D353CBD006E9D1F /* Sources */,
@@ -744,7 +744,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F92E71721D353CBD006E9D1F /* Build configuration list for PBXNativeTarget "ScorecardTests" */;
 			buildPhases = (
-				29E2A0D502183C9CF6A86052 /* 📦 Check Pods Manifest.lock */,
+				29E2A0D502183C9CF6A86052 /* [CP] Check Pods Manifest.lock */,
 				34853CDB75563ECB672DCCA1 /* [CP] Check Pods Manifest.lock */,
 				128B2E7C5DB14724B9F6D4BA /* [CP] Check Pods Manifest.lock */,
 				F92E71571D353CBD006E9D1F /* Sources */,
@@ -769,7 +769,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F92E71751D353CBD006E9D1F /* Build configuration list for PBXNativeTarget "ScorecardUITests" */;
 			buildPhases = (
-				4EEBD461710824BB96FE68EB /* 📦 Check Pods Manifest.lock */,
+				4EEBD461710824BB96FE68EB /* [CP] Check Pods Manifest.lock */,
 				B75A6B96AB17565F7FFC7F94 /* [CP] Check Pods Manifest.lock */,
 				C3BAC9913B998D892A40F79C /* [CP] Check Pods Manifest.lock */,
 				F92E71621D353CBD006E9D1F /* Sources */,
@@ -910,14 +910,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		29E2A0D502183C9CF6A86052 /* 📦 Check Pods Manifest.lock */ = {
+		29E2A0D502183C9CF6A86052 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -955,14 +955,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScorecardTests/Pods-ScorecardTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4EEBD461710824BB96FE68EB /* 📦 Check Pods Manifest.lock */ = {
+		4EEBD461710824BB96FE68EB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1090,14 +1090,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A991DE29C3171A2D07AB2D82 /* 📦 Check Pods Manifest.lock */ = {
+		A991DE29C3171A2D07AB2D82 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1173,11 +1173,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */,
-				04EF3D491D48951D0055BE43 /* StaticDetailedStatisticsTableView.swift in Sources */,
 				F4984AC91D4643FF009B0DEA /* Metrics.swift in Sources */,
-				F4984ABF1D45EF85009B0DEA /* DetailedStatsTableView.swift in Sources */,
 				F495FCD91D421405005A3EE8 /* Button.swift in Sources */,
 				F4984AC71D464327009B0DEA /* Project.swift in Sources */,
+				F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */,
 				F46185D61D3E32FA007ABA24 /* Stats.swift in Sources */,
 				F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */,
 				04F295BC1D461B0100B6E9B2 /* StatisticsChart.swift in Sources */,
@@ -1187,10 +1186,11 @@
 				F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */,
 				F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */,
 				F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */,
+				F4E2A3261D48BE7900F3ED22 /* ColorConstants.swift in Sources */,
 				F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */,
+				F4E2A3281D48BF0200F3ED22 /* SideMenuController.swift in Sources */,
 				F92E71FB1D354859006E9D1F /* GeneralConstants.swift in Sources */,
 				F92E72001D35497E006E9D1F /* RootViewController.swift in Sources */,
-				04EF3D4B1D4898670055BE43 /* StatsLabelsCell.swift in Sources */,
 				F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */,
 				F46185D21D3E191D007ABA24 /* UIViewController+MMDrawerController.m in Sources */,
 				F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */,
@@ -1202,7 +1202,7 @@
 				F4984AC51D464288009B0DEA /* User.swift in Sources */,
 				F92E71F91D354790006E9D1F /* BaseViewController.swift in Sources */,
 				F4BB4E021D473F24006F6C69 /* NotificationViewController.swift in Sources */,
-				F4984AC11D45EFC5009B0DEA /* StatsCell.swift in Sources */,
+				F4A378A71D49117600C8956D /* StatsDetailCell.swift in Sources */,
 				049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

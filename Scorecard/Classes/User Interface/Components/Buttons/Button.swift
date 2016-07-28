@@ -14,8 +14,11 @@ enum Button {
     case Notification
     case Back
     
-    func getButton() -> UIButton{
+    func getButton() -> UIButton {
+        
         let button = UIButton(frame: CGRectMake(0,0,30,30))
+        
+        button.contentMode = .ScaleAspectFit
         switch self {
         case .Profile:
             button.setImage(UIImage(named: "Profile"), forState: .Normal)
@@ -25,6 +28,7 @@ enum Button {
             break
         case .Back:
             button.setImage(UIImage(named: "Back"), forState: .Normal)
+            break
         }
         return button
     }

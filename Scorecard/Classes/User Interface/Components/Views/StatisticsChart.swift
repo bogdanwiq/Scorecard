@@ -26,11 +26,10 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         xAxis.drawAxisLineEnabled = false
         xAxis.labelPosition = .TopInside
         xAxis.avoidFirstLastClippingEnabled = true
-        xAxis.labelFont = UIFont(name: "HelveticaNeue", size: 13.0)!
+        xAxis.labelFont = UIFont(name: "HelveticaNeue", size: kAxisFontSize)!
         xAxis.labelTextColor = Color.chartTextColor
         drawGridBackgroundEnabled = false
         drawBordersEnabled = false
-        
         legend.enabled = false
         descriptionText = ""
         animate(xAxisDuration: 0.0, yAxisDuration: 1.0, easingOption: .EaseInSine)
@@ -44,21 +43,24 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
     }
     
     func setChartData() {
+        
         let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
         let downloads = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0, 4.0, 18.0, 2.0, 4.0, 5.0, 4.0]
         let users = [12.0, 15.0, 6.0, 5.0, 2.0, 60.0, 44.0, 52.0, 30.0, 47.0, 14.0, 4.0]
         let updates = [53.0, 28.0, 22.0, 13.0, 12.0, 6.0, 17.0, 63.0, 48.0, 56.0, 20.0, 12.0]
-        
         var downloadsEntries: [ChartDataEntry] = []
         var usersEntries: [ChartDataEntry] = []
         var updatesEntries: [ChartDataEntry] = []
+        let updatesDataSet = LineChartDataSet(yVals: updatesEntries, label: "Updates")
+        let usersDataSet = LineChartDataSet(yVals: usersEntries, label: "Users")
+        let downloadsDataSet = LineChartDataSet(yVals: downloadsEntries, label: "Downloads")
+        let chartData = LineChartData(xVals: months, dataSet: updatesDataSet)
         
         for i in 0..<months.count {
             let dataEntry = ChartDataEntry(value: updates[i], xIndex: i)
             updatesEntries.append(dataEntry)
         }
         
-        let updatesDataSet = LineChartDataSet(yVals: updatesEntries, label: "Updates")
         updatesDataSet.mode = .CubicBezier
         updatesDataSet.drawValuesEnabled = false
         updatesDataSet.drawCirclesEnabled = false
@@ -73,7 +75,6 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
             usersEntries.append(dataEntry)
         }
         
-        let usersDataSet = LineChartDataSet(yVals: usersEntries, label: "Users")
         usersDataSet.mode = .CubicBezier
         usersDataSet.drawValuesEnabled = false
         usersDataSet.drawCirclesEnabled = false
@@ -88,7 +89,6 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
             downloadsEntries.append(dataEntry)
         }
         
-        let downloadsDataSet = LineChartDataSet(yVals: downloadsEntries, label: "Downloads")
         downloadsDataSet.mode = .CubicBezier
         downloadsDataSet.drawValuesEnabled = false
         downloadsDataSet.drawCirclesEnabled = false
@@ -98,10 +98,8 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         downloadsDataSet.drawFilledEnabled = true
         downloadsDataSet.highlightEnabled = false
         
-        let chartData = LineChartData(xVals: months, dataSet: updatesDataSet)
         chartData.addDataSet(usersDataSet)
         chartData.addDataSet(downloadsDataSet)
         data = chartData
     }
-    
 }

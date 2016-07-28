@@ -19,7 +19,6 @@ class SettingsTableView : UITableView, UITableViewDataSource {
         frame = UIScreen.mainScreen().bounds
         dataSource = self
         registerClass(PreferenceSliderCell.self, forCellReuseIdentifier: "PreferenceSliderCell")
-        allowsSelection = false
         scrollEnabled = false
         separatorColor = UIColor.clearColor()
         backgroundColor = Color.mainBackground
@@ -30,7 +29,7 @@ class SettingsTableView : UITableView, UITableViewDataSource {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settings.count
     }
     
@@ -38,12 +37,11 @@ class SettingsTableView : UITableView, UITableViewDataSource {
         
         let reuseIdentifier = "PreferenceSliderCell"
         let cell : PreferenceSliderCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PreferenceSliderCell
+        
         cell.preferenceName.text = settings[indexPath.row]
         cell.slider.setOn(service.getProfileSettings(settings[indexPath.row]) ?? false, animated: false)
         cell.slider.addTarget(cell, action: #selector(cell.didChangeState(_:)), forControlEvents: .ValueChanged)
         cell.backgroundColor = Color.mainBackground
-        
         return cell
     }
-    
 }
