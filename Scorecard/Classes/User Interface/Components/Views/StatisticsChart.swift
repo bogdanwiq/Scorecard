@@ -51,16 +51,13 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         var downloadsEntries: [ChartDataEntry] = []
         var usersEntries: [ChartDataEntry] = []
         var updatesEntries: [ChartDataEntry] = []
-        let updatesDataSet = LineChartDataSet(yVals: updatesEntries, label: "Updates")
-        let usersDataSet = LineChartDataSet(yVals: usersEntries, label: "Users")
-        let downloadsDataSet = LineChartDataSet(yVals: downloadsEntries, label: "Downloads")
-        let chartData = LineChartData(xVals: months, dataSet: updatesDataSet)
-        
+  
         for i in 0..<months.count {
             let dataEntry = ChartDataEntry(value: updates[i], xIndex: i)
             updatesEntries.append(dataEntry)
         }
         
+        let updatesDataSet = LineChartDataSet(yVals: updatesEntries, label: "Updates")
         updatesDataSet.mode = .CubicBezier
         updatesDataSet.drawValuesEnabled = false
         updatesDataSet.drawCirclesEnabled = false
@@ -75,6 +72,7 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
             usersEntries.append(dataEntry)
         }
         
+        let usersDataSet = LineChartDataSet(yVals: usersEntries, label: "Users")
         usersDataSet.mode = .CubicBezier
         usersDataSet.drawValuesEnabled = false
         usersDataSet.drawCirclesEnabled = false
@@ -89,6 +87,7 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
             downloadsEntries.append(dataEntry)
         }
         
+        let downloadsDataSet = LineChartDataSet(yVals: downloadsEntries, label: "Downloads")
         downloadsDataSet.mode = .CubicBezier
         downloadsDataSet.drawValuesEnabled = false
         downloadsDataSet.drawCirclesEnabled = false
@@ -98,6 +97,7 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         downloadsDataSet.drawFilledEnabled = true
         downloadsDataSet.highlightEnabled = false
         
+        let chartData = LineChartData(xVals: months, dataSet: updatesDataSet)
         chartData.addDataSet(usersDataSet)
         chartData.addDataSet(downloadsDataSet)
         data = chartData
