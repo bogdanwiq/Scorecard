@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Charts
+import ChameleonFramework
 
 class StatisticsChart: LineChartView, ChartViewDelegate {
     
@@ -35,11 +36,21 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         animate(xAxisDuration: 0.0, yAxisDuration: 1.0, easingOption: .EaseInSine)
         setViewPortOffsets(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0)
         backgroundColor = Color.chartBackground
+        
         setChartData()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getRandomColor() -> UIColor {
+        
+        var color = RandomFlatColorWithShade(.Light)
+        while [FlatBlack(), FlatBlackDark(), FlatGray(), FlatGrayDark(), FlatWhite(), FlatWhiteDark()].contains(color) {
+            color = RandomFlatColorWithShade(.Light)
+        }
+        return color
     }
     
     func setChartData() {
@@ -51,7 +62,8 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         var downloadsEntries: [ChartDataEntry] = []
         var usersEntries: [ChartDataEntry] = []
         var updatesEntries: [ChartDataEntry] = []
-  
+        var colorArray = ColorSchemeOf(.Analogous, color: getRandomColor(), isFlatScheme: true)
+        
         for i in 0..<months.count {
             let dataEntry = ChartDataEntry(value: updates[i], xIndex: i)
             updatesEntries.append(dataEntry)
@@ -61,8 +73,8 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         updatesDataSet.mode = .CubicBezier
         updatesDataSet.drawValuesEnabled = false
         updatesDataSet.drawCirclesEnabled = false
-        updatesDataSet.setColor(Color.updatesDataSetBackground, alpha: 0.5)
-        updatesDataSet.fillColor = Color.updatesDataSetBackground
+        updatesDataSet.setColor(colorArray[1], alpha: 0.5)
+        updatesDataSet.fillColor = colorArray[1]
         updatesDataSet.fillAlpha = 0.5
         updatesDataSet.drawFilledEnabled = true
         updatesDataSet.highlightLineWidth = 0.0
@@ -76,8 +88,8 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         usersDataSet.mode = .CubicBezier
         usersDataSet.drawValuesEnabled = false
         usersDataSet.drawCirclesEnabled = false
-        usersDataSet.setColor(Color.usersDataSetBackground, alpha: 0.5)
-        usersDataSet.fillColor = Color.usersDataSetBackground
+        usersDataSet.setColor(colorArray[2], alpha: 0.5)
+        usersDataSet.fillColor = colorArray[2]
         usersDataSet.fillAlpha = 0.5
         usersDataSet.drawFilledEnabled = true
         usersDataSet.highlightEnabled = false
@@ -91,8 +103,8 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         downloadsDataSet.mode = .CubicBezier
         downloadsDataSet.drawValuesEnabled = false
         downloadsDataSet.drawCirclesEnabled = false
-        downloadsDataSet.setColor(Color.downloadsDataSetBackground, alpha: 0.5)
-        downloadsDataSet.fillColor = Color.downloadsDataSetBackground
+        downloadsDataSet.setColor(colorArray[3], alpha: 0.5)
+        downloadsDataSet.fillColor = colorArray[3]
         downloadsDataSet.fillAlpha = 0.5
         downloadsDataSet.drawFilledEnabled = true
         downloadsDataSet.highlightEnabled = false
