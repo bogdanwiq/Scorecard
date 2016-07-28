@@ -9,7 +9,10 @@
 import Foundation
 import UIKit
 
-class ProfileViewController : BaseViewController {
+class ProfileViewController : BaseViewController, UITableViewDataSource {
+    
+    var settings = ["Notifications", "Alerts"]
+    let service = DataService.sharedInstance
     
     var profilePicture: ProfilePicture!
     var nameLabel: UILabel!
@@ -38,6 +41,7 @@ class ProfileViewController : BaseViewController {
         view.addSubview(nameLabel)
         
         settingsTableView = SettingsTableView()
+        settingsTableView.dataSource = self
         settingsTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(settingsTableView)
         
@@ -65,5 +69,31 @@ class ProfileViewController : BaseViewController {
         profileScreenConstraints.append(NSLayoutConstraint(item: logoutButton, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
         profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=10)-[profilePicture]-10-[nameLabel]-10-[settingsTableView(>=130)]-[logoutButton]-(>=10)-|", options: .AlignAllCenterX, metrics: nil, views: dictionary)
         view.addConstraints(profileScreenConstraints)
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return settings.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let reuseIdentifier = "PreferenceSliderCell"
+        let cell : PreferenceSliderCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PreferenceSliderCell
+        
+        cell.preferenceName.text = settings[indexPath.row]
+        cell.slider.setOn(service.getProfileSettings(settings[indexPath.row]) ?? false, animated: false)
+        cell.slider.addTarget(self, action: #selector(didChangeState(_:)), forControlEvents: .ValueChanged)
+        cell.backgroundColor = Color.mainBackground
+        return cell
+    }
+    
+    func didChangeState(sender: UISwitch) {
+        for i in 0..<settingsTableView.numberOfRowsInSection(0) {
+            let cell: PreferenceSliderCell = settingsTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as! PreferenceSliderCell
+            if cell.slider == sender {
+                service.setProfileSettings(cell.preferenceName.text!, state: sender.on)
+                break
+            }
+        }
     }
 }

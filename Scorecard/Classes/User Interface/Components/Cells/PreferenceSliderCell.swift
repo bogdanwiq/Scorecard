@@ -13,7 +13,6 @@ class PreferenceSliderCell: UITableViewCell{
     
     let preferenceName = UILabel()
     let slider = UISwitch()
-    let service = DataService.sharedInstance
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style	, reuseIdentifier: reuseIdentifier)
@@ -33,11 +32,6 @@ class PreferenceSliderCell: UITableViewCell{
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func didChangeState(sender: UISwitch) {
-        // CR: [Anyone | High] The cells will set the data just trough viewcontroller [Atti]
-        service.setProfileSettings(preferenceName.text!, state: sender.on)
     }
     
     func setupConstraints() {
