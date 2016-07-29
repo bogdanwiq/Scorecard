@@ -9,12 +9,11 @@
 import Foundation
 import ObjectMapper
 
-class Metrics : Mappable {
+class Metric : Mappable {
     
-    var id : Int?
-    var name : String?
-    var values : MetricValue?
-    var submetrics : Metrics?
+    var id : String!
+    var name : String!
+    var submetrics : [Submetric]!
     
     required init?(_ map: Map) {
         
@@ -23,7 +22,6 @@ class Metrics : Mappable {
     func mapping(map: Map) {
         id         <- map["id"]
         name       <- map["name"]
-        values     <- map["values"]
         submetrics <- map["submetrics"]
     }
     

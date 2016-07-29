@@ -16,10 +16,10 @@ class Project: Mappable {
         case w
     }
     
-    var id : Int?
-    var name : String?
-    var interval : intervalType?
-    var metrics : [Metrics]?
+    var id : String!
+    var name : String!
+    var interval : intervalType!
+    var metrics : [Metric]!
   //  var collaborators : [User]?
     
     required init?(_ map: Map){
@@ -27,10 +27,21 @@ class Project: Mappable {
     }
     
     func mapping(map: Map) {
-        id              <- map["id"]
-        name            <- map["name"]
-        interval        <- map["interval"]
-        metrics         <- map["metrics"]
+        id          <- map["id"]
+        name        <- map["name"]
+        var strInterval: String!
+        strInterval <- map["interval"]
+        switch strInterval {
+        case "d":
+            interval = intervalType.d
+            break
+        case "w":
+            interval = intervalType.w
+            break
+        default:
+            break
+        }
+        metrics     <- map["metrics"]
     //    collaborators   <- map["collaborators"]
     }
 }

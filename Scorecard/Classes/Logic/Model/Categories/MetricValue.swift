@@ -11,15 +11,15 @@ import ObjectMapper
 
 class MetricValue: Mappable {
     
-    var date: String?
-    var value : Int?
+    var date: String!
+    var value : Int!
     
     required init?(_ map: Map) {
         
     }
     
     func mapping(map: Map) {
-        date              <- map["date"]
-        value            <- map["value"]
+        date  <- map["date"]
+        value <- map["value"]
     }
 }

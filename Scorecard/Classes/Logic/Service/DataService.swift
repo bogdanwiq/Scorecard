@@ -7,23 +7,36 @@
 //
 
 import Foundation
+import ObjectMapper
 
 class DataService {
     
     static let sharedInstance = DataService()
 
     func setupStats() -> [Stats] {
-        var stats : [Stats] = [Stats]()
         
-        let stat1 = Stats(typeName: "DOWNLOAD", counter: 123131, difference: 2222, percent: 22, sign: .ArrowUp)
-        let stat2 = Stats(typeName: "UPDATE", counter: 1231, difference: 22, percent: 10, sign: .ArrowDown)
-        let stat3 = Stats(typeName: "USERS", counter: 123131, difference: 2222, percent: 22, sign: .ArrowUp)
-        let stat4 = Stats(typeName: "DOWNLOADERS", counter: 1231, difference: 22, percent: 10, sign: .None)
+        let path = NSBundle.mainBundle().pathForResource("example", ofType: "json")
+        let data = NSData(contentsOfFile: path!)
+        let unformattedString = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+        let jsonDict = try? NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers)
+        let array = jsonDict?.valueForKey("project")! as! NSArray
+        var string = "[\n"
+        for i in 0..<(array.count - 1) {
+            string += "\(array[i]),\n"
+        }
+        string += "\(array[array.count - 1])\n]"
+        let nsstring = NSString(string: string)
         
-        stats.append(stat1)
-        stats.append(stat2)
-        stats.append(stat3)
-        stats.append(stat4)
+        let projects: Array<Project>? = Mapper<Project>().mapArray(nsstring)
+        
+        var stats : [Stats] = []
+        
+        for project in projects! {
+            for metric in project.metrics! {
+                let stat = Stats(typeName: metric.name!, counter: countEntries(metric.submetrics!), difference: 0, percent: 0, sign: .None)
+                stats.append(stat)
+            }
+        }
         
         return stats
     }
@@ -39,5 +52,13 @@ class DataService {
     
     func getProfileSettings(preferenceName: String) -> Bool {
         return NSUserDefaults.standardUserDefaults().boolForKey(preferenceName)
+    }
+    
+    func countEntries(submetrics: [Submetric]) -> Int {
+        var counter = 0
+        for submetric in submetrics {
+            counter += submetric.values!.count
+        }
+        return counter
     }
 }
