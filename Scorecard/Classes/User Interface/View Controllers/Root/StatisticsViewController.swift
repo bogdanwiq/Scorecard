@@ -30,7 +30,7 @@ class StatisticViewController: BaseViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationButton)
         timeFrame.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(timeFrame)
-
+        
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
@@ -65,6 +65,22 @@ extension StatisticViewController: UITableViewDelegate {
         let selectedCell : DashboardCell = tableView.cellForRowAtIndexPath(indexPath)! as! DashboardCell
         
         selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
-        navigationController?.pushViewController(DetailedStatisticViewController(), animated: true)
+        navigationController?.pushViewController(DetailedStatisticViewController(metric: self.tableView.projectsStats[indexPath.section].metrics[indexPath.row]), animated: true)
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView()
+        header.backgroundColor = Color.timeFrameBackground
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = self.tableView.projectsStats[section].name
+        label.textColor = Color.timeFrameSelected
+        label.font = UIFont.boldSystemFontOfSize(17.0)
+        header.addSubview(label)
+        header.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[title]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["title": label]))
+        header.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: header, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
+        
+        return header
     }
 }

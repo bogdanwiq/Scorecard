@@ -17,18 +17,28 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
     var statsDetail : StatsDetail!
     var statsTableDetail : UITableView!
     var statisticsChart : StatisticsChart!
-    var currentStats: [Stats] = []
+    //var currentStats: [Stats] = []
+    var currentMetric : Metric!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
     }
     
+    init(metric: Metric){
+        super.init()
+        self.currentMetric = metric
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func initUI() {
         view.backgroundColor = Color.mainBackground
         title = "Statistics"
         
-        statsDetail = StatsDetail()
+        statsDetail = StatsDetail(metric: currentMetric)
         statsDetail.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(statsDetail)
         
@@ -37,12 +47,6 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         statisticsChart.delegate = self
         statisticsChart.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(statisticsChart)
-        
-        for _ in 0..<6 {
-            currentStats.append(Stats(typeName: "Updates", counter: 15, difference: 20, percent: 20, sign: .ArrowUp))
-            currentStats.append(Stats(typeName: "Users", counter: 135, difference: 220, percent: 201, sign: .ArrowDown))
-            currentStats.append(Stats(typeName: "Downloads", counter: 175, difference: 120, percent: 120, sign: .None))
-        }
     }
     
     private func setupStatsTableDetail(){
@@ -64,8 +68,8 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         var tableHeight : Int = 0
         let screenResolutionFactor = Int(screenHeight/100)-1
         
-        if currentStats.count < screenResolutionFactor {
-            tableHeight =  Int(statsTableDetail.rowHeight) * currentStats.count
+        if currentMetric.submetrics.count < screenResolutionFactor {
+            tableHeight =  Int(statsTableDetail.rowHeight) * currentMetric.submetrics.count
         } else {
             tableHeight  = screenResolutionFactor * Int(statsTableDetail.rowHeight)
         }
@@ -78,12 +82,13 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentStats.count
+        return currentMetric.submetrics.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell : StatsDetailCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! StatsDetailCell
+        
         let animation: CATransition = CATransition()
         
         animation.duration = 0.3
@@ -91,10 +96,12 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         cell.difference.layer.addAnimation(animation ,forKey :"layerFadeOut")
         
-        cell.difference.text = String(currentStats[indexPath.row].difference)
-        cell.sign.image = currentStats[indexPath.row].getImage()
+        let currentSubmetric = currentMetric.submetrics[indexPath.row]
+        cell.difference.text = dataService.sumSubmetricValues(currentSubmetric)
+
+        cell.sign.image = EvolutionSign.None.getSign()
         cell.identifier.image = UIImage(named: "Circle")
-        cell.typeName.text = currentStats[indexPath.row].typeName
+        cell.typeName.text = currentMetric.submetrics[indexPath.row].name
         return cell
     }
     
@@ -112,8 +119,8 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
             
             let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
             highlights.append(highlight)
-            currentStats[i].typeName = dataSet.label!
-            currentStats[i].difference = Int(dataSet.entryForIndex(selectedIndex)!.value)
+            currentMetric.submetrics[i].name = dataSet.label!
+
             i += 1
         }
         chartView.highlightValues(highlights)

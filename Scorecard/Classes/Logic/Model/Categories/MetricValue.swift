@@ -11,7 +11,7 @@ import ObjectMapper
 
 class MetricValue: Mappable {
     
-    var date: String!
+    var date: NSDate!
     var value : Int!
     
     required init?(_ map: Map) {
@@ -19,7 +19,12 @@ class MetricValue: Mappable {
     }
     
     func mapping(map: Map) {
-        date  <- map["date"]
-        value <- map["value"]
+        var strDate: String!
+        strDate <- map["date"]
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        date = dateFormatter.dateFromString(strDate)
+        value   <- map["value"]
     }
+    
 }

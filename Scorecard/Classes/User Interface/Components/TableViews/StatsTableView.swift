@@ -47,12 +47,7 @@ class StatsTableView : UITableView, UITableViewDataSource {
         let cell : DashboardCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DashboardCell
         
         cell.typeName.text = projectsStats[indexPath.section].metrics[indexPath.row].name
-        
-        var counter = 0
-        for submetric in projectsStats[indexPath.section].metrics[indexPath.row].submetrics {
-            counter += submetric.values.count
-        }
-        cell.counter.text = String(counter)
+        cell.counter.text = service.sumMetricValues(projectsStats[indexPath.section].metrics[indexPath.row])
         
 //        if stats[indexPath.row].getImage() == UIImage(named: "ArrowUp") {
 //            cell.difference.textColor = Color.statsRise

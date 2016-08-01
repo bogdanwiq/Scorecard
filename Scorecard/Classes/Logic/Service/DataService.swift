@@ -55,4 +55,40 @@ class DataService {
     func getProfileSettings(preferenceName: String) -> Bool {
         return NSUserDefaults.standardUserDefaults().boolForKey(preferenceName)
     }
+    
+    func sumMetricValues(metric: Metric) -> String {
+        var count = 0
+        for submetric in metric.submetrics {
+            for value in submetric.values {
+                count += value.value
+            }
+        }
+        return count.prettyString()
+    }
+    
+    func sumSubmetricValues(submetric: Submetric) -> String {
+        var count = 0
+        for value in submetric.values {
+            count += value.value
+        }
+        return count.prettyString()
+    }
+}
+
+extension Int {
+    
+    func prettyString() -> String {
+        var copy = self
+        var i = 0
+        var result = ""
+        while copy != 0 {
+            result = String(copy % 10) + result
+            copy /= 10
+            i += 1
+            if i % 3 == 0 && copy != 0 {
+                result = "." + result
+            }
+        }
+        return result
+    }
 }

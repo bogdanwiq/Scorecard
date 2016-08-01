@@ -16,12 +16,12 @@ class StatsDetail : UIView {
     var difference : UILabel!
     var percent : UILabel!
     var sign : UIImageView!
-    var currentStat : Stats!
+    var currentMetric : Metric!
     let service = DataService.sharedInstance
     
-    init() {
+    init(metric: Metric) {
         super.init(frame: CGRectZero)
-        currentStat = service.getCurrentStat()
+        self.currentMetric = metric
         initUI()
         setupInformation()
         setupConstraints()
@@ -69,22 +69,24 @@ class StatsDetail : UIView {
     }
     
     private func setupInformation() {
-        typeName.text = currentStat.typeName
-        counter.text = String(currentStat.counter)
-        if currentStat.getImage() == UIImage(named: "ArrowUp") {
-            difference.textColor = Color.statsRise
-            difference.text = "+" + String(currentStat.difference)
-        }
-        else if currentStat.getImage() == UIImage(named: "ArrowDown") {
-            difference.textColor = Color.statsFall
-            difference.text = "-" + String(currentStat.difference)
-        }
-        else if currentStat.getImage() == UIImage(named: "None") {
-            difference.textColor = Color.statsRise
-            difference.text = String(currentStat.difference)
-        }
-        percent.text = String(currentStat.percent) + "%"
-        sign.image = currentStat.getImage()
+        typeName.text = currentMetric.name
+        counter.text = service.sumMetricValues(currentMetric)
+//        if currentMetric.getImage() == UIImage(named: "ArrowUp") {
+//            difference.textColor = Color.statsRise
+//            difference.text = "+" + String(currentMetric.difference)
+//        }
+//        else if currentMetric.getImage() == UIImage(named: "ArrowDown") {
+//            difference.textColor = Color.statsFall
+//            difference.text = "-" + String(currentMetric.difference)
+//        }
+//        else if currentMetric.getImage() == UIImage(named: "None") {
+//            difference.textColor = Color.statsRise
+//            difference.text = String(currentMetric.difference)
+//        }
+        difference.textColor = Color.statsRise
+        difference.text = String(20039)
+        percent.text = String(32) + "%"
+        sign.image = EvolutionSign.None.getSign()
     }
     private func setupConstraints() {
         
