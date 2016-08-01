@@ -17,17 +17,9 @@ class DataService {
         
         let path = NSBundle.mainBundle().pathForResource("example", ofType: "json")
         let data = NSData(contentsOfFile: path!)
-        let unformattedString = NSString(data: data!, encoding: NSUTF8StringEncoding)!
-        let jsonDict = try? NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers)
-        let array = jsonDict?.valueForKey("project")! as! NSArray
-        var string = "[\n"
-        for i in 0..<(array.count - 1) {
-            string += "\(array[i]),\n"
-        }
-        string += "\(array[array.count - 1])\n]"
-        let nsstring = NSString(string: string)
+        let string = NSString(data: data!, encoding: NSUTF8StringEncoding)!
         
-        let projects: Array<Project>? = Mapper<Project>().mapArray(nsstring)
+        let projects: Array<Project>? = Mapper<Project>().mapArray(clipJSON(string))
         
         var stats : [Stats] = []
         
@@ -39,6 +31,25 @@ class DataService {
         }
         
         return stats
+    }
+    
+    private func clipJSON(json: NSString) -> String {
+        var startIndex = 0
+        for i in 0..<json.length {
+            if json.characterAtIndex(i) == "[".utf16.first! {
+                startIndex = i
+                break
+            }
+        }
+        var endIndex = 0
+        for i in (0..<json.length).reverse() {
+            if json.characterAtIndex(i) == "]".utf16.first! {
+                endIndex = i
+                break
+            }
+        }
+        
+        return json.substringWithRange(NSMakeRange(startIndex, endIndex - startIndex + 1))
     }
     
     func getCurrentStat() -> Stats {
