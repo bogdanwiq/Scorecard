@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()
         // Set the battery, carrier , signal, clock to white
+        // CR: [Anyone | Medium] Move these appearance related lines to an external class. (see NotificationViewController) [MBoti]
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
