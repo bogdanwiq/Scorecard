@@ -15,6 +15,7 @@ class StatisticViewController: BaseViewController {
     let tableView = StatsTableView()
     let reuseIdentifier : String = "DashboardCell"
     let service = DataService.sharedInstance
+    var originalProjectsStats : [Project]!
     var projectsStats : [Project]!
     
     override func viewDidAppear(animated: Bool) {
@@ -40,7 +41,9 @@ class StatisticViewController: BaseViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
-        projectsStats = service.setupStats()
+        originalProjectsStats = service.setupStats()
+        projectsStats = []
+        projectsStats.appendContentsOf(originalProjectsStats)
     }
     
     override func setupConstraints() {
@@ -151,19 +154,24 @@ extension StatisticViewController: TimeFrameDelegate {
     func timeFrameSelectedValue(selectedIndex: Int) {
         switch selectedIndex {
         case 0 :
-            service.filter(projectsStats, type: .OneDay)
+            projectsStats = service.filter(originalProjectsStats, type: .OneDay)
+            tableView.reloadData()
             break
         case 1 :
-            service.filter(projectsStats, type: .OneWeek)
+            projectsStats = service.filter(originalProjectsStats, type: .OneWeek)
+            tableView.reloadData()
             break
         case 2 :
-            service.filter(projectsStats, type: .OneMonth)
+            projectsStats = service.filter(originalProjectsStats, type: .OneMonth)
+            tableView.reloadData()
             break
         case 3 :
-            service.filter(projectsStats, type: .OneYear)
+            projectsStats = service.filter(originalProjectsStats, type: .OneYear)
+            tableView.reloadData()
             break
         case 4 :
-            service.filter(projectsStats, type: .All)
+            projectsStats = service.filter(originalProjectsStats, type: .All)
+            tableView.reloadData()
             break
         default :
             break

@@ -22,6 +22,10 @@ class Project: Mappable {
     var metrics : [Metric]!
   //  var collaborators : [User]?
     
+    init() {
+        
+    }
+    
     required init?(_ map: Map){
         
     }

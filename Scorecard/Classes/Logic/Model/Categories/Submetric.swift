@@ -15,6 +15,10 @@ class Submetric : Mappable {
     var name : String!
     var values : [MetricValue]!
     
+    init() {
+        
+    }
+    
     required init?(_ map: Map) {
         
     }

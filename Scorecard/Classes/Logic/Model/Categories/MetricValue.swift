@@ -14,6 +14,10 @@ class MetricValue: Mappable {
     var date: NSDate!
     var value : Int!
     
+    init() {
+
+    }
+    
     required init?(_ map: Map) {
         
     }
