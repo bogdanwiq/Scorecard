@@ -76,18 +76,20 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        // CR: [Anyone | Low] Declare this constsant outside. [MBoti]
         let reuseIdentifier = "PreferenceSliderCell"
         let cell : PreferenceSliderCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PreferenceSliderCell
         
         cell.preferenceName.text = settings[indexPath.row]
         cell.slider.setOn(service.getProfileSettings(settings[indexPath.row]) ?? false, animated: false)
+        // CR: [Anyone | High] Every time you reuse a cell, you will add another listener to your slider. This means that your slider will send state change notifications multiple times to your controller. Move this line inside your cell and implement the delegate mechanism to provide feedback. [MBoti]
         cell.slider.addTarget(self, action: #selector(didChangeState(_:)), forControlEvents: .ValueChanged)
         cell.backgroundColor = Color.mainBackground
         return cell
     }
     
     func didChangeState(sender: UISwitch) {
+        // CR: [Anyone | High] This method will break your app if there are more cell than you can fit on the screen due to forced (nil) unwrapping (as! PreferenceSliderCell). Either reload the section animated or iterate through the visible cells. [MBoti]
         for i in 0..<settingsTableView.numberOfRowsInSection(0) {
             let cell: PreferenceSliderCell = settingsTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as! PreferenceSliderCell
             if cell.slider == sender {

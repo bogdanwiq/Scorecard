@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// CR: [Anyone | Medium] Separate your controllers. Not all controllers should be part of the Root directory. [MBoti]
 class StatisticViewController: BaseViewController, UITableViewDelegate{
     
     let timeFrame = TimeFrame()
@@ -23,12 +24,14 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
         view.backgroundColor = Color.mainBackground
         navigationController?.navigationBar.translucent = false
         title = "Dashboard"
+        // CR: [Anyone | Low] Remove these lines once you move them to MinAppearance. [MBoti]
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Color.navigationTitle]
         navigationController?.navigationBar.barTintColor = Color.navigationBackground
         navigationController?.navigationBar.tintColor = Color.textColor
         let profileButton = Button.Profile.getButton()
         profileButton.addTarget(self, action: #selector(slideLeft), forControlEvents: .TouchUpInside)
         let notificationButton = Button.Notification.getButton()
+        // CR: [Anyone | Low] The name of the selector should be notificationTapped. This is not clear. [MBoti]
         notificationButton.addTarget(self, action: #selector(goNotification), forControlEvents: .TouchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationButton)
@@ -51,6 +54,7 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
         view.addConstraints(allConstraints)
     }
     
+    // CR: [Anyone | Low] Move delegate methods to an extension. Check the bottom of the class. [MBoti]
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell : DashboardCell = tableView.cellForRowAtIndexPath(indexPath)! as! DashboardCell
@@ -62,7 +66,7 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
     func slideLeft(){
         
         let appDelegate = SharedApplication.delegate as! AppDelegate
-        
+        // CR: [Anyone | High] Don't access AppDelegate directly. [MBoti]
         appDelegate.sideMenu!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
     }
     
@@ -70,3 +74,15 @@ class StatisticViewController: BaseViewController, UITableViewDelegate{
         navigationController?.pushViewController(NotificationViewController(), animated: true)
     }
 }
+
+/* This is how your delegate methods should be implemented.
+ 
+ 
+ 
+// MARK: - UITableViewDelegate
+
+extension StatisticViewController: UITableViewDelegate {
+    
+    // implement your methods here.
+}
+ */
