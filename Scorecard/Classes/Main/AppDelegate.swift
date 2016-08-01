@@ -12,20 +12,15 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var sideMenu : SideMenuController?
-    let centerView = UINavigationController(rootViewController: StatisticViewController())
-    let leftView = ProfileViewController()
+    var rootViewController : RootViewController!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()
-        // Set the battery, carrier , signal, clock to white
-        // CR: [Anyone | Medium] Move these appearance related lines to an external class. (see NotificationViewController) [MBoti]
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        sideMenu = SideMenuController(centerViewController: centerView, leftDrawerViewController: leftView, rightDrawerViewController: nil)
-        window?.rootViewController = sideMenu
+        MainAppearance.setNavigationBarProperties()
+        
+        rootViewController = RootViewController()
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         return true
     }

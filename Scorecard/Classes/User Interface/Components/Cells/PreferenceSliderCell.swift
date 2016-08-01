@@ -11,6 +11,8 @@ import UIKit
 
 class PreferenceSliderCell: UITableViewCell{
     
+    weak var delegate: PreferenceSliderCellDelegate?
+    
     let preferenceName = UILabel()
     let slider = UISwitch()
     
@@ -25,6 +27,7 @@ class PreferenceSliderCell: UITableViewCell{
         slider.setOn(false, animated: false)
         slider.onTintColor = Color.profileSettings
         slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.addTarget(self, action: #selector(didChangeState(_:)), forControlEvents: .ValueChanged)
         contentView.addSubview(slider)
         
         setupConstraints()
@@ -43,5 +46,14 @@ class PreferenceSliderCell: UITableViewCell{
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[preferenceName]-(>=10)-[slider]-20-|", options: .AlignAllCenterY, metrics: nil, views: dictionary)
         addConstraints(constraints)
     }
+    
+    // MARK: - User interactions
+    
+    func didChangeState(sender: UISwitch) {
+        delegate?.preferenceSliderCellDidChangeValue(self, newState: sender.on)
+    }
+}
 
+protocol PreferenceSliderCellDelegate: class {
+    func preferenceSliderCellDidChangeValue(cell: PreferenceSliderCell, newState: Bool)
 }

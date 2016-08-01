@@ -21,18 +21,12 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = SharedApplication.delegate as! AppDelegate
-        appDelegate.sideMenu!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
-        
+        mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
     }
     
     override func initUI() {
         view.backgroundColor = Color.mainBackground
-        navigationController?.navigationBar.translucent = false
         title = "Statistics"
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: Color.navigationTitle]
-        navigationController?.navigationBar.barTintColor = Color.navigationBackground
-        navigationController?.navigationBar.tintColor = Color.navigationTitle
         
         statsDetail = StatsDetail()
         statsDetail.translatesAutoresizingMaskIntoConstraints = false
