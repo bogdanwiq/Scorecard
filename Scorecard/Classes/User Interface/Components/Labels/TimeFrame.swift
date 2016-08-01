@@ -11,6 +11,8 @@ import UIKit
 
 class TimeFrame : UIControl {
     
+    weak var delegate : TimeFrameDelegate?
+    
     private var labels = [UILabel]()
     private var items : [String] = ["1d", "1w", "1m", "1y", "All"]{
         didSet{
@@ -90,6 +92,7 @@ class TimeFrame : UIControl {
         labels[selectedIndex].layer.cornerRadius = frame.height / 2
         labels[selectedIndex].textColor = Color.timeFrameBackground
         labels[selectedIndex].font = UIFont.boldSystemFontOfSize(17.0)
+        delegate?.timeFrameSelectedValue(selectedIndex)
     }
     
     private func setupConstraints() {
@@ -110,4 +113,8 @@ class TimeFrame : UIControl {
         timeFrameConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|\(horizontalConstraints)|", options: [.AlignAllTop, .AlignAllBottom], metrics: nil, views: dictionary)
         addConstraints(timeFrameConstraints)
     }
+}
+
+protocol TimeFrameDelegate: class {
+    func timeFrameSelectedValue(selectedIndex: Int)
 }

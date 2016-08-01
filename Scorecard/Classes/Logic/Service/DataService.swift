@@ -9,6 +9,15 @@
 import Foundation
 import ObjectMapper
 
+enum TimeFilter {
+    case OneDay
+    case OneWeek
+    case OneMonth
+    case OneYear
+    case All
+}
+
+
 class DataService {
     
     static let sharedInstance = DataService()
@@ -43,17 +52,33 @@ class DataService {
         return json.substringWithRange(NSMakeRange(startIndex, endIndex - startIndex + 1))
     }
     
-    func getCurrentStat() -> Stats {
-        let stat1 = Stats(typeName: "DOWNLOAD", counter: 123131, difference: 2222, percent: 22, sign: .ArrowUp)
-        return stat1
-    }
-    
     func setProfileSettings(preferenceName: String, state: Bool) {
         NSUserDefaults.standardUserDefaults().setBool(state, forKey: preferenceName)
     }
     
     func getProfileSettings(preferenceName: String) -> Bool {
         return NSUserDefaults.standardUserDefaults().boolForKey(preferenceName)
+    }
+    
+    func filter(projects: [Project], type: TimeFilter) -> [Project] {
+        switch type {
+        case .OneDay :
+            
+            break
+        case .OneWeek:
+            
+            break
+        case .OneMonth:
+            
+            break
+        case .OneYear:
+            
+            break
+        case .All:
+            
+            break
+        }
+        return []
     }
     
     func sumMetricValues(metric: Metric) -> String {

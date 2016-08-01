@@ -13,6 +13,9 @@ class StatisticViewController: BaseViewController {
     
     let timeFrame = TimeFrame()
     let tableView = StatsTableView()
+    let reuseIdentifier : String = "DashboardCell"
+    let service = DataService.sharedInstance
+    var projectsStats : [Project]!
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -28,12 +31,16 @@ class StatisticViewController: BaseViewController {
         notificationButton.addTarget(self, action: #selector(notificationTapped), forControlEvents: .TouchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationButton)
+        timeFrame.delegate = self
         timeFrame.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(timeFrame)
         
         tableView.delegate = self
+        tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+        
+        projectsStats = service.setupStats()
     }
     
     override func setupConstraints() {
@@ -65,7 +72,7 @@ extension StatisticViewController: UITableViewDelegate {
         let selectedCell : DashboardCell = tableView.cellForRowAtIndexPath(indexPath)! as! DashboardCell
         
         selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
-        navigationController?.pushViewController(DetailedStatisticViewController(metric: self.tableView.projectsStats[indexPath.section].metrics[indexPath.row]), animated: true)
+        navigationController?.pushViewController(DetailedStatisticViewController(metric: projectsStats[indexPath.section].metrics[indexPath.row]), animated: true)
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -74,7 +81,7 @@ extension StatisticViewController: UITableViewDelegate {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = self.tableView.projectsStats[section].name
+        label.text = projectsStats[section].name
         label.textColor = Color.timeFrameSelected
         label.font = UIFont.boldSystemFontOfSize(17.0)
         header.addSubview(label)
@@ -82,5 +89,84 @@ extension StatisticViewController: UITableViewDelegate {
         header.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: header, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
         
         return header
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension StatisticViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return projectsStats[section].name
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return projectsStats[section].metrics.count
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return projectsStats.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell : DashboardCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DashboardCell
+        
+        cell.typeName.text = projectsStats[indexPath.section].metrics[indexPath.row].name
+        cell.counter.text = service.sumMetricValues(projectsStats[indexPath.section].metrics[indexPath.row])
+        
+        //        if stats[indexPath.row].getImage() == UIImage(named: "ArrowUp") {
+        //            cell.difference.textColor = Color.statsRise
+        //            cell.difference.text = "+" + String(stats[indexPath.row].difference)
+        //        }
+        //        else if stats[indexPath.row].getImage() == UIImage(named: "ArrowDown") {
+        //            cell.difference.textColor = Color.statsFall
+        //            cell.difference.text = "-" + String(stats[indexPath.row].difference)
+        //        }
+        //        else if stats[indexPath.row].getImage() == UIImage(named: "None") {
+        //            cell.difference.textColor = Color.statsRise
+        //            cell.difference.text = String(stats[indexPath.row].difference)
+        //        }
+        //        cell.percent.text = String(stats[indexPath.row].percent) + "%"
+        //        cell.sign.image = stats[indexPath.row].getImage()
+        
+        cell.difference.text = "+123812"
+        cell.percent.text = "27%"
+        cell.sign.image = EvolutionSign.None.getSign()
+        
+        var hue : CGFloat = 0.0
+        var saturation: CGFloat = 0.0
+        var brightness : CGFloat = 0.0
+        var alpha : CGFloat = 0.0
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        Color.mainBackground.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        cell.backgroundColor = UIColor(hue: hue, saturation: saturation-(0.06*CGFloat(indexPath.row)), brightness: brightness+(0.03*CGFloat(indexPath.row)), alpha: alpha)
+        return cell
+    }
+}
+
+// MARK - TimeFrameDelegate
+
+extension StatisticViewController: TimeFrameDelegate {
+    func timeFrameSelectedValue(selectedIndex: Int) {
+        switch selectedIndex {
+        case 0 :
+            service.filter(projectsStats, type: .OneDay)
+            break
+        case 1 :
+            service.filter(projectsStats, type: .OneWeek)
+            break
+        case 2 :
+            service.filter(projectsStats, type: .OneMonth)
+            break
+        case 3 :
+            service.filter(projectsStats, type: .OneYear)
+            break
+        case 4 :
+            service.filter(projectsStats, type: .All)
+            break
+        default :
+            break
+        }
     }
 }
