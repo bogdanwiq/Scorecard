@@ -13,7 +13,7 @@ class DataService {
     
     static let sharedInstance = DataService()
 
-    func setupStats() -> [Stats] {
+    func setupStats() -> [Project] {
         
         let path = NSBundle.mainBundle().pathForResource("example", ofType: "json")
         let data = NSData(contentsOfFile: path!)
@@ -21,16 +21,7 @@ class DataService {
         
         let projects: Array<Project>? = Mapper<Project>().mapArray(clipJSON(string))
         
-        var stats : [Stats] = []
-        
-        for project in projects! {
-            for metric in project.metrics! {
-                let stat = Stats(typeName: metric.name!, counter: countEntries(metric.submetrics!), difference: 0, percent: 0, sign: .None)
-                stats.append(stat)
-            }
-        }
-        
-        return stats
+        return projects!
     }
     
     private func clipJSON(json: NSString) -> String {
@@ -63,13 +54,5 @@ class DataService {
     
     func getProfileSettings(preferenceName: String) -> Bool {
         return NSUserDefaults.standardUserDefaults().boolForKey(preferenceName)
-    }
-    
-    func countEntries(submetrics: [Submetric]) -> Int {
-        var counter = 0
-        for submetric in submetrics {
-            counter += submetric.values!.count
-        }
-        return counter
     }
 }

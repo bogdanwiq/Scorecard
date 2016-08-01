@@ -13,7 +13,7 @@ class StatsTableView : UITableView, UITableViewDataSource {
     
     let reuseIdentifier : String = "DashboardCell"
     let service = DataService.sharedInstance
-    var stats : [Stats]!
+    var projectsStats : [Project]!
     
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
@@ -23,7 +23,7 @@ class StatsTableView : UITableView, UITableViewDataSource {
         registerClass(DashboardCell.self, forCellReuseIdentifier: "DashboardCell")
         separatorColor = UIColor.clearColor()
         backgroundColor = Color.mainBackground
-        stats = service.setupStats()
+        projectsStats = service.setupStats()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,44 +31,47 @@ class StatsTableView : UITableView, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section{
-        case 0 :
-            return "First"
-        case 1 :
-            return "Second"
-        default :
-            return nil
-        }
+        return projectsStats[section].name
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stats.count
+        return projectsStats[section].metrics.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return projectsStats.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell : DashboardCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DashboardCell
         
-        cell.typeName.text = stats[indexPath.row].typeName
-        cell.counter.text = String(stats[indexPath.row].counter)
-        if stats[indexPath.row].getImage() == UIImage(named: "ArrowUp") {
-            cell.difference.textColor = Color.statsRise
-            cell.difference.text = "+" + String(stats[indexPath.row].difference)
+        cell.typeName.text = projectsStats[indexPath.section].metrics[indexPath.row].name
+        
+        var counter = 0
+        for submetric in projectsStats[indexPath.section].metrics[indexPath.row].submetrics {
+            counter += submetric.values.count
         }
-        else if stats[indexPath.row].getImage() == UIImage(named: "ArrowDown") {
-            cell.difference.textColor = Color.statsFall
-            cell.difference.text = "-" + String(stats[indexPath.row].difference)
-        }
-        else if stats[indexPath.row].getImage() == UIImage(named: "None") {
-            cell.difference.textColor = Color.statsRise
-            cell.difference.text = String(stats[indexPath.row].difference)
-        }
-        cell.percent.text = String(stats[indexPath.row].percent) + "%"
-        cell.sign.image = stats[indexPath.row].getImage()
+        cell.counter.text = String(counter)
+        
+//        if stats[indexPath.row].getImage() == UIImage(named: "ArrowUp") {
+//            cell.difference.textColor = Color.statsRise
+//            cell.difference.text = "+" + String(stats[indexPath.row].difference)
+//        }
+//        else if stats[indexPath.row].getImage() == UIImage(named: "ArrowDown") {
+//            cell.difference.textColor = Color.statsFall
+//            cell.difference.text = "-" + String(stats[indexPath.row].difference)
+//        }
+//        else if stats[indexPath.row].getImage() == UIImage(named: "None") {
+//            cell.difference.textColor = Color.statsRise
+//            cell.difference.text = String(stats[indexPath.row].difference)
+//        }
+//        cell.percent.text = String(stats[indexPath.row].percent) + "%"
+//        cell.sign.image = stats[indexPath.row].getImage()
+        
+        cell.difference.text = "+123812"
+        cell.percent.text = "27%"
+        cell.sign.image = EvolutionSign.None.getSign()
         
         var hue : CGFloat = 0.0
         var saturation: CGFloat = 0.0

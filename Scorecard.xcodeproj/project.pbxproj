@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04289FE51D3F93F00006DBCA /* SettingsTableView.swift */; };
+		04347BE61D4F492C0003C76A /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 04347BE51D4F492C0003C76A /* example.json */; };
 		049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */; };
 		04EF3D531D4B3B040055BE43 /* Submetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF3D521D4B3B040055BE43 /* Submetric.swift */; };
 		04EF3D551D4B3BCF0055BE43 /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF3D541D4B3BCF0055BE43 /* Metric.swift */; };
@@ -88,6 +89,7 @@
 
 /* Begin PBXFileReference section */
 		04289FE51D3F93F00006DBCA /* SettingsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
+		04347BE51D4F492C0003C76A /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceSliderCell.swift; path = "Scorecard/Classes/User Interface/Components/Cells/PreferenceSliderCell.swift"; sourceTree = SOURCE_ROOT; };
 		04EF3D521D4B3B040055BE43 /* Submetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Submetric.swift; sourceTree = "<group>"; };
 		04EF3D541D4B3BCF0055BE43 /* Metric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metric.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 		F92E719D1D354600006E9D1F /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				04347BE51D4F492C0003C76A /* example.json */,
 				F4B5FFF71D423549003A9C96 /* DataService.swift */,
 			);
 			path = Service;
@@ -865,6 +868,7 @@
 				F92E71E31D354600006E9D1F /* .keep in Resources */,
 				F92E71E11D354600006E9D1F /* .keep in Resources */,
 				F92E71D71D354600006E9D1F /* .keep in Resources */,
+				04347BE61D4F492C0003C76A /* example.json in Resources */,
 				F92E71D51D354600006E9D1F /* .keep in Resources */,
 				F92E71D41D354600006E9D1F /* .keep in Resources */,
 				F92E71EC1D354600006E9D1F /* .keep in Resources */,
