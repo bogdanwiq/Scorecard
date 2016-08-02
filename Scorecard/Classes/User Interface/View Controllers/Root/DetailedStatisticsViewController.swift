@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Charts
+import ChameleonFramework
 
 class DetailedStatisticViewController : BaseViewController, UITableViewDataSource, ChartViewDelegate {
     
@@ -17,17 +18,20 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
     var statsDetail : StatsDetail!
     var statsTableDetail : UITableView!
     var statisticsChart : StatisticsChart!
-    //var currentStats: [Stats] = []
     var currentMetric : Metric!
+    var differenceAndPercent : (Int, Double)!
+    var timeFrame = 4
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
     }
     
-    init(metric: Metric){
+    init(metric: Metric, differenceAndPercent: (Int, Double), timeFrame : Int){
         super.init()
         self.currentMetric = metric
+        self.differenceAndPercent = differenceAndPercent
+        self.timeFrame = timeFrame
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,14 +42,18 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         view.backgroundColor = Color.mainBackground
         title = "Statistics"
         
-        statsDetail = StatsDetail(metric: currentMetric)
+        statsDetail = StatsDetail()
+        statsDetail.delegate = self
         statsDetail.translatesAutoresizingMaskIntoConstraints = false
+        setupInformation()
         view.addSubview(statsDetail)
+        
         
         setupStatsTableDetail()
         statisticsChart = StatisticsChart()
         statisticsChart.delegate = self
         statisticsChart.translatesAutoresizingMaskIntoConstraints = false
+        setChartData()
         view.addSubview(statisticsChart)
     }
     
@@ -95,35 +103,257 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         animation.type = kCATransitionFade
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         cell.difference.layer.addAnimation(animation ,forKey :"layerFadeOut")
+        var submetricArray : [Int] = []
         
-        let currentSubmetric = currentMetric.submetrics[indexPath.row]
-        cell.difference.text = dataService.sumSubmetricValues(currentSubmetric)
-
-        cell.sign.image = EvolutionSign.None.getSign()
+        switch timeFrame {
+        case 0 :
+            submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .OneDay)
+            break
+        case 1 :
+            submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .OneWeek)
+            break
+        case 2 :
+            submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .OneMonth)
+            break
+        case 3:
+            submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .OneYear)
+            break
+        case 4:
+            submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .All)
+            break
+        default :
+            break
+        }
         cell.identifier.image = UIImage(named: "Circle")
         cell.typeName.text = currentMetric.submetrics[indexPath.row].name
+        cell.difference.text = submetricArray[indexPath.row].prettyString()
+        cell.sign.image = EvolutionSign.None.getSign()
+        
         return cell
     }
     
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-       
+        
         let selectedIndex = entry.xIndex
         var i = 0
         var highlights: [ChartHighlight] = []
         
         for dataSet in (chartView.data?.dataSets)! {
             let marker = CircleMarker(color: (chartView.data?.dataSets[i].colors[0])!)
-            marker.minimumSize = CGSizeMake(10.0 , 10.0)
-            marker.offset = CGPointMake(0.0, 5.0)
+            marker.minimumSize = CGSizeMake(7.0 , 7.0)
+            marker.offset = CGPointMake(0.0, 1.0)
             chartView.marker = marker
             
             let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
             highlights.append(highlight)
             currentMetric.submetrics[i].name = dataSet.label!
-
+            
             i += 1
         }
         chartView.highlightValues(highlights)
         statsTableDetail.reloadData()
+    }
+    
+    func setChartData() {
+        var xAxis : [String] = []
+        var colorArray = ColorSchemeOf(.Analogous, color: getRandomColor(), isFlatScheme: true)
+        
+        switch timeFrame {
+        case 0 :
+            xAxis = ["01:00", "02:00", "03:00","04:00","05:00","06:00","07:00","08:00",
+                     "09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00",
+                     "17:00","18:00","19:00","20:00","21:00","22:00","23:00","0:00"]
+            let chartData = LineChartData(xVals: xAxis)
+            for i in 0..<currentMetric.submetrics.count {
+                let submetricName = currentMetric.submetrics[i].name
+                let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
+                let chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
+                chartDataSet.mode = .CubicBezier
+                chartDataSet.drawValuesEnabled = false
+                chartDataSet.drawCirclesEnabled = false
+                chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
+                chartDataSet.fillColor = colorArray[i % 5]
+                chartDataSet.fillAlpha = 0.5
+                chartDataSet.drawFilledEnabled = true
+                chartDataSet.highlightLineWidth = 0.0
+                chartData.addDataSet(chartDataSet)
+            }
+            statisticsChart.data = chartData
+            break
+        case 1 :
+            xAxis = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+            let chartData = LineChartData(xVals: xAxis)
+            for i in 0..<currentMetric.submetrics.count {
+                let submetricName = currentMetric.submetrics[i].name
+                let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
+                let chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
+                chartDataSet.mode = .CubicBezier
+                chartDataSet.drawValuesEnabled = false
+                chartDataSet.drawCirclesEnabled = false
+                chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
+                chartDataSet.fillColor = colorArray[i % 5]
+                chartDataSet.fillAlpha = 0.5
+                chartDataSet.drawFilledEnabled = true
+                chartDataSet.highlightLineWidth = 0.0
+                chartData.addDataSet(chartDataSet)
+            }
+            statisticsChart.data = chartData
+            break
+        case 2 :
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "MMM"
+            let currentMonth = dateFormatter.stringFromDate(NSDate()).uppercaseString
+            switch currentMonth {
+            case "JAN", "MAR", "MAY", "JUL", "AUG", "OCT", "DEC": //31
+                xAxis = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+                         "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
+                         "23", "24", "25", "26", "27", "28", "29", "30", "31"]
+                let chartData = LineChartData(xVals: xAxis)
+                for i in 0..<currentMetric.submetrics.count {
+                    let submetricName = currentMetric.submetrics[i].name
+                    let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
+                    let chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
+                    chartDataSet.mode = .CubicBezier
+                    chartDataSet.drawValuesEnabled = false
+                    chartDataSet.drawCirclesEnabled = false
+                    chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
+                    chartDataSet.fillColor = colorArray[i % 5]
+                    chartDataSet.fillAlpha = 0.5
+                    chartDataSet.drawFilledEnabled = true
+                    chartDataSet.highlightLineWidth = 0.0
+                    chartData.addDataSet(chartDataSet)
+                }
+                statisticsChart.data = chartData
+                break
+            case "FEB": // 28
+                xAxis = ["1", "2", "3", "4", "5", "6", "7", "8",
+                         "9", "10", "11", "12", "13", "14", "15",
+                         "16", "17", "18", "19", "20", "21", "22",
+                         "23", "24", "25", "26", "27", "28"]
+                let chartData = LineChartData(xVals: xAxis)
+                for i in 0..<currentMetric.submetrics.count {
+                    let submetricName = currentMetric.submetrics[i].name
+                    let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
+                    let chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
+                    chartDataSet.mode = .CubicBezier
+                    chartDataSet.drawValuesEnabled = false
+                    chartDataSet.drawCirclesEnabled = false
+                    chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
+                    chartDataSet.fillColor = colorArray[i % 5]
+                    chartDataSet.fillAlpha = 0.5
+                    chartDataSet.drawFilledEnabled = true
+                    chartDataSet.highlightLineWidth = 0.0
+                    chartData.addDataSet(chartDataSet)
+                }
+                statisticsChart.data = chartData
+                break
+            case "APR", "JUN", "SEP", "NOV": //30
+                xAxis = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
+                         "12", "13", "14", "15", "16", "17", "18", "19", "20",
+                         "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+                let chartData = LineChartData(xVals: xAxis)
+                for i in 0..<currentMetric.submetrics.count {
+                    let submetricName = currentMetric.submetrics[i].name
+                    let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
+                    let chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
+                    chartDataSet.mode = .CubicBezier
+                    chartDataSet.drawValuesEnabled = false
+                    chartDataSet.drawCirclesEnabled = false
+                    chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
+                    chartDataSet.fillColor = colorArray[i % 5]
+                    chartDataSet.fillAlpha = 0.5
+                    chartDataSet.drawFilledEnabled = true
+                    chartDataSet.highlightLineWidth = 0.0
+                    chartData.addDataSet(chartDataSet)
+                }
+                statisticsChart.data = chartData
+                break
+            default:
+                break
+            }
+            break
+        case 3:
+            xAxis = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+            let chartData = LineChartData(xVals: xAxis)
+            for i in 0..<currentMetric.submetrics.count {
+                let submetricName = currentMetric.submetrics[i].name
+                let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
+                let chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
+                chartDataSet.mode = .CubicBezier
+                chartDataSet.drawValuesEnabled = false
+                chartDataSet.drawCirclesEnabled = false
+                chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
+                chartDataSet.fillColor = colorArray[i % 5]
+                chartDataSet.fillAlpha = 0.5
+                chartDataSet.drawFilledEnabled = true
+                chartDataSet.highlightLineWidth = 0.0
+                chartData.addDataSet(chartDataSet)
+            }
+            statisticsChart.data = chartData
+            break
+        case 4:
+            xAxis = dataService.getYearsLimit(currentMetric)
+            let chartData = LineChartData(xVals: xAxis)
+            for i in 0..<currentMetric.submetrics.count {
+                let submetricName = currentMetric.submetrics[i].name
+                let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
+                let chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
+                chartDataSet.mode = .CubicBezier
+                chartDataSet.drawValuesEnabled = false
+                chartDataSet.drawCirclesEnabled = false
+                chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
+                chartDataSet.fillColor = colorArray[i % 5]
+                chartDataSet.fillAlpha = 0.5
+                chartDataSet.drawFilledEnabled = true
+                chartDataSet.highlightLineWidth = 0.0
+                chartData.addDataSet(chartDataSet)
+            }
+            statisticsChart.data = chartData
+            break
+        default :
+            break
+        }
+    }
+    
+    func getRandomColor() -> UIColor {
+        
+        var color = RandomFlatColorWithShade(.Light)
+        while [FlatBlack(), FlatBlackDark(), FlatGray(), FlatGrayDark(), FlatWhite(), FlatWhiteDark()].contains(color) {
+            color = RandomFlatColorWithShade(.Light)
+        }
+        return color
+    }
+}
+
+// MARK - StatsDetailDelegate
+
+extension DetailedStatisticViewController: StatsDetailSetupInformationDelegate {
+    func setupInformation(){
+        
+        statsDetail.typeName.text = currentMetric.name
+        statsDetail.counter.text = dataService.sumMetricValues(currentMetric)
+        if differenceAndPercent.0 < 0 {
+            statsDetail.difference.text = "\(differenceAndPercent.0)"
+            statsDetail.difference.textColor = Color.statsFall
+            statsDetail.percent.textColor = Color.statsFall
+            statsDetail.percent.text = String(format: "%.2f",differenceAndPercent.1) + "%"
+            statsDetail.sign.image = EvolutionSign.ArrowDown.getSign()
+        }
+        else if differenceAndPercent.0 == 0 {
+            statsDetail.difference.text = String(differenceAndPercent)
+            statsDetail.difference.text = "\(differenceAndPercent.0)"
+            statsDetail.difference.textColor = Color.textColor
+            statsDetail.percent.textColor = Color.textColor
+            statsDetail.percent.text = String(format: "%.2f",differenceAndPercent.1) + "%"
+            statsDetail.sign.image = EvolutionSign.None.getSign()
+        }
+        else if differenceAndPercent.0 > 0 {
+            statsDetail.difference.text = String(differenceAndPercent)
+            statsDetail.difference.text = "+\(differenceAndPercent.0)"
+            statsDetail.difference.textColor = Color.statsRise
+            statsDetail.percent.textColor = Color.statsRise
+            statsDetail.percent.text = String(format: "+%.2f",differenceAndPercent.1) + "%"
+            statsDetail.sign.image = EvolutionSign.ArrowUp.getSign()
+        }
     }
 }

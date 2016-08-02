@@ -17,7 +17,7 @@ class StatisticViewController: BaseViewController {
     let service = DataService.sharedInstance
     var originalProjectsStats : [Project]!
     var projectsStats : [Project]!
-    var projectDifferenceAndPercent : [String: [(Int, Double)]] = [:]
+    var projectDifferenceAndPercent : [String: [String: (Int, Double)]] = [:]
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -77,7 +77,7 @@ extension StatisticViewController: UITableViewDelegate {
         let selectedCell : DashboardCell = tableView.cellForRowAtIndexPath(indexPath)! as! DashboardCell
         
         selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
-        navigationController?.pushViewController(DetailedStatisticViewController(metric: projectsStats[indexPath.section].metrics[indexPath.row], differenceAndPercent: projectDifferenceAndPercent[projectsStats[indexPath.section].id]![indexPath.row], timeFrame: timeFrame.selectedIndex), animated: true)
+        navigationController?.pushViewController(DetailedStatisticViewController(metric: projectsStats[indexPath.section].metrics[indexPath.row], differenceAndPercent: projectDifferenceAndPercent[projectsStats[indexPath.section].id]![projectsStats[indexPath.section].metrics[indexPath.row].id]!, timeFrame: timeFrame.selectedIndex), animated: true)
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -121,26 +121,26 @@ extension StatisticViewController: UITableViewDataSource {
         cell.counter.text = service.sumMetricValues(projectsStats[indexPath.section].metrics[indexPath.row])
         
         let array = projectDifferenceAndPercent[projectsStats[indexPath.section].id]!
-       
-        if array[indexPath.row].0 < 0 {
-            cell.difference.text = "\(array[indexPath.row].0)"
+        
+        if array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0 < 0 {
+            cell.difference.text = "\(array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0)"
             cell.difference.textColor = Color.statsFall
             cell.percent.textColor = Color.statsFall
-            cell.percent.text = String(format: "%.2f",array[indexPath.row].1) + "%"
+            cell.percent.text = String(format: "%.2f",array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.1) + "%"
             cell.sign.image = EvolutionSign.ArrowDown.getSign()
         }
-        else if array[indexPath.row].0 == 0 {
-            cell.difference.text = "\(array[indexPath.row].0)"
+        else if array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0 == 0 {
+            cell.difference.text = "\(array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0)"
             cell.difference.textColor = Color.textColor
             cell.percent.textColor = Color.textColor
-            cell.percent.text = String(format: "%.2f",array[indexPath.row].1) + "%"
+            cell.percent.text = String(format: "%.2f",array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.1) + "%"
             cell.sign.image = EvolutionSign.None.getSign()
         }
-        else if array[indexPath.row].0 > 0 {
-            cell.difference.text = "+\(array[indexPath.row].0)"
+        else if array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0 > 0 {
+            cell.difference.text = "+\(array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0)"
             cell.difference.textColor = Color.statsRise
             cell.percent.textColor = Color.statsRise
-            cell.percent.text = String(format: "+%.2f",array[indexPath.row].1) + "%"
+            cell.percent.text = String(format: "+%.2f",array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.1) + "%"
             cell.sign.image = EvolutionSign.ArrowUp.getSign()
         }
         

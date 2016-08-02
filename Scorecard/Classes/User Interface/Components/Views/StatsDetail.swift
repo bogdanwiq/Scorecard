@@ -16,14 +16,14 @@ class StatsDetail : UIView {
     var difference : UILabel!
     var percent : UILabel!
     var sign : UIImageView!
-    var currentMetric : Metric!
     let service = DataService.sharedInstance
     
-    init(metric: Metric) {
+    
+    weak var delegate : StatsDetailSetupInformationDelegate?
+    
+    init() {
         super.init(frame: CGRectZero)
-        self.currentMetric = metric
         initUI()
-        setupInformation()
         setupConstraints()
     }
     
@@ -66,28 +66,10 @@ class StatsDetail : UIView {
         sign = UIImageView()
         sign.translatesAutoresizingMaskIntoConstraints = false
         addSubview(sign)
+        
+        delegate?.setupInformation()
     }
     
-    private func setupInformation() {
-        typeName.text = currentMetric.name
-        counter.text = service.sumMetricValues(currentMetric)
-//        if currentMetric.getImage() == UIImage(named: "ArrowUp") {
-//            difference.textColor = Color.statsRise
-//            difference.text = "+" + String(currentMetric.difference)
-//        }
-//        else if currentMetric.getImage() == UIImage(named: "ArrowDown") {
-//            difference.textColor = Color.statsFall
-//            difference.text = "-" + String(currentMetric.difference)
-//        }
-//        else if currentMetric.getImage() == UIImage(named: "None") {
-//            difference.textColor = Color.statsRise
-//            difference.text = String(currentMetric.difference)
-//        }
-        difference.textColor = Color.statsRise
-        difference.text = String(20039)
-        percent.text = String(32) + "%"
-        sign.image = EvolutionSign.None.getSign()
-    }
     private func setupConstraints() {
         
         var cellConstraints = [NSLayoutConstraint]()
@@ -105,4 +87,8 @@ class StatsDetail : UIView {
         cellConstraints.append(NSLayoutConstraint(item: sign, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
         addConstraints(cellConstraints)
     }
+}
+
+protocol StatsDetailSetupInformationDelegate: class {
+    func setupInformation()
 }

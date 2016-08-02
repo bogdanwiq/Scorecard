@@ -8,6 +8,7 @@
 
 import Foundation
 import ObjectMapper
+import Charts
 
 enum TimeFilter {
     case OneDay
@@ -213,31 +214,31 @@ class DataService {
         return filteredProjects
     }
     
-    func getPreviousCount(projects: [Project], type: TimeFilter) -> [String: [(Int, Double)]] {
-        var dictionary : [String: [(Int, Double)]] = [:]
+    func getPreviousCount(projects: [Project], type: TimeFilter) -> [String: [String: (Int, Double)]] {
+        var dictionary : [String: [String: (Int, Double)]] = [:]
         switch type {
         case .OneDay :
             for project in projects {
-                var sumSubmetrics: [(Int, Double)] = []
+                var sumSubmetrics: [String: (Int, Double)] = [:]
                 for metric in project.metrics {
-                    var previousSum = 0
-                    var currentSum = 0
+                    var previousSum = 0.0
+                    var currentSum = 0.0
                     for submetric in metric.submetrics {
                         for metricValue in submetric.values {
                             let intervalInHours = fabs(metricValue.date.timeIntervalSinceNow) / (60*60)
                             if intervalInHours > 24 && intervalInHours <= 48 {
-                                previousSum += metricValue.value
+                                previousSum += Double(metricValue.value)
                             }
                             if intervalInHours <= 24 {
-                                currentSum += metricValue.value
+                                currentSum += Double(metricValue.value)
                             }
                         }
                     }
-                    if previousSum == 0 {
-                        sumSubmetrics.append((currentSum, Double(currentSum)))
+                    if previousSum <= 0.0 {
+                        sumSubmetrics[metric.id] = (Int(currentSum), currentSum)
                     }
                     else {
-                        sumSubmetrics.append((currentSum - previousSum, (Double(currentSum) - Double(previousSum)) * 100.0 / Double(previousSum)))
+                        sumSubmetrics[metric.id] = (Int(currentSum - previousSum), (currentSum - previousSum) * 100.0 / previousSum)
                     }
                 }
                 dictionary[project.id] = sumSubmetrics
@@ -245,26 +246,26 @@ class DataService {
             break
         case .OneWeek:
             for project in projects {
-                var sumSubmetrics: [(Int, Double)] = []
+                var sumSubmetrics: [String: (Int, Double)] = [:]
                 for metric in project.metrics {
-                    var previousSum = 0
-                    var currentSum = 0
+                    var previousSum = 0.0
+                    var currentSum = 0.0
                     for submetric in metric.submetrics {
                         for metricValue in submetric.values {
                             let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
                             if intervalInDays > 7 && intervalInDays <= 14 {
-                                previousSum += metricValue.value
+                                previousSum += Double(metricValue.value)
                             }
                             if intervalInDays <= 7 {
-                                currentSum += metricValue.value
+                                currentSum += Double(metricValue.value)
                             }
                         }
                     }
-                    if previousSum == 0 {
-                        sumSubmetrics.append((currentSum, Double(currentSum)))
+                    if previousSum <= 0.0 {
+                        sumSubmetrics[metric.id] = (Int(currentSum), currentSum)
                     }
                     else {
-                        sumSubmetrics.append((currentSum - previousSum, (Double(currentSum) - Double(previousSum)) * 100.0 / Double(previousSum)))
+                        sumSubmetrics[metric.id] = (Int(currentSum - previousSum), (currentSum - previousSum) * 100.0 / previousSum)
                     }
                 }
                 dictionary[project.id] = sumSubmetrics
@@ -272,26 +273,26 @@ class DataService {
             break
         case .OneMonth:
             for project in projects {
-                var sumSubmetrics: [(Int, Double)] = []
+                var sumSubmetrics: [String: (Int, Double)] = [:]
                 for metric in project.metrics {
-                    var previousSum = 0
-                    var currentSum = 0
+                    var previousSum = 0.0
+                    var currentSum = 0.0
                     for submetric in metric.submetrics {
                         for metricValue in submetric.values {
                             let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
                             if intervalInDays > 30 && intervalInDays <= 60 {
-                                previousSum += metricValue.value
+                                previousSum += Double(metricValue.value)
                             }
                             if intervalInDays <= 30 {
-                                currentSum += metricValue.value
+                                currentSum += Double(metricValue.value)
                             }
                         }
                     }
-                    if previousSum == 0 {
-                        sumSubmetrics.append((currentSum, Double(currentSum)))
+                    if previousSum <= 0.0 {
+                        sumSubmetrics[metric.id] = (Int(currentSum), currentSum)
                     }
                     else {
-                        sumSubmetrics.append((currentSum - previousSum, (Double(currentSum) - Double(previousSum)) * 100.0 / Double(previousSum)))
+                        sumSubmetrics[metric.id] = (Int(currentSum - previousSum), (currentSum - previousSum) * 100.0 / previousSum)
                     }
                 }
                 dictionary[project.id] = sumSubmetrics
@@ -299,26 +300,26 @@ class DataService {
             break
         case .OneYear:
             for project in projects {
-                var sumSubmetrics: [(Int, Double)] = []
+                var sumSubmetrics: [String: (Int, Double)] = [:]
                 for metric in project.metrics {
-                    var previousSum = 0
-                    var currentSum = 0
+                    var previousSum = 0.0
+                    var currentSum = 0.0
                     for submetric in metric.submetrics {
                         for metricValue in submetric.values {
                             let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
                             if intervalInDays > 365 && intervalInDays <= (2*365) {
-                                previousSum += metricValue.value
+                                previousSum += Double(metricValue.value)
                             }
                             if intervalInDays <= 365 {
-                                currentSum += metricValue.value
+                                currentSum += Double(metricValue.value)
                             }
                         }
                     }
-                    if previousSum == 0 {
-                        sumSubmetrics.append((currentSum, Double(currentSum)))
+                    if previousSum <= 0.0 {
+                        sumSubmetrics[metric.id] = (Int(currentSum), currentSum)
                     }
                     else {
-                        sumSubmetrics.append((currentSum - previousSum, (Double(currentSum) - Double(previousSum)) * 100.0 / Double(previousSum)))
+                        sumSubmetrics[metric.id] = (Int(currentSum - previousSum), (currentSum - previousSum) * 100.0 / previousSum)
                     }
                 }
                 dictionary[project.id] = sumSubmetrics
@@ -326,9 +327,9 @@ class DataService {
             break
         case .All:
             for project in projects {
-                var sumSubmetrics: [(Int, Double)] = []
-                for _ in project.metrics {
-                    sumSubmetrics.append((0, 0.0))
+                var sumSubmetrics: [String: (Int, Double)] = [:]
+                for metric in project.metrics {
+                    sumSubmetrics[metric.id] = (0, 0.0)
                 }
                 dictionary[project.id] = sumSubmetrics
             }
@@ -427,12 +428,68 @@ class DataService {
         return count.prettyString()
     }
     
-    func sumSubmetricValues(submetric: Submetric) -> String {
-        var count = 0
-        for value in submetric.values {
-            count += value.value
+    func getDiagramFor(submetric: [MetricValue], timeFrame: Int, xAxis: [String]) -> [ChartDataEntry] {
+        
+        var chartValues : [ChartDataEntry] = []
+        let dateFormatter = NSDateFormatter()
+        for i in 0..<xAxis.count {
+            chartValues.append(ChartDataEntry(value: Double(0), xIndex: i))
         }
-        return count.prettyString()
+        switch timeFrame {
+        case 0:
+            dateFormatter.dateFormat = "HH"
+            for metricValue in submetric {
+                let date = dateFormatter.stringFromDate(metricValue.date) + ":00"
+                chartValues[xAxis.indexOf(date)!].value += Double(metricValue.value)
+            }
+            break
+        case 1:
+            dateFormatter.dateFormat = "EEE"
+            for metricValue in submetric {
+                let date = dateFormatter.stringFromDate(metricValue.date).uppercaseString
+                chartValues[xAxis.indexOf(date)!].value += Double(metricValue.value)
+            }
+            break
+        case 2:
+            dateFormatter.dateFormat = "d"
+            for metricValue in submetric {
+                let date = dateFormatter.stringFromDate(metricValue.date)
+                chartValues[xAxis.indexOf(date)!].value += Double(metricValue.value)
+            }
+            break
+        case 3:
+            dateFormatter.dateFormat = "MMM"
+            for metricValue in submetric {
+                let date = dateFormatter.stringFromDate(metricValue.date).uppercaseString
+                chartValues[xAxis.indexOf(date)!].value += Double(metricValue.value)
+            }
+            break
+        case 4:
+            dateFormatter.dateFormat = "yyyy"
+            for metricValue in submetric {
+                let date = dateFormatter.stringFromDate(metricValue.date)
+                chartValues[xAxis.indexOf(date)!].value += Double(metricValue.value)
+            }
+            break
+        default :
+            break
+        }
+        return chartValues
+    }
+    func getYearsLimit(metric : Metric) -> [String]{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        var years : [String] = []
+        
+        for submetric in metric.submetrics {
+            for subvalues in submetric.values {
+                let date = dateFormatter.stringFromDate(subvalues.date)
+                years.append(date)
+            }
+        }
+        years = Array(Set(years))
+        years.sortInPlace()
+        return years
     }
 }
 

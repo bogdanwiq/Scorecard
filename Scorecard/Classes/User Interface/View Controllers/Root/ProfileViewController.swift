@@ -84,7 +84,6 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
 }
 
 extension ProfileViewController: PreferenceSliderCellDelegate {
-    
     func preferenceSliderCellDidChangeValue(cell: PreferenceSliderCell, newState: Bool) {
         service.setProfileSettings(cell.preferenceName.text!, state: newState)
     }
