@@ -17,6 +17,7 @@ class StatisticViewController: BaseViewController {
     let service = DataService.sharedInstance
     var originalProjectsStats : [Project]!
     var projectsStats : [Project]!
+    var projectDifferenceAndPercent : [String: [(Int, Double)]] = [:]
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -42,6 +43,7 @@ class StatisticViewController: BaseViewController {
         view.addSubview(tableView)
         
         originalProjectsStats = service.setupStats()
+        projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .All)
         projectsStats = []
         projectsStats.appendContentsOf(originalProjectsStats)
     }
@@ -84,7 +86,7 @@ extension StatisticViewController: UITableViewDelegate {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = projectsStats[section].name
+        label.text = originalProjectsStats[section].name
         label.textColor = Color.timeFrameSelected
         label.font = UIFont.boldSystemFontOfSize(17.0)
         header.addSubview(label)
@@ -100,15 +102,15 @@ extension StatisticViewController: UITableViewDelegate {
 extension StatisticViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return projectsStats[section].name
+        return originalProjectsStats[section].name
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return projectsStats[section].metrics.count
+        return (section >= projectsStats.count) ? 0 : projectsStats[section].metrics.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return projectsStats.count
+        return originalProjectsStats.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -118,24 +120,29 @@ extension StatisticViewController: UITableViewDataSource {
         cell.typeName.text = projectsStats[indexPath.section].metrics[indexPath.row].name
         cell.counter.text = service.sumMetricValues(projectsStats[indexPath.section].metrics[indexPath.row])
         
-        //        if stats[indexPath.row].getImage() == UIImage(named: "ArrowUp") {
-        //            cell.difference.textColor = Color.statsRise
-        //            cell.difference.text = "+" + String(stats[indexPath.row].difference)
-        //        }
-        //        else if stats[indexPath.row].getImage() == UIImage(named: "ArrowDown") {
-        //            cell.difference.textColor = Color.statsFall
-        //            cell.difference.text = "-" + String(stats[indexPath.row].difference)
-        //        }
-        //        else if stats[indexPath.row].getImage() == UIImage(named: "None") {
-        //            cell.difference.textColor = Color.statsRise
-        //            cell.difference.text = String(stats[indexPath.row].difference)
-        //        }
-        //        cell.percent.text = String(stats[indexPath.row].percent) + "%"
-        //        cell.sign.image = stats[indexPath.row].getImage()
+        let array = projectDifferenceAndPercent[projectsStats[indexPath.section].id]!
         
-        cell.difference.text = "+123812"
-        cell.percent.text = "27%"
-        cell.sign.image = EvolutionSign.None.getSign()
+        if array[indexPath.row].0 < 0 {
+            cell.difference.text = "\(array[indexPath.row].0)"
+            cell.difference.textColor = Color.statsFall
+            cell.percent.textColor = Color.statsFall
+            cell.percent.text = String(format: "%.2f",array[indexPath.row].1) + "%"
+            cell.sign.image = EvolutionSign.ArrowDown.getSign()
+        }
+        else if array[indexPath.row].0 == 0 {
+            cell.difference.text = "\(array[indexPath.row].0)"
+            cell.difference.textColor = Color.textColor
+            cell.percent.textColor = Color.textColor
+            cell.percent.text = String(format: "%.2f",array[indexPath.row].1) + "%"
+            cell.sign.image = EvolutionSign.None.getSign()
+        }
+        else if array[indexPath.row].0 > 0 {
+            cell.difference.text = "+\(array[indexPath.row].0)"
+            cell.difference.textColor = Color.statsRise
+            cell.percent.textColor = Color.statsRise
+            cell.percent.text = String(format: "+%.2f",array[indexPath.row].1) + "%"
+            cell.sign.image = EvolutionSign.ArrowUp.getSign()
+        }
         
         var hue : CGFloat = 0.0
         var saturation: CGFloat = 0.0
@@ -155,23 +162,28 @@ extension StatisticViewController: TimeFrameDelegate {
         switch selectedIndex {
         case 0 :
             projectsStats = service.filter(originalProjectsStats, type: .OneDay)
-            tableView.reloadData()
+            projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneDay)
+            tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
             break
         case 1 :
             projectsStats = service.filter(originalProjectsStats, type: .OneWeek)
-            tableView.reloadData()
+            projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneWeek)
+            tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
             break
         case 2 :
             projectsStats = service.filter(originalProjectsStats, type: .OneMonth)
-            tableView.reloadData()
+            projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneMonth)
+            tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
             break
         case 3 :
             projectsStats = service.filter(originalProjectsStats, type: .OneYear)
-            tableView.reloadData()
+            projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneYear)
+            tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
             break
         case 4 :
             projectsStats = service.filter(originalProjectsStats, type: .All)
-            tableView.reloadData()
+            projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .All)
+            tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
             break
         default :
             break

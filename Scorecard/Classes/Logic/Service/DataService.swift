@@ -21,7 +21,7 @@ enum TimeFilter {
 class DataService {
     
     static let sharedInstance = DataService()
-
+    
     func setupStats() -> [Project] {
         
         let path = NSBundle.mainBundle().pathForResource("example", ofType: "json")
@@ -211,6 +211,130 @@ class DataService {
             break
         }
         return filteredProjects
+    }
+    
+    func getPreviousCount(projects: [Project], type: TimeFilter) -> [String: [(Int, Double)]] {
+        var dictionary : [String: [(Int, Double)]] = [:]
+        switch type {
+        case .OneDay :
+            for project in projects {
+                var sumSubmetrics: [(Int, Double)] = []
+                for metric in project.metrics {
+                    var previousSum = 0
+                    var currentSum = 0
+                    for submetric in metric.submetrics {
+                        for metricValue in submetric.values {
+                            let intervalInHours = fabs(metricValue.date.timeIntervalSinceNow) / (60*60)
+                            if intervalInHours > 24 && intervalInHours <= 48 {
+                                previousSum += metricValue.value
+                            }
+                            if intervalInHours <= 24 {
+                                currentSum += metricValue.value
+                            }
+                        }
+                    }
+                    if previousSum == 0 {
+                        sumSubmetrics.append((currentSum, Double(currentSum)))
+                    }
+                    else {
+                        sumSubmetrics.append((currentSum - previousSum, (Double(currentSum) - Double(previousSum)) * 100.0 / Double(previousSum)))
+                    }
+                }
+                dictionary[project.id] = sumSubmetrics
+            }
+            break
+        case .OneWeek:
+            for project in projects {
+                var sumSubmetrics: [(Int, Double)] = []
+                for metric in project.metrics {
+                    var previousSum = 0
+                    var currentSum = 0
+                    for submetric in metric.submetrics {
+                        for metricValue in submetric.values {
+                            let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
+                            if intervalInDays > 7 && intervalInDays <= 14 {
+                                previousSum += metricValue.value
+                            }
+                            if intervalInDays <= 7 {
+                                currentSum += metricValue.value
+                            }
+                        }
+                    }
+                    if previousSum == 0 {
+                        sumSubmetrics.append((currentSum, Double(currentSum)))
+                    }
+                    else {
+                        sumSubmetrics.append((currentSum - previousSum, (Double(currentSum) - Double(previousSum)) * 100.0 / Double(previousSum)))
+                    }
+                }
+                dictionary[project.id] = sumSubmetrics
+            }
+            break
+        case .OneMonth:
+            for project in projects {
+                var sumSubmetrics: [(Int, Double)] = []
+                for metric in project.metrics {
+                    var previousSum = 0
+                    var currentSum = 0
+                    for submetric in metric.submetrics {
+                        for metricValue in submetric.values {
+                            let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
+                            if intervalInDays > 30 && intervalInDays <= 60 {
+                                previousSum += metricValue.value
+                            }
+                            if intervalInDays <= 30 {
+                                currentSum += metricValue.value
+                            }
+                        }
+                    }
+                    if previousSum == 0 {
+                        sumSubmetrics.append((currentSum, Double(currentSum)))
+                    }
+                    else {
+                        sumSubmetrics.append((currentSum - previousSum, (Double(currentSum) - Double(previousSum)) * 100.0 / Double(previousSum)))
+                    }
+                }
+                dictionary[project.id] = sumSubmetrics
+            }
+            break
+        case .OneYear:
+            for project in projects {
+                var sumSubmetrics: [(Int, Double)] = []
+                for metric in project.metrics {
+                    var previousSum = 0
+                    var currentSum = 0
+                    for submetric in metric.submetrics {
+                        for metricValue in submetric.values {
+                            let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
+                            if intervalInDays > 365 && intervalInDays <= (2*365) {
+                                previousSum += metricValue.value
+                            }
+                            if intervalInDays <= 365 {
+                                currentSum += metricValue.value
+                            }
+                        }
+                    }
+                    if previousSum == 0 {
+                        sumSubmetrics.append((currentSum, Double(currentSum)))
+                    }
+                    else {
+                        sumSubmetrics.append((currentSum - previousSum, (Double(currentSum) - Double(previousSum)) * 100.0 / Double(previousSum)))
+                    }
+                }
+                dictionary[project.id] = sumSubmetrics
+            }
+            break
+        case .All:
+            for project in projects {
+                var sumSubmetrics: [(Int, Double)] = []
+                for _ in project.metrics {
+                    sumSubmetrics.append((0, 0.0))
+                }
+                dictionary[project.id] = sumSubmetrics
+            }
+            break
+        }
+        return dictionary
     }
     
     func sumMetricValues(metric: Metric) -> String {
