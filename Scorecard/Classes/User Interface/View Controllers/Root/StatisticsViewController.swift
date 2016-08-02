@@ -77,7 +77,7 @@ extension StatisticViewController: UITableViewDelegate {
         let selectedCell : DashboardCell = tableView.cellForRowAtIndexPath(indexPath)! as! DashboardCell
         
         selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
-        navigationController?.pushViewController(DetailedStatisticViewController(metric: projectsStats[indexPath.section].metrics[indexPath.row]), animated: true)
+        navigationController?.pushViewController(DetailedStatisticViewController(metric: projectsStats[indexPath.section].metrics[indexPath.row], differenceAndPercent: projectDifferenceAndPercent[projectsStats[indexPath.section].id]![indexPath.row], timeFrame: timeFrame.selectedIndex), animated: true)
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -121,7 +121,7 @@ extension StatisticViewController: UITableViewDataSource {
         cell.counter.text = service.sumMetricValues(projectsStats[indexPath.section].metrics[indexPath.row])
         
         let array = projectDifferenceAndPercent[projectsStats[indexPath.section].id]!
-        
+       
         if array[indexPath.row].0 < 0 {
             cell.difference.text = "\(array[indexPath.row].0)"
             cell.difference.textColor = Color.statsFall

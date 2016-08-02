@@ -24,7 +24,7 @@ class DataService {
     
     func setupStats() -> [Project] {
         
-        let path = NSBundle.mainBundle().pathForResource("example", ofType: "json")
+        let path = NSBundle.mainBundle().pathForResource("example2", ofType: "json")
         let data = NSData(contentsOfFile: path!)
         let string = NSString(data: data!, encoding: NSUTF8StringEncoding)!
         
@@ -335,6 +335,86 @@ class DataService {
             break
         }
         return dictionary
+    }
+    
+    func getPreviousSubmetricCount(metric: Metric, type: TimeFilter) -> [Int] {
+        var difference : [Int] = []
+        switch type {
+        case .OneDay :
+            for submetric in metric.submetrics {
+                var previousSum = 0
+                var currentSum = 0
+                for metricValue in submetric.values {
+                    let intervalInHours = fabs(metricValue.date.timeIntervalSinceNow) / (60*60)
+                    if intervalInHours > 24 && intervalInHours <= 48 {
+                        previousSum += metricValue.value
+                    }
+                    if intervalInHours <= 24 {
+                        currentSum += metricValue.value
+                    }
+                }
+                difference.append(currentSum - previousSum)
+            }
+            break
+        case .OneWeek:
+            for submetric in metric.submetrics {
+                var previousSum = 0
+                var currentSum = 0
+                for metricValue in submetric.values {
+                    let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
+                    if intervalInDays > 7 && intervalInDays <= 14 {
+                        previousSum += metricValue.value
+                    }
+                    if intervalInDays <= 7 {
+                        currentSum += metricValue.value
+                    }
+                }
+                difference.append(currentSum - previousSum)
+            }
+            break
+        case .OneMonth:
+            for submetric in metric.submetrics {
+                var previousSum = 0
+                var currentSum = 0
+                for metricValue in submetric.values {
+                    let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
+                    if intervalInDays > 30 && intervalInDays <= 60 {
+                        previousSum += metricValue.value
+                    }
+                    if intervalInDays <= 30 {
+                        currentSum += metricValue.value
+                    }
+                }
+                difference.append(currentSum - previousSum)
+            }
+            break
+        case .OneYear:
+            for submetric in metric.submetrics {
+                var previousSum = 0
+                var currentSum = 0
+                for metricValue in submetric.values {
+                    let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
+                    if intervalInDays > 365 && intervalInDays <= (2*365) {
+                        previousSum += metricValue.value
+                    }
+                    if intervalInDays <= 365 {
+                        currentSum += metricValue.value
+                    }
+                }
+                difference.append(currentSum - previousSum)
+            }
+            break
+        case .All:
+            for submetric in metric.submetrics {
+                var sumValues: Int = 0
+                for values in submetric.values {
+                    sumValues += values.value
+                }
+                difference.append(sumValues)
+            }
+            break
+        }
+        return difference
     }
     
     func sumMetricValues(metric: Metric) -> String {
