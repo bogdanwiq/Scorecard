@@ -81,6 +81,10 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
         cell.backgroundColor = Color.mainBackground
         return cell
     }
+    
+    func googleSignOut(){
+        GIDSignIn.sharedInstance().signOut()
+    }
 }
 
 extension ProfileViewController: PreferenceSliderCellDelegate {

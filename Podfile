@@ -12,6 +12,8 @@ target 'Scorecard' do
 	pod 'Charts'
 	pod 'ObjectMapper'
 	pod 'ChameleonFramework/Swift'
+	pod 'Google/SignIn'
+	pod 'FBSDKLoginKit'
   # Pods for Scorecard
 
   target 'ScorecardTests' do

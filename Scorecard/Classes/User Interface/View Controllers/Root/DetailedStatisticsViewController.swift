@@ -24,7 +24,9 @@ class DetailedStatisticViewController : BaseViewController {
     var timeFrame : Int!
     var colors : [UIColor] = []
     var evolutionArray : [EvolutionSign] = []
+    var highlights: [ChartHighlight] = []
     var allColors : [UIColor] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
@@ -138,10 +140,12 @@ extension DetailedStatisticViewController: UITableViewDelegate {
         else {
             colors[indexPath.row] = UIColor.darkGrayColor()
         }
+        
         cell.identifier.tintColor = colors[indexPath.row]
         customView.backgroundColor = colors[indexPath.row]
         cell.selectedBackgroundView = customView
         
+        statisticsChart.highlightValues(highlights)
         statisticsChart.data?.dataSets[indexPath.row].notifyDataSetChanged()
         statisticsChart.setNeedsDisplay()
         statsTableDetail.deselectRowAtIndexPath(indexPath, animated: true)
@@ -185,18 +189,19 @@ extension DetailedStatisticViewController: ChartViewDelegate {
         
         let selectedIndex = entry.xIndex
         var i = 0
-        var highlights: [ChartHighlight] = []
+        
+        highlights = []
         
         for dataSet in (chartView.data?.dataSets)! {
             let marker = CircleMarker(color: (chartView.data?.dataSets[i].colors[0])!)
+            
             marker.minimumSize = CGSizeMake(7.0 , 7.0)
             marker.offset = CGPointMake(0.0, 1.0)
             chartView.marker = marker
-            
             if dataSet.isVisible {
                 let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
                 highlights.append(highlight)
-                
+                submetricArray[i] = Int((dataSet.entryForXIndex(selectedIndex)?.value)!)
                 if selectedIndex != 0 {
                     if (dataSet.entryForXIndex(selectedIndex)?.value)! > (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
                         evolutionArray[i] = .ArrowUp
@@ -208,9 +213,11 @@ extension DetailedStatisticViewController: ChartViewDelegate {
                 } else {
                     evolutionArray[i] = .None
                 }
+            } else {
+                submetricArray[i] = 0
+                evolutionArray[i] = .None
             }
             currentMetric.submetrics[i].name = dataSet.label!
-            submetricArray[i] = Int((dataSet.entryForXIndex(selectedIndex)?.value)!)
             i += 1
         }
         chartView.highlightValues(highlights)
