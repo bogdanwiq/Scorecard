@@ -21,6 +21,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
     var currentMetric : Metric!
     var differenceAndPercent : (Int, Double)!
     var timeFrame = 4
+    var colors : [UIColor] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,6 +126,8 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
             break
         }
         cell.identifier.image = UIImage(named: "Circle")
+        cell.identifier.image = cell.identifier.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.identifier.tintColor = colors[indexPath.row]
         cell.typeName.text = currentMetric.submetrics[indexPath.row].name
         cell.difference.text = submetricArray[indexPath.row].prettyString()
         cell.sign.image = EvolutionSign.None.getSign()
@@ -177,6 +180,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                 chartDataSet.drawFilledEnabled = true
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
+                colors.append(colorArray[i % 5])
             }
             statisticsChart.data = chartData
             break
@@ -196,6 +200,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                 chartDataSet.drawFilledEnabled = true
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
+                colors.append(colorArray[i % 5])
             }
             statisticsChart.data = chartData
             break
@@ -222,6 +227,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                     chartDataSet.drawFilledEnabled = true
                     chartDataSet.highlightLineWidth = 0.0
                     chartData.addDataSet(chartDataSet)
+                    colors.append(colorArray[i % 5])
                 }
                 statisticsChart.data = chartData
                 break
@@ -244,6 +250,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                     chartDataSet.drawFilledEnabled = true
                     chartDataSet.highlightLineWidth = 0.0
                     chartData.addDataSet(chartDataSet)
+                    colors.append(colorArray[i % 5])
                 }
                 statisticsChart.data = chartData
                 break
@@ -265,6 +272,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                     chartDataSet.drawFilledEnabled = true
                     chartDataSet.highlightLineWidth = 0.0
                     chartData.addDataSet(chartDataSet)
+                    colors.append(colorArray[i % 5])
                 }
                 statisticsChart.data = chartData
                 break
@@ -288,6 +296,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                 chartDataSet.drawFilledEnabled = true
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
+                colors.append(colorArray[i % 5])
             }
             statisticsChart.data = chartData
             break
@@ -307,6 +316,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                 chartDataSet.drawFilledEnabled = true
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
+                colors.append(colorArray[i % 5])
             }
             statisticsChart.data = chartData
             break
@@ -333,23 +343,21 @@ extension DetailedStatisticViewController: StatsDetailSetupInformationDelegate {
         statsDetail.typeName.text = currentMetric.name
         statsDetail.counter.text = dataService.sumMetricValues(currentMetric)
         if differenceAndPercent.0 < 0 {
-            statsDetail.difference.text = "\(differenceAndPercent.0)"
+            statsDetail.difference.text = "\(differenceAndPercent.0.prettyString())"
             statsDetail.difference.textColor = Color.statsFall
             statsDetail.percent.textColor = Color.statsFall
             statsDetail.percent.text = String(format: "%.2f",differenceAndPercent.1) + "%"
             statsDetail.sign.image = EvolutionSign.ArrowDown.getSign()
         }
         else if differenceAndPercent.0 == 0 {
-            statsDetail.difference.text = String(differenceAndPercent)
-            statsDetail.difference.text = "\(differenceAndPercent.0)"
+            statsDetail.difference.text = "\(differenceAndPercent.0.prettyString())"
             statsDetail.difference.textColor = Color.textColor
             statsDetail.percent.textColor = Color.textColor
             statsDetail.percent.text = String(format: "%.2f",differenceAndPercent.1) + "%"
             statsDetail.sign.image = EvolutionSign.None.getSign()
         }
         else if differenceAndPercent.0 > 0 {
-            statsDetail.difference.text = String(differenceAndPercent)
-            statsDetail.difference.text = "+\(differenceAndPercent.0)"
+            statsDetail.difference.text = "+\(differenceAndPercent.0.prettyString())"
             statsDetail.difference.textColor = Color.statsRise
             statsDetail.percent.textColor = Color.statsRise
             statsDetail.percent.text = String(format: "+%.2f",differenceAndPercent.1) + "%"

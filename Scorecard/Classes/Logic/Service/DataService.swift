@@ -496,17 +496,22 @@ class DataService {
 extension Int {
     
     func prettyString() -> String {
-        var copy = self
+        var copy = abs(self)
         var i = 0
         var result = ""
-        while copy != 0 {
-            result = String(copy % 10) + result
-            copy /= 10
-            i += 1
-            if i % 3 == 0 && copy != 0 {
-                result = "." + result
+        if copy == 0 {
+            return "0"
+        }
+        else {
+            while copy != 0 {
+                result = String(copy % 10) + result
+                copy /= 10
+                i += 1
+                if i % 3 == 0 && copy != 0 {
+                    result = "." + result
+                }
             }
         }
-        return result
+        return self >= 0 ? result : "-" + result
     }
 }
