@@ -18,6 +18,7 @@
 		9D7996D998DA383D9DF6E501 /* Pods_Scorecard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C33FD5373472CC5B1403ED /* Pods_Scorecard.framework */; };
 		F41BC7A11D5216C90027FED6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41BC7A01D5216C90027FED6 /* LoginViewController.swift */; };
 		F41BC7B01D522B900027FED6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F41BC7AF1D522B900027FED6 /* GoogleService-Info.plist */; };
+		F41BC7B21D5236A50027FED6 /* example2.json in Resources */ = {isa = PBXBuildFile; fileRef = F41BC7B11D5236A50027FED6 /* example2.json */; };
 		F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */; };
 		F4370C921D4792F3007FFE58 /* CircleMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4370C911D4792F3007FFE58 /* CircleMarker.swift */; };
 		F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185C71D3E191D007ABA24 /* MMDrawerBarButtonItem.m */; };
@@ -40,7 +41,6 @@
 		F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */; };
 		F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5FFF71D423549003A9C96 /* DataService.swift */; };
 		F4BB4E021D473F24006F6C69 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */; };
-		F4CE19221D51D4F2002E914A /* example2.json in Resources */ = {isa = PBXBuildFile; fileRef = F4CE19211D51D4F2002E914A /* example2.json */; };
 		F4E2A3261D48BE7900F3ED22 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E2A3251D48BE7900F3ED22 /* ColorConstants.swift */; };
 		F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */; };
 		F92E717F1D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717A1D353D11006E9D1F /* Info.plist */; };
@@ -110,6 +110,7 @@
 		F3C265FFAE1A500E8B6EC1F1 /* Pods-ScorecardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardTests/Pods-ScorecardTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F41BC7A01D5216C90027FED6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F41BC7AF1D522B900027FED6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F41BC7B11D5236A50027FED6 /* example2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example2.json; sourceTree = "<group>"; };
 		F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatisticsViewController.swift; path = Root/StatisticsViewController.swift; sourceTree = "<group>"; };
 		F4370C911D4792F3007FFE58 /* CircleMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMarker.swift; sourceTree = "<group>"; };
 		F46185C51D3E191D007ABA24 /* Scorecard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Scorecard-Bridging-Header.h"; path = "../Classes/User Interface/Transitioning/Scorecard-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 		F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvolutionSign.swift; sourceTree = "<group>"; };
 		F4B5FFF71D423549003A9C96 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationViewController.swift; path = Root/NotificationViewController.swift; sourceTree = "<group>"; };
-		F4CE19211D51D4F2002E914A /* example2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example2.json; sourceTree = "<group>"; };
 		F4E2A3251D48BE7900F3ED22 /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Root/ProfileViewController.swift; sourceTree = "<group>"; };
 		F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScorecardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -466,7 +466,7 @@
 		F92E719D1D354600006E9D1F /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				F4CE19211D51D4F2002E914A /* example2.json */,
+				F41BC7B11D5236A50027FED6 /* example2.json */,
 				04347BE51D4F492C0003C76A /* example.json */,
 				F4B5FFF71D423549003A9C96 /* DataService.swift */,
 			);
@@ -869,7 +869,6 @@
 				F92E71EE1D354600006E9D1F /* .keep in Resources */,
 				F41BC7B01D522B900027FED6 /* GoogleService-Info.plist in Resources */,
 				F92E71E81D354600006E9D1F /* .keep in Resources */,
-				F4CE19221D51D4F2002E914A /* example2.json in Resources */,
 				F92E71E41D354600006E9D1F /* .keep in Resources */,
 				F92E71D91D354600006E9D1F /* .keep in Resources */,
 				F92E71EB1D354600006E9D1F /* .keep in Resources */,
@@ -878,6 +877,7 @@
 				F92E71D81D354600006E9D1F /* .keep in Resources */,
 				F92E71E31D354600006E9D1F /* .keep in Resources */,
 				F92E71E11D354600006E9D1F /* .keep in Resources */,
+				F41BC7B21D5236A50027FED6 /* example2.json in Resources */,
 				F92E71D71D354600006E9D1F /* .keep in Resources */,
 				04347BE61D4F492C0003C76A /* example.json in Resources */,
 				F92E71D51D354600006E9D1F /* .keep in Resources */,
