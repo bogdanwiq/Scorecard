@@ -21,6 +21,7 @@ class DetailedStatisticViewController : BaseViewController {
     var currentMetric : Metric!
     var differenceAndPercent : (Int, Double)!
     var submetricArray : [Int] = []
+    var evolutionArray : [EvolutionSign] = []
     var timeFrame : Int!
     var colors : [UIColor] = []
     
@@ -35,6 +36,10 @@ class DetailedStatisticViewController : BaseViewController {
         self.differenceAndPercent = differenceAndPercent
         self.timeFrame = timeFrame
         getPreviousSubmetricCount()
+        // populate evolution sign array
+        for _ in 0..<currentMetric.submetrics.count {
+            evolutionArray.append(.None)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -138,7 +143,7 @@ extension DetailedStatisticViewController: UITableViewDataSource {
         cell.identifier.tintColor = colors[indexPath.row]
         cell.typeName.text = currentMetric.submetrics[indexPath.row].name
         cell.difference.text = submetricArray[indexPath.row].prettyString()
-        cell.sign.image = EvolutionSign.None.getSign()
+        cell.sign.image = evolutionArray[indexPath.row].getSign()
         
         return cell
     }
@@ -162,6 +167,22 @@ extension DetailedStatisticViewController: ChartViewDelegate {
             
             let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
             highlights.append(highlight)
+            
+            if selectedIndex != 0 {
+                if (dataSet.entryForXIndex(selectedIndex)?.value)! > (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
+                    evolutionArray[i] = .ArrowUp
+                }
+                else if (dataSet.entryForXIndex(selectedIndex)?.value)! < (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
+                    evolutionArray[i] = .ArrowDown
+                }
+                else {
+                    evolutionArray[i] = .None
+                }
+            }
+            else {
+                evolutionArray[i] = .None
+            }
+            
             currentMetric.submetrics[i].name = dataSet.label!
             submetricArray[i] = Int((dataSet.entryForXIndex(selectedIndex)?.value)!)
             
