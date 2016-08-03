@@ -21,10 +21,10 @@ class DetailedStatisticViewController : BaseViewController {
     var currentMetric : Metric!
     var differenceAndPercent : (Int, Double)!
     var submetricArray : [Int] = []
-    var evolutionArray : [EvolutionSign] = []
     var timeFrame : Int!
     var colors : [UIColor] = []
-    
+    var evolutionArray : [EvolutionSign] = []
+    var allColors : [UIColor] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
@@ -49,7 +49,6 @@ class DetailedStatisticViewController : BaseViewController {
     override func initUI() {
         view.backgroundColor = Color.mainBackground
         title = "Statistics"
-        
         statsDetail = StatsDetail()
         statsDetail.delegate = self
         statsDetail.translatesAutoresizingMaskIntoConstraints = false
@@ -68,12 +67,13 @@ class DetailedStatisticViewController : BaseViewController {
     private func setupStatsTableDetail(){
         statsTableDetail = UITableView()
         statsTableDetail.dataSource = self
+        statsTableDetail.delegate = self
         statsTableDetail.backgroundColor = Color.mainBackground
         statsTableDetail.registerClass(StatsDetailCell.self, forCellReuseIdentifier: "StatsDetailCell")
         statsTableDetail.separatorColor = UIColor.clearColor()
         statsTableDetail.translatesAutoresizingMaskIntoConstraints = false
         statsTableDetail.rowHeight = 30.0
-        statsTableDetail.allowsSelection = false
+        statsTableDetail.allowsSelection = true
         view.addSubview(statsTableDetail)
     }
     
@@ -89,6 +89,8 @@ class DetailedStatisticViewController : BaseViewController {
         } else {
             tableHeight  = screenResolutionFactor * Int(statsTableDetail.rowHeight)
         }
+        // Padding between table and chart
+        tableHeight += 8
         
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statsDetail]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statsTableDetail]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
@@ -120,6 +122,32 @@ class DetailedStatisticViewController : BaseViewController {
     }
 }
 
+// MARK - UITableViewDelegate
+
+extension DetailedStatisticViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let boolean = (statisticsChart.data?.dataSets[indexPath.row].isVisible)!
+        statisticsChart.data?.dataSets[indexPath.row].visible = !boolean
+        let cell : StatsDetailCell = tableView.cellForRowAtIndexPath(indexPath) as! StatsDetailCell
+        cell.backgroundColor = Color.mainBackground
+        let customView = UIView()
+        if statisticsChart.data?.dataSets[indexPath.row].visible == true {
+            colors[indexPath.row] = allColors[indexPath.row]
+        }
+        else {
+            colors[indexPath.row] = UIColor.darkGrayColor()
+        }
+        cell.identifier.tintColor = colors[indexPath.row]
+        customView.backgroundColor = colors[indexPath.row]
+        cell.selectedBackgroundView = customView
+        
+        statisticsChart.data?.dataSets[indexPath.row].notifyDataSetChanged()
+        statisticsChart.setNeedsDisplay()
+        statsTableDetail.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+}
+
 // MARK - UITableViewDataSource
 
 extension DetailedStatisticViewController: UITableViewDataSource {
@@ -131,13 +159,13 @@ extension DetailedStatisticViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell : StatsDetailCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! StatsDetailCell
-        
         let animation: CATransition = CATransition()
         
         animation.duration = 0.3
         animation.type = kCATransitionFade
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         cell.difference.layer.addAnimation(animation ,forKey :"layerFadeOut")
+        cell.sign.layer.addAnimation(animation, forKey :"layerFadeOut")
         cell.identifier.image = UIImage(named: "Circle")
         cell.identifier.image = cell.identifier.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         cell.identifier.tintColor = colors[indexPath.row]
@@ -165,27 +193,24 @@ extension DetailedStatisticViewController: ChartViewDelegate {
             marker.offset = CGPointMake(0.0, 1.0)
             chartView.marker = marker
             
-            let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
-            highlights.append(highlight)
-            
-            if selectedIndex != 0 {
-                if (dataSet.entryForXIndex(selectedIndex)?.value)! > (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
-                    evolutionArray[i] = .ArrowUp
-                }
-                else if (dataSet.entryForXIndex(selectedIndex)?.value)! < (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
-                    evolutionArray[i] = .ArrowDown
-                }
-                else {
+            if dataSet.isVisible {
+                let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
+                highlights.append(highlight)
+                
+                if selectedIndex != 0 {
+                    if (dataSet.entryForXIndex(selectedIndex)?.value)! > (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
+                        evolutionArray[i] = .ArrowUp
+                    } else if (dataSet.entryForXIndex(selectedIndex)?.value)! < (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
+                        evolutionArray[i] = .ArrowDown
+                    } else {
+                        evolutionArray[i] = .None
+                    }
+                } else {
                     evolutionArray[i] = .None
                 }
             }
-            else {
-                evolutionArray[i] = .None
-            }
-            
             currentMetric.submetrics[i].name = dataSet.label!
             submetricArray[i] = Int((dataSet.entryForXIndex(selectedIndex)?.value)!)
-            
             i += 1
         }
         chartView.highlightValues(highlights)
@@ -220,6 +245,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
                 colors.append(colorArray[i])
+                allColors.append(colorArray[i])
             }
             statisticsChart.data = chartData
             break
@@ -240,6 +266,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
                 colors.append(colorArray[i])
+                allColors.append(colorArray[i])
             }
             statisticsChart.data = chartData
             break
@@ -267,6 +294,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
                     chartDataSet.highlightLineWidth = 0.0
                     chartData.addDataSet(chartDataSet)
                     colors.append(colorArray[i])
+                    allColors.append(colorArray[i])
                 }
                 statisticsChart.data = chartData
                 break
@@ -290,6 +318,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
                     chartDataSet.highlightLineWidth = 0.0
                     chartData.addDataSet(chartDataSet)
                     colors.append(colorArray[i])
+                    allColors.append(colorArray[i])
                 }
                 statisticsChart.data = chartData
                 break
@@ -312,6 +341,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
                     chartDataSet.highlightLineWidth = 0.0
                     chartData.addDataSet(chartDataSet)
                     colors.append(colorArray[i])
+                    allColors.append(colorArray[i])
                 }
                 statisticsChart.data = chartData
                 break
@@ -336,6 +366,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
                 colors.append(colorArray[i])
+                allColors.append(colorArray[i])
             }
             statisticsChart.data = chartData
             break
@@ -356,6 +387,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
                 colors.append(colorArray[i])
+                allColors.append(colorArray[i])
             }
             statisticsChart.data = chartData
             break

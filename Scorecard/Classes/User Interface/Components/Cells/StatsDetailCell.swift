@@ -60,6 +60,7 @@ class StatsDetailCell : UITableViewCell {
                           "difference": difference,
                           "sign": sign]
         
+        cellConstraints.append(NSLayoutConstraint(item: identifier, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[identifier]-5-[typeName]-(>=10)-[difference]-[sign]-|", options: .AlignAllCenterY, metrics: nil, views: dictionary)
         addConstraints(cellConstraints)
     }
