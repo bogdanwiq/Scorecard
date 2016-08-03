@@ -11,7 +11,7 @@ import UIKit
 import Charts
 import ChameleonFramework
 
-class DetailedStatisticViewController : BaseViewController, UITableViewDataSource, ChartViewDelegate {
+class DetailedStatisticViewController : BaseViewController {
     
     let reuseIdentifier : String = "StatsDetailCell"
     let dataService = DataService.sharedInstance
@@ -20,7 +20,8 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
     var statisticsChart : StatisticsChart!
     var currentMetric : Metric!
     var differenceAndPercent : (Int, Double)!
-    var timeFrame = 4
+    var submetricArray : [Int] = []
+    var timeFrame : Int!
     var colors : [UIColor] = []
     
     override func viewDidLoad() {
@@ -33,6 +34,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         self.currentMetric = metric
         self.differenceAndPercent = differenceAndPercent
         self.timeFrame = timeFrame
+        getPreviousSubmetricCount()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,22 +92,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         view.addConstraints(allConstraints)
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentMetric.submetrics.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell : StatsDetailCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! StatsDetailCell
-        
-        let animation: CATransition = CATransition()
-        
-        animation.duration = 0.3
-        animation.type = kCATransitionFade
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        cell.difference.layer.addAnimation(animation ,forKey :"layerFadeOut")
-        var submetricArray : [Int] = []
-        
+    func getPreviousSubmetricCount() {
         switch timeFrame {
         case 0 :
             submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .OneDay)
@@ -125,6 +112,27 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         default :
             break
         }
+    }
+}
+
+// MARK - UITableViewDataSource
+
+extension DetailedStatisticViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return currentMetric.submetrics.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell : StatsDetailCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! StatsDetailCell
+        
+        let animation: CATransition = CATransition()
+        
+        animation.duration = 0.3
+        animation.type = kCATransitionFade
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        cell.difference.layer.addAnimation(animation ,forKey :"layerFadeOut")
         cell.identifier.image = UIImage(named: "Circle")
         cell.identifier.image = cell.identifier.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         cell.identifier.tintColor = colors[indexPath.row]
@@ -134,6 +142,11 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
         
         return cell
     }
+}
+
+// MARK - ChartViewDelegate
+
+extension DetailedStatisticViewController: ChartViewDelegate {
     
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         
@@ -150,6 +163,7 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
             let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
             highlights.append(highlight)
             currentMetric.submetrics[i].name = dataSet.label!
+            submetricArray[i] = Int((dataSet.entryForXIndex(selectedIndex)?.value)!)
             
             i += 1
         }
@@ -160,6 +174,10 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
     func setChartData() {
         var xAxis : [String] = []
         var colorArray = ColorSchemeOf(.Analogous, color: getRandomColor(), isFlatScheme: true)
+        // extend color array to have as many values as the submetrics in the current metric
+        while colorArray.count < currentMetric.submetrics.count {
+            colorArray += ColorSchemeOf(.Analogous, color: colorArray[colorArray.count - 1], isFlatScheme: true)
+        }
         
         switch timeFrame {
         case 0 :
@@ -174,13 +192,13 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                 chartDataSet.mode = .CubicBezier
                 chartDataSet.drawValuesEnabled = false
                 chartDataSet.drawCirclesEnabled = false
-                chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
-                chartDataSet.fillColor = colorArray[i % 5]
+                chartDataSet.setColor(colorArray[i], alpha: 0.5)
+                chartDataSet.fillColor = colorArray[i]
                 chartDataSet.fillAlpha = 0.5
                 chartDataSet.drawFilledEnabled = true
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
-                colors.append(colorArray[i % 5])
+                colors.append(colorArray[i])
             }
             statisticsChart.data = chartData
             break
@@ -194,13 +212,13 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                 chartDataSet.mode = .CubicBezier
                 chartDataSet.drawValuesEnabled = false
                 chartDataSet.drawCirclesEnabled = false
-                chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
-                chartDataSet.fillColor = colorArray[i % 5]
+                chartDataSet.setColor(colorArray[i], alpha: 0.5)
+                chartDataSet.fillColor = colorArray[i]
                 chartDataSet.fillAlpha = 0.5
                 chartDataSet.drawFilledEnabled = true
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
-                colors.append(colorArray[i % 5])
+                colors.append(colorArray[i])
             }
             statisticsChart.data = chartData
             break
@@ -221,13 +239,13 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                     chartDataSet.mode = .CubicBezier
                     chartDataSet.drawValuesEnabled = false
                     chartDataSet.drawCirclesEnabled = false
-                    chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
-                    chartDataSet.fillColor = colorArray[i % 5]
+                    chartDataSet.setColor(colorArray[i], alpha: 0.5)
+                    chartDataSet.fillColor = colorArray[i]
                     chartDataSet.fillAlpha = 0.5
                     chartDataSet.drawFilledEnabled = true
                     chartDataSet.highlightLineWidth = 0.0
                     chartData.addDataSet(chartDataSet)
-                    colors.append(colorArray[i % 5])
+                    colors.append(colorArray[i])
                 }
                 statisticsChart.data = chartData
                 break
@@ -244,13 +262,13 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                     chartDataSet.mode = .CubicBezier
                     chartDataSet.drawValuesEnabled = false
                     chartDataSet.drawCirclesEnabled = false
-                    chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
-                    chartDataSet.fillColor = colorArray[i % 5]
+                    chartDataSet.setColor(colorArray[i], alpha: 0.5)
+                    chartDataSet.fillColor = colorArray[i]
                     chartDataSet.fillAlpha = 0.5
                     chartDataSet.drawFilledEnabled = true
                     chartDataSet.highlightLineWidth = 0.0
                     chartData.addDataSet(chartDataSet)
-                    colors.append(colorArray[i % 5])
+                    colors.append(colorArray[i])
                 }
                 statisticsChart.data = chartData
                 break
@@ -266,13 +284,13 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                     chartDataSet.mode = .CubicBezier
                     chartDataSet.drawValuesEnabled = false
                     chartDataSet.drawCirclesEnabled = false
-                    chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
-                    chartDataSet.fillColor = colorArray[i % 5]
+                    chartDataSet.setColor(colorArray[i], alpha: 0.5)
+                    chartDataSet.fillColor = colorArray[i]
                     chartDataSet.fillAlpha = 0.5
                     chartDataSet.drawFilledEnabled = true
                     chartDataSet.highlightLineWidth = 0.0
                     chartData.addDataSet(chartDataSet)
-                    colors.append(colorArray[i % 5])
+                    colors.append(colorArray[i])
                 }
                 statisticsChart.data = chartData
                 break
@@ -290,13 +308,13 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                 chartDataSet.mode = .CubicBezier
                 chartDataSet.drawValuesEnabled = false
                 chartDataSet.drawCirclesEnabled = false
-                chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
-                chartDataSet.fillColor = colorArray[i % 5]
+                chartDataSet.setColor(colorArray[i], alpha: 0.5)
+                chartDataSet.fillColor = colorArray[i]
                 chartDataSet.fillAlpha = 0.5
                 chartDataSet.drawFilledEnabled = true
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
-                colors.append(colorArray[i % 5])
+                colors.append(colorArray[i])
             }
             statisticsChart.data = chartData
             break
@@ -310,13 +328,13 @@ class DetailedStatisticViewController : BaseViewController, UITableViewDataSourc
                 chartDataSet.mode = .CubicBezier
                 chartDataSet.drawValuesEnabled = false
                 chartDataSet.drawCirclesEnabled = false
-                chartDataSet.setColor(colorArray[i % 5], alpha: 0.5)
-                chartDataSet.fillColor = colorArray[i % 5]
+                chartDataSet.setColor(colorArray[i], alpha: 0.5)
+                chartDataSet.fillColor = colorArray[i]
                 chartDataSet.fillAlpha = 0.5
                 chartDataSet.drawFilledEnabled = true
                 chartDataSet.highlightLineWidth = 0.0
                 chartData.addDataSet(chartDataSet)
-                colors.append(colorArray[i % 5])
+                colors.append(colorArray[i])
             }
             statisticsChart.data = chartData
             break

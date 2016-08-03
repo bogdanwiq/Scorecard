@@ -471,12 +471,13 @@ class DataService {
                 chartValues[xAxis.indexOf(date)!].value += Double(metricValue.value)
             }
             break
-        default :
+        default:
             break
         }
         return chartValues
     }
-    func getYearsLimit(metric : Metric) -> [String]{
+    
+    func getYearsLimit(metric : Metric) -> [String] {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy"
         var years : [String] = []
