@@ -20,16 +20,16 @@ enum LoginButton {
         button.translatesAutoresizingMaskIntoConstraints = false
         switch self {
         case .Google:
-            button.setTitle("Sign in with Google", forState: .Normal)
+            button.setTitle("Connect with Google", forState: .Normal)
             button.setTitleColor(Color.mainBackground, forState: .Normal)
             button.backgroundColor = Color.textColor
-            button.imageEdgeInsets.right = 72
+            button.imageEdgeInsets.right = 50
             button.alpha = 1.0
             button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
             button.setImage(UIImage(named:"GoogleLogo"), forState: UIControlState.Normal)
             break
         case .Facebook:
-            button.setTitle("Sign in with Facebook", forState: UIControlState.Normal)
+            button.setTitle("Login with Facebook", forState: UIControlState.Normal)
             button.setTitleColor(Color.textColor, forState: .Normal)
             button.backgroundColor = Color.facebookBackground
             button.imageEdgeInsets.right = 50
