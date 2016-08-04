@@ -97,7 +97,7 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
         if (error == nil) {
             let fullName = user.profile.name
-            let imageUrl = String(user.profile.imageURLWithDimension(100))
+            let imageUrl = String(user.profile.imageURLWithDimension(130))
             //let email    = user.profile.email
             actInd.startAnimating()
             googleLoginButton.alpha = 0.6
