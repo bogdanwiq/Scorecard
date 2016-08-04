@@ -19,18 +19,31 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
     var nameLabel: UILabel!
     var settingsTableView: SettingsTableView!
     var logoutButton: UIButton!
+    var fullName : String!
+    var imageUrl : String!
     
+    init(fullName: String, imageUrl: String){
+        super.init()
+        self.fullName = fullName
+        self.imageUrl = imageUrl
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func initUI() {
+        super.initUI()
         view.backgroundColor = Color.mainBackground
         title = "Profile"
         
-        let image = UIImage(named: "ProfilePicture")
+        let image: UIImage = UIImage(data: NSData(contentsOfURL: NSURL(string: imageUrl)!)!)!
         profilePicture = ProfilePicture(image: image)
+        profilePicture.image = image
         profilePicture.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profilePicture)
         
         nameLabel = UILabel()
-        nameLabel.text = "Anonymous User"
+        nameLabel.text = fullName
         nameLabel.backgroundColor = Color.mainBackground
         nameLabel.textColor = Color.textColor
         nameLabel.textAlignment = .Center
@@ -49,6 +62,7 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
         logoutButton.tintColor = Color.textColor
         logoutButton.layer.cornerRadius = 10.0
         logoutButton.clipsToBounds = true
+        logoutButton.addTarget(self, action: #selector(googleSignOut), forControlEvents: .TouchUpInside)
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logoutButton)
     }
@@ -84,6 +98,7 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
     
     func googleSignOut(){
         GIDSignIn.sharedInstance().signOut()
+        presentViewController(LoginViewController(), animated: true, completion: nil)
     }
 }
 

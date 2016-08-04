@@ -28,8 +28,6 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
         googleLoginButton = GIDSignInButton()
         googleLoginButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(googleLoginButton)
-        
-        GIDSignIn.sharedInstance().signOut()
     }
     
     override func setupConstraints() {
@@ -46,9 +44,9 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
                 withError error: NSError!) {
         if (error == nil) {
             let fullName = user.profile.name
-            //user.profile.imageURLWithDimension(400)
-            let email = user.profile.email
-            presentViewController(RootViewController(), animated: true, completion: nil)
+            let imageUrl = String(user.profile.imageURLWithDimension(100))
+            //let email    = user.profile.email
+            presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
         }
     }
     

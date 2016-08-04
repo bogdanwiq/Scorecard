@@ -10,9 +10,9 @@ import UIKit
 
 class RootViewController: MMDrawerController {
     
-    init() {
+    init(fullName: String, imageUrl: String) {
         let centerView = UINavigationController(rootViewController: StatisticViewController())
-        let leftView = ProfileViewController()
+        let leftView = ProfileViewController(fullName: fullName, imageUrl: imageUrl)
         
         super.init(centerViewController: centerView, leftDrawerViewController: leftView, rightDrawerViewController: nil)
         openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
