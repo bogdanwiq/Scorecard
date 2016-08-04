@@ -30,6 +30,7 @@
 		F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D71D3E3605007ABA24 /* DashboardCell.swift */; };
 		F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D91D3E6124007ABA24 /* ProfilePicture.swift */; };
 		F464DE031D4F48280027B953 /* MainAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F464DE021D4F48280027B953 /* MainAppearance.swift */; };
+		F48AF7AD1D53549500E24002 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AF7AC1D53549500E24002 /* LoginButton.swift */; };
 		F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD21D40C779005A3EE8 /* TimeFrame.swift */; };
 		F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */; };
 		F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */; };
@@ -128,6 +129,7 @@
 		F46185D71D3E3605007ABA24 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = ../TableViews/DashboardCell.swift; sourceTree = "<group>"; };
 		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePicture.swift; path = ../Labels/ProfilePicture.swift; sourceTree = "<group>"; };
 		F464DE021D4F48280027B953 /* MainAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppearance.swift; sourceTree = "<group>"; };
+		F48AF7AC1D53549500E24002 /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		F495FCD21D40C779005A3EE8 /* TimeFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFrame.swift; sourceTree = "<group>"; };
 		F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailedStatisticsViewController.swift; path = Root/DetailedStatisticsViewController.swift; sourceTree = "<group>"; };
 		F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDetail.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				F495FCD81D421405005A3EE8 /* Button.swift */,
+				F48AF7AC1D53549500E24002 /* LoginButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1214,6 +1217,7 @@
 				F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */,
 				F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */,
 				F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */,
+				F48AF7AD1D53549500E24002 /* LoginButton.swift in Sources */,
 				F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */,
 				F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */,
 				F4E2A3261D48BE7900F3ED22 /* ColorConstants.swift in Sources */,
@@ -1367,6 +1371,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Scorecard/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1389,6 +1394,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Scorecard/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1499,6 +1505,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Scorecard/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
