@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MainAppearance.setNavigationBarProperties()
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
 //        rootViewController = RootViewController()
@@ -29,18 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(application: UIApplication,
-                     openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        return GIDSignIn.sharedInstance().handleURL(url,
-                                                    sourceApplication: sourceApplication,
-                                                    annotation: annotation)
+    func applicationDidBecomeActive(application: UIApplication) {
+        FBSDKAppEvents.activateApp()
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        return GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication, annotation: annotation) || FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     @available(iOS 9.0, *)
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        return GIDSignIn.sharedInstance().handleURL(url,
-                                                    sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?,
-                                                    annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
+        return GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?, annotation: options[UIApplicationOpenURLOptionsAnnotationKey]) || FBSDKApplicationDelegate.sharedInstance().application(app, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
     }
     
 }

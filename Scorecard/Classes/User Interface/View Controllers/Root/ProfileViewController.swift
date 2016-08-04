@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
 
 class ProfileViewController : BaseViewController, UITableViewDataSource {
     
@@ -96,8 +97,13 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
         return cell
     }
     
-    func googleSignOut(){
-        GIDSignIn.sharedInstance().signOut()
+    func googleSignOut() {
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            FBSDKAccessToken.setCurrentAccessToken(nil)
+            FBSDKProfile.setCurrentProfile(nil)
+        } else {
+            GIDSignIn.sharedInstance().signOut()
+        }
         presentViewController(LoginViewController(), animated: true, completion: nil)
     }
 }
