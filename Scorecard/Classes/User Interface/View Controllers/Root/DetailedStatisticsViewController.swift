@@ -23,9 +23,10 @@ class DetailedStatisticViewController : BaseViewController {
     var submetricArray : [Int] = []
     var timeFrame : Int!
     var colors : [UIColor] = []
-    var evolutionArray : [EvolutionSign] = []
-    var highlights: [ChartHighlight] = []
     var allColors : [UIColor] = []
+    var evolutionArray : [EvolutionSign] = []
+    var highlights: [Int: ChartHighlight] = [:]
+    var allHighlights: [ChartHighlight] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,19 +137,22 @@ extension DetailedStatisticViewController: UITableViewDelegate {
         let customView = UIView()
         if statisticsChart.data?.dataSets[indexPath.row].visible == true {
             colors[indexPath.row] = allColors[indexPath.row]
+            highlights[indexPath.row] = allHighlights[indexPath.row]
         }
         else {
             colors[indexPath.row] = UIColor.darkGrayColor()
+            highlights.removeValueForKey(indexPath.row)
         }
         
         cell.identifier.tintColor = colors[indexPath.row]
         customView.backgroundColor = colors[indexPath.row]
         cell.selectedBackgroundView = customView
         
-        statisticsChart.highlightValues(highlights)
+        statisticsChart.highlightValues(Array<ChartHighlight>(highlights.values))
         statisticsChart.data?.dataSets[indexPath.row].notifyDataSetChanged()
         statisticsChart.setNeedsDisplay()
         statsTableDetail.deselectRowAtIndexPath(indexPath, animated: true)
+        statsTableDetail.reloadData()
     }
 }
 
@@ -174,8 +178,14 @@ extension DetailedStatisticViewController: UITableViewDataSource {
         cell.identifier.image = cell.identifier.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         cell.identifier.tintColor = colors[indexPath.row]
         cell.typeName.text = currentMetric.submetrics[indexPath.row].name
-        cell.difference.text = submetricArray[indexPath.row].prettyString()
-        cell.sign.image = evolutionArray[indexPath.row].getSign()
+        if statisticsChart.data?.dataSets[indexPath.row].visible == true {
+            cell.difference.text = submetricArray[indexPath.row].prettyString()
+            cell.sign.image = evolutionArray[indexPath.row].getSign()
+        }
+        else {
+            cell.difference.text = "0"
+            cell.sign.image = EvolutionSign.None.getSign()
+        }
         
         return cell
     }
@@ -190,7 +200,8 @@ extension DetailedStatisticViewController: ChartViewDelegate {
         let selectedIndex = entry.xIndex
         var i = 0
         
-        highlights = []
+        allHighlights = []
+        highlights = [:]
         
         for dataSet in (chartView.data?.dataSets)! {
             let marker = CircleMarker(color: (chartView.data?.dataSets[i].colors[0])!)
@@ -198,29 +209,28 @@ extension DetailedStatisticViewController: ChartViewDelegate {
             marker.minimumSize = CGSizeMake(7.0 , 7.0)
             marker.offset = CGPointMake(0.0, 1.0)
             chartView.marker = marker
+            let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
+            allHighlights.append(highlight)
             if dataSet.isVisible {
                 let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
-                highlights.append(highlight)
-                submetricArray[i] = Int((dataSet.entryForXIndex(selectedIndex)?.value)!)
-                if selectedIndex != 0 {
-                    if (dataSet.entryForXIndex(selectedIndex)?.value)! > (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
-                        evolutionArray[i] = .ArrowUp
-                    } else if (dataSet.entryForXIndex(selectedIndex)?.value)! < (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
-                        evolutionArray[i] = .ArrowDown
-                    } else {
-                        evolutionArray[i] = .None
-                    }
+                highlights[i] = highlight
+            }
+            submetricArray[i] = Int((dataSet.entryForXIndex(selectedIndex)?.value)!)
+            if selectedIndex != 0 {
+                if (dataSet.entryForXIndex(selectedIndex)?.value)! > (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
+                    evolutionArray[i] = .ArrowUp
+                } else if (dataSet.entryForXIndex(selectedIndex)?.value)! < (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
+                    evolutionArray[i] = .ArrowDown
                 } else {
                     evolutionArray[i] = .None
                 }
             } else {
-                submetricArray[i] = 0
                 evolutionArray[i] = .None
             }
             currentMetric.submetrics[i].name = dataSet.label!
             i += 1
         }
-        chartView.highlightValues(highlights)
+        chartView.highlightValues(Array<ChartHighlight>(highlights.values))
         statsTableDetail.reloadData()
     }
     
