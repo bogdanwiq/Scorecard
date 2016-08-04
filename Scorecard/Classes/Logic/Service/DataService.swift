@@ -18,7 +18,6 @@ enum TimeFilter {
     case All
 }
 
-
 class DataService {
     
     static let sharedInstance = DataService()
@@ -53,12 +52,23 @@ class DataService {
         return json.substringWithRange(NSMakeRange(startIndex, endIndex - startIndex + 1))
     }
     
-    func setProfileSettings(preferenceName: String, state: Bool) {
-        NSUserDefaults.standardUserDefaults().setBool(state, forKey: preferenceName)
+    func setProfileSettings(userId: String, preferenceName: String, state: Bool) {
+        var dict = NSUserDefaults.standardUserDefaults().objectForKey(userId) as! [String: Bool]?
+        if dict == nil {
+            dict = [:]
+        }
+        dict![preferenceName] = state
+        NSUserDefaults.standardUserDefaults().setObject(dict, forKey: userId)
     }
     
-    func getProfileSettings(preferenceName: String) -> Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey(preferenceName)
+    func getProfileSettings(userId: String, preferenceName: String) -> Bool {
+        let dict = NSUserDefaults.standardUserDefaults().objectForKey(userId) as! [String: Bool]?
+        if dict == nil {
+            return false
+        }
+        else {
+            return dict![preferenceName] ?? false
+        }
     }
     
     func filter(projects: [Project], type: TimeFilter) -> [Project] {

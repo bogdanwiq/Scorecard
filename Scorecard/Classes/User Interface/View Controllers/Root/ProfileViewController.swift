@@ -91,7 +91,14 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
         let cell : PreferenceSliderCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PreferenceSliderCell
         
         cell.preferenceName.text = settings[indexPath.row]
-        cell.slider.setOn(service.getProfileSettings(settings[indexPath.row]) ?? false, animated: false)
+        let userId: String
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            userId = FBSDKAccessToken.currentAccessToken().userID
+        }
+        else {
+            userId = GIDSignIn.sharedInstance().clientID
+        }
+        cell.slider.setOn(service.getProfileSettings(userId, preferenceName: settings[indexPath.row]), animated: false)
         cell.delegate = self
         cell.backgroundColor = Color.mainBackground
         return cell
@@ -110,6 +117,13 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
 
 extension ProfileViewController: PreferenceSliderCellDelegate {
     func preferenceSliderCellDidChangeValue(cell: PreferenceSliderCell, newState: Bool) {
-        service.setProfileSettings(cell.preferenceName.text!, state: newState)
+        let userId: String
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            userId = FBSDKAccessToken.currentAccessToken().userID
+        }
+        else {
+            userId = GIDSignIn.sharedInstance().clientID
+        }
+        service.setProfileSettings(userId, preferenceName: cell.preferenceName.text!, state: newState)
     }
 }
