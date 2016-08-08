@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
+import PasscodeLock
 
 class StatisticViewController: BaseViewController {
     
@@ -25,6 +27,9 @@ class StatisticViewController: BaseViewController {
     }
     
     override func initUI() {
+        
+        setupPasscodeScreen()
+        
         view.backgroundColor = Color.mainBackground
         title = "Dashboard"
         let profileButton = Button.Profile.getButton()
@@ -57,6 +62,24 @@ class StatisticViewController: BaseViewController {
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[timeFrame(30)][tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         view.addConstraints(allConstraints)
+    }
+    
+    func setupPasscodeScreen() {
+        var passcodeKey: String
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            passcodeKey = FBSDKAccessToken.currentAccessToken().userID
+        } else {
+            passcodeKey = GIDSignIn.sharedInstance().clientID
+        }
+        passcodeKey += "pass"
+        let configuration = PasscodeLockConfiguration(passcodeKey: passcodeKey)
+        let passcodeLockVC: PasscodeLockViewController
+        if configuration.repository.hasPasscode {
+            passcodeLockVC = PasscodeLockViewController(state: .EnterPasscode, configuration: configuration)
+        } else {
+            passcodeLockVC = PasscodeLockViewController(state: .SetPasscode, configuration: configuration)
+        }
+        presentViewController(passcodeLockVC, animated: true, completion: nil)
     }
     
     func slideLeft() {

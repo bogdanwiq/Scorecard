@@ -20,22 +20,20 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
     override func viewDidLoad() {
         super.viewDidLoad()
         if FBSDKAccessToken.currentAccessToken() != nil {
-            var fullName = ""
-            var imageUrl = ""
             let request1 = FBSDKGraphRequest.init(graphPath: "me/picture", parameters: ["type": "large", "redirect": "false"], HTTPMethod: "GET")
             request1.startWithCompletionHandler({ (connection, result, error) in
                 if error != nil {
                     print(error.localizedDescription)
                     return
                 }
-                imageUrl = result.valueForKey("data")!.valueForKey("url")! as! String
+                let imageUrl = result.valueForKey("data")!.valueForKey("url")! as! String
                 let request2 = FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields": "name"], HTTPMethod: "GET")
                 request2.startWithCompletionHandler({ (connection, result, error) in
                     if error != nil {
                         print(error.localizedDescription)
                         return
                     }
-                    fullName = result.valueForKey("name")! as! String
+                    let fullName = result.valueForKey("name")! as! String
                     self.actInd.startAnimating()
                     self.googleLoginButton.alpha = 0.15
                     self.facebookLoginButton.alpha = 0.6
@@ -55,8 +53,7 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
         actInd = UIActivityIndicatorView()
         actInd.translatesAutoresizingMaskIntoConstraints = false
         actInd.hidesWhenStopped = true
-        actInd.activityIndicatorViewStyle =
-            UIActivityIndicatorViewStyle.WhiteLarge
+        actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
         actInd.color = Color.timeFrameSelected
         view.addSubview(actInd)
         
@@ -89,26 +86,24 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
     func btnFacebookSignInPressed() {
         
         let loginManager = FBSDKLoginManager()
-
+        
         loginManager.logInWithReadPermissions(["public_profile"], fromViewController: self, handler: { (response:FBSDKLoginManagerLoginResult!, error: NSError!) in
             if (error == nil) {
                 if FBSDKAccessToken.currentAccessToken() != nil {
-                    var fullName = ""
-                    var imageUrl = ""
                     let request1 = FBSDKGraphRequest.init(graphPath: "me/picture", parameters: ["type": "large", "redirect": "false"], HTTPMethod: "GET")
                     request1.startWithCompletionHandler({ (connection, result, error) in
                         if error != nil {
                             print(error.localizedDescription)
                             return
                         }
-                        imageUrl = result.valueForKey("data")!.valueForKey("url")! as! String
+                        let imageUrl = result.valueForKey("data")!.valueForKey("url")! as! String
                         let request2 = FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields": "name"], HTTPMethod: "GET")
                         request2.startWithCompletionHandler({ (connection, result, error) in
                             if error != nil {
                                 print(error.localizedDescription)
                                 return
                             }
-                            fullName = result.valueForKey("name")! as! String
+                            let fullName = result.valueForKey("name")! as! String
                             self.actInd.startAnimating()
                             self.googleLoginButton.alpha = 0.15
                             self.facebookLoginButton.alpha = 0.6
@@ -124,7 +119,7 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
         if (error == nil) {
             let fullName = user.profile.name
             let imageUrl = String(user.profile.imageURLWithDimension(130))
-            //let email    = user.profile.email
+            //let email = user.profile.email
             actInd.startAnimating()
             googleLoginButton.alpha = 0.6
             facebookLoginButton.alpha = 0.15

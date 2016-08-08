@@ -137,7 +137,10 @@ extension DetailedStatisticViewController: UITableViewDelegate {
         let customView = UIView()
         if statisticsChart.data?.dataSets[indexPath.row].visible == true {
             colors[indexPath.row] = allColors[indexPath.row]
-            highlights[indexPath.row] = allHighlights[indexPath.row]
+            // only if a selection has been made on the chart (there already are highlights)
+            if allHighlights != [] {
+                highlights[indexPath.row] = allHighlights[indexPath.row]
+            }
         }
         else {
             colors[indexPath.row] = UIColor.darkGrayColor()

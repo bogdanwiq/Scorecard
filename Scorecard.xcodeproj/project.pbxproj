@@ -10,8 +10,11 @@
 		04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04289FE51D3F93F00006DBCA /* SettingsTableView.swift */; };
 		04347BE61D4F492C0003C76A /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 04347BE51D4F492C0003C76A /* example.json */; };
 		049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */; };
+		04E95F631D54817E003B8FC2 /* PasscodeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E95F621D54817E003B8FC2 /* PasscodeRepository.swift */; };
+		04E95F671D54B018003B8FC2 /* PasscodeLockConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E95F661D54B018003B8FC2 /* PasscodeLockConfiguration.swift */; };
 		04EF3D531D4B3B040055BE43 /* Submetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF3D521D4B3B040055BE43 /* Submetric.swift */; };
 		04EF3D551D4B3BCF0055BE43 /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF3D541D4B3BCF0055BE43 /* Metric.swift */; };
+		04F08B431D588FF00050E073 /* PasscodeLockView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F08B411D588FEF0050E073 /* PasscodeLockView.xib */; };
 		04F295BC1D461B0100B6E9B2 /* StatisticsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */; };
 		85B16355C4682A962EA47E7C /* Pods_ScorecardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A5979765873DF93CA36D6F /* Pods_ScorecardUITests.framework */; };
 		994079583AD2247F3BCD8E1A /* Pods_ScorecardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */; };
@@ -95,8 +98,11 @@
 		04289FE51D3F93F00006DBCA /* SettingsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
 		04347BE51D4F492C0003C76A /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceSliderCell.swift; path = "Scorecard/Classes/User Interface/Components/Cells/PreferenceSliderCell.swift"; sourceTree = SOURCE_ROOT; };
+		04E95F621D54817E003B8FC2 /* PasscodeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeRepository.swift; sourceTree = "<group>"; };
+		04E95F661D54B018003B8FC2 /* PasscodeLockConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeLockConfiguration.swift; sourceTree = "<group>"; };
 		04EF3D521D4B3B040055BE43 /* Submetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Submetric.swift; sourceTree = "<group>"; };
 		04EF3D541D4B3BCF0055BE43 /* Metric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metric.swift; sourceTree = "<group>"; };
+		04F08B411D588FEF0050E073 /* PasscodeLockView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasscodeLockView.xib; sourceTree = "<group>"; };
 		04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsChart.swift; sourceTree = "<group>"; };
 		358D394A94E20F69650E0DE9 /* Pods-ScorecardUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4DD101E3A037447876FCE83F /* Pods-ScorecardUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScorecardUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScorecardUITests/Pods-ScorecardUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -206,6 +212,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04F08B3F1D588FBC0050E073 /* PasscodeLock */ = {
+			isa = PBXGroup;
+			children = (
+				04F08B411D588FEF0050E073 /* PasscodeLockView.xib */,
+			);
+			name = PasscodeLock;
+			path = "../Classes/User Interface/View Controllers";
+			sourceTree = "<group>";
+		};
 		A32ED0AE60905359CA580F5B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +486,8 @@
 				F41BC7B11D5236A50027FED6 /* example2.json */,
 				04347BE51D4F492C0003C76A /* example.json */,
 				F4B5FFF71D423549003A9C96 /* DataService.swift */,
+				04E95F621D54817E003B8FC2 /* PasscodeRepository.swift */,
+				04E95F661D54B018003B8FC2 /* PasscodeLockConfiguration.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -653,6 +670,7 @@
 			isa = PBXGroup;
 			children = (
 				F92E71C61D354600006E9D1F /* Images.xcassets */,
+				04F08B3F1D588FBC0050E073 /* PasscodeLock */,
 				F92E71C41D354600006E9D1F /* Fonts */,
 				F92E71CB1D354600006E9D1F /* Strings */,
 				F92E71C21D354600006E9D1F /* Database */,
@@ -832,6 +850,11 @@
 					F92E71461D353CBD006E9D1F = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = Y6P2NYW2G8;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					F92E715A1D353CBD006E9D1F = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -885,6 +908,7 @@
 				04347BE61D4F492C0003C76A /* example.json in Resources */,
 				F92E71D51D354600006E9D1F /* .keep in Resources */,
 				F92E71D41D354600006E9D1F /* .keep in Resources */,
+				04F08B431D588FF00050E073 /* PasscodeLockView.xib in Resources */,
 				F92E71EC1D354600006E9D1F /* .keep in Resources */,
 				F92E71D31D354600006E9D1F /* .keep in Resources */,
 				F92E71F01D354600006E9D1F /* .keep in Resources */,
@@ -1219,6 +1243,7 @@
 				F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */,
 				F48AF7AD1D53549500E24002 /* LoginButton.swift in Sources */,
 				F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */,
+				04E95F671D54B018003B8FC2 /* PasscodeLockConfiguration.swift in Sources */,
 				F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */,
 				F4E2A3261D48BE7900F3ED22 /* ColorConstants.swift in Sources */,
 				F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */,
@@ -1238,6 +1263,7 @@
 				F92E71F91D354790006E9D1F /* BaseViewController.swift in Sources */,
 				F41BC7A11D5216C90027FED6 /* LoginViewController.swift in Sources */,
 				F4BB4E021D473F24006F6C69 /* NotificationViewController.swift in Sources */,
+				04E95F631D54817E003B8FC2 /* PasscodeRepository.swift in Sources */,
 				F4A378A71D49117600C8956D /* StatsDetailCell.swift in Sources */,
 				049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */,
 			);

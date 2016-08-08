@@ -14,6 +14,7 @@ target 'Scorecard' do
 	pod 'ChameleonFramework/Swift'
 	pod 'Google/SignIn'
 	pod 'FBSDKLoginKit'
+	pod 'PasscodeLock'
   # Pods for Scorecard
 
   target 'ScorecardTests' do
