@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class MainAppearance {
+    
     static func setNavigationBarProperties() {
         // Set the battery, carrier , signal, clock to white
         UIApplication.sharedApplication().statusBarStyle = .LightContent

@@ -1,26 +1,26 @@
 //
-//  StatsTableView.swift
+//  NotificationTableView.swift
 //  Scorecard
 //
-//  Created by Halcyon Mobile on 7/19/16.
+//  Created by Halcyon Mobile on 8/5/16.
 //  Copyright © 2016 Halcyon Mobile. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class SettingsTableView : UITableView {
-
+class NotificationTableView : UITableView {
+    
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
-        registerClass(PreferenceSliderCell.self, forCellReuseIdentifier: "PreferenceSliderCell")
+        registerClass(NotificationCell.self, forCellReuseIdentifier: "NotificationCell")
         allowsSelection = false
-        scrollEnabled = false
+        scrollEnabled = true
         separatorColor = UIColor.clearColor()
         backgroundColor = Color.mainBackground
-        rowHeight = 63
+        rowHeight = 90
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -18,7 +18,6 @@ class StatsDetail : UIView {
     var sign : UIImageView!
     let service = DataService.sharedInstance
     
-    
     weak var delegate : StatsDetailSetupInformationDelegate?
     
     init() {
@@ -32,7 +31,6 @@ class StatsDetail : UIView {
     }
     
     private func initUI(){
-        
         backgroundColor = Color.mainBackground
         
         typeName = UILabel()

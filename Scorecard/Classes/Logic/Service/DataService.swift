@@ -27,7 +27,6 @@ class DataService {
         let path = NSBundle.mainBundle().pathForResource("example2", ofType: "json")
         let data = NSData(contentsOfFile: path!)
         let string = NSString(data: data!, encoding: NSUTF8StringEncoding)!
-        
         let projects: Array<Project>? = Mapper<Project>().mapArray(clipJSON(string))
         
         return projects!

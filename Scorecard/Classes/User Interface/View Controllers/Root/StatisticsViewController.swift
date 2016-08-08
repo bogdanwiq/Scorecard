@@ -104,10 +104,11 @@ extension StatisticViewController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView()
-        header.backgroundColor = Color.timeFrameBackground
         
+        let header = UIView()
         let label = UILabel()
+        
+        header.backgroundColor = Color.timeFrameBackground
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = originalProjectsStats[section].name
         label.textColor = Color.timeFrameSelected

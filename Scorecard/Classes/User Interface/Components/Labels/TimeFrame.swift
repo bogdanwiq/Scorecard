@@ -24,6 +24,7 @@ class TimeFrame : UIControl {
             displaySelected()
         }
     }
+    
     init() {
         super.init(frame: CGRectZero)
         setupView()
