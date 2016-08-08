@@ -15,7 +15,6 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
     var settings = ["Notifications", "Alerts"]
     let service = DataService.sharedInstance
     let reuseIdentifier = "PreferenceSliderCell"
-    
     var profilePicture: ProfilePicture!
     var nameLabel: UILabel!
     var settingsTableView: SettingsTableView!
@@ -88,6 +87,7 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell : PreferenceSliderCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PreferenceSliderCell
         
         cell.preferenceName.text = settings[indexPath.row]
@@ -117,7 +117,9 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
 
 extension ProfileViewController: PreferenceSliderCellDelegate {
     func preferenceSliderCellDidChangeValue(cell: PreferenceSliderCell, newState: Bool) {
+        
         let userId: String
+        
         if FBSDKAccessToken.currentAccessToken() != nil {
             userId = FBSDKAccessToken.currentAccessToken().userID
         }

@@ -140,7 +140,6 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        // do something when user logs out
     }
     
 }

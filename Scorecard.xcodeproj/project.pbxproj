@@ -26,7 +26,6 @@
 		F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185CC1D3E191D007ABA24 /* MMDrawerVisualState.m */; };
 		F46185D21D3E191D007ABA24 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */; };
 		F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D31D3E239F007ABA24 /* StatsTableView.swift */; };
-		F46185D61D3E32FA007ABA24 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D51D3E32FA007ABA24 /* Stats.swift */; };
 		F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D71D3E3605007ABA24 /* DashboardCell.swift */; };
 		F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D91D3E6124007ABA24 /* ProfilePicture.swift */; };
 		F464DE031D4F48280027B953 /* MainAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F464DE021D4F48280027B953 /* MainAppearance.swift */; };
@@ -38,6 +37,8 @@
 		F4984AC51D464288009B0DEA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC41D464288009B0DEA /* User.swift */; };
 		F4984AC71D464327009B0DEA /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC61D464327009B0DEA /* Project.swift */; };
 		F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984ACA1D46444A009B0DEA /* MetricValue.swift */; };
+		F49D4F831D54B54700C9E4F6 /* NotificationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D4F821D54B54700C9E4F6 /* NotificationTableView.swift */; };
+		F49D4F851D54B57300C9E4F6 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D4F841D54B57300C9E4F6 /* NotificationCell.swift */; };
 		F4A378A71D49117600C8956D /* StatsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A378A61D49117600C8956D /* StatsDetailCell.swift */; };
 		F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */; };
 		F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5FFF71D423549003A9C96 /* DataService.swift */; };
@@ -125,7 +126,6 @@
 		F46185CD1D3E191D007ABA24 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
 		F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
 		F46185D31D3E239F007ABA24 /* StatsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsTableView.swift; sourceTree = "<group>"; };
-		F46185D51D3E32FA007ABA24 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stats.swift; path = "../../../User Interface/Model Presentation/Stats.swift"; sourceTree = "<group>"; };
 		F46185D71D3E3605007ABA24 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = ../TableViews/DashboardCell.swift; sourceTree = "<group>"; };
 		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePicture.swift; path = ../Labels/ProfilePicture.swift; sourceTree = "<group>"; };
 		F464DE021D4F48280027B953 /* MainAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppearance.swift; sourceTree = "<group>"; };
@@ -137,6 +137,8 @@
 		F4984AC41D464288009B0DEA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F4984AC61D464327009B0DEA /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		F4984ACA1D46444A009B0DEA /* MetricValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricValue.swift; sourceTree = "<group>"; };
+		F49D4F821D54B54700C9E4F6 /* NotificationTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableView.swift; sourceTree = "<group>"; };
+		F49D4F841D54B57300C9E4F6 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		F4A378A61D49117600C8956D /* StatsDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDetailCell.swift; sourceTree = "<group>"; };
 		F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvolutionSign.swift; sourceTree = "<group>"; };
 		F4B5FFF71D423549003A9C96 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -455,7 +457,6 @@
 		F92E719B1D354600006E9D1F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				F46185D51D3E32FA007ABA24 /* Stats.swift */,
 				F4984AC41D464288009B0DEA /* User.swift */,
 				F4984AC61D464327009B0DEA /* Project.swift */,
 				04EF3D541D4B3BCF0055BE43 /* Metric.swift */,
@@ -533,6 +534,7 @@
 				049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */,
 				F46185D71D3E3605007ABA24 /* DashboardCell.swift */,
 				F4A378A61D49117600C8956D /* StatsDetailCell.swift */,
+				F49D4F841D54B57300C9E4F6 /* NotificationCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -558,6 +560,7 @@
 			children = (
 				F46185D31D3E239F007ABA24 /* StatsTableView.swift */,
 				04289FE51D3F93F00006DBCA /* SettingsTableView.swift */,
+				F49D4F821D54B54700C9E4F6 /* NotificationTableView.swift */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -1210,12 +1213,13 @@
 				F495FCD91D421405005A3EE8 /* Button.swift in Sources */,
 				F4984AC71D464327009B0DEA /* Project.swift in Sources */,
 				F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */,
-				F46185D61D3E32FA007ABA24 /* Stats.swift in Sources */,
 				F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */,
 				04F295BC1D461B0100B6E9B2 /* StatisticsChart.swift in Sources */,
 				F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */,
 				F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */,
 				F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */,
+				F49D4F851D54B57300C9E4F6 /* NotificationCell.swift in Sources */,
+				F49D4F831D54B54700C9E4F6 /* NotificationTableView.swift in Sources */,
 				F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */,
 				F48AF7AD1D53549500E24002 /* LoginButton.swift in Sources */,
 				F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */,

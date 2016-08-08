@@ -39,7 +39,6 @@ class DetailedStatisticViewController : BaseViewController {
         self.differenceAndPercent = differenceAndPercent
         self.timeFrame = timeFrame
         getPreviousSubmetricCount()
-        // populate evolution sign array
         for _ in 0..<currentMetric.submetrics.count {
             evolutionArray.append(.None)
         }
@@ -57,7 +56,6 @@ class DetailedStatisticViewController : BaseViewController {
         statsDetail.translatesAutoresizingMaskIntoConstraints = false
         setupInformation()
         view.addSubview(statsDetail)
-        
         
         setupStatsTableDetail()
         statisticsChart = StatisticsChart()
@@ -92,9 +90,8 @@ class DetailedStatisticViewController : BaseViewController {
         } else {
             tableHeight  = screenResolutionFactor * Int(statsTableDetail.rowHeight)
         }
-        // Padding between table and chart
+       
         tableHeight += 8
-        
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statsDetail]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statsTableDetail]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statisticsChart]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
@@ -130,11 +127,13 @@ class DetailedStatisticViewController : BaseViewController {
 extension DetailedStatisticViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         let boolean = (statisticsChart.data?.dataSets[indexPath.row].isVisible)!
         statisticsChart.data?.dataSets[indexPath.row].visible = !boolean
         let cell : StatsDetailCell = tableView.cellForRowAtIndexPath(indexPath) as! StatsDetailCell
         cell.backgroundColor = Color.mainBackground
         let customView = UIView()
+        
         if statisticsChart.data?.dataSets[indexPath.row].visible == true {
             colors[indexPath.row] = allColors[indexPath.row]
             highlights[indexPath.row] = allHighlights[indexPath.row]
@@ -186,7 +185,6 @@ extension DetailedStatisticViewController: UITableViewDataSource {
             cell.difference.text = "0"
             cell.sign.image = EvolutionSign.None.getSign()
         }
-        
         return cell
     }
 }
@@ -237,7 +235,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
     func setChartData() {
         var xAxis : [String] = []
         var colorArray = ColorSchemeOf(.Analogous, color: getRandomColor(), isFlatScheme: true)
-        // extend color array to have as many values as the submetrics in the current metric
+        
         while colorArray.count < currentMetric.submetrics.count {
             colorArray += ColorSchemeOf(.Analogous, color: colorArray[colorArray.count - 1], isFlatScheme: true)
         }
@@ -427,7 +425,6 @@ extension DetailedStatisticViewController: ChartViewDelegate {
 
 extension DetailedStatisticViewController: StatsDetailSetupInformationDelegate {
     func setupInformation(){
-        
         statsDetail.typeName.text = currentMetric.name
         statsDetail.counter.text = dataService.sumMetricValues(currentMetric)
         if differenceAndPercent.0 < 0 {
