@@ -36,8 +36,9 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
                         return
                     }
                     let fullName = result.valueForKey("name")! as! String
+                    UIView.animateWithDuration(0.6, animations: {self.view.alpha = 0.8})
                     self.actInd.startAnimating()
-                    self.googleLoginButton.alpha = 0.15
+                    self.googleLoginButton.alpha = 0.4
                     self.facebookLoginButton.alpha = 0.6
                     self.presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
                 })
@@ -103,9 +104,10 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
                                 print(error.localizedDescription)
                                 return
                             }
+                            UIView.animateWithDuration(0.6, animations: {self.view.alpha = 0.8})
                             let fullName = result.valueForKey("name")! as! String
                             self.actInd.startAnimating()
-                            self.googleLoginButton.alpha = 0.15
+                            self.googleLoginButton.alpha = 0.4
                             self.facebookLoginButton.alpha = 0.6
                             self.presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
                         })
@@ -121,8 +123,9 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
             let imageUrl = String(user.profile.imageURLWithDimension(130))
 
             actInd.startAnimating()
+            UIView.animateWithDuration(0.6, animations: {self.view.alpha = 0.8})
             googleLoginButton.alpha = 0.6
-            facebookLoginButton.alpha = 0.15
+            facebookLoginButton.alpha = 0.4
             presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
         }
     }
