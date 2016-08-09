@@ -167,7 +167,7 @@ extension DetailedStatisticViewController: UITableViewDataSource {
             cell.sign.image = evolutionArray[indexPath.row].getSign()
         }
         else {
-            cell.difference.text = "0"
+            cell.difference.text = ""
             cell.sign.image = EvolutionSign.None.getSign()
         }
         return cell
@@ -369,7 +369,11 @@ extension DetailedStatisticViewController: StatsDetailSetupInformationDelegate {
     func setupInformation() {
         statsDetail.typeName.text = currentMetric.name
         statsDetail.counter.text = dataService.sumMetricValues(currentMetric)
-        statsDetail.percent.text = String(format: "%.2f",differenceAndPercent.1) + "%"
+        if differenceAndPercent.1 != 0 {
+            statsDetail.percent.text = String(format: "%.2f",differenceAndPercent.1) + "%"
+        } else {
+            statsDetail.percent.text = ""
+        }
         if differenceAndPercent.0 < 0 {
             statsDetail.difference.text = "\(differenceAndPercent.0.prettyString())"
             statsDetail.difference.textColor = Color.statsFall
@@ -377,7 +381,7 @@ extension DetailedStatisticViewController: StatsDetailSetupInformationDelegate {
             statsDetail.sign.image = EvolutionSign.ArrowDown.getSign()
         }
         else if differenceAndPercent.0 == 0 {
-            statsDetail.difference.text = "\(differenceAndPercent.0.prettyString())"
+            statsDetail.difference.text = ""
             statsDetail.difference.textColor = Color.textColor
             statsDetail.percent.textColor = Color.textColor
             statsDetail.sign.image = EvolutionSign.None.getSign()

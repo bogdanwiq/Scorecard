@@ -155,10 +155,10 @@ extension StatisticViewController: UITableViewDataSource {
             cell.sign.image = EvolutionSign.ArrowDown.getSign()
         }
         else if array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0 == 0 {
-            cell.difference.text = "\(array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0.prettyString())"
+            cell.difference.text = ""
             cell.difference.textColor = Color.textColor
             cell.percent.textColor = Color.textColor
-            cell.percent.text = String(format: "%.2f",array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.1) + "%"
+            cell.percent.text = ""
             cell.sign.image = EvolutionSign.None.getSign()
         }
         else if array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0 > 0 {
