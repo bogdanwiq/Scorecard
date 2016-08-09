@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import FBSDKLoginKit
+import PasscodeLock
 
 class ProfileViewController : BaseViewController, UITableViewDataSource {
     
@@ -21,6 +22,7 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
     var logoutButton: UIButton!
     var fullName : String!
     var imageUrl : String!
+    var configuration : PasscodeLockConfiguration!
     
     init(fullName: String, imageUrl: String){
         super.init()
@@ -117,7 +119,7 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
 
 extension ProfileViewController: PreferenceSliderCellDelegate {
     func preferenceSliderCellDidChangeValue(cell: PreferenceSliderCell, newState: Bool) {
-        
+    
         let userId: String
         
         if FBSDKAccessToken.currentAccessToken() != nil {
@@ -125,6 +127,18 @@ extension ProfileViewController: PreferenceSliderCellDelegate {
         }
         else {
             userId = GIDSignIn.sharedInstance().clientID
+        }
+        
+        if cell.preferenceName.text == "Passcode" {
+            var passcodeKey = userId
+            passcodeKey += "pass"
+            configuration = PasscodeLockConfiguration(passcodeKey: passcodeKey)
+            if newState == true {
+                let passcodeLockVC = PasscodeLockViewController(state: .SetPasscode, configuration: configuration)
+                presentViewController(passcodeLockVC, animated: true, completion: nil)
+            } else {
+                configuration.repository.deletePasscode()
+            }
         }
         service.setProfileSettings(userId, preferenceName: cell.preferenceName.text!, state: newState)
     }

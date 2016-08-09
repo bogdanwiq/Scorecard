@@ -28,7 +28,7 @@ class StatisticViewController: BaseViewController {
     
     override func initUI() {
         
-        setupPasscodeScreen()
+        presentPasscodeScreen()
         
         view.backgroundColor = Color.mainBackground
         title = "Dashboard"
@@ -64,7 +64,7 @@ class StatisticViewController: BaseViewController {
         view.addConstraints(allConstraints)
     }
     
-    func setupPasscodeScreen() {
+    func presentPasscodeScreen() {
         var passcodeKey: String
         if FBSDKAccessToken.currentAccessToken() != nil {
             passcodeKey = FBSDKAccessToken.currentAccessToken().userID
@@ -73,13 +73,10 @@ class StatisticViewController: BaseViewController {
         }
         passcodeKey += "pass"
         let configuration = PasscodeLockConfiguration(passcodeKey: passcodeKey)
-        let passcodeLockVC: PasscodeLockViewController
         if configuration.repository.hasPasscode {
-            passcodeLockVC = PasscodeLockViewController(state: .EnterPasscode, configuration: configuration)
-        } else {
-            passcodeLockVC = PasscodeLockViewController(state: .SetPasscode, configuration: configuration)
+            let passcodeLockVC = PasscodeLockViewController(state: .EnterPasscode, configuration: configuration)
+            presentViewController(passcodeLockVC, animated: true, completion: nil)
         }
-        presentViewController(passcodeLockVC, animated: true, completion: nil)
     }
     
     func slideLeft() {
