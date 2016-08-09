@@ -13,10 +13,10 @@ import PasscodeLock
 
 class StatisticViewController: BaseViewController {
     
+    let service = DataService.sharedInstance
+    let reuseIdentifier : String = "DashboardCell"
     let timeFrame = TimeFrame()
     let tableView = StatsTableView()
-    let reuseIdentifier : String = "DashboardCell"
-    let service = DataService.sharedInstance
     var originalProjectsStats : [Project]!
     var projectsStats : [Project]!
     var projectDifferenceAndPercent : [String: [String: (Int, Double)]] = [:]
@@ -30,14 +30,16 @@ class StatisticViewController: BaseViewController {
         
         presentPasscodeScreen()
         
-        view.backgroundColor = Color.mainBackground
-        title = "Dashboard"
         let profileButton = Button.Profile.getButton()
         profileButton.addTarget(self, action: #selector(slideLeft), forControlEvents: .TouchUpInside)
         let notificationButton = Button.Notification.getButton()
         notificationButton.addTarget(self, action: #selector(notificationTapped), forControlEvents: .TouchUpInside)
+        
+        view.backgroundColor = Color.mainBackground
+        title = "Dashboard"
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationButton)
+        
         timeFrame.delegate = self
         timeFrame.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(timeFrame)
@@ -65,13 +67,16 @@ class StatisticViewController: BaseViewController {
     }
     
     func presentPasscodeScreen() {
+        
         var passcodeKey: String
+        
         if FBSDKAccessToken.currentAccessToken() != nil {
             passcodeKey = FBSDKAccessToken.currentAccessToken().userID
         } else {
             passcodeKey = GIDSignIn.sharedInstance().clientID
         }
         passcodeKey += "pass"
+        
         let configuration = PasscodeLockConfiguration(passcodeKey: passcodeKey)
         if configuration.repository.hasPasscode {
             let passcodeLockVC = PasscodeLockViewController(state: .EnterPasscode, configuration: configuration)
@@ -83,7 +88,7 @@ class StatisticViewController: BaseViewController {
         mm_drawerController.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
     }
     
-    func notificationTapped(){
+    func notificationTapped() {
         navigationController?.pushViewController(NotificationViewController(), animated: true)
     }
 }
@@ -113,7 +118,6 @@ extension StatisticViewController: UITableViewDelegate {
         header.addSubview(label)
         header.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[title]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["title": label]))
         header.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: header, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
-        
         return header
     }
 }
@@ -179,35 +183,34 @@ extension StatisticViewController: UITableViewDataSource {
 // MARK - TimeFrameDelegate
 
 extension StatisticViewController: TimeFrameDelegate {
+    
     func timeFrameSelectedValue(selectedIndex: Int) {
+        
         switch selectedIndex {
         case 0 :
             projectsStats = service.filter(originalProjectsStats, type: .OneDay)
             projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneDay)
-            tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
             break
         case 1 :
             projectsStats = service.filter(originalProjectsStats, type: .OneWeek)
             projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneWeek)
-            tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
             break
         case 2 :
             projectsStats = service.filter(originalProjectsStats, type: .OneMonth)
             projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneMonth)
-            tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
             break
         case 3 :
             projectsStats = service.filter(originalProjectsStats, type: .OneYear)
             projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneYear)
-            tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
             break
         case 4 :
             projectsStats = service.filter(originalProjectsStats, type: .All)
             projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .All)
-            tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
+            
             break
         default :
             break
         }
+        tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
     }
 }

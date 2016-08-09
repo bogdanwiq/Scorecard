@@ -17,19 +17,21 @@ enum Button {
     func getButton() -> UIButton {
         
         let button = UIButton(frame: CGRectMake(0,0,30,30))
+        var image : UIImage = UIImage()
         
-        button.contentMode = .ScaleAspectFit
         switch self {
         case .Profile:
-            button.setImage(UIImage(named: "Profile"), forState: .Normal)
+            image = UIImage(named: "Profile")!
             break
         case .Notification:
-            button.setImage(UIImage(named: "Notification"), forState: .Normal)
+            image = UIImage(named: "Notification")!
             break
         case .Back:
-            button.setImage(UIImage(named: "Back"), forState: .Normal)
+            image = UIImage(named: "Back")!
             break
         }
+        button.contentMode = .ScaleAspectFit
+        button.setImage(image, forState: .Normal)
         return button
     }
 }

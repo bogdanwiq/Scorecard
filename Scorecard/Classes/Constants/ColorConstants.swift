@@ -24,7 +24,6 @@ extension UIColor {
 }
 
 struct Color {
-    
     static let mainBackground             = Color.blackPearl
     static let navigationBackground       = Color.blackPearl
     static let chartTextColor             = Color.blackPearl

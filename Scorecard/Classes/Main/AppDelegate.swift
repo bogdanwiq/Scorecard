@@ -11,30 +11,28 @@ import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     var rootViewController: LoginViewController!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        var configureError: NSError?
+        let types:UIUserNotificationType = UIUserNotificationType.Alert
+        let mySettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
+        
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()
         MainAppearance.setNavigationBarProperties()
-        var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
-        let types:UIUserNotificationType = UIUserNotificationType.Alert
-        let mySettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(mySettings)
-        
         rootViewController = LoginViewController()
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         return true
     }
-    
-   
     
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
@@ -49,4 +47,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?, annotation: options[UIApplicationOpenURLOptionsAnnotationKey]) || FBSDKApplicationDelegate.sharedInstance().application(app, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
     }
 }
-

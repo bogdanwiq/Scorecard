@@ -11,14 +11,15 @@ import UIKit
 
 class NotificationViewController: BaseViewController {
     
+    let reuseIdentifier : String = "NotificationCell"
     let tableView = NotificationTableView()
     var allNotifications: [UILocalNotification] = []
-    let reuseIdentifier : String = "NotificationCell"
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,8 +60,7 @@ extension NotificationViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell : NotificationCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! NotificationCell
-        print(allNotifications[indexPath.row].alertBody!)
-        cell.notificationText.text = "Maked At date : \(cell.date)"
+        cell.notificationText.text = "Marked At date : \(cell.date)"
         return cell
     }
     
@@ -69,7 +69,6 @@ extension NotificationViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
         if editingStyle == .Delete {
             allNotifications.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -78,4 +77,3 @@ extension NotificationViewController: UITableViewDataSource {
         }
     }
 }
-

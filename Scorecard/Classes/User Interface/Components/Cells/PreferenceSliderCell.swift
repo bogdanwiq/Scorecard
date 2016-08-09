@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PreferenceSliderCell: UITableViewCell{
+class PreferenceSliderCell: UITableViewCell {
     
     weak var delegate: PreferenceSliderCellDelegate?
     

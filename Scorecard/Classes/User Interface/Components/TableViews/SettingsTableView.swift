@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class SettingsTableView : UITableView {
-
+    
     init() {
         super.init(frame: CGRectZero, style: UITableViewStyle.Plain)
         registerClass(PreferenceSliderCell.self, forCellReuseIdentifier: "PreferenceSliderCell")
@@ -20,7 +20,7 @@ class SettingsTableView : UITableView {
         backgroundColor = Color.mainBackground
         rowHeight = 38
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

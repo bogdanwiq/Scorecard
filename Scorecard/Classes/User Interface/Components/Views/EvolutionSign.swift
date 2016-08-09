@@ -13,7 +13,7 @@ enum EvolutionSign {
     case ArrowUp
     case ArrowDown
     case None
-
+    
     func getSign() -> UIImage {
         
         var image : UIImage = UIImage()

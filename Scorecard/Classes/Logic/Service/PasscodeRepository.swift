@@ -34,5 +34,4 @@ class PasscodeRepository: PasscodeRepositoryType {
     func deletePasscode() {
         NSUserDefaults.standardUserDefaults().removeObjectForKey(passcodeKey)
     }
-    
 }

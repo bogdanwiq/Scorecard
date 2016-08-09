@@ -11,14 +11,14 @@ import UIKit
 
 class StatsDetail : UIView {
     
+    weak var delegate : StatsDetailSetupInformationDelegate?
+    
+    let service = DataService.sharedInstance
     var typeName : UILabel!
     var counter : UILabel!
     var difference : UILabel!
     var percent : UILabel!
     var sign : UIImageView!
-    let service = DataService.sharedInstance
-    
-    weak var delegate : StatsDetailSetupInformationDelegate?
     
     init() {
         super.init(frame: CGRectZero)
@@ -30,7 +30,7 @@ class StatsDetail : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initUI(){
+    private func initUI() {
         backgroundColor = Color.mainBackground
         
         typeName = UILabel()

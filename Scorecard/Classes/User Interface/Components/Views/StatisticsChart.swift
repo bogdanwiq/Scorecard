@@ -16,6 +16,11 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = Color.chartBackground
+        setupChart()
+    }
+    
+    private func setupChart() {
         leftAxis.drawGridLinesEnabled = false
         leftAxis.drawAxisLineEnabled = false
         leftAxis.drawLabelsEnabled = false
@@ -34,7 +39,6 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         descriptionText = ""
         animate(xAxisDuration: 0.0, yAxisDuration: 1.0, easingOption: .EaseInSine)
         setViewPortOffsets(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0)
-        backgroundColor = Color.chartBackground
     }
     
     required init?(coder aDecoder: NSCoder) {

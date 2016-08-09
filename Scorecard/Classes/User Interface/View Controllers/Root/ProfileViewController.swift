@@ -14,17 +14,17 @@ import PasscodeLock
 class ProfileViewController : BaseViewController, UITableViewDataSource {
     
     var settings = ["Notifications", "Alerts", "Passcode"]
-    let service = DataService.sharedInstance
     let reuseIdentifier = "PreferenceSliderCell"
-    var profilePicture: ProfilePicture!
+    let service = DataService.sharedInstance
     var nameLabel: UILabel!
-    var settingsTableView: SettingsTableView!
     var logoutButton: UIButton!
     var fullName : String!
     var imageUrl : String!
+    var profilePicture: ProfilePicture!
+    var settingsTableView: SettingsTableView!
     var configuration : PasscodeLockConfiguration!
     
-    init(fullName: String, imageUrl: String){
+    init(fullName: String, imageUrl: String) {
         super.init()
         self.fullName = fullName
         self.imageUrl = imageUrl

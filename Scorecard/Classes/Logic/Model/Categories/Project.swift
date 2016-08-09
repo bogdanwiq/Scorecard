@@ -20,14 +20,12 @@ class Project: Mappable {
     var name : String!
     var interval : intervalType!
     var metrics : [Metric]!
-  //  var collaborators : [User]?
+    //  var collaborators : [User]?
     
     init() {
-        
     }
     
-    required init?(_ map: Map){
-        
+    required init?(_ map: Map) {
     }
     
     func mapping(map: Map) {
@@ -46,6 +44,6 @@ class Project: Mappable {
             break
         }
         metrics     <- map["metrics"]
-    //    collaborators   <- map["collaborators"]
+        //    collaborators   <- map["collaborators"]
     }
 }
