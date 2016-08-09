@@ -394,7 +394,13 @@ extension DetailedStatisticViewController: StatsDetailSetupInformationDelegate {
 extension DetailedStatisticViewController: TimeFrameDelegate {
     
     func timeFrameSelectedValue(selectedIndex: Int) {
+        let animation: CATransition = CATransition()
         
+        animation.duration = 0.3
+        animation.type = kCATransitionFade
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        view.layer.addAnimation(animation,forKey :"layerFadeOut")
+            
         var tableHeight = 0
         var newTableHeight = 0
         let screenResolutionFactor = Int(screenHeight/100)-1
