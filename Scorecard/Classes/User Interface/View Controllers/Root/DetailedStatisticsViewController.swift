@@ -22,19 +22,22 @@ class DetailedStatisticViewController : BaseViewController {
     var differenceAndPercent : (Int, Double)!
     var submetricArray : [Int] = []
     var timeFrame : Int!
-    var colors : [UIColor] = []
-    var allColors : [UIColor] = []
+    var colors : [UIColor]!
+    var allColors : [UIColor]!
     var evolutionArray : [EvolutionSign] = []
     var highlights: [Int: ChartHighlight] = [:]
     var allHighlights: [ChartHighlight] = []
+    let timeFrameView = TimeFrame()
+    var originalMetric : Metric!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
     }
     
-    init(metric: Metric, differenceAndPercent: (Int, Double), timeFrame : Int){
+    init(originalMetric: Metric, metric: Metric, differenceAndPercent: (Int, Double), timeFrame : Int){
         super.init()
+        self.originalMetric = originalMetric
         self.currentMetric = metric
         self.differenceAndPercent = differenceAndPercent
         self.timeFrame = timeFrame
@@ -56,6 +59,11 @@ class DetailedStatisticViewController : BaseViewController {
         statsDetail.translatesAutoresizingMaskIntoConstraints = false
         setupInformation()
         view.addSubview(statsDetail)
+        
+        timeFrameView.selectedIndex = timeFrame
+        timeFrameView.delegate = self
+        timeFrameView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(timeFrameView)
         
         setupStatsTableDetail()
         statisticsChart = StatisticsChart()
@@ -81,7 +89,7 @@ class DetailedStatisticViewController : BaseViewController {
     override func setupConstraints() {
         
         var allConstraints = [NSLayoutConstraint]()
-        let dictionary = ["statsDetail": statsDetail, "statsTableDetail": statsTableDetail, "statisticsChart": statisticsChart]
+        let dictionary = ["statsDetail": statsDetail, "timeFrameView": timeFrameView, "statsTableDetail": statsTableDetail, "statisticsChart": statisticsChart]
         var tableHeight : Int = 0
         let screenResolutionFactor = Int(screenHeight/100)-1
         
@@ -90,31 +98,30 @@ class DetailedStatisticViewController : BaseViewController {
         } else {
             tableHeight  = screenResolutionFactor * Int(statsTableDetail.rowHeight)
         }
-       
         tableHeight += 8
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statsDetail]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statsTableDetail]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[statisticsChart]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[statsDetail][statsTableDetail(\(tableHeight))][statisticsChart]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[timeFrameView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        allConstraints.append(NSLayoutConstraint(item: statsTableDetail, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CGFloat(tableHeight)))
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[timeFrameView(30)][statsDetail][statsTableDetail][statisticsChart]|", options: [.AlignAllLeft, .AlignAllRight], metrics: nil, views: dictionary)
         view.addConstraints(allConstraints)
     }
     
     func getPreviousSubmetricCount() {
         switch timeFrame {
         case 0 :
-            submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .OneDay)
+            submetricArray = dataService.getSubmetricCount(currentMetric)
             break
         case 1 :
-            submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .OneWeek)
+            submetricArray = dataService.getSubmetricCount(currentMetric)
             break
         case 2 :
-            submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .OneMonth)
+            submetricArray = dataService.getSubmetricCount(currentMetric)
             break
         case 3:
-            submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .OneYear)
+            submetricArray = dataService.getSubmetricCount(currentMetric)
             break
         case 4:
-            submetricArray = dataService.getPreviousSubmetricCount(currentMetric, type: .All)
+            submetricArray = dataService.getSubmetricCount(currentMetric)
             break
         default :
             break
@@ -237,6 +244,11 @@ extension DetailedStatisticViewController: ChartViewDelegate {
     
     func setChartData() {
         var xAxis : [String] = []
+        
+        // empty color arrays
+        colors = []
+        allColors = []
+        
         var colorArray = ColorSchemeOf(.Analogous, color: getRandomColor(), isFlatScheme: true)
         
         while colorArray.count < currentMetric.submetrics.count {
@@ -451,5 +463,68 @@ extension DetailedStatisticViewController: StatsDetailSetupInformationDelegate {
             statsDetail.percent.text = String(format: "+%.2f",differenceAndPercent.1) + "%"
             statsDetail.sign.image = EvolutionSign.ArrowUp.getSign()
         }
+    }
+}
+
+extension DetailedStatisticViewController: TimeFrameDelegate {
+    func timeFrameSelectedValue(selectedIndex: Int) {
+        
+        var tableHeight = 0
+        var newTableHeight = 0
+        let screenResolutionFactor = Int(screenHeight/100)-1
+        
+        if currentMetric.submetrics.count < screenResolutionFactor {
+            tableHeight =  Int(statsTableDetail.rowHeight) * currentMetric.submetrics.count
+        } else {
+            tableHeight  = screenResolutionFactor * Int(statsTableDetail.rowHeight)
+        }
+        tableHeight += 8
+        
+        timeFrame = selectedIndex
+        switch selectedIndex {
+        case 0 :
+            currentMetric = dataService.filterMetric(originalMetric, type: .OneDay)
+            differenceAndPercent = dataService.getMetricPreviousCount(originalMetric, type: .OneDay)
+            break
+        case 1 :
+            currentMetric = dataService.filterMetric(originalMetric, type: .OneWeek)
+            differenceAndPercent = dataService.getMetricPreviousCount(originalMetric, type: .OneWeek)
+            break
+        case 2 :
+            currentMetric = dataService.filterMetric(originalMetric, type: .OneMonth)
+            differenceAndPercent = dataService.getMetricPreviousCount(originalMetric, type: .OneMonth)
+            break
+        case 3 :
+            currentMetric = dataService.filterMetric(originalMetric, type: .OneYear)
+            differenceAndPercent = dataService.getMetricPreviousCount(originalMetric, type: .OneYear)
+            break
+        case 4 :
+            currentMetric = dataService.filterMetric(originalMetric, type: .All)
+            differenceAndPercent = dataService.getMetricPreviousCount(originalMetric, type: .All)
+            break
+        default :
+            break
+        }
+        getPreviousSubmetricCount()
+        setChartData()
+        setupInformation()
+        statsTableDetail.reloadData()
+        evolutionArray.removeAll()
+        for _ in 0..<currentMetric.submetrics.count {
+            evolutionArray.append(.None)
+        }
+        if currentMetric.submetrics.count < screenResolutionFactor {
+            newTableHeight =  Int(statsTableDetail.rowHeight) * currentMetric.submetrics.count
+        } else {
+            newTableHeight  = screenResolutionFactor * Int(statsTableDetail.rowHeight)
+        }
+        newTableHeight += 8
+        for constraint in view.constraints {
+            if constraint.constant == CGFloat(tableHeight) {
+                constraint.constant = CGFloat(newTableHeight)
+            }
+        }
+        view.setNeedsLayout()
+        statisticsChart.highlightValues([])
     }
 }

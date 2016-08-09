@@ -100,7 +100,7 @@ extension StatisticViewController: UITableViewDelegate {
         let selectedCell : DashboardCell = tableView.cellForRowAtIndexPath(indexPath)! as! DashboardCell
         
         selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
-        navigationController?.pushViewController(DetailedStatisticViewController(metric: projectsStats[indexPath.section].metrics[indexPath.row], differenceAndPercent: projectDifferenceAndPercent[projectsStats[indexPath.section].id]![projectsStats[indexPath.section].metrics[indexPath.row].id]!, timeFrame: timeFrame.selectedIndex), animated: true)
+        navigationController?.pushViewController(DetailedStatisticViewController(originalMetric: originalProjectsStats[indexPath.section].metrics[indexPath.row], metric: projectsStats[indexPath.section].metrics[indexPath.row], differenceAndPercent: projectDifferenceAndPercent[projectsStats[indexPath.section].id]![projectsStats[indexPath.section].metrics[indexPath.row].id]!, timeFrame: timeFrame.selectedIndex), animated: true)
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

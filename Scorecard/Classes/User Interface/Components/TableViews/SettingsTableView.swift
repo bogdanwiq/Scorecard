@@ -18,7 +18,7 @@ class SettingsTableView : UITableView {
         scrollEnabled = false
         separatorColor = UIColor.clearColor()
         backgroundColor = Color.mainBackground
-        rowHeight = 63
+        rowHeight = 38
     }
 
     required init?(coder aDecoder: NSCoder) {
