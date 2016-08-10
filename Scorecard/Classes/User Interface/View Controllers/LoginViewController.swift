@@ -19,6 +19,8 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
         if FBSDKAccessToken.currentAccessToken() != nil {
             let request1 = FBSDKGraphRequest.init(graphPath: "me/picture", parameters: ["type": "large", "redirect": "false"], HTTPMethod: "GET")
             request1.startWithCompletionHandler({ (connection, result, error) in
@@ -35,16 +37,16 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
                     }
                     let fullName = result.valueForKey("name")! as! String
                     self.actInd.startAnimating()
-                    self.googleLoginButton.alpha = 0.15
-                    self.facebookLoginButton.alpha = 0.6
+                    UIView.animateWithDuration(2.0) {
+                        self.googleLoginButton.alpha = 0.1
+                        self.facebookLoginButton.alpha = 0.6
+                    }
                     self.presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
                 })
             })
         } else if (GIDSignIn.sharedInstance() != nil) {
             GIDSignIn.sharedInstance().signInSilently()
         }
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     override func initUI() {
@@ -105,8 +107,10 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
                             }
                             let fullName = result.valueForKey("name")! as! String
                             self.actInd.startAnimating()
-                            self.googleLoginButton.alpha = 0.15
-                            self.facebookLoginButton.alpha = 0.6
+                            UIView.animateWithDuration(2.0) {
+                                self.googleLoginButton.alpha = 0.1
+                                self.facebookLoginButton.alpha = 0.6
+                            }
                             self.presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
                         })
                     })
@@ -119,22 +123,13 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
         if (error == nil) {
             let fullName = user.profile.name
             let imageUrl = String(user.profile.imageURLWithDimension(130))
-            //let email = user.profile.email
+
             actInd.startAnimating()
-            googleLoginButton.alpha = 0.6
-            facebookLoginButton.alpha = 0.15
+            UIView.animateWithDuration(2.0) {
+                self.googleLoginButton.alpha = 0.6
+                self.facebookLoginButton.alpha = 0.1
+            }
             presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
         }
     }
-    
-    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!, withError error: NSError!) {
-        NSNotificationCenter.defaultCenter().postNotificationName(
-            "ToggleAuthUINotification",
-            object: nil,
-            userInfo: ["statusText": "User has disconnected."])
-    }
-    
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-    }
-    
 }

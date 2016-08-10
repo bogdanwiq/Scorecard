@@ -27,7 +27,7 @@ class DashboardCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initUI(){
+    private func initUI() {
         backgroundColor = Color.mainBackground
         
         typeName = UILabel()

@@ -10,14 +10,13 @@ import UIKit
 
 extension UIImage {
     
-    private static func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+    func resizeImage(targetSize: CGSize) -> UIImage {
         
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / image.size.width
-        let heightRatio = targetSize.height / image.size.height
-        
+        let size = self.size
+        let widthRatio  = targetSize.width  / self.size.width
+        let heightRatio = targetSize.height / self.size.height
         var newSize: CGSize
+        
         if(widthRatio > heightRatio) {
             newSize = CGSizeMake(size.width * heightRatio, size.height * heightRatio)
         } else {
@@ -25,12 +24,11 @@ extension UIImage {
         }
         
         let rect = CGRectMake(0, 0, newSize.width, newSize.height)
-
+        
         UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.drawInRect(rect)
+        self.drawInRect(rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         return newImage
     }
 }
@@ -48,6 +46,3 @@ let kPercentSize : CGFloat = 18.0
 let kLabelWidth : CGFloat = 140.0
 let kLabelHeight : CGFloat = 22.0
 let kAxisFontSize : CGFloat = 13.0
-
-
-

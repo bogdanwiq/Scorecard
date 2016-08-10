@@ -27,16 +27,12 @@ class TimeFrame : UIControl {
     
     init() {
         super.init(frame: CGRectZero)
-        setupView()
+        backgroundColor = Color.timeFrameBackground
+        setupLabels()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
-        backgroundColor = Color.timeFrameBackground
-        setupLabels()
     }
     
     private func setupLabels() {
@@ -75,7 +71,7 @@ class TimeFrame : UIControl {
         return false
     }
     
-    private func displaySelected(){
+    private func displaySelected() {
         
         let animation: CATransition = CATransition()
         

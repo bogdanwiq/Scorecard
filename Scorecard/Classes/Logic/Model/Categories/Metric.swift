@@ -16,11 +16,9 @@ class Metric : Mappable {
     var submetrics : [Submetric]!
     
     init() {
-        
     }
     
     required init?(_ map: Map) {
-        
     }
     
     func mapping(map: Map) {
@@ -28,5 +26,4 @@ class Metric : Mappable {
         name       <- map["name"]
         submetrics <- map["submetrics"]
     }
-    
 }

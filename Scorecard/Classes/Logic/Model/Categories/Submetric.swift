@@ -16,7 +16,6 @@ class Submetric : Mappable {
     var values : [MetricValue]!
     
     init() {
-        
     }
     
     required init?(_ map: Map) {
@@ -28,5 +27,4 @@ class Submetric : Mappable {
         name   <- map["name"]
         values <- map["values"]
     }
-    
 }

@@ -11,7 +11,7 @@ import Foundation
 class ProfilePicture : UIImageView {
     
     var profileImage : UIImage?
-   
+    
     override init(image: UIImage?) {
         super.init(image: image)
         profileImage = image!

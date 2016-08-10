@@ -11,6 +11,7 @@ import UIKit
 class RootViewController: MMDrawerController {
     
     init(fullName: String, imageUrl: String) {
+        
         let centerView = UINavigationController(rootViewController: StatisticViewController())
         let leftView = ProfileViewController(fullName: fullName, imageUrl: imageUrl)
         

@@ -26,7 +26,7 @@ class NotificationCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initUI(){
+    private func initUI() {
         backgroundColor = Color.mainBackground
         
         flag = UIImageView()
@@ -63,7 +63,7 @@ class NotificationCell : UITableViewCell {
         let dictionary = ["flag" : flag,
                           "title": title,
                           "notificationText": notificationText]
-       
+        
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[flag(20)]-[title]-|", options: [.AlignAllTop, .AlignAllBottom], metrics: nil, views: dictionary)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[title(20)][notificationText]-|", options: [.AlignAllLeft, .AlignAllRight] , metrics: nil, views: dictionary)
         addConstraints(cellConstraints)

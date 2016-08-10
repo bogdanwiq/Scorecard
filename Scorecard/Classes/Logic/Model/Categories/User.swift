@@ -15,8 +15,7 @@ class User: Mappable {
     var name : String?
     var image : String?
     
-    required init?(_ map: Map){
-        
+    required init?(_ map: Map) {
     }
     
     func mapping(map: Map) {

@@ -9,20 +9,22 @@
 import Foundation
 import UIKit
 import FBSDKLoginKit
+import PasscodeLock
 
 class ProfileViewController : BaseViewController, UITableViewDataSource {
     
-    var settings = ["Notifications", "Alerts"]
-    let service = DataService.sharedInstance
+    var settings = ["Notifications", "Alerts", "Passcode"]
     let reuseIdentifier = "PreferenceSliderCell"
-    var profilePicture: ProfilePicture!
+    let service = DataService.sharedInstance
     var nameLabel: UILabel!
-    var settingsTableView: SettingsTableView!
     var logoutButton: UIButton!
     var fullName : String!
     var imageUrl : String!
+    var profilePicture: ProfilePicture!
+    var settingsTableView: SettingsTableView!
+    var configuration : PasscodeLockConfiguration!
     
-    init(fullName: String, imageUrl: String){
+    init(fullName: String, imageUrl: String) {
         super.init()
         self.fullName = fullName
         self.imageUrl = imageUrl
@@ -77,8 +79,8 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
         profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=20)-[profilePicture(<=130)]-(>=20)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[settingsTableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[logoutButton(100)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        profileScreenConstraints.append(NSLayoutConstraint(item: logoutButton, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
-        profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=10)-[profilePicture]-10-[nameLabel]-10-[settingsTableView(>=130)]-[logoutButton]-(>=10)-|", options: .AlignAllCenterX, metrics: nil, views: dictionary)
+        profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=10)-[profilePicture]-10-[nameLabel]-10-[settingsTableView(120)]-[logoutButton]-(>=10)-|", options: .AlignAllCenterX, metrics: nil, views: dictionary)
+        
         view.addConstraints(profileScreenConstraints)
     }
     
@@ -117,7 +119,7 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
 
 extension ProfileViewController: PreferenceSliderCellDelegate {
     func preferenceSliderCellDidChangeValue(cell: PreferenceSliderCell, newState: Bool) {
-        
+    
         let userId: String
         
         if FBSDKAccessToken.currentAccessToken() != nil {
@@ -125,6 +127,18 @@ extension ProfileViewController: PreferenceSliderCellDelegate {
         }
         else {
             userId = GIDSignIn.sharedInstance().clientID
+        }
+        
+        if cell.preferenceName.text == "Passcode" {
+            var passcodeKey = userId
+            passcodeKey += "pass"
+            configuration = PasscodeLockConfiguration(passcodeKey: passcodeKey)
+            if newState == true {
+                let passcodeLockVC = PasscodeLockViewController(state: .SetPasscode, configuration: configuration)
+                presentViewController(passcodeLockVC, animated: true, completion: nil)
+            } else {
+                configuration.repository.deletePasscode()
+            }
         }
         service.setProfileSettings(userId, preferenceName: cell.preferenceName.text!, state: newState)
     }
