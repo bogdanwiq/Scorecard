@@ -91,6 +91,7 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
         
         loginManager.logInWithReadPermissions(["public_profile"], fromViewController: self, handler: { (response:FBSDKLoginManagerLoginResult!, error: NSError!) in
             if (error == nil) {
+                // CR: [Someone | Medium] The FB and Google login logic should be moved in AuthenticationService. [Atti]
                 if FBSDKAccessToken.currentAccessToken() != nil {
                     let request1 = FBSDKGraphRequest.init(graphPath: "me/picture", parameters: ["type": "large", "redirect": "false"], HTTPMethod: "GET")
                     request1.startWithCompletionHandler({ (connection, result, error) in
@@ -129,6 +130,7 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
                 self.googleLoginButton.alpha = 0.6
                 self.facebookLoginButton.alpha = 0.1
             }
+            // CR: [Someone | High] The root Vc shouldn't be presented on login, because the login vc will live below this. The RootVC should be added as root vc to window. Maybe it can be added as root by default and the login presented modally if needed. [Atti]
             presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
         }
     }

@@ -30,6 +30,17 @@ class DashboardCell: UITableViewCell {
     private func initUI() {
         backgroundColor = Color.mainBackground
         
+        // CR: [Bogdan | High] create constants for fonts.
+        //e.g.
+        //    static func karbonRegularFont(size: FontSize) {
+        //        return UIFont(name:fontWithName:kFontNameKarbonRegular, size: size)
+        //   }
+        //
+        // enum Button {
+        //  Small = 10, etc
+        // }
+        // cum e descris in coding standards
+        //[Atti]
         typeName = UILabel()
         typeName.textAlignment = NSTextAlignment.Left
         typeName.textColor = Color.textColor
@@ -72,6 +83,7 @@ class DashboardCell: UITableViewCell {
                           "percent": percent,
                           "sign" : sign]
         
+        // CR: [Bogdan | Medium] Use constants for paddings, it's easier to maintain in the future [Atti]
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[typeName]-(>=10)-[difference]-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[counter]-(>=10)-[percent]-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=15)-[typeName]-2-[counter]-(>=15)-|", options: .AlignAllLeft, metrics: nil, views: dictionary)

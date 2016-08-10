@@ -33,9 +33,7 @@ class BaseViewController: UIViewController {
     
     // MARK: - UI
     
-    func initUI() {
-        
-    }
+    func initUI() { /* Override in child if needed */ }
     
     func setupConstraints() { /* Override in child if needed */ }
 }

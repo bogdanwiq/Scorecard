@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// CR: [Bogdan | Medium] Just for this setups shouldn't subclass tableview. mabe create one tableview for basic setups and the cell registration do outside. [Atti]
 class StatsTableView : UITableView {
     
     init() {

@@ -52,6 +52,7 @@ class NotificationCell : UITableViewCell {
         notificationText.translatesAutoresizingMaskIntoConstraints = false
         addSubview(notificationText)
         
+        // CR: [Bogdan | Low] Create date formats manager to handle handle dates.[Atti]
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "d MMM yyyy HH:mm"
         date = dateFormatter.stringFromDate(NSDate())

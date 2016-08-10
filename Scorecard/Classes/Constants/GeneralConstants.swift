@@ -8,6 +8,7 @@
 
 import UIKit
 
+// CR: [Andrei | High] Move this uiimage extension in separate file. [Atti]
 extension UIImage {
     
     func resizeImage(targetSize: CGSize) -> UIImage {
