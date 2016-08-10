@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import PasscodeLock
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -45,5 +46,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @available(iOS 9.0, *)
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         return GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?, annotation: options[UIApplicationOpenURLOptionsAnnotationKey]) || FBSDKApplicationDelegate.sharedInstance().application(app, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
+    }
+    
+    func applicationWillEnterForeground(application: UIApplication) {
+        let rootViewController = window?.rootViewController as! LoginViewController
+        let drawerController = rootViewController.presentedViewController as? RootViewController
+        // if user hasn't logged in
+        if drawerController != nil {
+            let navigationController = drawerController!.centerViewController as? UINavigationController
+            
+            var passcodeKey: String
+            
+            if FBSDKAccessToken.currentAccessToken() != nil {
+                passcodeKey = FBSDKAccessToken.currentAccessToken().userID
+            } else {
+                passcodeKey = GIDSignIn.sharedInstance().clientID
+            }
+            passcodeKey += "pass"
+            
+            let configuration = PasscodeLockConfiguration(passcodeKey: passcodeKey)
+            if configuration.repository.hasPasscode && navigationController != nil {
+                let passcodeLockVC = PasscodeLockViewController(state: .EnterPasscode, configuration: configuration)
+                navigationController!.topViewController?.presentViewController(passcodeLockVC, animated: true, completion: nil)
+            }
+        }
     }
 }
