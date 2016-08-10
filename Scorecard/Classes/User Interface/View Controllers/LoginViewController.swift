@@ -19,6 +19,7 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         if FBSDKAccessToken.currentAccessToken() != nil {
@@ -41,6 +42,7 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
                         self.googleLoginButton.alpha = 0.1
                         self.facebookLoginButton.alpha = 0.6
                     }
+                    
                     self.presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
                 })
             })
@@ -76,8 +78,9 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
         let dictionary = ["googleButton": googleLoginButton, "facebookButton": facebookLoginButton, "actInd": actInd]
         
         allConstraints.append(NSLayoutConstraint(item: actInd, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
+        allConstraints.append(NSLayoutConstraint(item: googleLoginButton, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.15, constant: 0.0))
         allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[googleButton]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=20)-[actInd]-(>=20)-[googleButton(>=100)][facebookButton(==googleButton)]|", options: [.AlignAllLeft, .AlignAllRight], metrics: nil, views: dictionary)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=20)-[actInd]-(>=20)-[googleButton][facebookButton(==googleButton)]|", options: [.AlignAllLeft, .AlignAllRight], metrics: nil, views: dictionary)
         view.addConstraints(allConstraints)
     }
     
@@ -111,6 +114,7 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
                                 self.googleLoginButton.alpha = 0.1
                                 self.facebookLoginButton.alpha = 0.6
                             }
+                            
                             self.presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
                         })
                     })
@@ -129,6 +133,7 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
                 self.googleLoginButton.alpha = 0.6
                 self.facebookLoginButton.alpha = 0.1
             }
+            
             presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
         }
     }
