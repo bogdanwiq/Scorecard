@@ -143,12 +143,18 @@ extension ProfileViewController: PreferenceSliderCellDelegate {
                 let passcodeLockVC = PasscodeLockViewController(state: .SetPasscode, configuration: configuration)
                 presentViewController(passcodeLockVC, animated: true, completion: nil)
                 passcodeLockVC.dismissCompletionCallback = {
-                    cell.slider.setOn(false, animated: true)
+                    if self.configuration.repository.hasPasscode == false {
+                        cell.slider.setOn(false, animated: true)
+                    }
                 }
             } else {
                 configuration.repository.deletePasscode()
             }
         }
-        service.setProfileSettings(userId, preferenceName: cell.preferenceName.text!, state: newState)
+        service.setProfileSettings(userId, preferenceName: cell.preferenceName.text!, state: cell.slider.on)
+    }
+    
+    func didCancelPasscodeSetup() {
+        
     }
 }
