@@ -36,14 +36,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func userDidSignIn() {
-        let root = window?.rootViewController as! LoginViewController
-        window?.rootViewController = root.root
-        window?.makeKeyAndVisible()
+        
+        let root = self.window?.rootViewController as! LoginViewController
+        root.actInd.startAnimating()
+        let loginType = root.getLoginType()
+        UIView.animateWithDuration(2.0, delay: 0.0, options: .CurveLinear, animations: {() -> Void in
+            if loginType == "Facebook" {
+                root.facebookLoginButton.alpha = 0.6
+                root.googleLoginButton.alpha = 0.1
+            } else {
+                root.facebookLoginButton.alpha = 0.1
+                root.googleLoginButton.alpha = 0.6
+            }
+            } , completion: {(true) -> Void in
+                UIView.transitionWithView(self.window!, duration: 1.0, options: .TransitionFlipFromLeft, animations: {() -> Void in
+                    self.window?.rootViewController = root.root }, completion: nil)
+        })
     }
     
     func userDidSignOut() {
-        window?.rootViewController = LoginViewController()
-        window?.makeKeyAndVisible()
+        UIView.transitionWithView(self.window!, duration: 1.0, options: .TransitionFlipFromRight , animations: {() -> Void in
+            self.window?.rootViewController = LoginViewController()}, completion: nil)
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
