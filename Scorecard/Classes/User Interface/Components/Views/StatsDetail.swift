@@ -36,28 +36,28 @@ class StatsDetail : UIView {
         typeName = UILabel()
         typeName.textAlignment = NSTextAlignment.Left
         typeName.textColor = Color.textColor
-        typeName.font = UIFont(name:"HelveticaNeue", size: kTypeNameSize)
+        typeName.font = Font.helveticaNeue(.TypeName)
         typeName.translatesAutoresizingMaskIntoConstraints = false
         addSubview(typeName)
         
         counter = UILabel()
         counter.textAlignment = NSTextAlignment.Left
         counter.textColor = Color.textColor
-        counter.font = UIFont(name:"HelveticaNeue", size: kCounterSize)
+        counter.font = Font.helveticaNeue(.Counter)
         counter.translatesAutoresizingMaskIntoConstraints = false
         addSubview(counter)
         
         difference = UILabel()
         difference.textAlignment = NSTextAlignment.Right
         difference.textColor = Color.textColor
-        difference.font = UIFont(name:"HelveticaNeue", size: kDifferenceSize)
+        difference.font = Font.helveticaNeue(.Difference)
         difference.translatesAutoresizingMaskIntoConstraints = false
         addSubview(difference)
         
         percent = UILabel()
         percent.textAlignment = NSTextAlignment.Right
         percent.textColor = Color.textColor
-        percent.font = UIFont(name:"HelveticaNeue", size: kPercentSize)
+        percent.font = Font.helveticaNeue(.Percent)
         percent.translatesAutoresizingMaskIntoConstraints = false
         addSubview(percent)
         
@@ -71,19 +71,19 @@ class StatsDetail : UIView {
     private func setupConstraints() {
         
         var cellConstraints = [NSLayoutConstraint]()
-        let dictionary = ["typeName": typeName,
-                          "counter" : counter,
-                          "difference": difference,
-                          "percent": percent,
-                          "sign" : sign,
-                          ]
+        let metrics : [String: CGFloat] = ["padding": 20, "inner":10]
+        let views : [String: UIView] = ["typeName": typeName,
+                                        "counter" : counter,
+                                        "difference": difference,
+                                        "percent": percent,
+                                        "sign" : sign]
         
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[typeName]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[difference]-10-[sign]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[typeName]-4-[counter]-|", options: .AlignAllLeft, metrics: nil, views: dictionary)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[difference]-[percent]-|", options: .AlignAllRight, metrics: nil, views: dictionary)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[typeName]", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[difference]-(inner)-[sign]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[typeName]-4-[counter]-|", options: .AlignAllLeft, metrics: nil, views: views)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[difference]-[percent]-|", options: .AlignAllRight, metrics: nil, views: views)
         cellConstraints.append(NSLayoutConstraint(item: sign, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
-        addConstraints(cellConstraints)
+        NSLayoutConstraint.activateConstraints(cellConstraints)
     }
 }
 

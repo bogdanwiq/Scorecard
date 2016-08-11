@@ -15,10 +15,10 @@ class StatisticViewController: BaseViewController {
     
     let service = DataService.sharedInstance
     let reuseIdentifier : String = "DashboardCell"
+    var tableView : UITableView!
     let timeFrame = TimeFrame()
-    let tableView = StatsTableView()
-    var originalProjectsStats : [Project]!
-    var projectsStats : [Project]!
+    var originalProjectsStats: [Project] = []
+    var projectsStats: [Project] = []
     var projectDifferenceAndPercent : [String: [String: (Int, Double)]] = [:]
     
     override func viewDidAppear(animated: Bool) {
@@ -44,8 +44,14 @@ class StatisticViewController: BaseViewController {
         timeFrame.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(timeFrame)
         
+        tableView = UITableView(frame: CGRectZero, style: .Plain)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 80.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorColor = UIColor.clearColor()
+        tableView.backgroundColor = Color.mainBackground
+        tableView.registerClass(DashboardCell.self, forCellReuseIdentifier: "DashboardCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
@@ -53,17 +59,6 @@ class StatisticViewController: BaseViewController {
         projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .All)
         projectsStats = []
         projectsStats.appendContentsOf(originalProjectsStats)
-    }
-    
-    override func setupConstraints() {
-        
-        var allConstraints = [NSLayoutConstraint]()
-        let dictionary = ["timeFrame": timeFrame, "tableView": tableView]
-        
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[timeFrame]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[timeFrame(30)][tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        view.addConstraints(allConstraints)
     }
     
     func presentPasscodeScreen() {
@@ -82,6 +77,17 @@ class StatisticViewController: BaseViewController {
             let passcodeLockVC = PasscodeLockViewController(state: .EnterPasscode, configuration: configuration)
             presentViewController(passcodeLockVC, animated: true, completion: nil)
         }
+    }
+    
+    override func setupConstraints() {
+        
+        var allConstraints = [NSLayoutConstraint]()
+        let views : [String: UIView] = ["timeFrame": timeFrame, "tableView": tableView]
+        
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[timeFrame]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[timeFrame(30)][tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+        NSLayoutConstraint.activateConstraints(allConstraints)
     }
     
     func slideLeft() {
@@ -114,7 +120,7 @@ extension StatisticViewController: UITableViewDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = originalProjectsStats[section].name
         label.textColor = Color.timeFrameSelected
-        label.font = UIFont.boldSystemFontOfSize(17.0)
+        label.font = Font.system(.Metric)
         header.addSubview(label)
         header.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[title]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["title": label]))
         header.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: header, attribute: .CenterY, multiplier: 1.0, constant: 0.0))

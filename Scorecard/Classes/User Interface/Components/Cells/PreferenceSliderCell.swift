@@ -40,11 +40,12 @@ class PreferenceSliderCell: UITableViewCell {
     func setupConstraints() {
         
         var constraints = [NSLayoutConstraint]()
-        let dictionary = ["preferenceName": preferenceName, "slider": slider]
+        let metrics : [String: CGFloat] = ["padding": 10]
+        let views : [String: UIView] = ["preferenceName": preferenceName, "slider": slider]
         
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[preferenceName]-|", options: .AlignAllCenterY, metrics: nil, views: dictionary)
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[preferenceName]-(>=10)-[slider]-20-|", options: .AlignAllCenterY, metrics: nil, views: dictionary)
-        addConstraints(constraints)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[preferenceName]-|", options: .AlignAllCenterY, metrics: nil, views: views)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[preferenceName]-(>=10)-[slider]-(padding)-|", options: .AlignAllCenterY, metrics: metrics, views: views)
+        NSLayoutConstraint.activateConstraints(constraints)
     }
     
     // MARK: - User interactions

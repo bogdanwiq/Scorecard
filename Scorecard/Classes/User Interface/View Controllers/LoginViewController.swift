@@ -11,40 +11,27 @@ import UIKit
 import GoogleSignIn
 import FBSDKLoginKit
 
-class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDelegate {
+class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDelegate{
     
+    var authenticationService = AuthenticationService.sharedInstance
     var actInd : UIActivityIndicatorView!
     var googleLoginButton : UIButton!
     var facebookLoginButton : UIButton!
+    var root: RootViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         if FBSDKAccessToken.currentAccessToken() != nil {
-            let request1 = FBSDKGraphRequest.init(graphPath: "me/picture", parameters: ["type": "large", "redirect": "false"], HTTPMethod: "GET")
-            request1.startWithCompletionHandler({ (connection, result, error) in
-                if error != nil {
-                    print(error.localizedDescription)
-                    return
-                }
-                let imageUrl = result.valueForKey("data")!.valueForKey("url")! as! String
-                let request2 = FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields": "name"], HTTPMethod: "GET")
-                request2.startWithCompletionHandler({ (connection, result, error) in
-                    if error != nil {
-                        print(error.localizedDescription)
-                        return
-                    }
-                    let fullName = result.valueForKey("name")! as! String
-                    self.actInd.startAnimating()
-                    UIView.animateWithDuration(2.0) {
-                        self.googleLoginButton.alpha = 0.1
-                        self.facebookLoginButton.alpha = 0.6
-                    }
-                    
-                    self.presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
-                })
+            self.authenticationService.facebookLogin({ (fullName, imageURL) in
+//                self.actInd.startAnimating()
+//                UIView.animateWithDuration(2.0) {
+//                    self.googleLoginButton.alpha = 0.1
+//                    self.facebookLoginButton.alpha = 0.6
+//                }
+                self.root = RootViewController(fullName: fullName, imageUrl: imageURL)
+                NSNotificationCenter.defaultCenter().postNotificationName("userDidSignIn", object: nil)
             })
         } else if (GIDSignIn.sharedInstance() != nil) {
             GIDSignIn.sharedInstance().signInSilently()
@@ -75,17 +62,27 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
     override func setupConstraints() {
         
         var allConstraints = [NSLayoutConstraint]()
-        let dictionary = ["googleButton": googleLoginButton, "facebookButton": facebookLoginButton, "actInd": actInd]
+        let metrics : [String: CGFloat] = ["padding": 20]
+        let views : [String: UIView] = ["googleButton": googleLoginButton, "facebookButton": facebookLoginButton, "actInd": actInd]
         
         allConstraints.append(NSLayoutConstraint(item: actInd, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
         allConstraints.append(NSLayoutConstraint(item: googleLoginButton, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.15, constant: 0.0))
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[googleButton]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=20)-[actInd]-(>=20)-[googleButton][facebookButton(==googleButton)]|", options: [.AlignAllLeft, .AlignAllRight], metrics: nil, views: dictionary)
-        view.addConstraints(allConstraints)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[googleButton]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=padding)-[actInd]-(>=padding)-[googleButton][facebookButton(==googleButton)]|", options: [.AlignAllLeft, .AlignAllRight], metrics: metrics, views: views)
+        NSLayoutConstraint.activateConstraints(allConstraints)
     }
     
     func btnGoogleSignInPressed() {
         GIDSignIn.sharedInstance().signIn()
+    }
+    
+    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
+        if (error == nil) {
+            let fullName = user.profile.name
+            let imageUrl = String(user.profile.imageURLWithDimension(130))
+            root = RootViewController(fullName: fullName, imageUrl: imageUrl)
+            NSNotificationCenter.defaultCenter().postNotificationName("userDidSignIn", object: nil)
+        }
     }
     
     func btnFacebookSignInPressed() {
@@ -94,47 +91,11 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
         
         loginManager.logInWithReadPermissions(["public_profile"], fromViewController: self, handler: { (response:FBSDKLoginManagerLoginResult!, error: NSError!) in
             if (error == nil) {
-                if FBSDKAccessToken.currentAccessToken() != nil {
-                    let request1 = FBSDKGraphRequest.init(graphPath: "me/picture", parameters: ["type": "large", "redirect": "false"], HTTPMethod: "GET")
-                    request1.startWithCompletionHandler({ (connection, result, error) in
-                        if error != nil {
-                            print(error.localizedDescription)
-                            return
-                        }
-                        let imageUrl = result.valueForKey("data")!.valueForKey("url")! as! String
-                        let request2 = FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields": "name"], HTTPMethod: "GET")
-                        request2.startWithCompletionHandler({ (connection, result, error) in
-                            if error != nil {
-                                print(error.localizedDescription)
-                                return
-                            }
-                            let fullName = result.valueForKey("name")! as! String
-                            self.actInd.startAnimating()
-                            UIView.animateWithDuration(2.0) {
-                                self.googleLoginButton.alpha = 0.1
-                                self.facebookLoginButton.alpha = 0.6
-                            }
-                            
-                            self.presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
-                        })
-                    })
-                }
+                self.authenticationService.facebookLogin({ (fullName, imageURL) in
+                    self.root = RootViewController(fullName: fullName, imageUrl: imageURL)
+                    NSNotificationCenter.defaultCenter().postNotificationName("userDidSignIn", object: nil)
+                })
             }
         })
-    }
-    
-    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
-        if (error == nil) {
-            let fullName = user.profile.name
-            let imageUrl = String(user.profile.imageURLWithDimension(130))
-
-            actInd.startAnimating()
-            UIView.animateWithDuration(2.0) {
-                self.googleLoginButton.alpha = 0.6
-                self.facebookLoginButton.alpha = 0.1
-            }
-            
-            presentViewController(RootViewController(fullName: fullName, imageUrl: imageUrl), animated: true, completion: nil)
-        }
     }
 }

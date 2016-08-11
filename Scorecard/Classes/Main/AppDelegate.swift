@@ -8,12 +8,12 @@
 
 import UIKit
 import FBSDKLoginKit
+import PasscodeLock
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var rootViewController: LoginViewController!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -28,10 +28,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         UIApplication.sharedApplication().registerUserNotificationSettings(mySettings)
-        rootViewController = LoginViewController()
-        window?.rootViewController = rootViewController
+        window?.rootViewController = LoginViewController()
         window?.makeKeyAndVisible()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userDidSignIn), name: "userDidSignIn", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userDidSignOut), name: "userDidSignOut", object: nil)
         return true
+    }
+    
+    func userDidSignIn() {
+        let root = window?.rootViewController as! LoginViewController
+        window?.rootViewController = root.root
+        window?.makeKeyAndVisible()
+    }
+    
+    func userDidSignOut() {
+        window?.rootViewController = LoginViewController()
+        window?.makeKeyAndVisible()
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
@@ -45,5 +57,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @available(iOS 9.0, *)
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         return GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?, annotation: options[UIApplicationOpenURLOptionsAnnotationKey]) || FBSDKApplicationDelegate.sharedInstance().application(app, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
+    }
+    
+    func applicationWillEnterForeground(application: UIApplication) {
+        let rootViewController = window?.rootViewController as? RootViewController
+        // if user hasn't logged in
+        if rootViewController != nil {
+            let navigationController = rootViewController!.centerViewController as? UINavigationController
+            
+            var passcodeKey: String
+            
+            if FBSDKAccessToken.currentAccessToken() != nil {
+                passcodeKey = FBSDKAccessToken.currentAccessToken().userID
+            } else {
+                passcodeKey = GIDSignIn.sharedInstance().clientID
+            }
+            passcodeKey += "pass"
+            
+            let configuration = PasscodeLockConfiguration(passcodeKey: passcodeKey)
+            if configuration.repository.hasPasscode && navigationController != nil {
+                let passcodeLockVC = PasscodeLockViewController(state: .EnterPasscode, configuration: configuration)
+                navigationController!.topViewController?.presentViewController(passcodeLockVC, animated: true, completion: nil)
+            }
+        }
     }
 }

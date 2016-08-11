@@ -20,8 +20,8 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
     var logoutButton: UIButton!
     var fullName : String!
     var imageUrl : String!
+    var settingsTableView: UITableView!
     var profilePicture: ProfilePicture!
-    var settingsTableView: SettingsTableView!
     var configuration : PasscodeLockConfiguration!
     
     init(fullName: String, imageUrl: String) {
@@ -52,8 +52,14 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nameLabel)
         
-        settingsTableView = SettingsTableView()
+        settingsTableView = UITableView(frame: CGRectZero, style: .Plain)
+        settingsTableView.allowsSelection = false
+        settingsTableView.scrollEnabled = false
+        settingsTableView.separatorColor = UIColor.clearColor()
+        settingsTableView.backgroundColor = Color.mainBackground
+        settingsTableView.rowHeight = 38
         settingsTableView.dataSource = self
+        settingsTableView.registerClass(PreferenceSliderCell.self, forCellReuseIdentifier: "PreferenceSliderCell")
         settingsTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(settingsTableView)
         
@@ -64,7 +70,7 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
         logoutButton.tintColor = Color.textColor
         logoutButton.layer.cornerRadius = 10.0
         logoutButton.clipsToBounds = true
-        logoutButton.addTarget(self, action: #selector(googleSignOut), forControlEvents: .TouchUpInside)
+        logoutButton.addTarget(self, action: #selector(logout), forControlEvents: .TouchUpInside)
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logoutButton)
     }
@@ -72,16 +78,16 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
     override func setupConstraints() {
         
         var profileScreenConstraints = [NSLayoutConstraint]()
-        let dictionary = ["profilePicture": profilePicture, "nameLabel": nameLabel, "settingsTableView": settingsTableView, "logoutButton": logoutButton]
+        let metrics : [String: CGFloat] = ["padding":20, "margin":10]
+        let views : [String: UIView] = ["profilePicture": profilePicture, "nameLabel": nameLabel, "settingsTableView": settingsTableView, "logoutButton": logoutButton]
         
         profileScreenConstraints.append(NSLayoutConstraint(item: settingsTableView, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1.0, constant: 50.0))
         profileScreenConstraints.append(NSLayoutConstraint(item: profilePicture, attribute: .Width, relatedBy: .Equal, toItem: profilePicture, attribute: .Height, multiplier: 1.0, constant: 0.0))
-        profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=20)-[profilePicture(<=130)]-(>=20)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[settingsTableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[logoutButton(100)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=10)-[profilePicture]-10-[nameLabel]-10-[settingsTableView(120)]-[logoutButton]-(>=10)-|", options: .AlignAllCenterX, metrics: nil, views: dictionary)
-        
-        view.addConstraints(profileScreenConstraints)
+        profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=padding)-[profilePicture(<=130)]-(>=padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[settingsTableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+        profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[logoutButton(100)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+        profileScreenConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=margin)-[profilePicture]-(margin)-[nameLabel]-(margin)-[settingsTableView(120)]-[logoutButton]-(>=margin)-|", options: .AlignAllCenterX, metrics: metrics, views: views)
+        NSLayoutConstraint.activateConstraints(profileScreenConstraints)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,20 +112,20 @@ class ProfileViewController : BaseViewController, UITableViewDataSource {
         return cell
     }
     
-    func googleSignOut() {
+    func logout() {
         if FBSDKAccessToken.currentAccessToken() != nil {
             FBSDKAccessToken.setCurrentAccessToken(nil)
             FBSDKProfile.setCurrentProfile(nil)
         } else {
             GIDSignIn.sharedInstance().signOut()
         }
-        presentViewController(LoginViewController(), animated: true, completion: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("userDidSignOut", object: nil)
     }
 }
 
 extension ProfileViewController: PreferenceSliderCellDelegate {
     func preferenceSliderCellDidChangeValue(cell: PreferenceSliderCell, newState: Bool) {
-    
+        
         let userId: String
         
         if FBSDKAccessToken.currentAccessToken() != nil {
@@ -136,6 +142,9 @@ extension ProfileViewController: PreferenceSliderCellDelegate {
             if newState == true {
                 let passcodeLockVC = PasscodeLockViewController(state: .SetPasscode, configuration: configuration)
                 presentViewController(passcodeLockVC, animated: true, completion: nil)
+                passcodeLockVC.dismissCompletionCallback = {
+                    cell.slider.setOn(false, animated: true)
+                }
             } else {
                 configuration.repository.deletePasscode()
             }

@@ -31,7 +31,7 @@ class StatisticsChart: LineChartView, ChartViewDelegate {
         xAxis.drawAxisLineEnabled = false
         xAxis.labelPosition = .TopInside
         xAxis.avoidFirstLastClippingEnabled = true
-        xAxis.labelFont = UIFont(name: "HelveticaNeue", size: kAxisFontSize)!
+        xAxis.labelFont = Font.helveticaNeue(.Axis)
         xAxis.labelTextColor = Color.chartTextColor
         drawGridBackgroundEnabled = false
         drawBordersEnabled = false

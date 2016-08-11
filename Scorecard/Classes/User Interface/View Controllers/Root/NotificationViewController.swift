@@ -12,7 +12,7 @@ import UIKit
 class NotificationViewController: BaseViewController {
     
     let reuseIdentifier : String = "NotificationCell"
-    let tableView = NotificationTableView()
+    var tableView : UITableView!
     var allNotifications: [UILocalNotification] = []
     
     override func viewDidAppear(animated: Bool) {
@@ -31,12 +31,19 @@ class NotificationViewController: BaseViewController {
         
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
-
+    
     override func initUI() {
         view.backgroundColor = Color.mainBackground
         title = "Notifications"
         
+        tableView = UITableView(frame: CGRectZero, style: UITableViewStyle.Plain)
+        tableView.allowsSelection = false
+        tableView.scrollEnabled = true
+        tableView.separatorColor = UIColor.clearColor()
+        tableView.backgroundColor = Color.mainBackground
+        tableView.rowHeight = 90
         tableView.dataSource = self
+        tableView.registerClass(NotificationCell.self, forCellReuseIdentifier: "NotificationCell")
         tableView.allowsMultipleSelectionDuringEditing = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
@@ -45,11 +52,11 @@ class NotificationViewController: BaseViewController {
     override func setupConstraints() {
         
         var allConstraints = [NSLayoutConstraint]()
-        let dictionary = ["tableView": tableView]
+        let views : [String: UIView] = ["tableView": tableView]
         
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        view.addConstraints(allConstraints)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+        NSLayoutConstraint.activateConstraints(allConstraints)
     }
 }
 

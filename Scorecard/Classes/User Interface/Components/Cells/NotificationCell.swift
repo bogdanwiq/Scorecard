@@ -37,7 +37,7 @@ class NotificationCell : UITableViewCell {
         
         title = UILabel()
         title.text = "Congratulations"
-        title.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
+        title.font = Font.helveticaNeueBold(.Normal)
         title.textAlignment = NSTextAlignment.Left
         title.textColor = Color.textColor
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -48,24 +48,24 @@ class NotificationCell : UITableViewCell {
         notificationText.numberOfLines = 0
         notificationText.textColor = Color.textColor
         notificationText.textAlignment = NSTextAlignment.Left
-        notificationText.font = UIFont(name:"HelveticaNeue", size: 16.0)
+        notificationText.font = Font.helveticaNeue(.Normal)
         notificationText.translatesAutoresizingMaskIntoConstraints = false
         addSubview(notificationText)
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "d MMM yyyy HH:mm"
+        let dateFormatter = DateFormatter(format: .All)
         date = dateFormatter.stringFromDate(NSDate())
     }
     
     private func setupConstraints() {
         
         var cellConstraints = [NSLayoutConstraint]()
-        let dictionary = ["flag" : flag,
-                          "title": title,
-                          "notificationText": notificationText]
-        
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[flag(20)]-[title]-|", options: [.AlignAllTop, .AlignAllBottom], metrics: nil, views: dictionary)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[title(20)][notificationText]-|", options: [.AlignAllLeft, .AlignAllRight] , metrics: nil, views: dictionary)
-        addConstraints(cellConstraints)
+        let metrics : [String: CGFloat] = ["size": 20]
+        let views : [String: UIView] = ["flag" : flag,
+                                        "title": title,
+                                        "notificationText": notificationText]
+    
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[flag(size)]-[title]-|", options: [.AlignAllTop, .AlignAllBottom], metrics: metrics, views: views)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[title(size)][notificationText]-|", options: [.AlignAllLeft, .AlignAllRight] , metrics: metrics, views: views)
+        NSLayoutConstraint.activateConstraints(cellConstraints)
     }
 }

@@ -37,13 +37,13 @@ class StatsDetailCell : UITableViewCell {
         typeName = UILabel()
         typeName.textAlignment = NSTextAlignment.Left
         typeName.textColor = Color.textColor
-        typeName.font = UIFont(name:"HelveticaNeue", size: kTypeNameSize)
+        typeName.font = Font.helveticaNeue(.TypeName)
         typeName.translatesAutoresizingMaskIntoConstraints = false
         addSubview(typeName)
         
         difference = UILabel()
         difference.textColor = Color.textColor
-        difference.font = UIFont(name:"HelveticaNeue", size: kDifferenceSize)
+        difference.font = Font.helveticaNeue(.Difference)
         difference.translatesAutoresizingMaskIntoConstraints = false
         addSubview(difference)
         
@@ -55,13 +55,13 @@ class StatsDetailCell : UITableViewCell {
     private func setupConstraints() {
         
         var cellConstraints = [NSLayoutConstraint]()
-        let dictionary = ["identifier" : identifier,
-                          "typeName": typeName,
-                          "difference": difference,
-                          "sign": sign]
+        let views : [String: UIView] = ["identifier" : identifier,
+                                       "typeName": typeName,
+                                       "difference": difference,
+                                       "sign": sign]
         
         cellConstraints.append(NSLayoutConstraint(item: identifier, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[identifier]-5-[typeName]-(>=10)-[difference]-[sign]-|", options: .AlignAllCenterY, metrics: nil, views: dictionary)
-        addConstraints(cellConstraints)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[identifier]-5-[typeName]-(>=10)-[difference]-[sign]-|", options: .AlignAllCenterY, metrics: nil, views: views)
+        NSLayoutConstraint.activateConstraints(cellConstraints)
     }
 }

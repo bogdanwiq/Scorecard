@@ -341,7 +341,7 @@ class DataService {
     func getDiagramFor(submetric: [MetricValue], timeFrame: Int, xAxis: [String]) -> [ChartDataEntry] {
         
         var chartValues : [ChartDataEntry] = []
-        let dateFormatter = NSDateFormatter()
+        var dateFormatter : DateFormatter!
         var date : String!
         
         for i in 0..<xAxis.count {
@@ -351,23 +351,23 @@ class DataService {
         for metricValue in submetric {
             switch timeFrame {
             case 0:
-                dateFormatter.dateFormat = "HH"
+                dateFormatter = DateFormatter(format: .Hour)
                 date = dateFormatter.stringFromDate(metricValue.date) + ":00"
                 break
             case 1:
-                dateFormatter.dateFormat = "EEE"
+                dateFormatter = DateFormatter(format: .Weekday)
                 date = dateFormatter.stringFromDate(metricValue.date).uppercaseString
                 break
             case 2:
-                dateFormatter.dateFormat = "d"
+                dateFormatter = DateFormatter(format: .Day)
                 date = dateFormatter.stringFromDate(metricValue.date)
                 break
             case 3:
-                dateFormatter.dateFormat = "MMM"
+                dateFormatter = DateFormatter(format: .Month)
                 date = dateFormatter.stringFromDate(metricValue.date).uppercaseString
                 break
             case 4:
-                dateFormatter.dateFormat = "yyyy"
+                dateFormatter = DateFormatter(format: .Year)
                 date = dateFormatter.stringFromDate(metricValue.date)
                 break
             default:
@@ -381,8 +381,7 @@ class DataService {
     func getYearsLimit(metric : Metric) -> [String] {
         
         var years : [String] = []
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy"
+        let dateFormatter = DateFormatter(format: .Year)
         
         for submetric in metric.submetrics {
             for subvalues in submetric.values {

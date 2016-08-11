@@ -33,28 +33,28 @@ class DashboardCell: UITableViewCell {
         typeName = UILabel()
         typeName.textAlignment = NSTextAlignment.Left
         typeName.textColor = Color.textColor
-        typeName.font = UIFont(name:"HelveticaNeue", size: kTypeNameSize)
+        typeName.font = Font.helveticaNeue(.TypeName)
         typeName.translatesAutoresizingMaskIntoConstraints = false
         addSubview(typeName)
         
         counter = UILabel()
         counter.textAlignment = NSTextAlignment.Left
         counter.textColor = Color.textColor
-        counter.font = UIFont(name:"HelveticaNeue", size: kCounterSize)
+        counter.font = Font.helveticaNeue(.Counter)
         counter.translatesAutoresizingMaskIntoConstraints = false
         addSubview(counter)
         
         difference = UILabel()
         difference.textAlignment = NSTextAlignment.Right
         difference.textColor = Color.textColor
-        difference.font = UIFont(name:"HelveticaNeue", size: kDifferenceSize)
+        difference.font = Font.helveticaNeue(.Difference)
         difference.translatesAutoresizingMaskIntoConstraints = false
         addSubview(difference)
         
         percent = UILabel()
         percent.textAlignment = NSTextAlignment.Right
         percent.textColor = Color.textColor
-        percent.font = UIFont(name:"HelveticaNeue", size: kPercentSize)
+        percent.font = Font.helveticaNeue(.Percent)
         percent.translatesAutoresizingMaskIntoConstraints = false
         addSubview(percent)
         
@@ -66,17 +66,18 @@ class DashboardCell: UITableViewCell {
     private func setupConstraints() {
         
         var cellConstraints = [NSLayoutConstraint]()
-        let dictionary = ["typeName": typeName,
-                          "counter" : counter,
-                          "difference": difference,
-                          "percent": percent,
-                          "sign" : sign]
+        let metrics : [String: CGFloat] = ["padding": 10]
+        let views : [String: UIView] = ["typeName": typeName,
+                                        "counter" : counter,
+                                        "difference": difference,
+                                        "percent": percent,
+                                        "sign" : sign]
         
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[typeName]-(>=10)-[difference]-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[counter]-(>=10)-[percent]-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=15)-[typeName]-2-[counter]-(>=15)-|", options: .AlignAllLeft, metrics: nil, views: dictionary)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[difference]-(>=10)-[percent]-|", options: .AlignAllRight, metrics: nil, views: dictionary)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[typeName]-(>=padding)-[difference]-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[counter]-(>=padding)-[percent]-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[typeName]-(>=2)-[counter]-(padding)-|", options: .AlignAllLeft, metrics: metrics, views: views)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[difference]-(>=padding)-[percent]-|", options: .AlignAllRight, metrics: metrics, views: views)
         cellConstraints.append(NSLayoutConstraint(item: sign, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
-        addConstraints(cellConstraints)
+        NSLayoutConstraint.activateConstraints(cellConstraints)
     }
 }

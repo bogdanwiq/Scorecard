@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04289FE51D3F93F00006DBCA /* SettingsTableView.swift */; };
 		04347BE61D4F492C0003C76A /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 04347BE51D4F492C0003C76A /* example.json */; };
 		049D3BEB1D3F738C00D72A90 /* PreferenceSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */; };
 		04E95F631D54817E003B8FC2 /* PasscodeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E95F621D54817E003B8FC2 /* PasscodeRepository.swift */; };
@@ -23,12 +22,13 @@
 		F41BC7B01D522B900027FED6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F41BC7AF1D522B900027FED6 /* GoogleService-Info.plist */; };
 		F41BC7B21D5236A50027FED6 /* example2.json in Resources */ = {isa = PBXBuildFile; fileRef = F41BC7B11D5236A50027FED6 /* example2.json */; };
 		F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */; };
+		F433F1C41D5B655C003489BF /* ImageUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433F1C31D5B655C003489BF /* ImageUtilities.swift */; };
+		F433F1C61D5B67F6003489BF /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433F1C51D5B67F6003489BF /* FontConstants.swift */; };
 		F4370C921D4792F3007FFE58 /* CircleMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4370C911D4792F3007FFE58 /* CircleMarker.swift */; };
 		F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185C71D3E191D007ABA24 /* MMDrawerBarButtonItem.m */; };
 		F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185C91D3E191D007ABA24 /* MMDrawerController.m */; };
 		F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185CC1D3E191D007ABA24 /* MMDrawerVisualState.m */; };
 		F46185D21D3E191D007ABA24 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */; };
-		F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D31D3E239F007ABA24 /* StatsTableView.swift */; };
 		F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D71D3E3605007ABA24 /* DashboardCell.swift */; };
 		F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D91D3E6124007ABA24 /* ProfilePicture.swift */; };
 		F464DE031D4F48280027B953 /* MainAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F464DE021D4F48280027B953 /* MainAppearance.swift */; };
@@ -40,12 +40,13 @@
 		F4984AC51D464288009B0DEA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC41D464288009B0DEA /* User.swift */; };
 		F4984AC71D464327009B0DEA /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984AC61D464327009B0DEA /* Project.swift */; };
 		F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4984ACA1D46444A009B0DEA /* MetricValue.swift */; };
-		F49D4F831D54B54700C9E4F6 /* NotificationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D4F821D54B54700C9E4F6 /* NotificationTableView.swift */; };
 		F49D4F851D54B57300C9E4F6 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D4F841D54B57300C9E4F6 /* NotificationCell.swift */; };
+		F4A206DF1D5C866A005536B1 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A206DE1D5C866A005536B1 /* AuthenticationService.swift */; };
 		F4A378A71D49117600C8956D /* StatsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A378A61D49117600C8956D /* StatsDetailCell.swift */; };
 		F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */; };
 		F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5FFF71D423549003A9C96 /* DataService.swift */; };
 		F4BB4E021D473F24006F6C69 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */; };
+		F4DEEF741D5B71AA008036E0 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DEEF731D5B71AA008036E0 /* DateFormatter.swift */; };
 		F4E2A3261D48BE7900F3ED22 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E2A3251D48BE7900F3ED22 /* ColorConstants.swift */; };
 		F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */; };
 		F92E717F1D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717A1D353D11006E9D1F /* Info.plist */; };
@@ -62,7 +63,6 @@
 		F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92E71A01D354600006E9D1F /* AppDelegate.swift */; };
 		F92E71E11D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71AC1D354600006E9D1F /* .keep */; };
 		F92E71E31D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71B01D354600006E9D1F /* .keep */; };
-		F92E71E41D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71B21D354600006E9D1F /* .keep */; };
 		F92E71E51D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71B41D354600006E9D1F /* .keep */; };
 		F92E71E81D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71BC1D354600006E9D1F /* .keep */; };
 		F92E71EA1D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71C01D354600006E9D1F /* .keep */; };
@@ -96,7 +96,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04289FE51D3F93F00006DBCA /* SettingsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
 		04347BE51D4F492C0003C76A /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceSliderCell.swift; path = "Scorecard/Classes/User Interface/Components/Cells/PreferenceSliderCell.swift"; sourceTree = SOURCE_ROOT; };
 		04E95F621D54817E003B8FC2 /* PasscodeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeRepository.swift; sourceTree = "<group>"; };
@@ -120,6 +119,8 @@
 		F41BC7AF1D522B900027FED6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F41BC7B11D5236A50027FED6 /* example2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example2.json; sourceTree = "<group>"; };
 		F4322CAB1D390B6800EEB566 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatisticsViewController.swift; path = Root/StatisticsViewController.swift; sourceTree = "<group>"; };
+		F433F1C31D5B655C003489BF /* ImageUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageUtilities.swift; path = ../../Constants/ImageUtilities.swift; sourceTree = "<group>"; };
+		F433F1C51D5B67F6003489BF /* FontConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontConstants.swift; sourceTree = "<group>"; };
 		F4370C911D4792F3007FFE58 /* CircleMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMarker.swift; sourceTree = "<group>"; };
 		F46185C51D3E191D007ABA24 /* Scorecard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Scorecard-Bridging-Header.h"; path = "../Classes/User Interface/Transitioning/Scorecard-Bridging-Header.h"; sourceTree = "<group>"; };
 		F46185C61D3E191D007ABA24 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
@@ -129,9 +130,8 @@
 		F46185CA1D3E191D007ABA24 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
 		F46185CB1D3E191D007ABA24 /* MMDrawerVisualState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerVisualState.h; sourceTree = "<group>"; };
 		F46185CC1D3E191D007ABA24 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
-		F46185CD1D3E191D007ABA24 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
+		F46185CD1D3E191D007ABA24 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+MMDrawerController.h"; path = "../Classes/User Interface/Transitioning/UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
 		F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
-		F46185D31D3E239F007ABA24 /* StatsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsTableView.swift; sourceTree = "<group>"; };
 		F46185D71D3E3605007ABA24 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = ../TableViews/DashboardCell.swift; sourceTree = "<group>"; };
 		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePicture.swift; path = ../Labels/ProfilePicture.swift; sourceTree = "<group>"; };
 		F464DE021D4F48280027B953 /* MainAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppearance.swift; sourceTree = "<group>"; };
@@ -143,12 +143,13 @@
 		F4984AC41D464288009B0DEA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F4984AC61D464327009B0DEA /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		F4984ACA1D46444A009B0DEA /* MetricValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricValue.swift; sourceTree = "<group>"; };
-		F49D4F821D54B54700C9E4F6 /* NotificationTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableView.swift; sourceTree = "<group>"; };
 		F49D4F841D54B57300C9E4F6 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		F4A206DE1D5C866A005536B1 /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		F4A378A61D49117600C8956D /* StatsDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDetailCell.swift; sourceTree = "<group>"; };
 		F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvolutionSign.swift; sourceTree = "<group>"; };
 		F4B5FFF71D423549003A9C96 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationViewController.swift; path = Root/NotificationViewController.swift; sourceTree = "<group>"; };
+		F4DEEF731D5B71AA008036E0 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		F4E2A3251D48BE7900F3ED22 /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Root/ProfileViewController.swift; sourceTree = "<group>"; };
 		F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScorecardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,7 +170,6 @@
 		F92E71A01D354600006E9D1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F92E71AC1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71B01D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
-		F92E71B21D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .keep; path = "../../User Interface/Components/Views/.keep"; sourceTree = "<group>"; };
 		F92E71B41D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71BC1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71C01D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
@@ -259,7 +259,6 @@
 				F46185CA1D3E191D007ABA24 /* MMDrawerController+Subclass.h */,
 				F46185CB1D3E191D007ABA24 /* MMDrawerVisualState.h */,
 				F46185CC1D3E191D007ABA24 /* MMDrawerVisualState.m */,
-				F46185CD1D3E191D007ABA24 /* UIViewController+MMDrawerController.h */,
 				F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */,
 			);
 			name = SideMenu;
@@ -354,6 +353,7 @@
 			children = (
 				F92E71FA1D354859006E9D1F /* GeneralConstants.swift */,
 				F4E2A3251D48BE7900F3ED22 /* ColorConstants.swift */,
+				F433F1C51D5B67F6003489BF /* FontConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -489,6 +489,7 @@
 				F4B5FFF71D423549003A9C96 /* DataService.swift */,
 				04E95F621D54817E003B8FC2 /* PasscodeRepository.swift */,
 				04E95F661D54B018003B8FC2 /* PasscodeLockConfiguration.swift */,
+				F4A206DE1D5C866A005536B1 /* AuthenticationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -575,9 +576,6 @@
 		F92E71AD1D354600006E9D1F /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
-				F46185D31D3E239F007ABA24 /* StatsTableView.swift */,
-				04289FE51D3F93F00006DBCA /* SettingsTableView.swift */,
-				F49D4F821D54B54700C9E4F6 /* NotificationTableView.swift */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -656,7 +654,8 @@
 		F92E71BD1D354600006E9D1F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				F92E71B21D354600006E9D1F /* .keep */,
+				F433F1C31D5B655C003489BF /* ImageUtilities.swift */,
+				F4DEEF731D5B71AA008036E0 /* DateFormatter.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -664,6 +663,7 @@
 		F92E71BF1D354600006E9D1F /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				F46185CD1D3E191D007ABA24 /* UIViewController+MMDrawerController.h */,
 				F92E71C01D354600006E9D1F /* .keep */,
 			);
 			path = Libraries;
@@ -772,6 +772,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F92E716F1D353CBD006E9D1F /* Build configuration list for PBXNativeTarget "Scorecard" */;
 			buildPhases = (
+				73561723597BF9A29A7E9138 /* [CP] Check Pods Manifest.lock */,
 				A991DE29C3171A2D07AB2D82 /* [CP] Check Pods Manifest.lock */,
 				54AF776BDBDA7E241597DF33 /* [CP] Check Pods Manifest.lock */,
 				9F52F40E75D9AE3A7F39BDB3 /* [CP] Check Pods Manifest.lock */,
@@ -796,6 +797,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F92E71721D353CBD006E9D1F /* Build configuration list for PBXNativeTarget "ScorecardTests" */;
 			buildPhases = (
+				1DC4E6CB21253F07301FD1A1 /* [CP] Check Pods Manifest.lock */,
 				29E2A0D502183C9CF6A86052 /* [CP] Check Pods Manifest.lock */,
 				34853CDB75563ECB672DCCA1 /* [CP] Check Pods Manifest.lock */,
 				128B2E7C5DB14724B9F6D4BA /* [CP] Check Pods Manifest.lock */,
@@ -821,6 +823,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F92E71751D353CBD006E9D1F /* Build configuration list for PBXNativeTarget "ScorecardUITests" */;
 			buildPhases = (
+				4D5BA95BC83A7ACDACD434E7 /* [CP] Check Pods Manifest.lock */,
 				4EEBD461710824BB96FE68EB /* [CP] Check Pods Manifest.lock */,
 				B75A6B96AB17565F7FFC7F94 /* [CP] Check Pods Manifest.lock */,
 				C3BAC9913B998D892A40F79C /* [CP] Check Pods Manifest.lock */,
@@ -898,7 +901,6 @@
 				F92E71EE1D354600006E9D1F /* .keep in Resources */,
 				F41BC7B01D522B900027FED6 /* GoogleService-Info.plist in Resources */,
 				F92E71E81D354600006E9D1F /* .keep in Resources */,
-				F92E71E41D354600006E9D1F /* .keep in Resources */,
 				F92E71D91D354600006E9D1F /* .keep in Resources */,
 				F92E71EB1D354600006E9D1F /* .keep in Resources */,
 				F92E71E51D354600006E9D1F /* .keep in Resources */,
@@ -970,6 +972,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		1DC4E6CB21253F07301FD1A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		29E2A0D502183C9CF6A86052 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1013,6 +1030,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScorecardTests/Pods-ScorecardTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D5BA95BC83A7ACDACD434E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4EEBD461710824BB96FE68EB /* [CP] Check Pods Manifest.lock */ = {
@@ -1103,6 +1135,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Scorecard/Pods-Scorecard-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		73561723597BF9A29A7E9138 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9CBA07FF070E8A37DADCC67C /* [CP] Embed Pods Frameworks */ = {
@@ -1239,27 +1286,28 @@
 				F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */,
 				F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */,
 				04F295BC1D461B0100B6E9B2 /* StatisticsChart.swift in Sources */,
+				F433F1C41D5B655C003489BF /* ImageUtilities.swift in Sources */,
 				F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */,
 				F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */,
 				F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */,
 				F49D4F851D54B57300C9E4F6 /* NotificationCell.swift in Sources */,
-				F49D4F831D54B54700C9E4F6 /* NotificationTableView.swift in Sources */,
 				F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */,
 				F48AF7AD1D53549500E24002 /* LoginButton.swift in Sources */,
 				F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */,
 				04E95F671D54B018003B8FC2 /* PasscodeLockConfiguration.swift in Sources */,
 				F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */,
 				F4E2A3261D48BE7900F3ED22 /* ColorConstants.swift in Sources */,
-				F46185D41D3E239F007ABA24 /* StatsTableView.swift in Sources */,
 				F92E71FB1D354859006E9D1F /* GeneralConstants.swift in Sources */,
 				F92E72001D35497E006E9D1F /* RootViewController.swift in Sources */,
 				04EF3D551D4B3BCF0055BE43 /* Metric.swift in Sources */,
 				F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */,
 				F46185D21D3E191D007ABA24 /* UIViewController+MMDrawerController.m in Sources */,
 				F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */,
+				F4A206DF1D5C866A005536B1 /* AuthenticationService.swift in Sources */,
+				F4DEEF741D5B71AA008036E0 /* DateFormatter.swift in Sources */,
+				F433F1C61D5B67F6003489BF /* FontConstants.swift in Sources */,
 				F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */,
 				F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */,
-				04289FE61D3F93F00006DBCA /* SettingsTableView.swift in Sources */,
 				F4370C921D4792F3007FFE58 /* CircleMarker.swift in Sources */,
 				F46185CF1D3E191D007ABA24 /* MMDrawerBarButtonItem.m in Sources */,
 				F4984AC51D464288009B0DEA /* User.swift in Sources */,

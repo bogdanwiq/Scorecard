@@ -88,7 +88,7 @@ class DetailedStatisticViewController : BaseViewController {
     override func setupConstraints() {
         
         var allConstraints = [NSLayoutConstraint]()
-        let dictionary = ["statsDetail": statsDetail, "timeFrameView": timeFrameView, "statsTableDetail": statsTableDetail, "statisticsChart": statisticsChart]
+        let views : [String: UIView] = ["statsDetail": statsDetail, "timeFrameView": timeFrameView, "statsTableDetail": statsTableDetail, "statisticsChart": statisticsChart]
         var tableHeight : Int = 0
         let screenResolutionFactor = Int(screenHeight/100)-1
         
@@ -99,9 +99,9 @@ class DetailedStatisticViewController : BaseViewController {
         }
         tableHeight += 8
         
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[timeFrameView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dictionary)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[timeFrameView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
         allConstraints.append(NSLayoutConstraint(item: statsTableDetail, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CGFloat(tableHeight)))
-        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[timeFrameView(30)][statsDetail][statsTableDetail][statisticsChart]|", options: [.AlignAllLeft, .AlignAllRight], metrics: nil, views: dictionary)
+        allConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[timeFrameView(30)][statsDetail][statsTableDetail][statisticsChart]|", options: [.AlignAllLeft, .AlignAllRight], metrics: nil, views: views)
         view.addConstraints(allConstraints)
     }
 }
@@ -258,8 +258,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
             statisticsChart.data = chartData
             break
         case 2 :
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "MMM"
+            let dateFormatter = DateFormatter(format: .Month)
             let currentMonth = dateFormatter.stringFromDate(NSDate()).uppercaseString
             switch currentMonth {
             case "JAN", "MAR", "MAY", "JUL", "AUG", "OCT", "DEC":
