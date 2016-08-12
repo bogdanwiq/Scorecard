@@ -17,8 +17,8 @@ class DetailedStatisticViewController : BaseViewController {
     let dataService = DataService.sharedInstance
     var submetricArray : [Int] = []
     var timeFrame : Int!
-    var colors : [UIColor]!
-    var allColors : [UIColor]!
+    var colors : [UIColor] = []
+    var allColors : [UIColor] = []
     var statsTableDetail : UITableView!
     var differenceAndPercent : (Int, Double)!
     var currentMetric : Metric!
@@ -66,6 +66,12 @@ class DetailedStatisticViewController : BaseViewController {
         timeFrameView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(timeFrameView)
         
+        statisticsChart = StatisticsChart()
+        statisticsChart.delegate = self
+        statisticsChart.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(statisticsChart)
+        setChartData()
+        
         statsTableDetail = UITableView()
         statsTableDetail.dataSource = self
         statsTableDetail.delegate = self
@@ -76,13 +82,6 @@ class DetailedStatisticViewController : BaseViewController {
         statsTableDetail.rowHeight = 30.0
         statsTableDetail.allowsSelection = true
         view.addSubview(statsTableDetail)
-        
-        statisticsChart = StatisticsChart()
-        statisticsChart.delegate = self
-        statisticsChart.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(statisticsChart)
-        
-        setChartData()
     }
     
     override func setupConstraints() {
@@ -93,9 +92,9 @@ class DetailedStatisticViewController : BaseViewController {
         let screenResolutionFactor = Int(screenHeight/100)-1
         
         if currentMetric.submetrics.count < screenResolutionFactor {
-            tableHeight =  Int(statsTableDetail.rowHeight) * currentMetric.submetrics.count
+            tableHeight = Int(statsTableDetail.rowHeight) * currentMetric.submetrics.count
         } else {
-            tableHeight  = screenResolutionFactor * Int(statsTableDetail.rowHeight)
+            tableHeight = screenResolutionFactor * Int(statsTableDetail.rowHeight)
         }
         tableHeight += 8
         
@@ -235,27 +234,9 @@ extension DetailedStatisticViewController: ChartViewDelegate {
             xAxis = ["01:00", "02:00", "03:00","04:00","05:00","06:00","07:00","08:00",
                      "09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00",
                      "17:00","18:00","19:00","20:00","21:00","22:00","23:00","0:00"]
-            let chartData = LineChartData(xVals: xAxis)
-            for i in 0..<currentMetric.submetrics.count {
-                let submetricName = currentMetric.submetrics[i].name
-                let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
-                chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
-                customizeChart(chartDataSet, color: colorArray[i])
-                chartData.addDataSet(chartDataSet)
-            }
-            statisticsChart.data = chartData
             break
         case 1 :
             xAxis = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
-            let chartData = LineChartData(xVals: xAxis)
-            for i in 0..<currentMetric.submetrics.count {
-                let submetricName = currentMetric.submetrics[i].name
-                let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
-                chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
-                customizeChart(chartDataSet, color: colorArray[i])
-                chartData.addDataSet(chartDataSet)
-            }
-            statisticsChart.data = chartData
             break
         case 2 :
             let dateFormatter = DateFormatter(format: .Month)
@@ -265,76 +246,40 @@ extension DetailedStatisticViewController: ChartViewDelegate {
                 xAxis = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
                          "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
                          "23", "24", "25", "26", "27", "28", "29", "30", "31"]
-                let chartData = LineChartData(xVals: xAxis)
-                for i in 0..<currentMetric.submetrics.count {
-                    let submetricName = currentMetric.submetrics[i].name
-                    let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
-                    chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
-                    customizeChart(chartDataSet, color: colorArray[i])
-                    chartData.addDataSet(chartDataSet)
-                }
-                statisticsChart.data = chartData
                 break
             case "FEB":
                 xAxis = ["1", "2", "3", "4", "5", "6", "7", "8",
                          "9", "10", "11", "12", "13", "14", "15",
                          "16", "17", "18", "19", "20", "21", "22",
                          "23", "24", "25", "26", "27", "28"]
-                let chartData = LineChartData(xVals: xAxis)
-                for i in 0..<currentMetric.submetrics.count {
-                    let submetricName = currentMetric.submetrics[i].name
-                    let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
-                    chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
-                    customizeChart(chartDataSet, color: colorArray[i])
-                    chartData.addDataSet(chartDataSet)
-                }
-                statisticsChart.data = chartData
                 break
             case "APR", "JUN", "SEP", "NOV":
                 xAxis = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
                          "12", "13", "14", "15", "16", "17", "18", "19", "20",
                          "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
-                let chartData = LineChartData(xVals: xAxis)
-                for i in 0..<currentMetric.submetrics.count {
-                    let submetricName = currentMetric.submetrics[i].name
-                    let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
-                    chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
-                    customizeChart(chartDataSet, color: colorArray[i])
-                    chartData.addDataSet(chartDataSet)
-                }
-                statisticsChart.data = chartData
                 break
             default:
-                break
+                return
             }
             break
         case 3:
             xAxis = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
-            let chartData = LineChartData(xVals: xAxis)
-            for i in 0..<currentMetric.submetrics.count {
-                let submetricName = currentMetric.submetrics[i].name
-                let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
-                chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
-                customizeChart(chartDataSet, color: colorArray[i])
-                chartData.addDataSet(chartDataSet)
-            }
-            statisticsChart.data = chartData
             break
         case 4:
             xAxis = dataService.getYearsLimit(currentMetric)
-            let chartData = LineChartData(xVals: xAxis)
-            for i in 0..<currentMetric.submetrics.count {
-                let submetricName = currentMetric.submetrics[i].name
-                let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
-                chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
-                customizeChart(chartDataSet, color: colorArray[i])
-                chartData.addDataSet(chartDataSet)
-            }
-            statisticsChart.data = chartData
             break
         default :
-            break
+            return
         }
+        let chartData = LineChartData(xVals: xAxis)
+        for i in 0..<currentMetric.submetrics.count {
+            let submetricName = currentMetric.submetrics[i].name
+            let chartEntries = dataService.getDiagramFor(currentMetric.submetrics[i].values, timeFrame: timeFrame, xAxis: xAxis)
+            chartDataSet = LineChartDataSet(yVals: chartEntries, label: submetricName)
+            customizeChart(chartDataSet, color: colorArray[i])
+            chartData.addDataSet(chartDataSet)
+        }
+        statisticsChart.data = chartData
     }
     
     private func customizeChart(chart: LineChartDataSet, color: UIColor) {
