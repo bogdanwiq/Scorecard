@@ -44,6 +44,7 @@
 		F4A206DF1D5C866A005536B1 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A206DE1D5C866A005536B1 /* AuthenticationService.swift */; };
 		F4A378A71D49117600C8956D /* StatsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A378A61D49117600C8956D /* StatsDetailCell.swift */; };
 		F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */; };
+		F4ADC8AD1D5DABBD00E684CF /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ADC8AC1D5DABBD00E684CF /* AlertViewController.swift */; };
 		F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5FFF71D423549003A9C96 /* DataService.swift */; };
 		F4BB4E021D473F24006F6C69 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */; };
 		F4DEEF741D5B71AA008036E0 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DEEF731D5B71AA008036E0 /* DateFormatter.swift */; };
@@ -147,6 +148,7 @@
 		F4A206DE1D5C866A005536B1 /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		F4A378A61D49117600C8956D /* StatsDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDetailCell.swift; sourceTree = "<group>"; };
 		F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvolutionSign.swift; sourceTree = "<group>"; };
+		F4ADC8AC1D5DABBD00E684CF /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		F4B5FFF71D423549003A9C96 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationViewController.swift; path = Root/NotificationViewController.swift; sourceTree = "<group>"; };
 		F4DEEF731D5B71AA008036E0 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			children = (
 				F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */,
 				F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */,
+				F4ADC8AC1D5DABBD00E684CF /* AlertViewController.swift */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -1282,6 +1285,7 @@
 				F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */,
 				F464DE031D4F48280027B953 /* MainAppearance.swift in Sources */,
 				F495FCD91D421405005A3EE8 /* Button.swift in Sources */,
+				F4ADC8AD1D5DABBD00E684CF /* AlertViewController.swift in Sources */,
 				F4984AC71D464327009B0DEA /* Project.swift in Sources */,
 				F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */,
 				F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */,

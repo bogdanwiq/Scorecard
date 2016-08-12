@@ -60,8 +60,10 @@ class StatsDetailCell : UITableViewCell {
                                        "difference": difference,
                                        "sign": sign]
         
+        let aspectRatio: CGFloat = 13.0 / 10.0
         cellConstraints.append(NSLayoutConstraint(item: identifier, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[identifier]-5-[typeName]-(>=10)-[difference]-[sign]-|", options: .AlignAllCenterY, metrics: nil, views: views)
+        cellConstraints.append(NSLayoutConstraint(item: sign, attribute: .Height, relatedBy: .Equal, toItem: sign, attribute: .Width, multiplier: aspectRatio, constant: 0.0))
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[identifier]-5-[typeName]-(>=10)-[difference]-[sign(10)]-|", options: .AlignAllCenterY, metrics: nil, views: views)
         NSLayoutConstraint.activateConstraints(cellConstraints)
     }
 }

@@ -40,6 +40,7 @@ struct Color {
     static let usersDataSetBackground     = Color.lima
     static let updatesDataSetBackground   = Color.lemonRipe
     static let facebookBackground         = Color.blueFacebook
+    static let alertBackground            = Color.redMonza
     
     private static let blackPearl   = UIColor(hexNumber: 0x031322)
     private static let blueOxford   = UIColor(hexNumber: 0x344454)
@@ -52,4 +53,5 @@ struct Color {
     private static let lemonRipe    = UIColor(hexNumber: 0xF7E51E)
     private static let blueHavelock = UIColor(hexNumber: 0x4A90E0)
     private static let blueFacebook = UIColor(hexNumber: 0x3b5998)
+    private static let redMonza     = UIColor(hexNumber: 0xd0021b)
 }

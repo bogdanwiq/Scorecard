@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 enum EvolutionSign {
+    case dArrowUp
+    case dArrowDown
+    case dNone
     case ArrowUp
     case ArrowDown
     case None
@@ -19,6 +22,15 @@ enum EvolutionSign {
         var image : UIImage = UIImage()
         
         switch self {
+        case .dArrowUp :
+            image = UIImage(named: "dArrowUp")!
+            break
+        case .dArrowDown :
+            image = UIImage(named: "dArrowDown")!
+            break
+        case .dNone:
+            image =  UIImage(named: "dNone")!
+            break
         case .ArrowUp :
             image = UIImage(named: "ArrowUp")!
             break

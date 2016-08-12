@@ -26,9 +26,7 @@ class NotificationViewController: BaseViewController {
         let notification: UILocalNotification = UILocalNotification()
         notification.alertBody = "HI, ALERT"
         notification.fireDate = NSDate().dateByAddingTimeInterval(1.0)
-        
         allNotifications.append(notification)
-        
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     

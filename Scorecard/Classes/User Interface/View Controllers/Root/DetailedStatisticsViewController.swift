@@ -43,7 +43,7 @@ class DetailedStatisticViewController : BaseViewController {
         self.timeFrame = timeFrame
         submetricArray = dataService.getSubmetricCount(currentMetric)
         for _ in 0..<currentMetric.submetrics.count {
-            evolutionArray.append(.None)
+            evolutionArray.append(.dNone)
         }
     }
     
@@ -168,7 +168,7 @@ extension DetailedStatisticViewController: UITableViewDataSource {
         }
         else {
             cell.difference.text = ""
-            cell.sign.image = EvolutionSign.None.getSign()
+            cell.sign.image = EvolutionSign.dNone.getSign()
         }
         return cell
     }
@@ -201,14 +201,14 @@ extension DetailedStatisticViewController: ChartViewDelegate {
             submetricArray[i] = Int((dataSet.entryForXIndex(selectedIndex)?.value)!)
             if selectedIndex != 0 {
                 if (dataSet.entryForXIndex(selectedIndex)?.value)! > (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
-                    evolutionArray[i] = .ArrowUp
+                    evolutionArray[i] = .dArrowUp
                 } else if (dataSet.entryForXIndex(selectedIndex)?.value)! < (dataSet.entryForXIndex(selectedIndex - 1)?.value)! {
-                    evolutionArray[i] = .ArrowDown
+                    evolutionArray[i] = .dArrowDown
                 } else {
-                    evolutionArray[i] = .None
+                    evolutionArray[i] = .dNone
                 }
             } else {
-                evolutionArray[i] = .None
+                evolutionArray[i] = .dNone
             }
             currentMetric.submetrics[i].name = dataSet.label!
             i += 1
@@ -446,7 +446,7 @@ extension DetailedStatisticViewController: TimeFrameDelegate {
         evolutionArray.removeAll()
         statisticsChart.highlightValues([])
         for _ in 0..<currentMetric.submetrics.count {
-            evolutionArray.append(.None)
+            evolutionArray.append(.dNone)
         }
         if currentMetric.submetrics.count < screenResolutionFactor {
             newTableHeight =  Int(statsTableDetail.rowHeight) * currentMetric.submetrics.count

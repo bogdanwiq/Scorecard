@@ -72,9 +72,10 @@ class DashboardCell: UITableViewCell {
                                         "difference": difference,
                                         "percent": percent,
                                         "sign" : sign]
-        
+        let aspectRatio: CGFloat = 30.0 / 18.0
+        cellConstraints.append(NSLayoutConstraint(item: sign, attribute: .Height, relatedBy: .Equal, toItem: sign, attribute: .Width, multiplier: aspectRatio, constant: 0.0))
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[typeName]-(>=padding)-[difference]-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[counter]-(>=padding)-[percent]-[sign]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-[counter]-(>=padding)-[percent]-[sign(13)]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[typeName]-(>=2)-[counter]-(padding)-|", options: .AlignAllLeft, metrics: metrics, views: views)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[difference]-(>=padding)-[percent]-|", options: .AlignAllRight, metrics: metrics, views: views)
         cellConstraints.append(NSLayoutConstraint(item: sign, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))

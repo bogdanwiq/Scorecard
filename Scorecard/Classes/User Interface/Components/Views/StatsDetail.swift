@@ -78,8 +78,10 @@ class StatsDetail : UIView {
                                         "percent": percent,
                                         "sign" : sign]
         
+        let aspectRatio: CGFloat = 30.0 / 18.0
+        cellConstraints.append(NSLayoutConstraint(item: sign, attribute: .Height, relatedBy: .Equal, toItem: sign, attribute: .Width, multiplier: aspectRatio, constant: 0.0))
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[typeName]", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
-        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[difference]-(inner)-[sign]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[difference]-(inner)-[sign(13)]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[typeName]-4-[counter]-|", options: .AlignAllLeft, metrics: nil, views: views)
         cellConstraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[difference]-[percent]-|", options: .AlignAllRight, metrics: nil, views: views)
         cellConstraints.append(NSLayoutConstraint(item: sign, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0))

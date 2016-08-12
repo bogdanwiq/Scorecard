@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let root = self.window?.rootViewController as! LoginViewController
         root.extendedLayoutIncludesOpaqueBars = true
         self.window?.rootViewController = root.root
-        UIView.transitionWithView(self.window!, duration: 2.0, options: .TransitionFlipFromRight , animations: nil, completion: nil)
+        UIView.transitionWithView(self.window!, duration: 1.0, options: .TransitionFlipFromRight , animations: nil, completion: nil)
     }
     
     func userDidSignOut() {

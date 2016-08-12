@@ -27,7 +27,7 @@ class PreferenceSliderCell: UITableViewCell {
         slider.setOn(false, animated: false)
         slider.onTintColor = Color.profileSettings
         slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.addTarget(self, action: #selector(didChangeState(_:)), forControlEvents: .ValueChanged)
+        slider.addTarget(self, action: #selector(didChangeState(_:)), forControlEvents: .AllTouchEvents)
         contentView.addSubview(slider)
         
         setupConstraints()
