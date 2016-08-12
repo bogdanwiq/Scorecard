@@ -21,10 +21,10 @@ enum Button {
         
         switch self {
         case .Profile:
-            image = UIImage(named: "Profile")!
+            image = UIImage(named: "Profile")!.resizeImage(CGSize(width: 20, height: 20))
             break
         case .Notification:
-            image = UIImage(named: "Notification")!
+            image = UIImage(named: "Notification")!.resizeImage(CGSize(width: 20, height: 20))
             break
         case .Back:
             image = UIImage(named: "Back")!
