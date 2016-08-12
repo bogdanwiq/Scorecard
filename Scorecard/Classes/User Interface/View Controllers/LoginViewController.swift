@@ -18,7 +18,6 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
     var googleLoginButton : UIButton!
     var facebookLoginButton : UIButton!
     var root: RootViewController!
-    var loginType = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +26,9 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
         if FBSDKAccessToken.currentAccessToken() != nil {
             self.authenticationService.facebookLogin({ (fullName, imageURL) in
                 self.root = RootViewController(fullName: fullName, imageUrl: imageURL)
-                self.loginType = "Facebook"
                 NSNotificationCenter.defaultCenter().postNotificationName("userDidSignIn", object: nil)
             })
         } else if (GIDSignIn.sharedInstance() != nil) {
-            loginType = "Google"
             GIDSignIn.sharedInstance().signInSilently()
         }
     }
@@ -70,10 +67,6 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
         NSLayoutConstraint.activateConstraints(allConstraints)
     }
     
-    func getLoginType() -> String{
-        return loginType
-    }
-    
     func btnGoogleSignInPressed() {
         GIDSignIn.sharedInstance().signIn()
     }
@@ -83,7 +76,6 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
             let fullName = user.profile.name
             let imageUrl = String(user.profile.imageURLWithDimension(130))
             root = RootViewController(fullName: fullName, imageUrl: imageUrl)
-            loginType = "Google"
             NSNotificationCenter.defaultCenter().postNotificationName("userDidSignIn", object: nil)
         }
     }
@@ -96,7 +88,6 @@ class LoginViewController : BaseViewController, GIDSignInUIDelegate, GIDSignInDe
             if (error == nil) {
                 self.authenticationService.facebookLogin({ (fullName, imageURL) in
                     self.root = RootViewController(fullName: fullName, imageUrl: imageURL)
-                    self.loginType = "Facebook"
                     NSNotificationCenter.defaultCenter().postNotificationName("userDidSignIn", object: nil)
                 })
             }

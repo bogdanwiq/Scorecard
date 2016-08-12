@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIKit
+import HMKit
 import FBSDKLoginKit
 import PasscodeLock
 
@@ -55,10 +55,27 @@ class StatisticViewController: BaseViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
-        originalProjectsStats = service.setupStats()
-        projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .All)
-        projectsStats = []
-        projectsStats.appendContentsOf(originalProjectsStats)
+        let actInd = UIActivityIndicatorView()
+        actInd.hidesWhenStopped = true
+        actInd.center = view.center
+        actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        actInd.color = Color.timeFrameSelected
+        view.addSubview(actInd)
+        actInd.startAnimating()
+        performAsync {
+            self.originalProjectsStats = self.service.setupStats()
+            self.projectDifferenceAndPercent = self.service.getPreviousCount(self.originalProjectsStats, type: .All)
+            self.projectsStats = []
+            self.projectsStats.appendContentsOf(self.originalProjectsStats)
+            performOnMainThread({
+                actInd.stopAnimating()
+                self.tableView.alpha = 0.0
+                UIView.animateWithDuration(1.0, animations: {() -> Void in
+                    self.tableView.reloadData()
+                    self.tableView.alpha = 1.0
+                })
+            })
+        }
     }
     
     func presentPasscodeScreen() {
