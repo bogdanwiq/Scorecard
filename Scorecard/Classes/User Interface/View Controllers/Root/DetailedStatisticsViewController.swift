@@ -32,7 +32,15 @@ class DetailedStatisticViewController : BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.setHidesBackButton(true, animated: false)
+        let backButton = Button.Back.getButton()
+        backButton.addTarget(self, action: #selector(goBack), forControlEvents: .TouchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     init(originalMetric: Metric, metric: Metric, differenceAndPercent: (Int, Double), timeFrame : Int) {
@@ -82,6 +90,10 @@ class DetailedStatisticViewController : BaseViewController {
         statsTableDetail.rowHeight = 30.0
         statsTableDetail.allowsSelection = true
         view.addSubview(statsTableDetail)
+    }
+    
+    func goBack() {
+        navigationController?.popViewControllerAnimated(true)
     }
     
     override func setupConstraints() {

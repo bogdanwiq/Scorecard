@@ -27,7 +27,7 @@ enum Button {
             image = UIImage(named: "Notification")!.resizeImage(CGSize(width: 20, height: 20))
             break
         case .Back:
-            image = UIImage(named: "Back")!
+            image = UIImage(named: "Back")!.resizeImage(CGSize(width: 20, height: 20))
             break
         }
         button.contentMode = .ScaleAspectFit
