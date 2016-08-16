@@ -201,7 +201,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
         for dataSet in (chartView.data?.dataSets)! {
             let marker = CircleMarker(color: (chartView.data?.dataSets[i].colors[0])!)
             
-            marker.minimumSize = CGSizeMake(7.0 , 7.0)
+            marker.minimumSize = CGSizeMake(7.0, 7.0)
             marker.offset = CGPointMake(0.0, 1.0)
             chartView.marker = marker
             let highlight = ChartHighlight(xIndex: selectedIndex, dataSetIndex: i)
@@ -252,8 +252,9 @@ extension DetailedStatisticViewController: ChartViewDelegate {
             xAxis = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
             break
         case 2 :
-            let dateFormatter = DateFormatter(format: .Month)
-            let currentMonth = dateFormatter.stringFromDate(NSDate()).uppercaseString
+            let calendar = NSCalendar.currentCalendar()
+            let components = calendar.components(.Month, fromDate: NSDate())
+            let currentMonth = components.month.toDate(.Month)
             switch currentMonth {
             case "JAN", "MAR", "MAY", "JUL", "AUG", "OCT", "DEC":
                 xAxis = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
@@ -400,7 +401,6 @@ extension DetailedStatisticViewController: TimeFrameDelegate {
         submetricArray = dataService.getSubmetricCount(currentMetric)
         setChartData()
         setupInformation()
-        statsTableDetail.reloadData()
         evolutionArray.removeAll()
         statisticsChart.highlightValues([])
         for _ in 0..<currentMetric.submetrics.count {
@@ -417,5 +417,6 @@ extension DetailedStatisticViewController: TimeFrameDelegate {
                 constraint.constant = CGFloat(newTableHeight)
             }
         }
+        statsTableDetail.reloadData()
     }
 }

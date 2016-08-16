@@ -341,8 +341,9 @@ class DataService {
     func getDiagramFor(submetric: [MetricValue], timeFrame: Int, xAxis: [String]) -> [ChartDataEntry] {
         
         var chartValues : [ChartDataEntry] = []
-        var dateFormatter : DateFormatter!
         var date : String!
+        var components : NSDateComponents
+        let calendar = NSCalendar.currentCalendar()
         
         for i in 0..<xAxis.count {
             chartValues.append(ChartDataEntry(value: Double(0), xIndex: i))
@@ -351,24 +352,24 @@ class DataService {
         for metricValue in submetric {
             switch timeFrame {
             case 0:
-                dateFormatter = DateFormatter(format: .Hour)
-                date = dateFormatter.stringFromDate(metricValue.date) + ":00"
+                components = calendar.components(.Hour, fromDate: metricValue.date)
+                date = components.hour.toDate(.Hour)
                 break
             case 1:
-                dateFormatter = DateFormatter(format: .Weekday)
-                date = dateFormatter.stringFromDate(metricValue.date).uppercaseString
+                components = calendar.components(.Weekday, fromDate: metricValue.date)
+                date = components.weekday.toDate(.Weekday)
                 break
             case 2:
-                dateFormatter = DateFormatter(format: .Day)
-                date = dateFormatter.stringFromDate(metricValue.date)
+                components = calendar.components(.Day, fromDate: metricValue.date)
+                date = components.day.toDate(.Day)
                 break
             case 3:
-                dateFormatter = DateFormatter(format: .Month)
-                date = dateFormatter.stringFromDate(metricValue.date).uppercaseString
+                components = calendar.components(.Month, fromDate: metricValue.date)
+                date = components.month.toDate(.Month)
                 break
             case 4:
-                dateFormatter = DateFormatter(format: .Year)
-                date = dateFormatter.stringFromDate(metricValue.date)
+                components = calendar.components(.Year, fromDate: metricValue.date)
+                date = components.year.toDate(.Year)
                 break
             default:
                 break
@@ -381,11 +382,12 @@ class DataService {
     func getYearsLimit(metric : Metric) -> [String] {
         
         var years : [String] = []
-        let dateFormatter = DateFormatter(format: .Year)
+        let calendar = NSCalendar.currentCalendar()
         
         for submetric in metric.submetrics {
             for subvalues in submetric.values {
-                let date = dateFormatter.stringFromDate(subvalues.date)
+                let components = calendar.components(.Year, fromDate: subvalues.date)
+                let date = components.year.toDate(.Year)
                 years.append(date)
             }
         }
@@ -416,5 +418,70 @@ extension Int {
             }
         }
         return self >= 0 ? result : "-" + result
+    }
+    
+    func toDate(format: DateFormat) -> String {
+        switch format {
+        case .Hour:
+            if self < 10 {
+                return "0\(self):00"
+            } else {
+                return "\(self):00"
+            }
+        case .Day:
+            return "\(self)"
+        case .Weekday:
+            switch self {
+            case 1:
+                return "SUN"
+            case 2:
+                return "MON"
+            case 3:
+                return "TUE"
+            case 4:
+                return "WED"
+            case 5:
+                return "THU"
+            case 6:
+                return "FRI"
+            case 7:
+                return "SAT"
+            default:
+                return ""
+            }
+        case .Month:
+            switch self {
+            case 1:
+                return "JAN"
+            case 2:
+                return "FEB"
+            case 3:
+                return "MAR"
+            case 4:
+                return "APR"
+            case 5:
+                return "MAY"
+            case 6:
+                return "JUN"
+            case 7:
+                return "JUL"
+            case 8:
+                return "AUG"
+            case 9:
+                return "SEP"
+            case 10:
+                return "OCT"
+            case 11:
+                return "NOV"
+            case 12:
+                return "DEC"
+            default:
+                return ""
+            }
+        case .Year:
+            return "\(self)"
+        default:
+            return ""
+        }
     }
 }
