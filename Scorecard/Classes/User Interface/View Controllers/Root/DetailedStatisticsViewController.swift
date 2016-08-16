@@ -11,7 +11,7 @@ import UIKit
 import Charts
 import ChameleonFramework
 
-class DetailedStatisticViewController : BaseViewController {
+class DetailedStatisticViewController : BaseViewController, UIGestureRecognizerDelegate {
     
     let reuseIdentifier : String = "StatsDetailCell"
     let dataService = DataService.sharedInstance
@@ -32,6 +32,7 @@ class DetailedStatisticViewController : BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController!.interactivePopGestureRecognizer!.delegate = self
         navigationItem.setHidesBackButton(true, animated: false)
         let backButton = Button.Back.getButton()
         backButton.addTarget(self, action: #selector(goBack), forControlEvents: .TouchUpInside)
@@ -39,8 +40,8 @@ class DetailedStatisticViewController : BaseViewController {
         mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureMode.None
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     init(originalMetric: Metric, metric: Metric, differenceAndPercent: (Int, Double), timeFrame : Int) {

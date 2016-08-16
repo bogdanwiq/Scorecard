@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class NotificationViewController: BaseViewController {
+class NotificationViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     let reuseIdentifier : String = "NotificationCell"
     var tableView : UITableView!
@@ -22,6 +22,7 @@ class NotificationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController!.interactivePopGestureRecognizer!.delegate = self
         navigationItem.setHidesBackButton(true, animated: false)
         let backButton = Button.Back.getButton()
         backButton.addTarget(self, action: #selector(goBack), forControlEvents: .TouchUpInside)
@@ -49,6 +50,10 @@ class NotificationViewController: BaseViewController {
         tableView.allowsMultipleSelectionDuringEditing = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     func goBack() {
