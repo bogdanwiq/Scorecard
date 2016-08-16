@@ -22,6 +22,10 @@ class NotificationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.setHidesBackButton(true, animated: false)
+        let backButton = Button.Back.getButton()
+        backButton.addTarget(self, action: #selector(goBack), forControlEvents: .TouchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         
         let notification: UILocalNotification = UILocalNotification()
         notification.alertBody = "HI, ALERT"
@@ -45,6 +49,10 @@ class NotificationViewController: BaseViewController {
         tableView.allowsMultipleSelectionDuringEditing = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+    }
+    
+    func goBack() {
+        navigationController?.popViewControllerAnimated(true)
     }
     
     override func setupConstraints() {
