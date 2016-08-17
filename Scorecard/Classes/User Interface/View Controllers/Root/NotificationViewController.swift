@@ -23,7 +23,8 @@ class NotificationViewController: BaseViewController, UIGestureRecognizerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController!.interactivePopGestureRecognizer!.delegate = self
-        navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.hidesBackButton = true
+
         let backButton = Button.Back.getButton()
         backButton.addTarget(self, action: #selector(goBack), forControlEvents: .TouchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)

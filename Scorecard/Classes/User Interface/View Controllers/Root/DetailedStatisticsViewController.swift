@@ -17,12 +17,11 @@ class DetailedStatisticViewController : BaseViewController, UIGestureRecognizerD
     let dataService = DataService.sharedInstance
     var submetricArray : [Int] = []
     var timeFrame : Int!
+    var metricId : String!
     var colors : [UIColor] = []
     var allColors : [UIColor] = []
     var statsTableDetail : UITableView!
-    var differenceAndPercent : (Int, Double)!
     var currentMetric : Metric!
-    var originalMetric : Metric!
     var statsDetail : StatsDetail!
     let timeFrameView = TimeFrame()
     var statisticsChart : StatisticsChart!
@@ -44,12 +43,11 @@ class DetailedStatisticViewController : BaseViewController, UIGestureRecognizerD
         return true
     }
     
-    init(originalMetric: Metric, metric: Metric, differenceAndPercent: (Int, Double), timeFrame : Int) {
+    init(metricId : String, timeFrame : Int) {
         super.init()
-        self.originalMetric = originalMetric
-        self.currentMetric = metric
-        self.differenceAndPercent = differenceAndPercent
+        self.currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
         self.timeFrame = timeFrame
+        self.metricId = metricId
         submetricArray = dataService.getSubmetricCount(currentMetric)
         for _ in 0..<currentMetric.submetrics.count {
             evolutionArray.append(.dNone)
@@ -246,7 +244,7 @@ extension DetailedStatisticViewController: ChartViewDelegate {
         case 0 :
             xAxis = ["01:00", "02:00", "03:00","04:00","05:00","06:00","07:00","08:00",
                      "09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00",
-                     "17:00","18:00","19:00","20:00","21:00","22:00","23:00","0:00"]
+                     "17:00","18:00","19:00","20:00","21:00","22:00","23:00","00:00"]
             break
         case 1 :
             xAxis = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
@@ -326,26 +324,29 @@ extension DetailedStatisticViewController: StatsDetailSetupInformationDelegate {
     
     func setupInformation() {
         statsDetail.typeName.text = currentMetric.name
-        statsDetail.counter.text = dataService.sumMetricValues(currentMetric)
-        if differenceAndPercent.1 != 0 {
-            statsDetail.percent.text = String(format: "%.2f",differenceAndPercent.1) + "%"
+        
+        let counter = Double(currentMetric.changeNet) + Double(currentMetric.changeNet)/(currentMetric.changePercent/100.0)
+        
+        statsDetail.counter.text = Int(counter).prettyString()
+        if currentMetric.changePercent != 0 {
+            statsDetail.percent.text = String(format: "%.2f",currentMetric.changePercent) + "%"
         } else {
             statsDetail.percent.text = ""
         }
-        if differenceAndPercent.0 < 0 {
-            statsDetail.difference.text = "\(differenceAndPercent.0.prettyString())"
+        if currentMetric.changeNet < 0 {
+            statsDetail.difference.text = "\(currentMetric.changeNet.prettyString())"
             statsDetail.difference.textColor = Color.statsFall
             statsDetail.percent.textColor = Color.statsFall
             statsDetail.sign.image = EvolutionSign.ArrowDown.getSign()
         }
-        else if differenceAndPercent.0 == 0 {
+        else if currentMetric.changeNet == 0 {
             statsDetail.difference.text = ""
             statsDetail.difference.textColor = Color.textColor
             statsDetail.percent.textColor = Color.textColor
             statsDetail.sign.image = EvolutionSign.None.getSign()
         }
-        else if differenceAndPercent.0 > 0 {
-            statsDetail.difference.text = "+\(differenceAndPercent.0.prettyString())"
+        else if currentMetric.changeNet > 0 {
+            statsDetail.difference.text = "+\(currentMetric.changeNet.prettyString())"
             statsDetail.difference.textColor = Color.statsRise
             statsDetail.percent.textColor = Color.statsRise
             statsDetail.sign.image = EvolutionSign.ArrowUp.getSign()
@@ -376,24 +377,19 @@ extension DetailedStatisticViewController: TimeFrameDelegate {
         timeFrame = selectedIndex
         switch selectedIndex {
         case 0 :
-            currentMetric = dataService.filterMetric(originalMetric, type: .OneDay)
-            differenceAndPercent = dataService.getMetricPreviousCount(originalMetric, type: .OneDay)
+            currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
             break
         case 1 :
-            currentMetric = dataService.filterMetric(originalMetric, type: .OneWeek)
-            differenceAndPercent = dataService.getMetricPreviousCount(originalMetric, type: .OneWeek)
+            currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
             break
         case 2 :
-            currentMetric = dataService.filterMetric(originalMetric, type: .OneMonth)
-            differenceAndPercent = dataService.getMetricPreviousCount(originalMetric, type: .OneMonth)
+            currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
             break
         case 3 :
-            currentMetric = dataService.filterMetric(originalMetric, type: .OneYear)
-            differenceAndPercent = dataService.getMetricPreviousCount(originalMetric, type: .OneYear)
+            currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
             break
         case 4 :
-            currentMetric = dataService.filterMetric(originalMetric, type: .All)
-            differenceAndPercent = dataService.getMetricPreviousCount(originalMetric, type: .All)
+            currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
             break
         default :
             break

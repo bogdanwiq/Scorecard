@@ -24,7 +24,7 @@ class MetricValue: Mappable {
         var strDate: String!
         let dateFormatter = NSDateFormatter()
         
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         strDate <- map["date"]
         date = dateFormatter.dateFromString(strDate)
         value   <- map["value"]

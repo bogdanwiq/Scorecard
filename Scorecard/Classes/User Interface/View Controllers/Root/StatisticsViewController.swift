@@ -17,8 +17,7 @@ class StatisticViewController: BaseViewController {
     let reuseIdentifier : String = "DashboardCell"
     var tableView : UITableView!
     let timeFrame = TimeFrame()
-    var originalProjectsStats: [Project] = []
-    var projectsStats: [Project] = []
+    var originalMetricStats : [MetricModel] = []
     var projectDifferenceAndPercent : [String: [String: (Int, Double)]] = [:]
     
     override func viewDidAppear(animated: Bool) {
@@ -37,8 +36,10 @@ class StatisticViewController: BaseViewController {
         
         view.backgroundColor = Color.mainBackground
         title = "Dashboard"
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationButton)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
         timeFrame.delegate = self
         timeFrame.translatesAutoresizingMaskIntoConstraints = false
@@ -63,10 +64,7 @@ class StatisticViewController: BaseViewController {
         view.addSubview(actInd)
         actInd.startAnimating()
         performAsync {
-            self.originalProjectsStats = self.service.setupStats()
-            self.projectDifferenceAndPercent = self.service.getPreviousCount(self.originalProjectsStats, type: .All)
-            self.projectsStats = []
-            self.projectsStats.appendContentsOf(self.originalProjectsStats)
+            self.originalMetricStats = self.service.setupStats()
             performOnMainThread({
                 actInd.stopAnimating()
                 self.tableView.alpha = 0.0
@@ -111,6 +109,31 @@ class StatisticViewController: BaseViewController {
         mm_drawerController.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
     }
     
+    func getTimeFrame() -> String {
+        var timeFrameString : String!
+        switch timeFrame.selectedIndex {
+        case 0 :
+            timeFrameString = "1d"
+            break
+        case 1 :
+            timeFrameString = "1w"
+            break
+        case 2 :
+            timeFrameString = "1m"
+            break
+        case 3 :
+            timeFrameString = "1y"
+            break
+        case 4 :
+            timeFrameString = "All"
+            break
+        default :
+            timeFrameString = "All"
+            break
+        }
+        return timeFrameString
+    }
+    
     func notificationTapped() {
         navigationController?.pushViewController(NotificationViewController(), animated: true)
     }
@@ -125,23 +148,7 @@ extension StatisticViewController: UITableViewDelegate {
         let selectedCell : DashboardCell = tableView.cellForRowAtIndexPath(indexPath)! as! DashboardCell
         
         selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
-        navigationController?.pushViewController(DetailedStatisticViewController(originalMetric: originalProjectsStats[indexPath.section].metrics[indexPath.row], metric: projectsStats[indexPath.section].metrics[indexPath.row], differenceAndPercent: projectDifferenceAndPercent[projectsStats[indexPath.section].id]![projectsStats[indexPath.section].metrics[indexPath.row].id]!, timeFrame: timeFrame.selectedIndex), animated: true)
-    }
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let header = UIView()
-        let label = UILabel()
-        
-        header.backgroundColor = Color.timeFrameBackground
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = originalProjectsStats[section].name
-        label.textColor = Color.timeFrameSelected
-        label.font = Font.system(.Metric)
-        header.addSubview(label)
-        header.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[title]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["title": label]))
-        header.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: header, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
-        return header
+        navigationController?.pushViewController(DetailedStatisticViewController(metricId: originalMetricStats[indexPath.row].id, timeFrame: timeFrame.selectedIndex), animated: true)
     }
 }
 
@@ -149,46 +156,40 @@ extension StatisticViewController: UITableViewDelegate {
 
 extension StatisticViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return originalProjectsStats[section].name
-    }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (section >= projectsStats.count) ? 0 : projectsStats[section].metrics.count
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return originalProjectsStats.count
+        return originalMetricStats.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        let timeFrame = getTimeFrame()
         let cell : DashboardCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DashboardCell
+        let currentMetric = originalMetricStats[indexPath.row]
+        let valueAndPercent = currentMetric.timeframe[timeFrame]!
+        let previousValue = Double(valueAndPercent.value) / (1 + valueAndPercent.percent / 100.0)
+        let difference = Double(valueAndPercent.value) - previousValue
         
-        cell.typeName.text = projectsStats[indexPath.section].metrics[indexPath.row].name
-        cell.counter.text = service.sumMetricValues(projectsStats[indexPath.section].metrics[indexPath.row])
-        
-        let array = projectDifferenceAndPercent[projectsStats[indexPath.section].id]!
-        
-        if array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0 < 0 {
-            cell.difference.text = "\(array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0.prettyString())"
+        cell.typeName.text = currentMetric.name
+        cell.counter.text = String(currentMetric.timeframe[timeFrame]!.value.prettyString())
+        if difference < 0 {
+            cell.difference.text = "\(Int(difference).prettyString())"
             cell.difference.textColor = Color.statsFall
             cell.percent.textColor = Color.statsFall
-            cell.percent.text = String(format: "%.2f",array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.1) + "%"
+            cell.percent.text = String(format: "%.2f",valueAndPercent.percent) + "%"
             cell.sign.image = EvolutionSign.ArrowDown.getSign()
         }
-        else if array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0 == 0 {
+        else if difference == 0 {
             cell.difference.text = ""
             cell.difference.textColor = Color.textColor
             cell.percent.textColor = Color.textColor
             cell.percent.text = ""
             cell.sign.image = EvolutionSign.None.getSign()
         }
-        else if array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0 > 0 {
-            cell.difference.text = "+\(array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.0.prettyString())"
+        else if difference > 0 {
+            cell.difference.text = "+\(Int(difference).prettyString())"
             cell.difference.textColor = Color.statsRise
             cell.percent.textColor = Color.statsRise
-            cell.percent.text = String(format: "+%.2f",array[projectsStats[indexPath.section].metrics[indexPath.row].id]!.1) + "%"
+            cell.percent.text = String(format: "+%.2f",valueAndPercent.percent) + "%"
             cell.sign.image = EvolutionSign.ArrowUp.getSign()
         }
         
@@ -208,32 +209,6 @@ extension StatisticViewController: UITableViewDataSource {
 extension StatisticViewController: TimeFrameDelegate {
     
     func timeFrameSelectedValue(selectedIndex: Int) {
-        
-        switch selectedIndex {
-        case 0 :
-            projectsStats = service.filter(originalProjectsStats, type: .OneDay)
-            projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneDay)
-            break
-        case 1 :
-            projectsStats = service.filter(originalProjectsStats, type: .OneWeek)
-            projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneWeek)
-            break
-        case 2 :
-            projectsStats = service.filter(originalProjectsStats, type: .OneMonth)
-            projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneMonth)
-            break
-        case 3 :
-            projectsStats = service.filter(originalProjectsStats, type: .OneYear)
-            projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .OneYear)
-            break
-        case 4 :
-            projectsStats = service.filter(originalProjectsStats, type: .All)
-            projectDifferenceAndPercent = service.getPreviousCount(originalProjectsStats, type: .All)
-            
-            break
-        default :
-            break
-        }
         tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
     }
 }

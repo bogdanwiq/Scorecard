@@ -22,14 +22,22 @@ class DataService {
     
     static let sharedInstance = DataService()
     
-    func setupStats() -> [Project] {
-        
-        let path = NSBundle.mainBundle().pathForResource("example2", ofType: "json")
+    func setupStats() -> [MetricModel] {
+        let path = NSBundle.mainBundle().pathForResource("metrics", ofType: "json")
         let data = NSData(contentsOfFile: path!)
         let string = NSString(data: data!, encoding: NSUTF8StringEncoding)!
-        let projects: Array<Project>? = Mapper<Project>().mapArray(clipJSON(string))
+        let metrics = Mapper<MetricModel>().mapArray(clipJSON(string))
         
-        return projects!
+        return metrics!
+    }
+    
+    func getSubmetric(metricId : String, timeFrame : Int) -> Metric {
+        let path = NSBundle.mainBundle().pathForResource("submetrics", ofType: "json")
+        let data = NSData(contentsOfFile: path!)
+        let string = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+        let metric = Mapper<Metric>().map(string)
+        
+        return metric!
     }
     
     private func clipJSON(json: NSString) -> String {
@@ -75,245 +83,7 @@ class DataService {
             return dict![preferenceName] ?? false
         }
     }
-    
-    func filter(projects: [Project], type: TimeFilter) -> [Project] {
-        
-        var filteredProjects: [Project] = []
-        
-        for project in projects {
-            let filteredProject = Project()
-            filteredProject.id = project.id
-            filteredProject.name = project.name
-            filteredProject.metrics = []
-            for metric in project.metrics {
-                let filteredMetric = Metric()
-                filteredMetric.id = metric.id
-                filteredMetric.name = metric.name
-                filteredMetric.submetrics = []
-                for submetric in metric.submetrics {
-                    let filteredSubmetric = Submetric()
-                    filteredSubmetric.id = submetric.id
-                    filteredSubmetric.name = submetric.name
-                    filteredSubmetric.values = []
-                    for metricValue in submetric.values {
-                        switch type {
-                        case .OneDay :
-                            let intervalInHours = fabs(metricValue.date.timeIntervalSinceNow) / (60*60)
-                            if intervalInHours <= 24 {
-                                filteredSubmetric.values.append(metricValue)
-                            }
-                            break
-                        case .OneWeek :
-                            let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                            if intervalInDays <= 7 {
-                                filteredSubmetric.values.append(metricValue)
-                            }
-                            break
-                        case .OneMonth :
-                            let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                            if intervalInDays <= 30 {
-                                filteredSubmetric.values.append(metricValue)
-                            }
-                            break
-                        case .OneYear :
-                            let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                            if intervalInDays <= 365 {
-                                filteredSubmetric.values.append(metricValue)
-                            }
-                            break
-                        case .All :
-                            filteredSubmetric.values.append(metricValue)
-                            break
-                        }
-                    }
-                    if filteredSubmetric.values.count > 0 {
-                        filteredMetric.submetrics.append(filteredSubmetric)
-                    }
-                }
-                if filteredMetric.submetrics.count > 0 {
-                    filteredProject.metrics.append(filteredMetric)
-                }
-            }
-            if filteredProject.metrics.count > 0 {
-                filteredProjects.append(filteredProject)
-            }
-        }
-        return filteredProjects
-    }
-    
-    func filterMetric(metric: Metric, type: TimeFilter) -> Metric {
-        
-        let filteredMetric = Metric()
-        
-        filteredMetric.name = metric.name
-        filteredMetric.submetrics = []
-        for submetric in metric.submetrics {
-            let filteredSubmetric = Submetric()
-            filteredSubmetric.id = submetric.id
-            filteredSubmetric.name = submetric.name
-            filteredSubmetric.values = []
-            for metricValue in submetric.values {
-                switch type {
-                case .OneDay :
-                    let intervalInHours = fabs(metricValue.date.timeIntervalSinceNow) / (60*60)
-                    if intervalInHours <= 24 {
-                        filteredSubmetric.values.append(metricValue)
-                    }
-                    break
-                case .OneWeek :
-                    let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                    if intervalInDays <= 7 {
-                        filteredSubmetric.values.append(metricValue)
-                    }
-                    break
-                case .OneMonth :
-                    let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                    if intervalInDays <= 30 {
-                        filteredSubmetric.values.append(metricValue)
-                    }
-                    break
-                case .OneYear :
-                    let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                    if intervalInDays <= 365 {
-                        filteredSubmetric.values.append(metricValue)
-                    }
-                    break
-                case .All :
-                    filteredSubmetric.values.append(metricValue)
-                    break
-                }
-            }
-            if filteredSubmetric.values.count > 0 {
-                filteredMetric.submetrics.append(filteredSubmetric)
-            }
-        }
-        return filteredMetric
-    }
-    
-    func getPreviousCount(projects: [Project], type: TimeFilter) -> [String: [String: (Int, Double)]] {
-        
-        var dictionary : [String: [String: (Int, Double)]] = [:]
-        
-        for project in projects {
-            var sumSubmetrics: [String: (Int, Double)] = [:]
-            for metric in project.metrics {
-                var previousSum = 0.0
-                var currentSum = 0.0
-                for submetric in metric.submetrics {
-                    for metricValue in submetric.values {
-                        switch type {
-                        case .OneDay :
-                            let intervalInHours = fabs(metricValue.date.timeIntervalSinceNow) / (60*60)
-                            if intervalInHours > 24 && intervalInHours <= 48 {
-                                previousSum += Double(metricValue.value)
-                            }
-                            if intervalInHours <= 24 {
-                                currentSum += Double(metricValue.value)
-                            }
-                            break
-                        case .OneWeek :
-                            let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                            if intervalInDays > 7 && intervalInDays <= 14 {
-                                previousSum += Double(metricValue.value)
-                            }
-                            if intervalInDays <= 7 {
-                                currentSum += Double(metricValue.value)
-                            }
-                            break
-                        case .OneMonth :
-                            let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                            if intervalInDays > 30 && intervalInDays <= 60 {
-                                previousSum += Double(metricValue.value)
-                            }
-                            if intervalInDays <= 30 {
-                                currentSum += Double(metricValue.value)
-                            }
-                            break
-                        case .OneYear :
-                            let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                            if intervalInDays > 365 && intervalInDays <= (2*365) {
-                                previousSum += Double(metricValue.value)
-                            }
-                            if intervalInDays <= 365 {
-                                currentSum += Double(metricValue.value)
-                            }
-                            break
-                        case .All :
-                            currentSum = 0.0
-                            break
-                        }
-                    }
-                }
-                if previousSum <= 0.0 {
-                    sumSubmetrics[metric.id] = (Int(currentSum), currentSum)
-                } else {
-                    sumSubmetrics[metric.id] = (Int(currentSum - previousSum), (currentSum - previousSum) * 100.0 / previousSum)
-                }
-                dictionary[project.id] = sumSubmetrics
-            }
-        }
-        return dictionary
-    }
-    
-    func getMetricPreviousCount(metric: Metric, type: TimeFilter) -> (Int, Double) {
-        
-        var differenceAndPercent : (Int, Double)
-        var previousSum = 0.0
-        var currentSum = 0.0
-        
-        for submetric in metric.submetrics {
-            for metricValue in submetric.values {
-                switch type {
-                case .OneDay :
-                    let intervalInHours = fabs(metricValue.date.timeIntervalSinceNow) / (60*60)
-                    if intervalInHours > 24 && intervalInHours <= 48 {
-                        previousSum += Double(metricValue.value)
-                    }
-                    if intervalInHours <= 24 {
-                        currentSum += Double(metricValue.value)
-                    }
-                    break
-                case .OneWeek :
-                    let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                    if intervalInDays > 7 && intervalInDays <= 14 {
-                        previousSum += Double(metricValue.value)
-                    }
-                    if intervalInDays <= 7 {
-                        currentSum += Double(metricValue.value)
-                    }
-                    break
-                case .OneMonth :
-                    let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                    if intervalInDays > 30 && intervalInDays <= 60 {
-                        previousSum += Double(metricValue.value)
-                    }
-                    if intervalInDays <= 30 {
-                        currentSum += Double(metricValue.value)
-                    }
-                    break
-                case .OneYear :
-                    let intervalInDays = fabs(metricValue.date.timeIntervalSinceNow) / (24*60*60)
-                    if intervalInDays > 365 && intervalInDays <= (2*365) {
-                        previousSum += Double(metricValue.value)
-                    }
-                    if intervalInDays <= 365 {
-                        currentSum += Double(metricValue.value)
-                    }
-                    break
-                case .All :
-                    currentSum = 0.0
-                    break
-                }
-            }
-        }
-        if previousSum <= 0.0 {
-            differenceAndPercent = (Int(currentSum), currentSum)
-        } else {
-            differenceAndPercent = (Int(currentSum - previousSum), (currentSum - previousSum) * 100.0 / previousSum)
-        }
-        return differenceAndPercent
-    }
-    
+
     func getSubmetricCount(metric: Metric) -> [Int] {
         
         var sum : [Int] = []
@@ -328,12 +98,10 @@ class DataService {
         return sum
     }
     
-    func sumMetricValues(metric: Metric) -> String {
+    func getSubmetricSum(submetric : Submetric) -> String {
         var count = 0
-        for submetric in metric.submetrics {
-            for value in submetric.values {
-                count += value.value
-            }
+        for values in submetric.values {
+            count += values.value
         }
         return count.prettyString()
     }
