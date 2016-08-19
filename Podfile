@@ -9,7 +9,8 @@ target 'Scorecard' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 	pod 'HLMFoundation'
-	pod 'HMKit'
+	pod 'HMKit/Core'
+    pod 'HLMKit/Networking'
 	pod 'Charts'
 	pod 'ObjectMapper'
 	pod 'ChameleonFramework/Swift'

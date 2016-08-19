@@ -9,6 +9,8 @@
 import Foundation
 import ObjectMapper
 import Charts
+import Alamofire
+import HMKit
 
 enum TimeFilter {
     case OneDay
@@ -22,43 +24,40 @@ class DataService {
     
     static let sharedInstance = DataService()
     
-    func setupStats() -> [MetricModel] {
-        let path = NSBundle.mainBundle().pathForResource("metrics", ofType: "json")
-        let data = NSData(contentsOfFile: path!)
-        let string = NSString(data: data!, encoding: NSUTF8StringEncoding)!
-        let metrics = Mapper<MetricModel>().mapArray(clipJSON(string))
+    func setupStats(timeFrame: String, completionHandler: (metrics: [MetricModel]) -> Void) {
         
-        return metrics!
+        let projectOperations = LoadProject()
+        projectOperations.run({ (projectResponse) in
+            let metricsOperations = LoadMetricsOperation(id: projectResponse[0].id, timeFrame: timeFrame)
+            
+            metricsOperations.run({ (metricResponse) in
+                completionHandler(metrics: metricResponse)
+            }) { (error) in
+                print(error)
+                completionHandler(metrics: [])
+            }
+        }) { (error) in
+            print(error)
+            completionHandler(metrics: [])
+        }
     }
     
-    func getSubmetric(metricId : String, timeFrame : Int) -> Metric {
-        let path = NSBundle.mainBundle().pathForResource("submetrics", ofType: "json")
-        let data = NSData(contentsOfFile: path!)
-        let string = NSString(data: data!, encoding: NSUTF8StringEncoding)!
-        let metric = Mapper<Metric>().map(string)
+    func getSubmetric(timeFrame: String, metricId: String, completionHandler: (metric: Metric) -> Void) {
         
-        return metric!
-    }
-    
-    private func clipJSON(json: NSString) -> String {
-        
-        var startIndex = 0
-        var endIndex = 0
-        
-        for i in 0..<json.length {
-            if json.characterAtIndex(i) == "[".utf16.first! {
-                startIndex = i
-                break
+        let projectOperations = LoadProject()
+        projectOperations.run({ (projectResponse) in
+            let submetricsOperations = LoadSubmetricsOperation(projectId: projectResponse[0].id, metricId: metricId, timeFrame: timeFrame)
+            
+            submetricsOperations.run({ (submetricResponse) in
+                completionHandler(metric: submetricResponse)
+            }) { (error) in
+                print(error)
+                completionHandler(metric: Metric())
             }
+        }) { (error) in
+            print(error)
+            completionHandler(metric: Metric())
         }
-        
-        for i in (0..<json.length).reverse() {
-            if json.characterAtIndex(i) == "]".utf16.first! {
-                endIndex = i
-                break
-            }
-        }
-        return json.substringWithRange(NSMakeRange(startIndex, endIndex - startIndex + 1))
     }
     
     func setProfileSettings(userId: String, preferenceName: String, state: Bool) {
@@ -83,17 +82,13 @@ class DataService {
             return dict![preferenceName] ?? false
         }
     }
-
+    
     func getSubmetricCount(metric: Metric) -> [Int] {
         
         var sum : [Int] = []
         
         for submetric in metric.submetrics {
-            var currentSum = 0
-            for metricValue in submetric.values {
-                currentSum += metricValue.value
-            }
-            sum.append(currentSum)
+            sum.append(submetric.total)
         }
         return sum
     }
@@ -101,7 +96,7 @@ class DataService {
     func getSubmetricSum(submetric : Submetric) -> String {
         var count = 0
         for values in submetric.values {
-            count += values.value
+            count += (values.value ?? 0)
         }
         return count.prettyString()
     }
@@ -142,7 +137,7 @@ class DataService {
             default:
                 break
             }
-            chartValues[xAxis.indexOf(date)!].value += Double(metricValue.value)
+            chartValues[xAxis.indexOf(date)!].value += Double(metricValue.value ?? 0)
         }
         return chartValues
     }

@@ -21,8 +21,9 @@ class Metric : Mappable {
     
     var id : String!
     var name : String!
-    var changeNet : Int!
-    var changePercent : Double!
+    var total : Int!
+    var value : Int!
+    var percentage : Double?
     var interval : IntervalType!
     var submetrics : [Submetric]!
     
@@ -33,34 +34,11 @@ class Metric : Mappable {
     }
     
     func mapping(map: Map) {
-        id         <- map["metrics.id"]
-        name       <- map["metrics.name"]
-        var s = ""
-        s <- map["metrics.changeNet"]
-        changeNet = Int(s)
-        s <- map["metrics.changePercent"]
-        changePercent = Double(s)
-        var strInterval: String!
-        strInterval <- map["metrics.interval"]
-        switch strInterval {
-        case "1d":
-            interval = IntervalType.d
-            break
-        case "1w":
-            interval = IntervalType.w
-            break
-        case "1m":
-            interval = IntervalType.m
-            break
-        case "1y":
-            interval = IntervalType.y
-            break
-        case "All":
-            interval = IntervalType.All
-            break
-        default:
-            break
-        }
-        submetrics <- map["metrics.submetrics"]
+        id         <- map["id"]
+        name       <- map["name"]
+        total      <- map["total"]
+        value      <- map["growth.value"]
+        percentage <- map["growth.percentage"]
+        submetrics <- map["submetrics"]
     }
 }

@@ -11,7 +11,7 @@ import ObjectMapper
 
 class Submetric : Mappable {
     
-    var id : String!
+    var total : Int!
     var name : String!
     var values : [MetricValue]!
     
@@ -23,7 +23,7 @@ class Submetric : Mappable {
     }
     
     func mapping(map: Map) {
-        id     <- map["id"]
+        total     <- map["total"]
         name   <- map["name"]
         values <- map["values"]
     }

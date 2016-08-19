@@ -1,18 +1,18 @@
 //
-//  ValueAndPercent.swift
+//  Project.swift
 //  Scorecard
 //
-//  Created by Halcyon Mobile on 8/16/16.
+//  Created by Halcyon Mobile on 8/18/16.
 //  Copyright © 2016 Halcyon Mobile. All rights reserved.
 //
 
 import Foundation
 import ObjectMapper
 
-class ValueAndPercent: Mappable {
+class Project : Mappable {
     
-    var percent: Double?
-    var value : Int!
+    var id : String!
+    var name : String!
     
     init() {
     }
@@ -21,7 +21,7 @@ class ValueAndPercent: Mappable {
     }
     
     func mapping(map: Map) {
-        value <- map["value"]
-        percent <- map["percentage"]
+        id         <- map["id"]
+        name       <- map["name"]
     }
 }

@@ -13,7 +13,8 @@ class MetricModel : Mappable {
     
     var id : String!
     var name : String!
-    var timeframe : [String: ValueAndPercent] = [:]
+    var total : Int!
+    var timeframe : ValueAndPercent!
     
     init() {
     }
@@ -24,6 +25,7 @@ class MetricModel : Mappable {
     func mapping(map: Map) {
         id         <- map["id"]
         name       <- map["name"]
-        timeframe  <- map["change"]
+        total      <- map["total"]
+        timeframe  <- map["growth"]
     }
 }

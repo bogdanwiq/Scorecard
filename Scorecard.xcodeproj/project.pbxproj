@@ -27,10 +27,13 @@
 		F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185C91D3E191D007ABA24 /* MMDrawerController.m */; };
 		F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185CC1D3E191D007ABA24 /* MMDrawerVisualState.m */; };
 		F46185D21D3E191D007ABA24 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */; };
-		F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D71D3E3605007ABA24 /* DashboardCell.swift */; };
-		F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46185D91D3E6124007ABA24 /* ProfilePicture.swift */; };
 		F464DE031D4F48280027B953 /* MainAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F464DE021D4F48280027B953 /* MainAppearance.swift */; };
+		F4689A0F1D65F1D60012A0F2 /* LoadProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4689A0E1D65F1D60012A0F2 /* LoadProject.swift */; };
+		F4689A111D65F2700012A0F2 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4689A101D65F2700012A0F2 /* Project.swift */; };
 		F48AF7AD1D53549500E24002 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48AF7AC1D53549500E24002 /* LoginButton.swift */; };
+		F4919CCD1D673A68003F4306 /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F4919CCC1D673A68003F4306 /* .keep */; };
+		F4919CCF1D673ABD003F4306 /* DashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4919CCE1D673ABD003F4306 /* DashboardCell.swift */; };
+		F4919CD11D673AE3003F4306 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4919CD01D673AE3003F4306 /* ProfilePicture.swift */; };
 		F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD21D40C779005A3EE8 /* TimeFrame.swift */; };
 		F495FCD51D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */; };
 		F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */; };
@@ -42,19 +45,19 @@
 		F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */; };
 		F4ADC8AD1D5DABBD00E684CF /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ADC8AC1D5DABBD00E684CF /* AlertViewController.swift */; };
 		F4B075F71D63460000C1D3FC /* ValueAndPercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B075F61D63460000C1D3FC /* ValueAndPercent.swift */; };
-		F4B075F91D63472700C1D3FC /* metrics.json in Resources */ = {isa = PBXBuildFile; fileRef = F4B075F81D63472700C1D3FC /* metrics.json */; };
 		F4B075FB1D63475900C1D3FC /* MetricModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B075FA1D63475900C1D3FC /* MetricModel.swift */; };
-		F4B075FD1D634E9300C1D3FC /* submetrics.json in Resources */ = {isa = PBXBuildFile; fileRef = F4B075FC1D634E9300C1D3FC /* submetrics.json */; };
 		F4B5FFF81D423549003A9C96 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5FFF71D423549003A9C96 /* DataService.swift */; };
 		F4BB4E021D473F24006F6C69 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */; };
 		F4DEEF741D5B71AA008036E0 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DEEF731D5B71AA008036E0 /* DateFormatter.swift */; };
 		F4E2A3261D48BE7900F3ED22 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E2A3251D48BE7900F3ED22 /* ColorConstants.swift */; };
+		F4E7E0DD1D65D9D80088BAAF /* BaseServerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E7E0DC1D65D9D80088BAAF /* BaseServerOperation.swift */; };
+		F4E7E0DF1D65DABB0088BAAF /* LoadMetricsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E7E0DE1D65DABB0088BAAF /* LoadMetricsOperation.swift */; };
+		F4E7E0E11D65DB480088BAAF /* LoadSubmetricsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E7E0E01D65DB480088BAAF /* LoadSubmetricsOperation.swift */; };
 		F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */; };
 		F92E717F1D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717A1D353D11006E9D1F /* Info.plist */; };
 		F92E71811D353D11006E9D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92E717D1D353D11006E9D1F /* Info.plist */; };
 		F92E71821D353D37006E9D1F /* ScorecardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92E71791D353D11006E9D1F /* ScorecardTests.swift */; };
 		F92E71831D353D3B006E9D1F /* ScorecardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92E717C1D353D11006E9D1F /* ScorecardUITests.swift */; };
-		F92E71D31D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E718B1D354600006E9D1F /* .keep */; };
 		F92E71D41D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E718D1D354600006E9D1F /* .keep */; };
 		F92E71D51D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E718F1D354600006E9D1F /* .keep */; };
 		F92E71D61D354600006E9D1F /* .keep in Resources */ = {isa = PBXBuildFile; fileRef = F92E71921D354600006E9D1F /* .keep */; };
@@ -131,10 +134,13 @@
 		F46185CC1D3E191D007ABA24 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
 		F46185CD1D3E191D007ABA24 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+MMDrawerController.h"; path = "../Classes/User Interface/Transitioning/UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
 		F46185CE1D3E191D007ABA24 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
-		F46185D71D3E3605007ABA24 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = ../TableViews/DashboardCell.swift; sourceTree = "<group>"; };
-		F46185D91D3E6124007ABA24 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePicture.swift; path = ../Labels/ProfilePicture.swift; sourceTree = "<group>"; };
 		F464DE021D4F48280027B953 /* MainAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppearance.swift; sourceTree = "<group>"; };
+		F4689A0E1D65F1D60012A0F2 /* LoadProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadProject.swift; sourceTree = "<group>"; };
+		F4689A101D65F2700012A0F2 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		F48AF7AC1D53549500E24002 /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		F4919CCC1D673A68003F4306 /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
+		F4919CCE1D673ABD003F4306 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardCell.swift; sourceTree = "<group>"; };
+		F4919CD01D673AE3003F4306 /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
 		F495FCD21D40C779005A3EE8 /* TimeFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFrame.swift; sourceTree = "<group>"; };
 		F495FCD41D40F2B6005A3EE8 /* DetailedStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailedStatisticsViewController.swift; path = Root/DetailedStatisticsViewController.swift; sourceTree = "<group>"; };
 		F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsDetail.swift; sourceTree = "<group>"; };
@@ -146,13 +152,14 @@
 		F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvolutionSign.swift; sourceTree = "<group>"; };
 		F4ADC8AC1D5DABBD00E684CF /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		F4B075F61D63460000C1D3FC /* ValueAndPercent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueAndPercent.swift; sourceTree = "<group>"; };
-		F4B075F81D63472700C1D3FC /* metrics.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = metrics.json; sourceTree = "<group>"; };
 		F4B075FA1D63475900C1D3FC /* MetricModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricModel.swift; sourceTree = "<group>"; };
-		F4B075FC1D634E9300C1D3FC /* submetrics.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = submetrics.json; sourceTree = "<group>"; };
 		F4B5FFF71D423549003A9C96 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		F4BB4E011D473F24006F6C69 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationViewController.swift; path = Root/NotificationViewController.swift; sourceTree = "<group>"; };
 		F4DEEF731D5B71AA008036E0 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		F4E2A3251D48BE7900F3ED22 /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		F4E7E0DC1D65D9D80088BAAF /* BaseServerOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseServerOperation.swift; sourceTree = "<group>"; };
+		F4E7E0DE1D65DABB0088BAAF /* LoadMetricsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMetricsOperation.swift; sourceTree = "<group>"; };
+		F4E7E0E01D65DB480088BAAF /* LoadSubmetricsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadSubmetricsOperation.swift; sourceTree = "<group>"; };
 		F4EB9DBF1D3CB99B00160C22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Root/ProfileViewController.swift; sourceTree = "<group>"; };
 		F54A1C79BF6A9AA39891F8C5 /* Pods_ScorecardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScorecardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92E71471D353CBD006E9D1F /* Scorecard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scorecard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,7 +169,6 @@
 		F92E717A1D353D11006E9D1F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F92E717C1D353D11006E9D1F /* ScorecardUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScorecardUITests.swift; sourceTree = "<group>"; };
 		F92E717D1D353D11006E9D1F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F92E718B1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E718D1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E718F1D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
 		F92E71921D354600006E9D1F /* .keep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .keep; sourceTree = "<group>"; };
@@ -391,7 +397,10 @@
 		F92E718A1D354600006E9D1F /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				F92E718B1D354600006E9D1F /* .keep */,
+				F4E7E0DC1D65D9D80088BAAF /* BaseServerOperation.swift */,
+				F4E7E0DE1D65DABB0088BAAF /* LoadMetricsOperation.swift */,
+				F4689A0E1D65F1D60012A0F2 /* LoadProject.swift */,
+				F4E7E0E01D65DB480088BAAF /* LoadSubmetricsOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -480,6 +489,7 @@
 				F4984ACA1D46444A009B0DEA /* MetricValue.swift */,
 				04EF3D521D4B3B040055BE43 /* Submetric.swift */,
 				F4B075F61D63460000C1D3FC /* ValueAndPercent.swift */,
+				F4689A101D65F2700012A0F2 /* Project.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -487,8 +497,6 @@
 		F92E719D1D354600006E9D1F /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				F4B075FC1D634E9300C1D3FC /* submetrics.json */,
-				F4B075F81D63472700C1D3FC /* metrics.json */,
 				F4B5FFF71D423549003A9C96 /* DataService.swift */,
 				04E95F621D54817E003B8FC2 /* PasscodeRepository.swift */,
 				04E95F661D54B018003B8FC2 /* PasscodeLockConfiguration.swift */,
@@ -552,8 +560,8 @@
 		F92E71A71D354600006E9D1F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				F4919CCE1D673ABD003F4306 /* DashboardCell.swift */,
 				049D3BEA1D3F738C00D72A90 /* PreferenceSliderCell.swift */,
-				F46185D71D3E3605007ABA24 /* DashboardCell.swift */,
 				F4A378A61D49117600C8956D /* StatsDetailCell.swift */,
 				F49D4F841D54B57300C9E4F6 /* NotificationCell.swift */,
 			);
@@ -579,6 +587,7 @@
 		F92E71AD1D354600006E9D1F /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				F4919CCC1D673A68003F4306 /* .keep */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -594,11 +603,11 @@
 		F92E71B11D354600006E9D1F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F46185D91D3E6124007ABA24 /* ProfilePicture.swift */,
 				F495FCD61D4107CB005A3EE8 /* StatsDetail.swift */,
 				04F295BB1D461B0100B6E9B2 /* StatisticsChart.swift */,
 				F4370C911D4792F3007FFE58 /* CircleMarker.swift */,
 				F4A378A81D49FC9C00C8956D /* EvolutionSign.swift */,
+				F4919CD01D673AE3003F4306 /* ProfilePicture.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -902,6 +911,7 @@
 			files = (
 				F92E71F11D354600006E9D1F /* .keep in Resources */,
 				F92E71EE1D354600006E9D1F /* .keep in Resources */,
+				F4919CCD1D673A68003F4306 /* .keep in Resources */,
 				F41BC7B01D522B900027FED6 /* GoogleService-Info.plist in Resources */,
 				F92E71E81D354600006E9D1F /* .keep in Resources */,
 				F92E71D91D354600006E9D1F /* .keep in Resources */,
@@ -909,16 +919,13 @@
 				F92E71E51D354600006E9D1F /* .keep in Resources */,
 				F92E71EA1D354600006E9D1F /* .keep in Resources */,
 				F92E71D81D354600006E9D1F /* .keep in Resources */,
-				F4B075F91D63472700C1D3FC /* metrics.json in Resources */,
 				F92E71E31D354600006E9D1F /* .keep in Resources */,
 				F92E71E11D354600006E9D1F /* .keep in Resources */,
 				F92E71D71D354600006E9D1F /* .keep in Resources */,
 				F92E71D51D354600006E9D1F /* .keep in Resources */,
 				F92E71D41D354600006E9D1F /* .keep in Resources */,
-				F4B075FD1D634E9300C1D3FC /* submetrics.json in Resources */,
 				04F08B431D588FF00050E073 /* PasscodeLockView.xib in Resources */,
 				F92E71EC1D354600006E9D1F /* .keep in Resources */,
-				F92E71D31D354600006E9D1F /* .keep in Resources */,
 				F92E71F01D354600006E9D1F /* .keep in Resources */,
 				F92E717F1D353D11006E9D1F /* Info.plist in Resources */,
 				F92E71ED1D354600006E9D1F /* Images.xcassets in Resources */,
@@ -1282,6 +1289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4E7E0DD1D65D9D80088BAAF /* BaseServerOperation.swift in Sources */,
 				F46185D11D3E191D007ABA24 /* MMDrawerVisualState.m in Sources */,
 				F464DE031D4F48280027B953 /* MainAppearance.swift in Sources */,
 				F495FCD91D421405005A3EE8 /* Button.swift in Sources */,
@@ -1289,21 +1297,25 @@
 				F4A378A91D49FC9C00C8956D /* EvolutionSign.swift in Sources */,
 				F92E71DC1D354600006E9D1F /* AppDelegate.swift in Sources */,
 				04F295BC1D461B0100B6E9B2 /* StatisticsChart.swift in Sources */,
+				F4689A111D65F2700012A0F2 /* Project.swift in Sources */,
 				F433F1C41D5B655C003489BF /* ImageUtilities.swift in Sources */,
+				F4919CCF1D673ABD003F4306 /* DashboardCell.swift in Sources */,
+				F4689A0F1D65F1D60012A0F2 /* LoadProject.swift in Sources */,
 				F4322CAC1D390B6800EEB566 /* StatisticsViewController.swift in Sources */,
 				F495FCD31D40C779005A3EE8 /* TimeFrame.swift in Sources */,
 				F46185D01D3E191D007ABA24 /* MMDrawerController.m in Sources */,
 				F49D4F851D54B57300C9E4F6 /* NotificationCell.swift in Sources */,
+				F4E7E0E11D65DB480088BAAF /* LoadSubmetricsOperation.swift in Sources */,
 				F4984ACB1D46444A009B0DEA /* MetricValue.swift in Sources */,
 				F48AF7AD1D53549500E24002 /* LoginButton.swift in Sources */,
-				F46185D81D3E3605007ABA24 /* DashboardCell.swift in Sources */,
 				04E95F671D54B018003B8FC2 /* PasscodeLockConfiguration.swift in Sources */,
 				F4B075FB1D63475900C1D3FC /* MetricModel.swift in Sources */,
-				F46185DA1D3E6124007ABA24 /* ProfilePicture.swift in Sources */,
 				F4E2A3261D48BE7900F3ED22 /* ColorConstants.swift in Sources */,
+				F4919CD11D673AE3003F4306 /* ProfilePicture.swift in Sources */,
 				F92E71FB1D354859006E9D1F /* GeneralConstants.swift in Sources */,
 				F92E72001D35497E006E9D1F /* RootViewController.swift in Sources */,
 				04EF3D551D4B3BCF0055BE43 /* Metric.swift in Sources */,
+				F4E7E0DF1D65DABB0088BAAF /* LoadMetricsOperation.swift in Sources */,
 				F4EB9DC01D3CB99B00160C22 /* ProfileViewController.swift in Sources */,
 				F46185D21D3E191D007ABA24 /* UIViewController+MMDrawerController.m in Sources */,
 				F495FCD71D4107CB005A3EE8 /* StatsDetail.swift in Sources */,

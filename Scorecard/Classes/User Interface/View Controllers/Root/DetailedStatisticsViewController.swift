@@ -45,20 +45,43 @@ class DetailedStatisticViewController : BaseViewController, UIGestureRecognizerD
     
     init(metricId : String, timeFrame : Int) {
         super.init()
-        self.currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
         self.timeFrame = timeFrame
         self.metricId = metricId
-        submetricArray = dataService.getSubmetricCount(currentMetric)
-        for _ in 0..<currentMetric.submetrics.count {
-            evolutionArray.append(.dNone)
+        dataService.getSubmetric(getTimeFrame(), metricId: metricId, completionHandler: { (metric) in
+            self.currentMetric = metric
+            self.submetricArray = self.dataService.getSubmetricCount(self.currentMetric)
+            for _ in 0..<self.currentMetric.submetrics.count {
+                self.evolutionArray.append(.dNone)
+            }
+            self.initUserInterface()
+            self.setupViewConstraints()
+        })
+    }
+    
+    func getTimeFrame() -> String {
+        let sTimeFrame: String
+        switch timeFrame {
+        case 0:
+            sTimeFrame = "day"
+        case 1:
+            sTimeFrame = "week"
+        case 2:
+            sTimeFrame = "month"
+        case 3:
+            sTimeFrame = "year"
+        case 4:
+            sTimeFrame = "all"
+        default:
+            sTimeFrame = "all"
         }
+        return sTimeFrame
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func initUI() {
+    func initUserInterface() {
         view.backgroundColor = Color.mainBackground
         title = "Statistics"
         
@@ -95,7 +118,7 @@ class DetailedStatisticViewController : BaseViewController, UIGestureRecognizerD
         navigationController?.popViewControllerAnimated(true)
     }
     
-    override func setupConstraints() {
+    func setupViewConstraints() {
         
         var allConstraints = [NSLayoutConstraint]()
         let views : [String: UIView] = ["statsDetail": statsDetail, "timeFrameView": timeFrameView, "statsTableDetail": statsTableDetail, "statisticsChart": statisticsChart]
@@ -325,28 +348,26 @@ extension DetailedStatisticViewController: StatsDetailSetupInformationDelegate {
     func setupInformation() {
         statsDetail.typeName.text = currentMetric.name
         
-        let counter = Double(currentMetric.changeNet) + Double(currentMetric.changeNet)/(currentMetric.changePercent/100.0)
-        
-        statsDetail.counter.text = Int(counter).prettyString()
-        if currentMetric.changePercent != 0 {
-            statsDetail.percent.text = String(format: "%.2f",currentMetric.changePercent) + "%"
+        statsDetail.counter.text = currentMetric.total.prettyString()
+        if currentMetric.value != 0 {
+            statsDetail.percent.text = String(format: "%.2f",currentMetric.percentage ?? 0) + "%"
         } else {
             statsDetail.percent.text = ""
         }
-        if currentMetric.changeNet < 0 {
-            statsDetail.difference.text = "\(currentMetric.changeNet.prettyString())"
+        if currentMetric.value < 0 {
+            statsDetail.difference.text = "\(currentMetric.value.prettyString())"
             statsDetail.difference.textColor = Color.statsFall
             statsDetail.percent.textColor = Color.statsFall
             statsDetail.sign.image = EvolutionSign.ArrowDown.getSign()
         }
-        else if currentMetric.changeNet == 0 {
+        else if currentMetric.value == 0 {
             statsDetail.difference.text = ""
             statsDetail.difference.textColor = Color.textColor
             statsDetail.percent.textColor = Color.textColor
             statsDetail.sign.image = EvolutionSign.None.getSign()
         }
-        else if currentMetric.changeNet > 0 {
-            statsDetail.difference.text = "+\(currentMetric.changeNet.prettyString())"
+        else if currentMetric.value > 0 {
+            statsDetail.difference.text = "+\(currentMetric.value.prettyString())"
             statsDetail.difference.textColor = Color.statsRise
             statsDetail.percent.textColor = Color.statsRise
             statsDetail.sign.image = EvolutionSign.ArrowUp.getSign()
@@ -359,11 +380,11 @@ extension DetailedStatisticViewController: TimeFrameDelegate {
     func timeFrameSelectedValue(selectedIndex: Int) {
         let animation: CATransition = CATransition()
         
-        animation.duration = 0.3
+        animation.duration = 0.7
         animation.type = kCATransitionFade
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         view.layer.addAnimation(animation,forKey :"layerFadeOut")
-            
+    
         var tableHeight = 0
         var newTableHeight = 0
         let screenResolutionFactor = Int(screenHeight/100)-1
@@ -375,44 +396,29 @@ extension DetailedStatisticViewController: TimeFrameDelegate {
         }
         tableHeight += 8
         timeFrame = selectedIndex
-        switch selectedIndex {
-        case 0 :
-            currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
-            break
-        case 1 :
-            currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
-            break
-        case 2 :
-            currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
-            break
-        case 3 :
-            currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
-            break
-        case 4 :
-            currentMetric = dataService.getSubmetric(metricId, timeFrame: timeFrame)
-            break
-        default :
-            break
-        }
-        submetricArray = dataService.getSubmetricCount(currentMetric)
-        setChartData()
-        setupInformation()
-        evolutionArray.removeAll()
-        statisticsChart.highlightValues([])
-        for _ in 0..<currentMetric.submetrics.count {
-            evolutionArray.append(.dNone)
-        }
-        if currentMetric.submetrics.count < screenResolutionFactor {
-            newTableHeight =  Int(statsTableDetail.rowHeight) * currentMetric.submetrics.count
-        } else {
-            newTableHeight = screenResolutionFactor * Int(statsTableDetail.rowHeight)
-        }
-        newTableHeight += 8
-        for constraint in view.constraints {
-            if constraint.constant == CGFloat(tableHeight) {
-                constraint.constant = CGFloat(newTableHeight)
+        dataService.getSubmetric(getTimeFrame(), metricId: metricId, completionHandler: { (metric) in
+            self.currentMetric = metric
+            self.submetricArray = self.dataService.getSubmetricCount(self.currentMetric)
+            
+            self.setChartData()
+            self.setupInformation()
+            self.evolutionArray.removeAll()
+            self.statisticsChart.highlightValues([])
+            for _ in 0..<self.currentMetric.submetrics.count {
+                self.evolutionArray.append(.dNone)
             }
-        }
-        statsTableDetail.reloadData()
+            if self.currentMetric.submetrics.count < screenResolutionFactor {
+                newTableHeight =  Int(self.statsTableDetail.rowHeight) * self.currentMetric.submetrics.count
+            } else {
+                newTableHeight = screenResolutionFactor * Int(self.statsTableDetail.rowHeight)
+            }
+            newTableHeight += 8
+            for constraint in self.view.constraints {
+                if constraint.constant == CGFloat(tableHeight) {
+                    constraint.constant = CGFloat(newTableHeight)
+                }
+            }
+            self.statsTableDetail.reloadData()
+        })
     }
 }

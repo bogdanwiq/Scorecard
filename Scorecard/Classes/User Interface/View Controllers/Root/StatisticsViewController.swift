@@ -17,6 +17,7 @@ class StatisticViewController: BaseViewController {
     let reuseIdentifier : String = "DashboardCell"
     var tableView : UITableView!
     let timeFrame = TimeFrame()
+    let actInd = UIActivityIndicatorView()
     var originalMetricStats : [MetricModel] = []
     var projectDifferenceAndPercent : [String: [String: (Int, Double)]] = [:]
     
@@ -56,7 +57,6 @@ class StatisticViewController: BaseViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
-        let actInd = UIActivityIndicatorView()
         actInd.hidesWhenStopped = true
         actInd.center = view.center
         actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
@@ -64,13 +64,15 @@ class StatisticViewController: BaseViewController {
         view.addSubview(actInd)
         actInd.startAnimating()
         performAsync {
-            self.originalMetricStats = self.service.setupStats()
-            performOnMainThread({
-                actInd.stopAnimating()
-                self.tableView.alpha = 0.0
-                UIView.animateWithDuration(1.0, animations: {() -> Void in
-                    self.tableView.reloadData()
-                    self.tableView.alpha = 1.0
+            self.service.setupStats(self.getTimeFrame(), completionHandler: { (metrics) in
+                self.originalMetricStats = metrics
+                performOnMainThread({
+                    self.actInd.stopAnimating()
+                    self.tableView.alpha = 0.0
+                    UIView.animateWithDuration(1.0, animations: {() -> Void in
+                        self.tableView.reloadData()
+                        self.tableView.alpha = 1.0
+                    })
                 })
             })
         }
@@ -113,22 +115,22 @@ class StatisticViewController: BaseViewController {
         var timeFrameString : String!
         switch timeFrame.selectedIndex {
         case 0 :
-            timeFrameString = "1d"
+            timeFrameString = "day"
             break
         case 1 :
-            timeFrameString = "1w"
+            timeFrameString = "week"
             break
         case 2 :
-            timeFrameString = "1m"
+            timeFrameString = "month"
             break
         case 3 :
-            timeFrameString = "1y"
+            timeFrameString = "year"
             break
         case 4 :
-            timeFrameString = "All"
+            timeFrameString = "all"
             break
         default :
-            timeFrameString = "All"
+            timeFrameString = "all"
             break
         }
         return timeFrameString
@@ -148,7 +150,14 @@ extension StatisticViewController: UITableViewDelegate {
         let selectedCell : DashboardCell = tableView.cellForRowAtIndexPath(indexPath)! as! DashboardCell
         
         selectedCell.selectionStyle = UITableViewCellSelectionStyle.None
-        navigationController?.pushViewController(DetailedStatisticViewController(metricId: originalMetricStats[indexPath.row].id, timeFrame: timeFrame.selectedIndex), animated: true)
+        let animation: CATransition = CATransition()
+        
+        animation.duration = 1.05
+        animation.type = kCATransitionFade
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        view.layer.addAnimation(animation,forKey :"layerFadeOut")
+        navigationController!.view.layer.addAnimation(animation, forKey: nil)
+        navigationController?.pushViewController(DetailedStatisticViewController(metricId: self.originalMetricStats[indexPath.row].id, timeFrame: self.timeFrame.selectedIndex), animated: true)
     }
 }
 
@@ -162,34 +171,31 @@ extension StatisticViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let timeFrame = getTimeFrame()
         let cell : DashboardCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DashboardCell
         let currentMetric = originalMetricStats[indexPath.row]
-        let valueAndPercent = currentMetric.timeframe[timeFrame]!
-        let previousValue = Double(valueAndPercent.value) / (1 + valueAndPercent.percent / 100.0)
-        let difference = Double(valueAndPercent.value) - previousValue
+        let valueAndPercent = currentMetric.timeframe!
         
         cell.typeName.text = currentMetric.name
-        cell.counter.text = String(currentMetric.timeframe[timeFrame]!.value.prettyString())
-        if difference < 0 {
-            cell.difference.text = "\(Int(difference).prettyString())"
+        cell.counter.text = String(currentMetric.total.prettyString())
+        if valueAndPercent.value < 0 {
+            cell.difference.text = "\(Int(valueAndPercent.value).prettyString())"
             cell.difference.textColor = Color.statsFall
             cell.percent.textColor = Color.statsFall
-            cell.percent.text = String(format: "%.2f",valueAndPercent.percent) + "%"
+            cell.percent.text = String(format: "%.2f", valueAndPercent.percent ?? 0) + "%"
             cell.sign.image = EvolutionSign.ArrowDown.getSign()
         }
-        else if difference == 0 {
+        else if valueAndPercent.value == 0 {
             cell.difference.text = ""
             cell.difference.textColor = Color.textColor
             cell.percent.textColor = Color.textColor
             cell.percent.text = ""
             cell.sign.image = EvolutionSign.None.getSign()
         }
-        else if difference > 0 {
-            cell.difference.text = "+\(Int(difference).prettyString())"
+        else if valueAndPercent.value > 0 {
+            cell.difference.text = "+\(Int(valueAndPercent.value).prettyString())"
             cell.difference.textColor = Color.statsRise
             cell.percent.textColor = Color.statsRise
-            cell.percent.text = String(format: "+%.2f",valueAndPercent.percent) + "%"
+            cell.percent.text = String(format: "+%.2f", valueAndPercent.percent ?? 0) + "%"
             cell.sign.image = EvolutionSign.ArrowUp.getSign()
         }
         
@@ -209,6 +215,20 @@ extension StatisticViewController: UITableViewDataSource {
 extension StatisticViewController: TimeFrameDelegate {
     
     func timeFrameSelectedValue(selectedIndex: Int) {
-        tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: tableView.numberOfSections)), withRowAnimation: .Fade)
+        actInd.startAnimating()
+        performAsync {
+            self.service.setupStats(self.getTimeFrame(), completionHandler: { (metrics) in
+                self.originalMetricStats = metrics
+                performOnMainThread({
+                    self.tableView.alpha = 0.0
+                    UIView.animateWithDuration(1.0, animations: {
+                        self.tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: self.tableView.numberOfSections)), withRowAnimation: .Fade)
+                        self.tableView.alpha = 1.0
+                        }, completion: { (_) in
+                            self.actInd.stopAnimating()
+                    })
+                })
+            })
+        }
     }
 }

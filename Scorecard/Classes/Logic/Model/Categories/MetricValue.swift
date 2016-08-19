@@ -12,7 +12,7 @@ import ObjectMapper
 class MetricValue: Mappable {
     
     var date: NSDate!
-    var value : Int!
+    var value : Int?
     
     init() {
     }
@@ -21,12 +21,9 @@ class MetricValue: Mappable {
     }
     
     func mapping(map: Map) {
-        var strDate: String!
-        let dateFormatter = NSDateFormatter()
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        strDate <- map["date"]
-        date = dateFormatter.dateFromString(strDate)
+        var strDate: Double!
+        strDate <- map["time"]
+        date = NSDate(timeIntervalSince1970: strDate / 1000.0)
         value   <- map["value"]
     }
 }
